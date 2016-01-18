@@ -1,0 +1,94 @@
+plugins {
+	id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
+}
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+defaultTasks 'run'
+
+def isRelease = 'release' in gradle.startParameter.taskNames
+def deployDir = 'deploy'
+
+def getVersion(isIncrement = false)
+{
+	def propsFile = 'version.properties'
+	def majorProp = 'version.major'
+	def minorProp = 'version.minor'
+	def patchProp = 'version.patch'
+	def metaProp = 'version.buildmeta'
+	def preProp = 'version.prerelease'
+	if (isIncrement)
+	{
+		ant.propertyfile(file: propsFile) {
+			entry(key: patchProp,
+			      type: 'int',
+			      default: '-1',
+			      operation: '+')
+		}
+	}
+	def p = new Properties()
+	file(propsFile).withInputStream { stream -> p.load(stream) }
+	def metadata = p.getProperty(metaProp, '')
+	def prerelease = p.getProperty(preProp, '')
+	return (p.getProperty(majorProp, '1') + '.' + p.getProperty(minorProp, '0') + '.' + p.getProperty(patchProp, '0') +
+	        (prerelease.length() > 0 ? '-' + prerelease : '') + (metadata.length() > 0 ? '+' + metadata : ''))
+}
+
+version = getVersion()
+
+mainClassName = 'net.thauvin.erik.semver.example.Example'
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile "net.thauvin.erik:semver:+"
+}
+
+annotationProcessor {
+	project.version = getVersion(isRelease)
+	library "net.thauvin.erik:semver:+"
+	processor "net.thauvin.erik.semver.VersionProcessor"
+}
+
+compileJava {
+	options.compilerArgs << "-proc:none"
+}
+
+jar {
+	manifest.attributes('Main-Class': mainClassName)
+}
+
+clean {
+	delete deployDir
+}
+
+
+task copyToDeploy(type: Copy) {
+	from jar
+	into deployDir
+}
+
+task deploy(dependsOn: ['build', 'copyToDeploy']) {
+	description = "Copies all needed files to the ${deployDir} directory."
+	group = "Publishing"
+	outputs.dir deployDir
+	inputs.files copyToDeploy
+	mustRunAfter clean
+}
+
+
+task release(dependsOn: ['deploy', 'wrapper']) {
+	group = "Publishing"
+	description = "Releases new version."
+	isRelease = true
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = gradle.gradleVersion
+}
+

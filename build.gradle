@@ -1,0 +1,98 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'maven'
+
+defaultTasks 'deploy'
+
+version = '1.0'
+
+def deployDir = 'deploy'
+def isRelease = 'release' in gradle.startParameter.taskNames
+def mavenGroupId = 'net.thauvin.erik'
+//def buildProps = 'buildnumber.properties'
+//def buildProp = 'build'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.apache.velocity:velocity:1.7'
+	testCompile 'org.testng:testng:+'
+}
+
+test {
+	useTestNG()
+}
+
+compileJava {
+	/*
+	doFirst {
+		if (isRelease)
+		{
+			ant.propertyfile(file: buildProps) {
+				entry(key: buildProp,
+				type: 'int',
+				default: '-1',
+				operation: '+')
+			}
+		}
+	}
+	*/
+}
+
+
+jar {
+	/*
+	doFirst {
+		def props = new Properties()
+		file(buildProps).withInputStream { stream -> props.load(stream) }
+		project.version = version + '.' + props.get(buildProp)
+	}
+	*/
+	archiveName = archiveName.toLowerCase()
+}
+
+clean {
+	delete deployDir
+}
+
+task copyToDeploy(type: Copy) {
+	from(configurations.runtime) {
+		exclude 'servlet-api-*.jar'
+		exclude 'jsp-api-*.jar'
+	}
+	from jar
+	into deployDir
+}
+
+task deploy(dependsOn: ['build', 'copyToDeploy']) {
+	description = "Copies all needed files to the ${deployDir} directory."
+	group = "Publishing"
+	outputs.dir deployDir
+	inputs.files copyToDeploy
+	mustRunAfter clean
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: mavenLocal().url)
+			pom.artifactId = rootProject.name.toLowerCase()
+			pom.groupId = mavenGroupId
+		}
+	}
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = gradle.gradleVersion
+}
+
+task release(dependsOn: ['deploy', 'wrapper', 'uploadArchives']) {
+	group = "Publishing"
+	description = "Releases new version."
+	isRelease = true
+}
