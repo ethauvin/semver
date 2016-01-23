@@ -93,6 +93,7 @@ public class VersionProcessor extends AbstractProcessor
 				{
 					p.load(reader);
 
+					versionInfo.setProject(p.getProperty(version.projectKey(), Constants.EMPTY));
 					versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
 					versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
 					versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
@@ -151,15 +152,15 @@ public class VersionProcessor extends AbstractProcessor
 	@Override
 	public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv)
 	{
-		for (final Element annotatedElement : roundEnv.getElementsAnnotatedWith(Version.class))
+		for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class))
 		{
-			final Version version = annotatedElement.getAnnotation(Version.class);
-			if (annotatedElement.getKind() == ElementKind.CLASS)
+			final Version version = element.getAnnotation(Version.class);
+			if (element.getKind() == ElementKind.CLASS)
 			{
-				final Element enclosing = annotatedElement.getEnclosingElement();
-				if (enclosing.getKind() == ElementKind.PACKAGE)
+				final Element enclosingElement = element.getEnclosingElement();
+				if (enclosingElement.getKind() == ElementKind.PACKAGE)
 				{
-					final PackageElement packageElement = (PackageElement) enclosing;
+					final PackageElement packageElement = (PackageElement) enclosingElement;
 					try
 					{
 						final VersionInfo versionInfo = findValues(version);
@@ -224,6 +225,7 @@ public class VersionProcessor extends AbstractProcessor
 			final VelocityContext vc = new VelocityContext();
 			vc.put("packageName", packageName);
 			vc.put("className", className);
+			vc.put("project", versionInfo.getProject());
 			vc.put("buildmeta", versionInfo.getBuildMetadata());
 			vc.put("epoch", versionInfo.getEpoch());
 			vc.put("patch", versionInfo.getPatch());

@@ -51,7 +51,7 @@ public class Example
 	{
 		final SimpleDateFormat sdf = new SimpleDateFormat("'Built on' EEE, d MMM yyyy 'at' HH:mm:ss z");
 
-		System.out.println(Example.class.getSimpleName() + ' ' + GeneratedVersion.getVersion());
+		System.out.println(GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
 		System.out.println(sdf.format(GeneratedVersion.getBuildDate()));
 	}
 }

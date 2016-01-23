@@ -18,6 +18,7 @@ public final class ${className} {
 	private final static int minor = ${minor};
 	private final static int patch = ${patch};
 	private final static String prerelease = "${prerelease}";
+	private final static String project = "${project}";
 
 	/**
 	 * Returns the build date.
@@ -75,6 +76,15 @@ public final class ${className} {
 		}
 
 		return "";
+	}
+
+	/**
+	 * Returns the project name.
+	 *
+	 * @return The project name, if any.
+	 */
+	public static String getProject() {
+		return project;
 	}
 
 	/**

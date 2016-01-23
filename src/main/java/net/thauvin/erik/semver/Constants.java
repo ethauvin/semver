@@ -64,6 +64,8 @@ public final class Constants
 
 	public static final String KEY_VERSION_PRERELEASE = "version.prerelease";
 
+	public static final String KEY_VERSION_PROJECT = "version.project";
+
 	public static final String VELOCITY_PROPERTIES = "velocity.properties";
 
 	/**

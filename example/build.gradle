@@ -13,15 +13,15 @@ def deployDir = 'deploy'
 def getVersion(isIncrement = false)
 {
 	def propsFile = 'version.properties'
-	def majorProp = 'version.major'
-	def minorProp = 'version.minor'
-	def patchProp = 'version.patch'
-	def metaProp = 'version.buildmeta'
-	def preProp = 'version.prerelease'
+	def majorKey = 'version.major'
+	def minorKey = 'version.minor'
+	def patchKey = 'version.patch'
+	def metaKey = 'version.buildmeta'
+	def preKey = 'version.prerelease'
 	if (isIncrement)
 	{
 		ant.propertyfile(file: propsFile) {
-			entry(key: patchProp,
+			entry(key: patchKey,
 			      type: 'int',
 			      default: '-1',
 			      operation: '+')
@@ -29,9 +29,9 @@ def getVersion(isIncrement = false)
 	}
 	def p = new Properties()
 	file(propsFile).withInputStream { stream -> p.load(stream) }
-	def metadata = p.getProperty(metaProp, '')
-	def prerelease = p.getProperty(preProp, '')
-	return (p.getProperty(majorProp, '1') + '.' + p.getProperty(minorProp, '0') + '.' + p.getProperty(patchProp, '0') +
+	def metadata = p.getProperty(metaKey, '')
+	def prerelease = p.getProperty(preKey, '')
+	return (p.getProperty(majorKey, '1') + '.' + p.getProperty(minorKey, '0') + '.' + p.getProperty(patchKey, '0') +
 	        (prerelease.length() > 0 ? '-' + prerelease : '') + (metadata.length() > 0 ? '+' + metadata : ''))
 }
 
@@ -46,17 +46,17 @@ repositories {
 }
 
 dependencies {
-	compile "net.thauvin.erik:semver:+"
+	compile 'net.thauvin.erik:semver:+'
 }
 
 annotationProcessor {
 	project.version = getVersion(isRelease)
-	library "net.thauvin.erik:semver:+"
-	processor "net.thauvin.erik.semver.VersionProcessor"
+	library 'net.thauvin.erik:semver:+'
+	processor 'net.thauvin.erik.semver.VersionProcessor'
 }
 
 compileJava {
-	options.compilerArgs << "-proc:none"
+	options.compilerArgs << '-proc:none'
 }
 
 jar {
@@ -74,17 +74,17 @@ task copyToDeploy(type: Copy) {
 }
 
 task deploy(dependsOn: ['build', 'copyToDeploy']) {
-	description = "Copies all needed files to the ${deployDir} directory."
-	group = "Publishing"
+	description = 'Copies all needed files to the ${deployDir} directory.'
+	group = 'Publishing'
 	outputs.dir deployDir
 	inputs.files copyToDeploy
 	mustRunAfter clean
 }
 
 
-task release(dependsOn: ['deploy', 'wrapper']) {
-	group = "Publishing"
-	description = "Releases new version."
+task release(dependsOn: ['deploy', 'wrapper']) << {
+	group = 'Publishing'
+	description = 'Releases new version.'
 	isRelease = true
 }
 

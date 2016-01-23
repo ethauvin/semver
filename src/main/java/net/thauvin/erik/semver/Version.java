@@ -71,6 +71,10 @@ public @interface Version
 
 	String prereleaseKey() default Constants.KEY_VERSION_PRERELEASE;
 
+	String project() default Constants.EMPTY;
+
+	String projectKey() default Constants.KEY_VERSION_PROJECT;
+
 	String properties() default Constants.EMPTY;
 
 	String template() default Constants.DEFAULT_TEMPLATE;

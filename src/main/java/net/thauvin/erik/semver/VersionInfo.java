@@ -54,6 +54,8 @@ public class VersionInfo
 
 	private String prerelease;
 
+	private String project;
+
 	public VersionInfo()
 	{
 		major = Constants.DEFAULT_MAJOR;
@@ -61,6 +63,7 @@ public class VersionInfo
 		patch = Constants.DEFAULT_PATCH;
 		buildmeta = Constants.EMPTY;
 		prerelease = Constants.EMPTY;
+		project = Constants.EMPTY;
 	}
 
 	public VersionInfo(final Version version)
@@ -70,6 +73,7 @@ public class VersionInfo
 		patch = version.patch();
 		buildmeta = version.buildmeta();
 		prerelease = version.prerelease();
+		project = version.project();
 	}
 
 	public String getBuildMetadata()
@@ -125,6 +129,16 @@ public class VersionInfo
 	public void setPreRelease(final String prerelease)
 	{
 		this.prerelease = prerelease;
+	}
+
+	public String getProject()
+	{
+		return project;
+	}
+
+	public void setProject(String project)
+	{
+		this.project = project;
 	}
 
 	public String getVersion()

@@ -13,11 +13,12 @@ import java.util.Date;
  */
 public final class GeneratedVersion {
 	private final static String buildmeta = "";
-	private final static Date date = new Date(1453146881481L);
+	private final static Date date = new Date(1453591949581L);
 	private final static int major = 3;
 	private final static int minor = 1;
 	private final static int patch = 35;
 	private final static String prerelease = "beta";
+	private final static String project = "Example";
 
 	/**
 	 * Returns the build date.
@@ -75,6 +76,15 @@ public final class GeneratedVersion {
 		}
 
 		return "";
+	}
+
+	/**
+	 * Returns the project name.
+	 *
+	 * @return The project name, if any.
+	 */
+	public static String getProject() {
+		return project;
 	}
 
 	/**
