@@ -156,6 +156,7 @@ artifacts {
 }
 
 javadoc {
+	title = mavenDescription + ' ' + version
 	options.tags = ['created']
 	options.author = true
 	options.addStringOption('link', 'http://docs.oracle.com/javase/8/docs/api/')
