@@ -115,5 +115,15 @@ example.project=Example
 example.major=1
 example.minor=0
 example.patch=0
-...
+# ...
+```
+
+## Auto-Increment
+
+Incrementing the version is best left to your favorite build system.
+
+For a solution using [Gradle](https://gradle.org/), please have a look at the `build.gradle` file in the `example` module directory. To run the example with patch version auto-incrementing, issue the following command:
+
+```
+gradle clean release run
 ```
