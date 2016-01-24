@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="semantic-version-annotation-processor">Semantic Version Annotation Processor</h1>
+<p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>Version</code> class containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <code>Properties</code> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
+<p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a>.</p>
+<h2 id="examples">Examples</h2>
+<ul>
+<li>Using annotation elements:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(major = <span class="dv">1</span>, minor = <span class="dv">0</span>, patch = <span class="dv">0</span>, prerelease = <span class="st">&quot;beta&quot;</span>)
+<span class="kw">public</span> <span class="kw">class</span> A {
+<span class="co">// ...</span></code></pre></div>
+<ul>
+<li>Or using a <a href="https://docs.oracle.com/javase/tutorial/essential/environment/properties.html">properties</a> file:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(properties = <span class="st">&quot;version.properties&quot;</span>)
+<span class="kw">public</span> <span class="kw">class</span> A {
+<span class="co">// ...</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ini"><code class="sourceCode ini"><span class="co"># version.properties</span>
+<span class="dt">version.major</span><span class="ot">=</span><span class="dv">1</span>
+<span class="dt">version.minor</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">version.patch</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">version.prerelease</span><span class="ot">=</span><span class="st">beta</span></code></pre></div>
+<h2 id="template">Template</h2>
+<p>Upon running the annotator processor, a source file <code>GeneratedVersion.java</code> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="http://velocity.apache.org/">Velocity</a> template.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(template = <span class="st">&quot;myversion.vm&quot;</span>)
+<span class="kw">public</span> <span class="kw">class</span> A {
+<span class="co">// ...</span></code></pre></div>
+<h3 id="default-template">Default Template</h3>
+<p>The default template implements the following static methods:</p>
+<table style="width:101%;">
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 48%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Method</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>getProject</code></td>
+<td style="text-align: left;">The project name, if any.</td>
+<td style="text-align: left;"><code>MyProject</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>getBuildDate</code></td>
+<td style="text-align: left;">The build date.</td>
+<td style="text-align: left;"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html"><code>java.util.Date</code></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>getVersion</code></td>
+<td style="text-align: left;">The full version string.</td>
+<td style="text-align: left;"><code>1.0.0-alpha+001</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>getMajor</code></td>
+<td style="text-align: left;">The major version.</td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>getMinor</code></td>
+<td style="text-align: left;">The minor version.</td>
+<td style="text-align: left;"><code>0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>getPatch</code></td>
+<td style="text-align: left;">The patch version.</td>
+<td style="text-align: left;"><code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>getPreRelease</code></td>
+<td style="text-align: left;">The pre-release version, if any.</td>
+<td style="text-align: left;"><code>alpha</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>getBuildMetadata</code></td>
+<td style="text-align: left;">The build metadata, if any.</td>
+<td style="text-align: left;"><code>001</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-template">Custom Template</h3>
+<p>A very simple custom template might look something like:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* myversion.vm */</span>
+<span class="kw">package</span> ${packageName}
+
+<span class="kw">import java.util.Date;</span>
+
+<span class="kw">public</span> <span class="dt">final</span> <span class="kw">class</span> ${className} {
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> String BUILDMETA = <span class="st">&quot;${buildmeta}&quot;</span>;
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> Date DATE = <span class="kw">new</span> Date(${epoch}L);
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> MAJOR = ${major};
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> MINOR = ${minor};
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> PATCH = ${patch};
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> String PRERELEASE = <span class="st">&quot;${prerelease}&quot;</span>;
+    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> String PROJECT = <span class="st">&quot;${project}&quot;</span>;
+}</code></pre></div>
+<p>The Velocity variables are automatically filled in by the processor.</p>
+<h2 id="elements-properties">Elements &amp; Properties</h2>
+<p>The following annotation elements and properties are available:</p>
+<table style="width:119%;">
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 31%" />
+<col style="width: 48%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Element</th>
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>project</code></td>
+<td style="text-align: left;"><code>version.project</code></td>
+<td style="text-align: left;">The project name.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>major</code></td>
+<td style="text-align: left;"><code>version.major</code></td>
+<td style="text-align: left;">The major version number.</td>
+<td style="text-align: left;"><code>1</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>minor</code></td>
+<td style="text-align: left;"><code>version.major</code></td>
+<td style="text-align: left;">The minor version number.</td>
+<td style="text-align: left;"><code>0</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>patch</code></td>
+<td style="text-align: left;"><code>version.patch</code></td>
+<td style="text-align: left;">The patch version number.</td>
+<td style="text-align: left;"><code>0</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>prerelease</code></td>
+<td style="text-align: left;"><code>version.prerelease</code></td>
+<td style="text-align: left;">The pre-release version.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>buildmeta</code></td>
+<td style="text-align: left;"><code>version.buildmeta</code></td>
+<td style="text-align: left;">The build metadata version.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>className</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">The name of the generated class.</td>
+<td style="text-align: left;"><code>GeneratedVersion</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>properties</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">The properties file.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>template</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">The template file.</td>
+<td style="text-align: left;"><code>version.vm</code></td>
+</tr>
+</tbody>
+</table>
+<p>In order to easily incorporate with existing projects, the property keys may be assigned custom values:</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(
+  properties = <span class="st">&quot;example.properties&quot;</span>, 
+  majorKey = <span class="st">&quot;example.major&quot;</span>,
+  minorKey = <span class="st">&quot;example.minor&quot;</span>,
+  patchKey = <span class="st">&quot;example.patch&quot;</span>,
+  prereleaseKey = <span class="st">&quot;example.prerelease&quot;</span>,
+  buildmetaKey = <span class="st">&quot;example.buildmeta&quot;</span>,
+  projectKey = <span class="st">&quot;example.project&quot;</span>
+)
+<span class="kw">public</span> <span class="kw">class</span> Example {
+<span class="co">// ...</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ini"><code class="sourceCode ini"><span class="co"># example.properties</span>
+<span class="dt">example.project</span><span class="ot">=</span><span class="st">Example</span>
+<span class="dt">example.major</span><span class="ot">=</span><span class="dv">1</span>
+<span class="dt">example.minor</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">example.patch</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">...</span></code></pre></div>
+</body>
+</html>

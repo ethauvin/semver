@@ -2,6 +2,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
 
+import org.apache.tools.ant.taskdefs.condition.Os
+
 defaultTasks 'deploy'
 
 def getVersion(isIncrement = false)
@@ -92,4 +94,22 @@ task release(dependsOn: ['deploy', 'wrapper', 'uploadArchives']) << {
 	group = 'Publishing'
 	description = 'Releases new version.'
 	isRelease = true
+}
+
+task pandoc(type: Exec) {
+	group = 'Documentation'
+	def pandoc_args = ['--from', 'markdown_github', '--to', 'html5', '-s', '-o', 'README.html', 'README.md']
+	if (Os.isFamily(Os.FAMILY_WINDOWS))
+	{
+		commandLine(['cmd', '/c', 'pandoc'] + pandoc_args)
+	}
+	else
+	{
+		executable '/usr/local/bin/pandoc'
+		args pandoc_args
+	}
+	standardOutput = new ByteArrayOutputStream()
+	ext.output = {
+		return standardOutput.toString()
+	}
 }

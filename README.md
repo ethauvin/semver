@@ -8,23 +8,22 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
  
 * Using annotation elements:
 
- ```java
- @Version(major = 1, minor = 0, patch = 0, prerelease = "beta")
- public class A {
- // ...
- ```
+```java
+@Version(major = 1, minor = 0, patch = 0, prerelease = "beta")
+public class A {
+// ...
+```
 
 * Or using a [properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file:
 
- ```java
- @Version(properties = "version.properties")
- public class A {
- // ...
- ```
+```java
+@Version(properties = "version.properties")
+public class A {
+// ...
+```
 
- and `version.properties` containing:
-
- ```ini
+```ini
+# version.properties
 version.major=1
 version.minor=0
 version.patch=0
@@ -41,7 +40,9 @@ public class A {
 // ...
 ```
 
-The [default template]() implements the following static methods:
+### Default Template
+
+The default template implements the following static methods:
 
 Method            | Description                      |  Example
 ------------------|----------------------------------|------------------
@@ -54,6 +55,28 @@ Method            | Description                      |  Example
 `getPreRelease`   | The pre-release version, if any. | `alpha`
 `getBuildMetadata`| The build metadata, if any.      | `001`
 
+### Custom Template
+
+A very simple custom template might look something like:
+
+```java
+/* myversion.vm */
+package ${packageName}
+
+import java.util.Date;
+
+public final class ${className} {
+	public final static String BUILDMETA = "${buildmeta}";
+	public final static Date DATE = new Date(${epoch}L);
+	public final static int MAJOR = ${major};
+	public final static int MINOR = ${minor};
+	public final static int PATCH = ${patch};
+	public final static String PRERELEASE = "${prerelease}";
+	public final static String PROJECT = "${project}";
+}
+```
+The Velocity variables are automatically filled in by the processor.
+	
 ## Elements & Properties
 
 The following annotation elements and properties are available:
@@ -86,9 +109,8 @@ public class Example {
 // ...
 ```
 
-with `example.properties` containing:
-
 ```ini
+# example.properties
 example.project=Example
 example.major=1
 example.minor=0
