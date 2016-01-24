@@ -15,6 +15,7 @@
 /deploy
 /dist
 /gen
+/gradle.properties
 /local.properties
 /out
 /proguard-project.txt

@@ -52,7 +52,7 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * The <code>VersionProcessor</code> class.
+ * The <code>VersionProcessor</code> class implements a semantic version annotation processor.
  *
  * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
  * @created 2016-01-13

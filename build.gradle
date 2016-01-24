@@ -1,6 +1,10 @@
+plugins {
+	id "com.jfrog.bintray" version "1.5"
+}
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -35,7 +39,20 @@ version = getVersion()
 
 def deployDir = 'deploy'
 def isRelease = 'release' in gradle.startParameter.taskNames
+
+
 def mavenGroupId = 'net.thauvin.erik'
+def mavenName = 'SemVer'
+def mavenDescription = 'Semantic Version Annotation Processor'
+def mavenUrl = 'https://github.com/ethauvin/sermver'
+def mavenLicense = 'The BSD 3-Clause License'
+def mavenLicenseUrl = 'http://opensource.org/licenses/BSD-3-Clause'
+def mavenScmCon = 'https://github.com/ethauvin/semver.git'
+def mavenScmDevCon = 'git@github.com:ethauvin/semver.git'
+
+def pkgLicenses = ['BSD 3-Clause']
+def pkgIssueTrackerUrl = mavenUrl + '/issues'
+def pkgLabels = ['java', 'annotation', 'processor', 'semantic', 'version']
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
@@ -47,6 +64,106 @@ repositories {
 dependencies {
 	compile 'org.apache.velocity:velocity:1.7'
 	testCompile 'org.testng:testng:+'
+}
+
+bintray {
+	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+	publications = ['MyPublication']
+	dryRun = true
+	pkg {
+		repo = 'maven'
+		name = mavenName
+		licenses = pkgLicenses
+		desc = mavenDescription
+		websiteUrl = mavenUrl
+		issueTrackerUrl = pkgIssueTrackerUrl
+		vcsUrl = mavenScmCon
+		labels = pkgLabels
+		publicDownloadNumbers = true
+		version {
+			name = project.version
+			desc = 'Version ' + project.version
+			vcsTag = project.version
+			gpg {
+				sign = true
+			}
+		}
+	}
+}
+
+
+def pomConfig = {
+	licenses {
+		license {
+			name mavenLicense
+			url mavenLicenseUrl
+			distribution 'repo'
+		}
+	}
+	developers {
+		developer {
+			id 'ethauvin'
+			name 'Erik C. Thauvin'
+			email 'erik@thauvin.net'
+		}
+	}
+	scm {
+		connection 'scm:git:' + mavenScmCon
+		developerConnection 'scm:git:' + mavenScmDevCon
+		url mavenScmCon
+	}
+}
+
+publishing {
+	publications {
+		MyPublication(MavenPublication) {
+			from components.java
+			artifact sourcesJar
+			artifact javadocJar
+			groupId mavenGroupId
+			artifactId rootProject.name
+			version project.version
+
+			pom.withXml {
+				def root = asNode()
+				root.appendNode('name', mavenName)
+				root.appendNode('description', mavenDescription)
+				root.appendNode('url', mavenUrl)
+				root.children().last() + pomConfig
+			}
+		}
+	}
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	group = 'Build'
+	description = 'Builds an archive of the javadoc docs.'
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+task sourcesJar(type: Jar) {
+	group = 'Build'
+	description = 'Builds an archive of the source code.'
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives javadocJar
+	archives sourcesJar
+}
+
+javadoc {
+	options.tags = ['created']
+	options.author = true
+	options.addStringOption('link', 'http://docs.oracle.com/javase/8/docs/api/')
+	options.addStringOption('sourcepath', project.hasProperty('jdkSrc') ? jdkSrc : "$System.env.JAVA_HOME/src.zip")
+	if (JavaVersion.current().isJava8Compatible())
+	{
+		options.addStringOption('Xdoclint:none', '-quiet')
+	}
 }
 
 test {
@@ -76,21 +193,11 @@ task deploy(dependsOn: ['build', 'copyToDeploy']) {
 	mustRunAfter clean
 }
 
-uploadArchives {
-	repositories {
-		mavenDeployer {
-			repository(url: mavenLocal().url)
-			pom.artifactId = rootProject.name
-			pom.groupId = mavenGroupId
-		}
-	}
-}
-
 task wrapper(type: Wrapper) {
-  gradleVersion = gradle.gradleVersion
+	gradleVersion = gradle.gradleVersion
 }
 
-task release(dependsOn: ['deploy', 'wrapper', 'uploadArchives']) << {
+task release(dependsOn: ['deploy', 'wrapper']) << {
 	group = 'Publishing'
 	description = 'Releases new version.'
 	isRelease = true

@@ -34,7 +34,7 @@
 package net.thauvin.erik.semver;
 
 /**
- * The <code>VersionInfo</code> class.
+ * The <code>VersionInfo</code> class is used to hold and retrieve the semantic version values.
  *
  * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
  * @created 2016-01-16
@@ -56,6 +56,9 @@ public class VersionInfo
 
 	private String project;
 
+	/**
+	 * Creates a new object with default values
+	 */
 	public VersionInfo()
 	{
 		major = Constants.DEFAULT_MAJOR;
@@ -66,6 +69,11 @@ public class VersionInfo
 		project = Constants.EMPTY;
 	}
 
+	/**
+	 * Creates a new object with values from a {@link net.thauvin.erik.semver.Version Version} object.
+	 *
+	 * @param version The version object.
+	 */
 	public VersionInfo(final Version version)
 	{
 		major = version.major();
@@ -76,71 +84,152 @@ public class VersionInfo
 		project = version.project();
 	}
 
+	/**
+	 * Returns the build metadata.
+	 *
+	 * @return The build metadata.
+	 */
 	public String getBuildMetadata()
 	{
 		return buildmeta;
 	}
 
+	/**
+	 * Sets the build metadata.
+	 *
+	 * @param buildmeta The new build metadata.
+	 */
 	public void setBuildMetadata(final String buildmeta)
 	{
 		this.buildmeta = buildmeta;
 	}
 
+	/**
+	 * Returns the build epoch/Unix timestamp.
+	 *
+	 * @return The build epoch.
+	 */
 	public long getEpoch()
 	{
 		return epoch;
 	}
 
+	/**
+	 * Returns the major version.
+	 *
+	 * @return The major version.
+	 */
 	public int getMajor()
 	{
 		return major;
 	}
 
+	/**
+	 * Sets the major version.
+	 *
+	 * @param major The new major version.
+	 */
 	public void setMajor(final int major)
 	{
 		this.major = major;
 	}
 
+	/**
+	 * Returns the major version.
+	 *
+	 * @return The major version.
+	 */
 	public int getMinor()
 	{
 		return minor;
 	}
 
+	/**
+	 * Sets the minor version.
+	 *
+	 * @param minor The new minor version.
+	 */
 	public void setMinor(final int minor)
 	{
 		this.minor = minor;
 	}
 
+	/**
+	 * Returns the patch version.
+	 *
+	 * @return The patch version.
+	 */
 	public int getPatch()
 	{
 		return patch;
 	}
 
+	/**
+	 * Sets the patch version.
+	 *
+	 * @param patch The new patch version.
+	 */
 	public void setPatch(final int patch)
 	{
 		this.patch = patch;
 	}
 
+	/**
+	 * Returns the pre-release version.
+	 *
+	 * @return The pre-release version.
+	 */
 	public String getPreRelease()
 	{
 		return prerelease;
 	}
 
+	/**
+	 * Sets the pre-release version.
+	 *
+	 * @param prerelease The new pre-release version.
+	 */
 	public void setPreRelease(final String prerelease)
 	{
 		this.prerelease = prerelease;
 	}
 
+	/**
+	 * Returns the project name.
+	 *
+	 * @return The project name.
+	 */
 	public String getProject()
 	{
 		return project;
 	}
 
+	/**
+	 * Sets the project name.
+	 *
+	 * @param project The new project name.
+	 */
 	public void setProject(String project)
 	{
 		this.project = project;
 	}
 
+	/**
+	 * Returns the full version string.
+	 * <p>
+	 * Formatted as:
+	 * <blockquote><code>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]</code></blockquote>
+	 * <p>
+	 * For example:
+	 * <ul>
+	 * <li><code>1.0.0</code></li>
+	 * <li><code>1.0.0-beta</code></li>
+	 * <li><code>1.0.0+20160124144700</code></li>
+	 * <li><code>1.0.0-alpha+001</code></li>
+	 * </ul>
+	 *
+	 * @return The version string.
+	 */
 	public String getVersion()
 	{
 		return "" + major + '.' + minor + '.' + patch + (prerelease.length() > 0 ? '-' + prerelease : "") + (
