@@ -147,7 +147,7 @@ In order to also include the generated source code to your source tree, you shou
 
 ```gradle
 plugins {
-	id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
+    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
 }
 ```
 
@@ -155,19 +155,19 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-	compile 'net.thauvin.erik:semver:0.9.1-beta'
+    compile 'net.thauvin.erik:semver:0.9.1-beta'
 }
 
 annotationProcessor {
-	project.version = getVersion(isRelease)
-	library 'net.thauvin.erik:semver:0.9.1-beta'
-	processor 'net.thauvin.erik.semver.VersionProcessor'
-	// sourcesDir 'src/generated/java'
+    project.version = getVersion(isRelease)
+    library 'net.thauvin.erik:semver:0.9.1-beta'
+    processor 'net.thauvin.erik.semver.VersionProcessor'
+    // sourcesDir 'src/generated/java'
 }
 
 compileJava {
-	// Disable the classpath procesor
-	options.compilerArgs << '-proc:none'
+    // Disable the classpath procesor
+    options.compilerArgs << '-proc:none'
 }
 ```
 
