@@ -133,6 +133,8 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 
 ### Gradle
 
+#### Class Generation
+
 To install and run from [Gradle](https://gradle.org/), add the following to the `build.gradle` file:
 
 ```gradle
@@ -141,9 +143,11 @@ dependencies {
 }
 ```
 
-The `GeneratedVersion` class will be automatically generated in the `build` directory upon compiling.
+The `GeneratedVersion` class will be automatically created in the `build` directory upon compiling.
 
-In order to also include the generated source code to your source tree, you should use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
+#### Glass & Source Generation
+
+In order to also incorporate the generated source code into the `source tree`, use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
 
 ```gradle
 plugins {
@@ -159,7 +163,6 @@ dependencies {
 }
 
 annotationProcessor {
-    project.version = getVersion(isRelease)
     library 'net.thauvin.erik:semver:0.9.1-beta'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
