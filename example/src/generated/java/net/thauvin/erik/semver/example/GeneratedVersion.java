@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public final class GeneratedVersion {
 	private final static String buildmeta = "";
-	private final static Date date = new Date(1453601787705L);
+	private final static Date date = new Date(1453751280926L);
 	private final static int major = 3;
 	private final static int minor = 1;
 	private final static int patch = 37;
@@ -30,12 +30,28 @@ public final class GeneratedVersion {
 	}
 
 	/**
-	 * Returns the full version.
+	 * Returns the full version string.
+	 * <p>
+	 * Formatted as:
+	 * <blockquote>
+	 * <code>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]</code>
+	 * </blockquote>
+	 * <p>
+	 * For example:
+	 * <ul>
+	 * <li><code>1.0.0</code></li>
+	 * <li><code>1.0.0-beta</code></li>
+	 * <li><code>1.0.0+20160124144700</code></li>
+	 * <li><code>1.0.0-alpha+001</code></li>
+	 * </ul>
 	 *
-	 * @return The full version string.
+	 * @return The version string.
 	 */
 	public static String getVersion() {
-		return "" + getMajor() + '.' + getMinor() + '.' + getPatch() + getPreRelease() + getBuildMetadata();
+		return Integer.toString(getMajor()) + '.'
+               + Integer.toString(getMinor()) + '.'
+               + Integer.toString(getPatch())
+               + getPreRelease() + getBuildMetadata();
 	}
 
 	/**
@@ -98,5 +114,15 @@ public final class GeneratedVersion {
 		}
 
 		return "";
+	}
+	
+	/**
+	 * Disables the default constructor.
+	 *
+	 * @throws UnsupportedOperationException if the constructor is called.
+	 */
+	private GeneratedVersion()
+			throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Illegal constructor call.");
 	}
 }

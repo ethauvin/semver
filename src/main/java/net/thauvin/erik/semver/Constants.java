@@ -108,7 +108,7 @@ public final class Constants
 	/**
 	 * Disables the default constructor.
 	 *
-	 * @throws UnsupportedOperationException if an error occurred. if the constructor is called.
+	 * @throws UnsupportedOperationException if the constructor is called.
 	 */
 	private Constants()
 			throws UnsupportedOperationException

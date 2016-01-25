@@ -207,7 +207,7 @@ public class VersionInfo
 	 *
 	 * @param project The new project name.
 	 */
-	public void setProject(String project)
+	public void setProject(final String project)
 	{
 		this.project = project;
 	}
@@ -230,7 +230,7 @@ public class VersionInfo
 	 */
 	public String getVersion()
 	{
-		return "" + major + '.' + minor + '.' + patch + (prerelease.length() > 0 ? '-' + prerelease : "") + (
-				buildmeta.length() > 0 ? '+' + buildmeta : "");
+		return Integer.toString(major) + '.' + Integer.toString(minor) + '.' + Integer.toString(patch) + (
+				prerelease.length() > 0 ? '-' + prerelease : "") + (buildmeta.length() > 0 ? '+' + buildmeta : "");
 	}
 }

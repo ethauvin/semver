@@ -170,7 +170,7 @@ public class VersionProcessor extends AbstractProcessor
 					}
 					catch (IOException e)
 					{
-						error("IOException occurred while running annotation processor", e);
+						error("IOException occurred while running the annotation processor", e);
 					}
 				}
 			}
@@ -192,7 +192,7 @@ public class VersionProcessor extends AbstractProcessor
 	{
 		try
 		{
-			return Integer.parseInt(p.getProperty(property, "" + defaultValue));
+			return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)));
 		}
 		catch (NumberFormatException ignore)
 		{
