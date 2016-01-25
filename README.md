@@ -117,8 +117,75 @@ example.minor=0
 example.patch=0
 # ...
 ```
+## Usage with Maven, Grail and Kobalt
 
-## Auto-Increment
+### Maven
+
+To install and run from [Maven](http://maven.apache.org/), configure an artifact as follows:
+
+```xml
+<dependency>
+    <groupId>net.thauvin.erik</groupId>
+    <artifactId>semver</artifactId>
+    <version>0.9.1-beta</version>
+</dependency>
+```
+
+### Gradle
+
+To install and run from [Gradle](https://gradle.org/), add the following to the `build.gradle` file:
+
+```gradle
+dependencies {
+    compile 'net.thauvin.erik:semver:0.9.1-beta'
+}
+```
+
+The `GeneratedVersion` class will be automatically generated in the `build` directory upon compiling.
+
+In order to also include the generated source code to your source tree, you should use the [EWEK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
+
+```gradle
+plugins {
+	id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
+}
+```
+
+Then add the following to the `build.gradle` file:
+
+```gradle
+dependencies {
+	compile 'net.thauvin.erik:semver:0.9.1-beta'
+}
+
+annotationProcessor {
+	project.version = getVersion(isRelease)
+	library 'net.thauvin.erik:semver:0.9.1-beta'
+	processor 'net.thauvin.erik.semver.VersionProcessor'
+	// sourcesDir 'src/generated/java'
+}
+
+compileJava {
+	// Disable the classpath procesor
+	options.compilerArgs << '-proc:none'
+}
+```
+
+The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.
+
+Please look at the `build.gradle` file in the `example` module directory for a sample.
+
+### Kobalt
+
+To install and run from [Kobalt](http://beust.com/kobalt/), add the following to the `Build.kt` file:
+
+```gradle
+dependencies {
+    apt("net.thauvin.erik:semver:0.9.1-beta")
+}
+```
+
+### Auto-Increment
 
 Incrementing the version is best left to your favorite build system.
 
