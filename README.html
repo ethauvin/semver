@@ -49,7 +49,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </head>
 <body>
 <h1 id="semantic-version-annotation-processor">Semantic Version Annotation Processor</h1>
-<p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>Version</code> class containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <code>Properties</code> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
+<p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>GeneratedVersion</code> class containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <code>Properties</code> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
 <p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a>.</p>
 <h2 id="examples">Examples</h2>
 <ul>
@@ -246,12 +246,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
     <span class="kw">&lt;version&gt;</span>0.9.1-beta<span class="kw">&lt;/version&gt;</span>
 <span class="kw">&lt;/dependency&gt;</span></code></pre></div>
 <h3 id="gradle">Gradle</h3>
+<h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
     compile &#39;net.thauvin.erik:semver:0.9.1-beta&#39;
 }</code></pre>
-<p>The <code>GeneratedVersion</code> class will be automatically generated in the <code>build</code> directory upon compiling.</p>
-<p>In order to also include the generated source code to your source tree, you should use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by addding the following to the very top of the <code>build.gradle</code> file:</p>
+<p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build</code> directory upon compiling.</p>
+<h4 id="class-source-generation">Class &amp; Source Generation</h4>
+<p>In order to also incorporate the generated source code into the <code>source tree</code>, use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by addding the following to the very top of the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>plugins {
     id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.2&quot;
 }</code></pre>
@@ -261,7 +263,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }
 
 annotationProcessor {
-    project.version = getVersion(isRelease)
     library &#39;net.thauvin.erik:semver:0.9.1-beta&#39;
     processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
     // sourcesDir &#39;src/generated/java&#39;
