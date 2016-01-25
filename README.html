@@ -236,6 +236,51 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dt">example.major</span><span class="ot">=</span><span class="dv">1</span>
 <span class="dt">example.minor</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">example.patch</span><span class="ot">=</span><span class="dv">0</span>
-<span class="dt">...</span></code></pre></div>
+<span class="co"># ...</span></code></pre></div>
+<h2 id="usage-with-maven-grail-and-kobalt">Usage with Maven, Grail and Kobalt</h2>
+<h3 id="maven">Maven</h3>
+<p>To install and run from <a href="http://maven.apache.org/">Maven</a>, configure an artifact as follows:</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
+    <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span>
+    <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span>
+    <span class="kw">&lt;version&gt;</span>0.9.1-beta<span class="kw">&lt;/version&gt;</span>
+<span class="kw">&lt;/dependency&gt;</span></code></pre></div>
+<h3 id="gradle">Gradle</h3>
+<p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
+<pre class="gradle"><code>dependencies {
+    compile &#39;net.thauvin.erik:semver:0.9.1-beta&#39;
+}</code></pre>
+<p>The <code>GeneratedVersion</code> class will be automatically generated in the <code>build</code> directory upon compiling.</p>
+<p>In order to also include the generated source code to your source tree, you should use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by addding the following to the very top of the <code>build.gradle</code> file:</p>
+<pre class="gradle"><code>plugins {
+    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.2&quot;
+}</code></pre>
+<p>Then add the following to the <code>build.gradle</code> file:</p>
+<pre class="gradle"><code>dependencies {
+    compile &#39;net.thauvin.erik:semver:0.9.1-beta&#39;
+}
+
+annotationProcessor {
+    project.version = getVersion(isRelease)
+    library &#39;net.thauvin.erik:semver:0.9.1-beta&#39;
+    processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
+    // sourcesDir &#39;src/generated/java&#39;
+}
+
+compileJava {
+    // Disable the classpath procesor
+    options.compilerArgs &lt;&lt; &#39;-proc:none&#39;
+}</code></pre>
+<p>The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.</p>
+<p>Please look at the <code>build.gradle</code> file in the <code>example</code> module directory for a sample.</p>
+<h3 id="kobalt">Kobalt</h3>
+<p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
+<pre class="gradle"><code>dependencies {
+    apt(&quot;net.thauvin.erik:semver:0.9.1-beta&quot;)
+}</code></pre>
+<h3 id="auto-increment">Auto-Increment</h3>
+<p>Incrementing the version is best left to your favorite build system.</p>
+<p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <code>build.gradle</code> file in the <code>example</code> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
+<pre><code>gradle clean release run</code></pre>
 </body>
 </html>

@@ -51,7 +51,7 @@ dependencies {
 
 annotationProcessor {
 	project.version = getVersion(isRelease)
-	library 'net.thauvin.erik:semver:+'
+	library 'net.thauvin.erik:semver:0.9.1-beta'
 	processor 'net.thauvin.erik.semver.VersionProcessor'
 }
 
