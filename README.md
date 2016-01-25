@@ -143,7 +143,7 @@ dependencies {
 
 The `GeneratedVersion` class will be automatically generated in the `build` directory upon compiling.
 
-In order to also include the generated source code to your source tree, you should use the [EWEK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
+In order to also include the generated source code to your source tree, you should use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
 
 ```gradle
 plugins {
