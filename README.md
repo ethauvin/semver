@@ -1,5 +1,7 @@
 #  Semantic Version Annotation Processor
 
+[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![Dependency Status](https://www.versioneye.com/user/projects/56a680101b78fd00390001d2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56a680101b78fd00390001d2) [![Build Status](https://travis-ci.org/ethauvin/semver.svg?branch=master)](https://travis-ci.org/ethauvin/semver) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver)
+
 An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a `Properties` file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
 This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor).
