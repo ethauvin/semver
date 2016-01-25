@@ -40,11 +40,10 @@ version = getVersion()
 def deployDir = 'deploy'
 def isRelease = 'release' in gradle.startParameter.taskNames
 
-
 def mavenGroupId = 'net.thauvin.erik'
 def mavenName = 'SemVer'
 def mavenDescription = 'Semantic Version Annotation Processor'
-def mavenUrl = 'https://github.com/ethauvin/sermver'
+def mavenUrl = 'https://github.com/ethauvin/semver'
 def mavenLicense = 'The BSD 3-Clause License'
 def mavenLicenseUrl = 'http://opensource.org/licenses/BSD-3-Clause'
 def mavenScmCon = 'https://github.com/ethauvin/semver.git'
@@ -70,7 +69,7 @@ bintray {
 	user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
 	key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
 	publications = ['MyPublication']
-	dryRun = true
+	dryRun = false
 	pkg {
 		repo = 'maven'
 		name = mavenName
