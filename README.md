@@ -44,7 +44,7 @@ public class A {
 
 ### Default Template
 
-The default template implements the following static methods:
+The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/version.vm) implements the following static methods:
 
 Method            | Description                      |  Example
 ------------------|----------------------------------|------------------
@@ -178,7 +178,7 @@ compileJava {
 
 The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.
 
-Please look at the `build.gradle` file in the `example` module directory for a sample.
+Please look at the `build.gradle` file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory for a sample.
 
 ### Kobalt
 
@@ -194,7 +194,7 @@ dependencies {
 
 Incrementing the version is best left to your favorite build system.
 
-For a solution using [Gradle](https://gradle.org/), please have a look at the `build.gradle` file in the `example` module directory. To run the example with patch version auto-incrementing, issue the following command:
+For a solution using [Gradle](https://gradle.org/), please have a look at the `build.gradle` file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory. To run the example with patch version auto-incrementing, issue the following command:
 
 ```
 gradle clean release run
