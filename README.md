@@ -194,7 +194,7 @@ dependencies {
 
 Incrementing the version is best left to your favorite build system.
 
-For a solution using [Gradle](https://gradle.org/), please have a look at the `build.gradle` file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory. To run the example with patch version auto-incrementing, issue the following command:
+For a solution using [Gradle](https://gradle.org/), please have a look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/example/build.gradle) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory. To run the example with patch version auto-incrementing, issue the following command:
 
 ```
 gradle clean release run
