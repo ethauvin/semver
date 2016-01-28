@@ -357,6 +357,15 @@
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.4/2b8c4b3035e45520ef42033e823c7d33e4b4402c/commons-lang-2.4-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: net.thauvin.erik:semver:0.9.3-beta">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.3-beta/semver-0.9.3-beta.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.3-beta/semver-0.9.3-beta-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: org.apache.velocity:velocity:1.7">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.velocity/velocity/1.7/2ceb567b8f3f21118ecdec129fe1271dbc09aa7a/velocity-1.7.jar!/" />
