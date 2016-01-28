@@ -115,7 +115,7 @@ public final class GeneratedVersion {
 
 		return "";
 	}
-	
+
 	/**
 	 * Disables the default constructor.
 	 *

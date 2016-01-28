@@ -76,7 +76,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">public</span> <span class="kw">class</span> A {
 <span class="co">// ...</span></code></pre></div>
 <h3 id="default-template">Default Template</h3>
-<p>The default template implements the following static methods:</p>
+<p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/version.vm">default template</a> implements the following static methods:</p>
 <table style="width:101%;">
 <colgroup>
 <col style="width: 26%" />
@@ -274,7 +274,7 @@ compileJava {
     options.compilerArgs &lt;&lt; &#39;-proc:none&#39;
 }</code></pre>
 <p>The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.</p>
-<p>Please look at the <code>build.gradle</code> file in the <code>example</code> module directory for a sample.</p>
+<p>Please look at the <code>build.gradle</code> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
@@ -282,7 +282,7 @@ compileJava {
 }</code></pre>
 <h3 id="auto-increment">Auto-Increment</h3>
 <p>Incrementing the version is best left to your favorite build system.</p>
-<p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <code>build.gradle</code> file in the <code>example</code> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
+<p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <a href="https://github.com/ethauvin/semver/blob/master/example/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
 <pre><code>gradle clean release run</code></pre>
 </body>
 </html>
