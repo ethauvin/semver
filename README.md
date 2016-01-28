@@ -178,7 +178,7 @@ compileJava {
 
 The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.
 
-Please look at the `build.gradle` file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory for a sample.
+Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/example/build.gradle) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory for a sample.
 
 ### Kobalt
 
