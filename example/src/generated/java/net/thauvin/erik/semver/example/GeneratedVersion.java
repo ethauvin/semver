@@ -7,13 +7,13 @@ package net.thauvin.erik.semver.example;
 import java.util.Date;
 
 /**
- * This class provides semantic version information.
+ * This <code>GeneratedVersion</code> class provides semantic version information.
  *
  * @author Semantic Version Annotation Processor
  */
 public final class GeneratedVersion {
 	private final static String buildmeta = "";
-	private final static Date date = new Date(1453950493893L);
+	private final static Date date = new Date(1454030788850L);
 	private final static int major = 3;
 	private final static int minor = 1;
 	private final static int patch = 37;
@@ -23,7 +23,7 @@ public final class GeneratedVersion {
    /**
      * Disables the default constructor.
      *
-     * @throws UnsupportedOperationException if the constructor is called.
+     * @throws UnsupportedOperationException If the constructor is called.
      */
     private GeneratedVersion()
             throws UnsupportedOperationException {
