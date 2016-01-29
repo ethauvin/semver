@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public final class GeneratedVersion {
 	private final static String buildmeta = "";
-	private final static Date date = new Date(1454030788850L);
+	private final static Date date = new Date(1454031375359L);
 	private final static int major = 3;
 	private final static int minor = 1;
 	private final static int patch = 37;

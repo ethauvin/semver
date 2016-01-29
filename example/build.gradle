@@ -47,13 +47,13 @@ repositories {
 }
 
 dependencies {
-	compile 'net.thauvin.erik:semver:0.9.3-beta'
+	compile 'net.thauvin.erik:semver:0.9.4-beta'
 }
 
 annotationProcessor {
 	// Update version, increment on release.
 	project.version = getVersion(isRelease)
-	library 'net.thauvin.erik:semver:0.9.3-beta'
+	library 'net.thauvin.erik:semver:0.9.4-beta'
 	processor 'net.thauvin.erik.semver.VersionProcessor'
 }
 
