@@ -10,16 +10,14 @@ import org.apache.tools.ant.taskdefs.condition.Os
 
 defaultTasks 'deploy'
 
-def getVersion(isIncrement = false)
-{
+def getVersion(isIncrement = false) {
 	def propsFile = 'version.properties'
 	def majorKey = 'version.major'
 	def minorKey = 'version.minor'
 	def patchKey = 'version.patch'
 	def metaKey = 'version.buildmeta'
 	def preKey = 'version.prerelease'
-	if (isIncrement)
-	{
+	if (isIncrement) {
 		ant.propertyfile(file: propsFile) {
 			entry(key: patchKey,
 			      type: 'int',
