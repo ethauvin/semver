@@ -72,7 +72,7 @@
     </LanguageOptions>
   </component>
   <component name="DependencyValidationManager">
-    <scope name="Source" pattern="file[example]:src/main/java/*.java||file[semver]:src/main/java/*.java" />
+    <scope name="Source" pattern="file[example]:src/main/java/*.java||file[semver]:src/main/java/*.java||file[semver]:src/test/java/*.java" />
   </component>
   <component name="Encoding">
     <file url="PROJECT" charset="UTF-8" />
@@ -305,7 +305,7 @@
         </XML>
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Erik's Code Style" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -355,15 +355,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.4/2b8c4b3035e45520ef42033e823c7d33e4b4402c/commons-lang-2.4-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Gradle: net.thauvin.erik:semver:0.9.4-beta">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.4-beta/semver-0.9.4-beta.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.4-beta/semver-0.9.4-beta-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.apache.velocity:velocity:1.7">
