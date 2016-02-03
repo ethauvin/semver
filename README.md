@@ -34,7 +34,7 @@ version.prerelease=beta
 
 ## Template
 
-Upon running the annotator processor, a source file `GeneratedVersion.java` is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Velocity](http://velocity.apache.org/) template.
+Upon running the annotator processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Velocity](http://velocity.apache.org/) template.
 
 ```java
 @Version(template = "myversion.vm")

@@ -71,7 +71,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dt">version.patch</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">version.prerelease</span><span class="ot">=</span><span class="st">beta</span></code></pre></div>
 <h2 id="template">Template</h2>
-<p>Upon running the annotator processor, a source file <code>GeneratedVersion.java</code> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="http://velocity.apache.org/">Velocity</a> template.</p>
+<p>Upon running the annotator processor, a source file <a href="https://github.com/ethauvin/semver/blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="http://velocity.apache.org/">Velocity</a> template.</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(template = <span class="st">&quot;myversion.vm&quot;</span>)
 <span class="kw">public</span> <span class="kw">class</span> A {
 <span class="co">// ...</span></code></pre></div>
