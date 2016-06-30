@@ -45,7 +45,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.thauvin.erik:semver:0.9.5-beta'
+    compileOnly 'net.thauvin.erik:semver:0.9.5-beta'
 }
 
 annotationProcessor {

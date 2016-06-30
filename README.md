@@ -161,7 +161,7 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compile 'net.thauvin.erik:semver:0.9.5-beta'
+    compileOnly 'net.thauvin.erik:semver:0.9.5-beta'
 }
 
 annotationProcessor {
