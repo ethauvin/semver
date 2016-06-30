@@ -206,7 +206,7 @@ task pandoc(type: Exec) {
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine(['cmd', '/c', 'pandoc'] + pandoc_args)
     } else {
-        executable '/usr/local/bin/pandoc'
+        executable 'pandoc'
         args pandoc_args
     }
     standardOutput = new ByteArrayOutputStream()
