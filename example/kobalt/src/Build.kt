@@ -38,25 +38,7 @@ val p = project {
             prerelease.insert(0, "+");
         }
 
-        val value = p.getProperty(patchKey, "0");
-        val patch: String?
-
-        if (isIncrement) {
-            patch = try {
-                (value.toInt() + 1).toString();
-            } catch (e: NumberFormatException) {
-                "0"
-            }
-
-            FileOutputStream(propsFile).use { output ->
-                p.setProperty(patchKey, patch)
-                p.store(output, "")
-            }
-        } else {
-            patch = value;
-        }
-
-        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + patch + prerelease + metadata)
+        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0") + prerelease + metadata)
     }
 
     version = getVersion()
@@ -92,10 +74,4 @@ val p = project {
     application {
         mainClass = mainClassName
     }
-}
-
-@Task(name = "release", dependsOn = arrayOf("clean"), description = "Releases new version.")
-fun taskRelease(project: Project): TaskResult {
-    project.version = project.getVersion(true)
-    return TaskResult()
 }
