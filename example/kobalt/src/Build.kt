@@ -38,7 +38,8 @@ val p = project {
             prerelease.insert(0, "+");
         }
 
-        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0") + prerelease + metadata)
+        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0")
+                + prerelease + metadata)
     }
 
     version = getVersion()
