@@ -187,8 +187,11 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 ```gradle
 dependencies {
     apt("net.thauvin.erik:semver:0.9.5-beta")
+	compile("net.thauvin.erik:semver:0.9.5-beta")
 }
 ```
+
+Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/example/kobalt/src/Build.kt) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory for a sample.
 
 ### Auto-Increment
 

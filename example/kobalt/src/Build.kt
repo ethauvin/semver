@@ -1,23 +1,15 @@
+import com.beust.kobalt.plugin.application.application
+import com.beust.kobalt.plugin.apt.apt
+import com.beust.kobalt.plugin.packaging.assemble
+import com.beust.kobalt.project
 import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.lang.NumberFormatException
-import java.util.Properties
-
-import com.beust.kobalt.*
-import com.beust.kobalt.api.annotation.Task
-import com.beust.kobalt.api.Project
-import com.beust.kobalt.plugin.application.*
-import com.beust.kobalt.plugin.apt.*
-import com.beust.kobalt.plugin.java.*
-import com.beust.kobalt.plugin.packaging.*
-
-val repos = repos()
+import java.util.*
 
 val p = project {
 
     name = "example"
 
-    fun getVersion(isIncrement: Boolean = false): String {
+    fun versionFor(): String {
         val propsFile = "version.properties"
         val majorKey = "version.major"
         val minorKey = "version.minor"
@@ -42,7 +34,7 @@ val p = project {
                 + prerelease + metadata)
     }
 
-    version = getVersion()
+    version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
     val processorJar = "net.thauvin.erik:semver:0.9.5-beta"
