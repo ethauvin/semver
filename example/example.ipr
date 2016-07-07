@@ -370,6 +370,7 @@
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
       </SOURCES>
     </library>
   </component>

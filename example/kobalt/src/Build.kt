@@ -27,7 +27,7 @@ val p = project {
         }
         val prerelease = StringBuilder(p.getProperty(preKey, ""))
         if (prerelease.length > 0) {
-            prerelease.insert(0, "+");
+            prerelease.insert(0, '+');
         }
 
         return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0")
