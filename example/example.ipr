@@ -166,7 +166,7 @@
       <KobaltProjectSettings>
         <option name="autoDownloadKobalt" value="true" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="kobaltHome" value="$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840" />
+        <option name="kobaltHome" value="$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -363,7 +363,7 @@
     </library>
     <library name="kobalt.jar">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -371,6 +371,9 @@
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
       </SOURCES>
     </library>
   </component>

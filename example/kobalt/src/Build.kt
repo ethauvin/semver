@@ -5,6 +5,13 @@ import com.beust.kobalt.project
 import java.io.FileInputStream
 import java.util.*
 
+fun StringBuilder.prepend(s: String): StringBuilder {
+    if (this.length > 0) {
+        this.insert(0, s)
+    }
+    return this
+}
+
 val p = project {
 
     name = "example"
@@ -17,21 +24,11 @@ val p = project {
         val metaKey = "version.buildmeta"
         val preKey = "version.prerelease"
 
-        val p = Properties().apply {
-            FileInputStream(propsFile).use { fis -> load(fis) }
-        }
-
-        val metadata = StringBuilder(p.getProperty(metaKey, ""))
-        if (metadata.length > 0) {
-            metadata.insert(0, '-');
-        }
-        val prerelease = StringBuilder(p.getProperty(preKey, ""))
-        if (prerelease.length > 0) {
-            prerelease.insert(0, '+');
-        }
+        val p = Properties().apply { FileInputStream(propsFile).use { fis -> load(fis) } }
 
         return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0")
-                + prerelease + metadata)
+                + StringBuilder(p.getProperty(preKey, "")).prepend("-")
+                + StringBuilder(p.getProperty(metaKey, "")).prepend("+"))
     }
 
     version = versionFor()
