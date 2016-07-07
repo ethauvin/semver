@@ -53,6 +53,7 @@ annotationProcessor {
     project.version = getVersion(isRelease)
     library 'net.thauvin.erik:semver:0.9.5-beta'
     processor 'net.thauvin.erik.semver.VersionProcessor'
+	// sourcesDir 'src/generated/java'
 }
 
 compileJava {
@@ -80,7 +81,6 @@ task deploy(dependsOn: ['build', 'copyToDeploy']) {
     inputs.files copyToDeploy
     mustRunAfter clean
 }
-
 
 task release(dependsOn: ['deploy', 'wrapper']) << {
     group = 'Publishing'
