@@ -1,17 +1,23 @@
-import java.util.Properties
 import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.lang.NumberFormatException
+import java.util.Properties
 
 import com.beust.kobalt.*
-import com.beust.kobalt.plugin.packaging.*
+import com.beust.kobalt.api.annotation.Task
+import com.beust.kobalt.api.Project
 import com.beust.kobalt.plugin.application.*
-import com.beust.kobalt.plugin.java.*
 import com.beust.kobalt.plugin.apt.*
+import com.beust.kobalt.plugin.java.*
+import com.beust.kobalt.plugin.packaging.*
 
 val repos = repos()
 
 val p = project {
 
-    fun getVersion(isIncremental: Boolean = false): String {
+    name = "example"
+
+    fun getVersion(isIncrement: Boolean = false): String {
         val propsFile = "version.properties"
         val majorKey = "version.major"
         val minorKey = "version.minor"
@@ -31,10 +37,28 @@ val p = project {
         if (prerelease.length > 0) {
             prerelease.insert(0, "+");
         }
-        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + p.getProperty(patchKey, "0") + prerelease + metadata)
+
+        val value = p.getProperty(patchKey, "0");
+        val patch: String?
+
+        if (isIncrement) {
+            patch = try {
+                (value.toInt() + 1).toString();
+            } catch (e: NumberFormatException) {
+                "0"
+            }
+
+            FileOutputStream(propsFile).use { output ->
+                p.setProperty(patchKey, patch)
+                p.store(output, "")
+            }
+        } else {
+            patch = value;
+        }
+
+        return (p.getProperty(majorKey, "1") + "." + p.getProperty(minorKey, "0") + "." + patch + prerelease + metadata)
     }
 
-    name = "example"
     version = getVersion()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
@@ -68,4 +92,10 @@ val p = project {
     application {
         mainClass = mainClassName
     }
+}
+
+@Task(name = "release", dependsOn = arrayOf("clean"), description = "Releases new version.")
+fun taskRelease(project: Project): TaskResult {
+    project.version = project.getVersion(true)
+    return TaskResult()
 }
