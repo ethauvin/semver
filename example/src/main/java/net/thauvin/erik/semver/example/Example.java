@@ -47,9 +47,19 @@ public class Example
 {
 	public static void main(final String... args)
 	{
-		final SimpleDateFormat sdf = new SimpleDateFormat("'Built on' EEE, d MMM yyyy 'at' HH:mm:ss z");
+		final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z");
 
-		System.out.println(GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
-		System.out.println(sdf.format(GeneratedVersion.getBuildDate()));
+		System.out.println("-----------------------------------------------------");
+
+		System.out.println("  " + GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
+
+		System.out.println("    Built on:       " + sdf.format(GeneratedVersion.getBuildDate()));
+		System.out.println("    Major:          " + GeneratedVersion.getMajor());
+		System.out.println("    Minor:          " + GeneratedVersion.getMinor());
+		System.out.println("    Patch:          " + GeneratedVersion.getPatch());
+		System.out.println("    PreRelease:     " + GeneratedVersion.getPreRelease());
+		System.out.println("    BuildMetaData:  " + GeneratedVersion.getBuildMetadata());
+
+		System.out.println("-----------------------------------------------------");
 	}
 }

@@ -238,13 +238,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
     <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span>
     <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span>
-    <span class="kw">&lt;version&gt;</span>0.9.5-beta<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;version&gt;</span>0.9.6-beta<span class="kw">&lt;/version&gt;</span>
 <span class="kw">&lt;/dependency&gt;</span></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compile &#39;net.thauvin.erik:semver:0.9.5-beta&#39;
+    compile &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
 }</code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build</code> directory upon compiling.</p>
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
@@ -254,11 +254,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre>
 <p>Then add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compileOnly &#39;net.thauvin.erik:semver:0.9.5-beta&#39;
+    compileOnly &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
 }
 
 annotationProcessor {
-    library &#39;net.thauvin.erik:semver:0.9.5-beta&#39;
+    library &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
     processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
     // sourcesDir &#39;src/generated/java&#39;
 }
@@ -272,13 +272,13 @@ compileJava {
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:0.9.5-beta&quot;)
-    compile(&quot;net.thauvin.erik:semver:0.9.5-beta&quot;)
+    apt(&quot;net.thauvin.erik:semver:0.9.6-beta&quot;)
+    compile(&quot;net.thauvin.erik:semver:0.9.6-beta&quot;)
 }</code></pre>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/example/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
 <h3 id="auto-increment">Auto-Increment</h3>
 <p>Incrementing the version is best left to your favorite build system.</p>
 <p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <a href="https://github.com/ethauvin/semver/blob/master/example/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
-<pre><code>gradle clean release run</code></pre>
+<pre><code>gradle release run</code></pre>
 </body>
 </html>

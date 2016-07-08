@@ -28,15 +28,15 @@ import java.util.Date;
  *         Annotation Processor</a>
  */
 public final class ${className} {
-	private final static String buildmeta = "${buildmeta}";
-	private final static Date date = new Date(${epoch}L);
-	private final static int major = ${major};
-	private final static int minor = ${minor};
-	private final static int patch = ${patch};
-	private final static String prerelease = "${prerelease}";
-	private final static String project = "${project}";
+    private final static String buildmeta = "${buildmeta}";
+    private final static Date date = new Date(${epoch}L);
+    private final static int major = ${major};
+    private final static int minor = ${minor};
+    private final static int patch = ${patch};
+    private final static String prerelease = "${prerelease}";
+    private final static String project = "${project}";
 
-   /**
+    /**
      * Disables the default constructor.
      *
      * @throws UnsupportedOperationException If the constructor is called.
@@ -86,7 +86,7 @@ public final class ${className} {
         return Integer.toString(getMajor()) + '.'
                 + Integer.toString(getMinor()) + '.'
                 + Integer.toString(getPatch())
-                + getPreRelease() + getBuildMetadata();
+                + getPreRelease(true) + getBuildMetadata(true);
     }
 
     /**
@@ -119,11 +119,43 @@ public final class ${className} {
     /**
      * Returns the pre-release version.
      *
+     * @param isHyphen Prepend a hyphen, if <code>true</code>.
+     * @return The pre-release version, if any.
+     */
+    public static String getPreRelease(final boolean isHyphen) {
+        if (prerelease.length() > 0) {
+            if (isHyphen) {
+                return '-' + prerelease;
+            } else {
+                return prerelease;
+            }
+        }
+
+        return "";
+    }
+
+    /**
+     * Returns the pre-release version.
+     *
      * @return The pre-release version, if any.
      */
     public static String getPreRelease() {
-        if (prerelease.length() > 0) {
-            return '-' + prerelease;
+        return getPreRelease(false);
+    }
+
+    /**
+     * Returns the build metadata.
+     *
+     * @param isPlus Prepend a plus sign, if <code>true</code>.
+     * @return The build metadata, if any.
+     */
+    public static String getBuildMetadata(final boolean isPlus) {
+        if (buildmeta.length() > 0) {
+            if (isPlus) {
+                return '+' + buildmeta;
+            } else {
+                return buildmeta;
+            }
         }
 
         return "";
@@ -135,10 +167,6 @@ public final class ${className} {
      * @return The build metadata, if any.
      */
     public static String getBuildMetadata() {
-        if (buildmeta.length() > 0) {
-            return '+' + buildmeta;
-        }
-
-        return "";
+        return getBuildMetadata(false);
     }
 }

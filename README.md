@@ -129,7 +129,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>0.9.5-beta</version>
+    <version>0.9.6-beta</version>
 </dependency>
 ```
 
@@ -141,7 +141,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    compile 'net.thauvin.erik:semver:0.9.5-beta'
+    compile 'net.thauvin.erik:semver:0.9.6-beta'
 }
 ```
 
@@ -161,11 +161,11 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:0.9.5-beta'
+    compileOnly 'net.thauvin.erik:semver:0.9.6-beta'
 }
 
 annotationProcessor {
-    library 'net.thauvin.erik:semver:0.9.5-beta'
+    library 'net.thauvin.erik:semver:0.9.6-beta'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -186,8 +186,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:0.9.5-beta")
-	compile("net.thauvin.erik:semver:0.9.5-beta")
+    apt("net.thauvin.erik:semver:0.9.6-beta")
+	compile("net.thauvin.erik:semver:0.9.6-beta")
 }
 ```
 
@@ -200,5 +200,5 @@ Incrementing the version is best left to your favorite build system.
 For a solution using [Gradle](https://gradle.org/), please have a look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/example/build.gradle) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory. To run the example with patch version auto-incrementing, issue the following command:
 
 ```
-gradle clean release run
+gradle release run
 ```

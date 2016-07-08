@@ -34,7 +34,7 @@ val p = project {
     version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.5-beta"
+    val processorJar = "net.thauvin.erik:semver:0.9.6-beta"
 
     sourceDirectories {
         path("src/main/java")

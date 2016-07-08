@@ -166,7 +166,7 @@
       <KobaltProjectSettings>
         <option name="autoDownloadKobalt" value="true" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="kobaltHome" value="$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841" />
+        <option name="kobaltHome" value="$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -181,6 +181,12 @@
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value />
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Erik's Code Style" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -215,7 +221,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/kobalt/Build.kt.iml" filepath="$PROJECT_DIR$/kobalt/Build.kt.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/example.iml" filepath="$PROJECT_DIR$/example.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8.x" project-jdk-type="JavaSDK">
@@ -363,7 +369,7 @@
     </library>
     <library name="kobalt.jar">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
@@ -374,6 +380,12 @@
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.840/kobalt/wrapper/kobalt-0.840.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
         <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.841/kobalt/wrapper/kobalt-0.841.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
+        <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-0.842/kobalt/wrapper/kobalt-0.842.jar!/" />
       </SOURCES>
     </library>
   </component>
