@@ -1,7 +1,9 @@
+import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.application.application
-import com.beust.kobalt.plugin.apt.apt
 import com.beust.kobalt.plugin.packaging.assemble
+import com.beust.kobalt.plugin.packaging.install
 import com.beust.kobalt.project
+import com.beust.kobalt.repos
 import java.io.FileInputStream
 import java.util.*
 
@@ -14,9 +16,11 @@ fun StringBuilder.prepend(s: String): StringBuilder {
     return this
 }
 
-val example = project {
+val semver = project {
 
-    name = "example"
+    name = "semver"
+    group = "net.thauvin.erik"
+    artifactId = name
 
     fun versionFor(): String {
         val propsFile = "version.properties"
@@ -35,9 +39,6 @@ val example = project {
 
     version = versionFor()
 
-    val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.6-beta"
-
     sourceDirectories {
         path("src/main/java")
     }
@@ -47,11 +48,11 @@ val example = project {
     }
 
     dependencies {
-        apt(processorJar)
-        compile(processorJar)
+        compile("org.apache.velocity:velocity:1.7")
     }
 
     dependenciesTest {
+        compile("org.testng:testng:6.9.12")
 
     }
 
@@ -60,14 +61,11 @@ val example = project {
     }
 
     assemble {
-        jar {
-            manifest {
-                attributes("Main-Class", mainClassName)
-            }
-        }
+        jar {}
     }
 
     application {
-        mainClass = mainClassName
+        mainClass = "com.example.Main"
     }
+
 }

@@ -21,6 +21,8 @@
 /out
 /proguard-project.txt
 /project.properties
+/target
 /test-output
 Thumbs.db
 ehthumbs.db
+kobaltBuild
