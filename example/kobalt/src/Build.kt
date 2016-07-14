@@ -1,7 +1,10 @@
+import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.application.application
 import com.beust.kobalt.plugin.apt.apt
 import com.beust.kobalt.plugin.packaging.assemble
+import com.beust.kobalt.plugin.packaging.install
 import com.beust.kobalt.project
+import com.beust.kobalt.repos
 import java.io.FileInputStream
 import java.util.*
 
@@ -54,6 +57,10 @@ val example = project {
     dependenciesTest {
 
     }
+	
+	apt {
+		outputDir = "/src/generated/java/"
+	}
 
     install {
         libDir = "deploy"

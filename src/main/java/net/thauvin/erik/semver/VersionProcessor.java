@@ -247,6 +247,5 @@ public class VersionProcessor extends AbstractProcessor
 		{
 			error("Could not load '" + Constants.VELOCITY_PROPERTIES + "' from jar.");
 		}
-
 	}
 }
