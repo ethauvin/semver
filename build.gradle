@@ -205,7 +205,7 @@ task release(dependsOn: ['wrapper', 'clean', 'deploy']) << {
 
 task pandoc(type: Exec) {
 	group = 'Documentation'
-	def pandoc_args = []
+	def pandoc_args = ['--from', 'markdown_github', '--to', 'html5', '-s', '-c', 'github-pandoc.css', '-o', 'README.html', 'README.md']
 	if (Os.isFamily(Os.FAMILY_WINDOWS))
 	{
 		commandLine(['cmd', '/c', 'pandoc'] + pandoc_args)

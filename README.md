@@ -78,6 +78,8 @@ public final class ${className} {
 }
 ```
 The Velocity variables are automatically filled in by the processor.
+
+Please also look at this [example](https://github.com/ethauvin/mobibot/blob/master/version.vm) using [`java.time`](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
 	
 ## Elements & Properties
 
