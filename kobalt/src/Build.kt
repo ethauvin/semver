@@ -58,7 +58,6 @@ val semver = project {
 
     dependenciesTest {
         compile("org.testng:testng:6.9.12")
-
     }
 
     javaCompiler {
