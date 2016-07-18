@@ -57,10 +57,10 @@ val example = project {
     dependenciesTest {
 
     }
-	
-	apt {
-		outputDir = "/src/generated/java/"
-	}
+
+    apt {
+        outputDir = "/src/generated/java/"
+    }
 
     install {
         libDir = "deploy"
