@@ -58,9 +58,26 @@
       </profile>
     </annotationProcessing>
   </component>
-  <component name="CopyrightManager" default="" />
+  <component name="CopyrightManager" default="">
+    <copyright>
+      <option name="myName" value="Erik's Copyright Notice" />
+      <option name="notice" value="&amp;#36;file.fileName&#10;&#10;Copyright (c) &amp;#36;today.year, Erik C. Thauvin (erik@thauvin.net)&#10;All rights reserved.&#10;&#10;Redistribution and use in source and binary forms, with or without&#10;modification, are permitted provided that the following conditions are met:&#10;&#10;  Redistributions of source code must retain the above copyright notice, this&#10;  list of conditions and the following disclaimer.&#10;&#10;  Redistributions in binary form must reproduce the above copyright notice,&#10;  this list of conditions and the following disclaimer in the documentation&#10;  and/or other materials provided with the distribution.&#10;&#10;  Neither the name of this project nor the names of its contributors may be&#10;  used to endorse or promote products derived from this software without&#10;  specific prior written permission.&#10;&#10;THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;&#10;AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE&#10;IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE&#10;DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE&#10;FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL&#10;DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR&#10;SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER&#10;CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,&#10;OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE&#10;OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE." />
+    </copyright>
+    <module2copyright>
+      <element module="Source" copyright="Erik's Copyright Notice" />
+    </module2copyright>
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="addBlankAfter" value="false" />
+    </LanguageOptions>
+  </component>
+  <component name="DependencyValidationManager">
+    <scope name="Source" pattern="file[example]:src/main/java//*.java||file[semver]:src/main/java//*.java" />
+  </component>
   <component name="Encoding">
     <file url="PROJECT" charset="UTF-8" />
+  </component>
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
   </component>
   <component name="GradleLocalSettings">
     <option name="modificationStamps">
@@ -80,7 +97,7 @@
         <entry key="$PROJECT_DIR$/../HttpStatus" value="2906561643260" />
         <entry key="$PROJECT_DIR$/../SemanticVersion" value="2905451385982" />
         <entry key="$PROJECT_DIR$/../mobibot" value="2865248599040" />
-        <entry key="$PROJECT_DIR$" value="2921455760636" />
+        <entry key="$PROJECT_DIR$" value="2921872379706" />
       </map>
     </option>
     <option name="externalProjectsViewState">
@@ -97,6 +114,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useAutoImport" value="true" />
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="LOCAL" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/example" />
+        <option name="gradleHome" value="C:/gradle" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/example" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
@@ -199,6 +228,7 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/example.iml" filepath="$PROJECT_DIR$/.idea/modules/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/semver.iml" filepath="$PROJECT_DIR$/.idea/modules/semver.iml" />
     </modules>
   </component>
@@ -332,6 +362,15 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/commons-lang/commons-lang/2.4/2b8c4b3035e45520ef42033e823c7d33e4b4402c/commons-lang-2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: net.thauvin.erik:semver:0.9.6-beta">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.6-beta/semver-0.9.6-beta.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/net/thauvin/erik/semver/0.9.6-beta/semver-0.9.6-beta-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Gradle: org.apache.ant:ant-launcher:1.7.0">

@@ -39,41 +39,40 @@ import java.lang.annotation.Target;
 /**
  * The <code>Version</code> class implements the annotation interface.
  *
- * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
+ * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
  * @created 2016-01-13
  * @since 1.0
  */
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
-public @interface Version
-{
-	String buildmeta() default Constants.EMPTY;
+public @interface Version {
+    String buildmeta() default Constants.EMPTY;
 
-	String buildmetaKey() default Constants.KEY_VERSION_BUILDMETA;
+    String buildmetaKey() default Constants.KEY_VERSION_BUILDMETA;
 
-	String className() default Constants.DEFAULT_CLASS_NAME;
+    String className() default Constants.DEFAULT_CLASS_NAME;
 
-	int major() default Constants.DEFAULT_MAJOR;
+    int major() default Constants.DEFAULT_MAJOR;
 
-	String majorKey() default Constants.KEY_VERSION_MAJOR;
+    String majorKey() default Constants.KEY_VERSION_MAJOR;
 
-	int minor() default Constants.DEFAULT_MINOR;
+    int minor() default Constants.DEFAULT_MINOR;
 
-	String minorKey() default Constants.KEY_VERSION_MINOR;
+    String minorKey() default Constants.KEY_VERSION_MINOR;
 
-	int patch() default Constants.DEFAULT_PATCH;
+    int patch() default Constants.DEFAULT_PATCH;
 
-	String patchKey() default Constants.KEY_VERSION_PATCH;
+    String patchKey() default Constants.KEY_VERSION_PATCH;
 
-	String prerelease() default Constants.EMPTY;
+    String prerelease() default Constants.EMPTY;
 
-	String prereleaseKey() default Constants.KEY_VERSION_PRERELEASE;
+    String prereleaseKey() default Constants.KEY_VERSION_PRERELEASE;
 
-	String project() default Constants.EMPTY;
+    String project() default Constants.EMPTY;
 
-	String projectKey() default Constants.KEY_VERSION_PROJECT;
+    String projectKey() default Constants.KEY_VERSION_PROJECT;
 
-	String properties() default Constants.EMPTY;
+    String properties() default Constants.EMPTY;
 
-	String template() default Constants.DEFAULT_TEMPLATE;
+    String template() default Constants.DEFAULT_TEMPLATE;
 }

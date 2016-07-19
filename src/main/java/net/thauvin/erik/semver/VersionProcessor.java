@@ -52,200 +52,169 @@ import java.util.Set;
 /**
  * The <code>VersionProcessor</code> class implements a semantic version annotation processor.
  *
- * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
+ * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
  * @created 2016-01-13
  * @since 1.0
  */
-public class VersionProcessor extends AbstractProcessor
-{
-	private Filer filer;
+public class VersionProcessor extends AbstractProcessor {
+    private Filer filer;
 
-	private Messager messager;
+    private Messager messager;
 
-	private void error(final String s)
-	{
-		log(Diagnostic.Kind.ERROR, s);
-	}
+    private void error(final String s) {
+        log(Diagnostic.Kind.ERROR, s);
+    }
 
-	private void error(final String s, final Throwable t)
-	{
-		messager.printMessage(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
-	}
+    private void error(final String s, final Throwable t) {
+        messager.printMessage(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
+    }
 
-	private VersionInfo findValues(final Version version)
-			throws IOException
-	{
-		final VersionInfo versionInfo;
+    private VersionInfo findValues(final Version version)
+            throws IOException {
+        final VersionInfo versionInfo;
 
-		if (version.properties().length() > 0)
-		{
-			versionInfo = new VersionInfo();
+        if (version.properties().length() > 0) {
+            versionInfo = new VersionInfo();
 
-			final File propsFile = new File(version.properties());
-			if (propsFile.exists())
-			{
-				note("Found properties: " + propsFile);
-				final Properties p = new Properties();
+            final File propsFile = new File(version.properties());
+            if (propsFile.exists()) {
+                note("Found properties: " + propsFile);
+                final Properties p = new Properties();
 
-				try (FileReader reader = new FileReader(propsFile))
-				{
-					p.load(reader);
+                try (FileReader reader = new FileReader(propsFile)) {
+                    p.load(reader);
 
-					versionInfo.setProject(p.getProperty(version.projectKey(), Constants.EMPTY));
-					versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
-					versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
-					versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
-					versionInfo.setBuildMetadata(p.getProperty(version.buildmetaKey(), Constants.EMPTY));
-					versionInfo.setPreRelease(p.getProperty(version.prereleaseKey(), Constants.EMPTY));
-				}
-			}
-			else
-			{
-				error("Could not find: " + propsFile);
-				throw new FileNotFoundException(propsFile + " (The system cannot find the file specified)");
-			}
-		}
-		else
-		{
-			versionInfo = new VersionInfo(version);
-		}
+                    versionInfo.setProject(p.getProperty(version.projectKey(), Constants.EMPTY));
+                    versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
+                    versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
+                    versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
+                    versionInfo.setBuildMetadata(p.getProperty(version.buildmetaKey(), Constants.EMPTY));
+                    versionInfo.setPreRelease(p.getProperty(version.prereleaseKey(), Constants.EMPTY));
+                }
+            } else {
+                error("Could not find: " + propsFile);
+                throw new FileNotFoundException(propsFile + " (The system cannot find the file specified)");
+            }
+        } else {
+            versionInfo = new VersionInfo(version);
+        }
 
-		return versionInfo;
-	}
+        return versionInfo;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Set<String> getSupportedAnnotationTypes()
-	{
-		final Set<String> result = new HashSet<>();
-		result.add(Version.class.getCanonicalName());
-		return result;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        final Set<String> result = new HashSet<>();
+        result.add(Version.class.getCanonicalName());
+        return result;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public SourceVersion getSupportedSourceVersion()
-	{
-		return SourceVersion.RELEASE_8;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.RELEASE_8;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public synchronized void init(final ProcessingEnvironment processingEnv)
-	{
-		super.init(processingEnv);
-		filer = processingEnv.getFiler();
-		messager = processingEnv.getMessager();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized void init(final ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        filer = processingEnv.getFiler();
+        messager = processingEnv.getMessager();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv)
-	{
-		for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class))
-		{
-			final Version version = element.getAnnotation(Version.class);
-			if (element.getKind() == ElementKind.CLASS)
-			{
-				final Element enclosingElement = element.getEnclosingElement();
-				if (enclosingElement.getKind() == ElementKind.PACKAGE)
-				{
-					final PackageElement packageElement = (PackageElement) enclosingElement;
-					try
-					{
-						final VersionInfo versionInfo = findValues(version);
-						note("Found version: " + versionInfo.getVersion());
-						writeTemplate(packageElement.getQualifiedName().toString(),
-						              version.className(),
-						              versionInfo,
-						              version.template());
-					}
-					catch (IOException e)
-					{
-						error("IOException occurred while running the annotation processor", e);
-					}
-				}
-			}
-		}
-		return true;
-	}
+    private void log(final Diagnostic.Kind kind, final String s) {
+        messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s);
+    }
 
-	private void log(final Diagnostic.Kind kind, final String s)
-	{
-		messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s);
-	}
+    private void note(final String s) {
+        log(Diagnostic.Kind.NOTE, s);
+    }
 
-	private void note(final String s)
-	{
-		log(Diagnostic.Kind.NOTE, s);
-	}
+    private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
+        try {
+            return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)));
+        } catch (NumberFormatException ignore) {
+            warn("Invalid property value: " + property);
+            return defaultValue;
+        }
+    }
 
-	private int parseIntProperty(final Properties p, final String property, final int defaultValue)
-	{
-		try
-		{
-			return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)));
-		}
-		catch (NumberFormatException ignore)
-		{
-			warn("Invalid property value: " + property);
-			return defaultValue;
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+        for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
+            final Version version = element.getAnnotation(Version.class);
+            if (element.getKind() == ElementKind.CLASS) {
+                final Element enclosingElement = element.getEnclosingElement();
+                if (enclosingElement.getKind() == ElementKind.PACKAGE) {
+                    final PackageElement packageElement = (PackageElement) enclosingElement;
+                    try {
+                        final VersionInfo versionInfo = findValues(version);
+                        note("Found version: " + versionInfo.getVersion());
+                        writeTemplate(packageElement.getQualifiedName().toString(),
+                                version.className(),
+                                versionInfo,
+                                version.template());
+                    } catch (IOException e) {
+                        error("IOException occurred while running the annotation processor", e);
+                    }
+                }
+            }
+        }
+        return true;
+    }
 
-	private void warn(final String s)
-	{
-		log(Diagnostic.Kind.WARNING, s);
-	}
+    private void warn(final String s) {
+        log(Diagnostic.Kind.WARNING, s);
+    }
 
-	private void writeTemplate(final String packageName, final String className, final VersionInfo versionInfo,
-	                           final String template)
-			throws IOException
-	{
-		final Properties p = new Properties();
-		final URL url = this.getClass().getClassLoader().getResource(Constants.VELOCITY_PROPERTIES);
+    private void writeTemplate(final String packageName,
+                               final String className,
+                               final VersionInfo versionInfo,
+                               final String template)
+            throws IOException {
+        final Properties p = new Properties();
+        final URL url = this.getClass().getClassLoader().getResource(Constants.VELOCITY_PROPERTIES);
 
-		if (url != null)
-		{
-			p.load(url.openStream());
+        if (url != null) {
+            p.load(url.openStream());
 
-			final VelocityEngine ve = new VelocityEngine(p);
-			ve.init();
+            final VelocityEngine ve = new VelocityEngine(p);
+            ve.init();
 
-			final VelocityContext vc = new VelocityContext();
-			vc.put("packageName", packageName);
-			vc.put("className", className);
-			vc.put("project", versionInfo.getProject());
-			vc.put("buildmeta", versionInfo.getBuildMetadata());
-			vc.put("epoch", versionInfo.getEpoch());
-			vc.put("patch", versionInfo.getPatch());
-			vc.put("major", versionInfo.getMajor());
-			vc.put("minor", versionInfo.getMinor());
-			vc.put("prerelease", versionInfo.getPreRelease());
+            final VelocityContext vc = new VelocityContext();
+            vc.put("packageName", packageName);
+            vc.put("className", className);
+            vc.put("project", versionInfo.getProject());
+            vc.put("buildmeta", versionInfo.getBuildMetadata());
+            vc.put("epoch", versionInfo.getEpoch());
+            vc.put("patch", versionInfo.getPatch());
+            vc.put("major", versionInfo.getMajor());
+            vc.put("minor", versionInfo.getMinor());
+            vc.put("prerelease", versionInfo.getPreRelease());
 
-			final Template vt = ve.getTemplate(template);
+            final Template vt = ve.getTemplate(template);
 
-			note("Loaded template: " + vt.getName());
+            note("Loaded template: " + vt.getName());
 
-			final JavaFileObject jfo = filer.createSourceFile(packageName + '.' + className);
-			try (final Writer writer = jfo.openWriter())
-			{
-				vt.merge(vc, writer);
-			}
+            final JavaFileObject jfo = filer.createSourceFile(packageName + '.' + className);
+            try (final Writer writer = jfo.openWriter()) {
+                vt.merge(vc, writer);
+            }
 
-			note("Generated source: " + jfo.getName());
-		}
-		else
-		{
-			error("Could not load '" + Constants.VELOCITY_PROPERTIES + "' from jar.");
-		}
-	}
+            note("Generated source: " + jfo.getName());
+        } else {
+            error("Could not load '" + Constants.VELOCITY_PROPERTIES + "' from jar.");
+        }
+    }
 }

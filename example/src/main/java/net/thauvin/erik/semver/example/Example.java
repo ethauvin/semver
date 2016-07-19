@@ -38,28 +38,26 @@ import java.text.SimpleDateFormat;
 /**
  * The <code>Example</code> class.
  *
- * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
+ * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
  * @created 2016-01-13
  * @since 1.0
  */
 @Version(properties = "version.properties")
-public class Example
-{
-	public static void main(final String... args)
-	{
-		final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z");
+public class Example {
+    public static void main(final String... args) {
+        final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z");
 
-		System.out.println("-----------------------------------------------------");
+        System.out.println("-----------------------------------------------------");
 
-		System.out.println("  " + GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
+        System.out.println("  " + GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
 
-		System.out.println("    Built on:       " + sdf.format(GeneratedVersion.getBuildDate()));
-		System.out.println("    Major:          " + GeneratedVersion.getMajor());
-		System.out.println("    Minor:          " + GeneratedVersion.getMinor());
-		System.out.println("    Patch:          " + GeneratedVersion.getPatch());
-		System.out.println("    PreRelease:     " + GeneratedVersion.getPreRelease());
-		System.out.println("    BuildMetaData:  " + GeneratedVersion.getBuildMetadata());
+        System.out.println("    Built on:       " + sdf.format(GeneratedVersion.getBuildDate()));
+        System.out.println("    Major:          " + GeneratedVersion.getMajor());
+        System.out.println("    Minor:          " + GeneratedVersion.getMinor());
+        System.out.println("    Patch:          " + GeneratedVersion.getPatch());
+        System.out.println("    PreRelease:     " + GeneratedVersion.getPreRelease());
+        System.out.println("    BuildMetaData:  " + GeneratedVersion.getBuildMetadata());
 
-		System.out.println("-----------------------------------------------------");
-	}
+        System.out.println("-----------------------------------------------------");
+    }
 }
