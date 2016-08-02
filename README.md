@@ -131,7 +131,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>0.9.6-beta</version>
+    <version>0.9.7</version>
 </dependency>
 ```
 
@@ -143,7 +143,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    compile 'net.thauvin.erik:semver:0.9.6-beta'
+    compile 'net.thauvin.erik:semver:0.9.7'
 }
 ```
 
@@ -163,11 +163,11 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:0.9.6-beta'
+    compileOnly 'net.thauvin.erik:semver:0.9.7'
 }
 
 annotationProcessor {
-    library 'net.thauvin.erik:semver:0.9.6-beta'
+    library 'net.thauvin.erik:semver:0.9.7'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -188,8 +188,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:0.9.6-beta")
-	compile("net.thauvin.erik:semver:0.9.6-beta")
+    apt("net.thauvin.erik:semver:0.9.7")
+    compile("net.thauvin.erik:semver:0.9.7")
 }
 ```
 

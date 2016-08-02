@@ -213,7 +213,12 @@ public class VersionInfo {
      * @return The version string.
      */
     public String getVersion() {
-        return Integer.toString(major) + '.' + Integer.toString(minor) + '.' + Integer.toString(patch) + (
-                prerelease.length() > 0 ? '-' + prerelease : "") + (buildmeta.length() > 0 ? '+' + buildmeta : "");
+        return Integer.toString(major)
+                + '.'
+                + Integer.toString(minor)
+                + '.'
+                + Integer.toString(patch)
+                + (prerelease.length() > 0 ? '-' + prerelease : "")
+                + (buildmeta.length() > 0 ? '+' + buildmeta : "");
     }
 }

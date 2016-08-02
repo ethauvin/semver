@@ -45,13 +45,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:0.9.6-beta'
+    compileOnly 'net.thauvin.erik:semver:0.9.7'
 }
 
 annotationProcessor {
     // Update version, increment on release.
     project.version = getVersion(isRelease)
-    library 'net.thauvin.erik:semver:0.9.6-beta'
+    library 'net.thauvin.erik:semver:0.9.7'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }

@@ -11,9 +11,9 @@ import java.io.FileInputStream
 import java.util.*
 import net.thauvin.erik.kobalt.plugin.exec.*
 
-val repos = repos(localMaven())
+//val repos = repos(localMaven())
 
-val pl = plugins("net.thauvin.erik:kobalt-exec:0.6.0-beta")
+val pl = plugins("net.thauvin.erik:kobalt-exec:0.6.2")
 
 fun StringBuilder.prepend(s: String): StringBuilder {
     if (this.length > 0) {
@@ -82,7 +82,6 @@ val semver = project {
     }
 }
 
-
 val example = project {
 
     name = "example"
@@ -90,7 +89,7 @@ val example = project {
     version = versionFor(directory)
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.6-beta"
+    val processorJar = "net.thauvin.erik:semver:0.9.7"
 
     sourceDirectories {
         path("src/main/java")
