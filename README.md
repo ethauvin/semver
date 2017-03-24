@@ -151,7 +151,7 @@ The `GeneratedVersion` class will be automatically created in the `build` direct
 
 #### Class & Source Generation
 
-In order to also incorporate the generated source code into the `source tree`, use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
+In order to also incorporate the generated source code into the `source tree`, use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/annotation-processor-plugin). Start by addding the following to the very top of the `build.gradle` file:
 
 ```gradle
 plugins {
