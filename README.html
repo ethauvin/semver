@@ -217,7 +217,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </table>
 <p>In order to easily incorporate with existing projects, the property keys may be assigned custom values:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(
-  properties = <span class="st">&quot;example.properties&quot;</span>, 
+  properties = <span class="st">&quot;example.properties&quot;</span>,
   majorKey = <span class="st">&quot;example.major&quot;</span>,
   minorKey = <span class="st">&quot;example.minor&quot;</span>,
   patchKey = <span class="st">&quot;example.patch&quot;</span>,
@@ -239,27 +239,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
     <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span>
     <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span>
-    <span class="kw">&lt;version&gt;</span>0.9.7<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;version&gt;</span>0.9.6-beta<span class="kw">&lt;/version&gt;</span>
 <span class="kw">&lt;/dependency&gt;</span></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compile &#39;net.thauvin.erik:semver:0.9.7&#39;
+    compile &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
 }</code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build</code> directory upon compiling.</p>
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
 <p>In order to also incorporate the generated source code into the <code>source tree</code>, use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/plugins/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by addding the following to the very top of the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>plugins {
-    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.2&quot;
+    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.3&quot;
 }</code></pre>
 <p>Then add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compileOnly &#39;net.thauvin.erik:semver:0.9.7&#39;
+    compileOnly &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
 }
 
 annotationProcessor {
-    library &#39;net.thauvin.erik:semver:0.9.7&#39;
+    library &#39;net.thauvin.erik:semver:0.9.6-beta&#39;
     processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
     // sourcesDir &#39;src/generated/java&#39;
 }
@@ -273,8 +273,8 @@ compileJava {
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:0.9.7&quot;)
-    compile(&quot;net.thauvin.erik:semver:0.9.7&quot;)
+    apt(&quot;net.thauvin.erik:semver:0.9.6-beta&quot;)
+    compile(&quot;net.thauvin.erik:semver:0.9.6-beta&quot;)
 }</code></pre>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/example/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
 <h3 id="auto-increment">Auto-Increment</h3>

@@ -7,7 +7,7 @@ An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annota
 This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor).
 
 ## Examples
- 
+
 * Using annotation elements:
 
 ```java
@@ -80,7 +80,7 @@ public final class ${className} {
 The Velocity variables are automatically filled in by the processor.
 
 Please also look at this [example](https://github.com/ethauvin/mobibot/blob/master/version.vm) using [`java.time`](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
-	
+
 ## Elements & Properties
 
 The following annotation elements and properties are available:
@@ -101,7 +101,7 @@ In order to easily incorporate with existing projects, the property keys may be 
 
 ```java
 @Version(
-  properties = "example.properties", 
+  properties = "example.properties",
   majorKey = "example.major",
   minorKey = "example.minor",
   patchKey = "example.patch",
@@ -131,7 +131,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>0.9.7</version>
+    <version>0.9.6-beta</version>
 </dependency>
 ```
 
@@ -143,7 +143,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    compile 'net.thauvin.erik:semver:0.9.7'
+    compile 'net.thauvin.erik:semver:0.9.6-beta'
 }
 ```
 
@@ -155,7 +155,7 @@ In order to also incorporate the generated source code into the `source tree`, u
 
 ```gradle
 plugins {
-    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
+    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.3"
 }
 ```
 
@@ -163,11 +163,11 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:0.9.7'
+    compileOnly 'net.thauvin.erik:semver:0.9.6-beta'
 }
 
 annotationProcessor {
-    library 'net.thauvin.erik:semver:0.9.7'
+    library 'net.thauvin.erik:semver:0.9.6-beta'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -188,8 +188,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:0.9.7")
-    compile("net.thauvin.erik:semver:0.9.7")
+    apt("net.thauvin.erik:semver:0.9.6-beta")
+    compile("net.thauvin.erik:semver:0.9.6-beta")
 }
 ```
 

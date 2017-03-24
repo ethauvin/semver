@@ -1,5 +1,5 @@
 plugins {
-    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.2"
+    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.3"
 }
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -45,13 +45,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:0.9.7'
+    compileOnly 'net.thauvin.erik:semver:+'
 }
 
 annotationProcessor {
     // Update version, increment on release.
     project.version = getVersion(isRelease)
-    library 'net.thauvin.erik:semver:0.9.7'
+    library 'net.thauvin.erik:semver:+'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -81,10 +81,12 @@ task deploy(dependsOn: ['build', 'copyToDeploy']) {
     mustRunAfter clean
 }
 
-task release(dependsOn: ['wrapper', 'clean', 'deploy']) << {
-    group = 'Publishing'
-    description = 'Releases new version.'
-    isRelease = true
+task release(dependsOn: ['wrapper', 'clean', 'deploy']) {
+    doLast {
+        group = 'Publishing'
+        description = 'Releases new version.'
+        isRelease = true
+    }
 }
 
 task wrapper(type: Wrapper) {
