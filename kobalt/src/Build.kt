@@ -58,7 +58,7 @@ val semver = project {
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.9.13.6")
+        compile("org.testng:testng:6.11")
     }
 
     javaCompiler {
@@ -88,8 +88,7 @@ val example = project {
     name = "example"
     directory = "example"
     version = versionFor(directory)
-    
-    val aptVer = versionFor()
+
     val mainClassName = "net.thauvin.erik.semver.example.Example"
     //val processorJar = "net.thauvin.erik:semver:"
     val processorJar = file("deploy/semver-" + versionFor() + ".jar")
