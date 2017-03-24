@@ -60,7 +60,7 @@ repositories {
 
 dependencies {
     compile 'org.apache.velocity:velocity:1.7'
-    testCompile 'org.testng:testng:6.9.12'
+    testCompile 'org.testng:testng:6.9.13.6'
 }
 
 bintray {

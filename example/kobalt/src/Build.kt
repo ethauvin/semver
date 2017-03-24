@@ -1,14 +1,11 @@
-import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.application.application
 import com.beust.kobalt.plugin.apt.apt
 import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.packaging.install
 import com.beust.kobalt.project
-import com.beust.kobalt.repos
 import java.io.FileInputStream
 import java.util.*
 
-val repos = repos(localMaven())
 
 fun StringBuilder.prepend(s: String): StringBuilder {
     if (this.length > 0) {
@@ -39,7 +36,7 @@ val example = project {
     version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.7"
+    val processorJar = "net.thauvin.erik:semver:"
 
     sourceDirectories {
         path("src/main/java")

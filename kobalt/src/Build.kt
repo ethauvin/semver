@@ -1,3 +1,4 @@
+import com.beust.kobalt.file
 import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.application.application
 import com.beust.kobalt.plugin.apt.apt
@@ -11,9 +12,9 @@ import java.io.FileInputStream
 import java.util.*
 import net.thauvin.erik.kobalt.plugin.exec.*
 
-//val repos = repos(localMaven())
-
-val pl = plugins("net.thauvin.erik:kobalt-exec:0.6.2")
+val bs = buildScript {
+    plugins("net.thauvin.erik:kobalt-exec:")
+}
 
 fun StringBuilder.prepend(s: String): StringBuilder {
     if (this.length > 0) {
@@ -57,7 +58,7 @@ val semver = project {
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.9.12")
+        compile("org.testng:testng:6.9.13.6")
     }
 
     javaCompiler {
@@ -87,9 +88,11 @@ val example = project {
     name = "example"
     directory = "example"
     version = versionFor(directory)
-
+    
+    val aptVer = versionFor()
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.7"
+    //val processorJar = "net.thauvin.erik:semver:"
+    val processorJar = file("deploy/semver-" + versionFor() + ".jar")
 
     sourceDirectories {
         path("src/main/java")
@@ -101,7 +104,7 @@ val example = project {
 
     dependencies {
         apt(processorJar)
-        compile(processorJar)
+        compile("org.apache.velocity:velocity:1.7", processorJar)
     }
 
     dependenciesTest {
@@ -109,7 +112,7 @@ val example = project {
     }
 
     install {
-        libDir = "deploy"
+        libDir = "example/deploy"
     }
 
     assemble {
