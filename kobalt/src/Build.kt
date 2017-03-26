@@ -45,23 +45,12 @@ val semver = project {
     artifactId = name
     version = versionFor()
 
-    sourceDirectories {
-        path("src/main/java")
-    }
-
-    sourceDirectoriesTest {
-        path("src/test/java")
-    }
-
     dependencies {
         compile("org.apache.velocity:velocity:1.7")
     }
 
     dependenciesTest {
         compile("org.testng:testng:6.11")
-    }
-
-    javaCompiler {
     }
 
     install {
@@ -79,19 +68,17 @@ val semver = project {
     exec {
         val args = listOf("--from", "markdown_github", "--to", "html5", "-s", "-c", "github-pandoc.css", "-o", "README.html", "README.md")
         commandLine(listOf("pandoc") + args, os = setOf(Os.LINUX))
-        commandLine(listOf("cmd", "/c", "pandoc") + args, os =setOf(Os.WINDOWS))
+        commandLine(listOf("cmd", "/c", "pandoc") + args, os = setOf(Os.WINDOWS))
     }
 }
 
-val example = project {
+val example = project(semver){
 
     name = "example"
     directory = "example"
     version = versionFor(directory)
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    //val processorJar = "net.thauvin.erik:semver:"
-    val processorJar = file("deploy/semver-" + versionFor() + ".jar")
 
     sourceDirectories {
         path("src/main/java")
@@ -102,8 +89,7 @@ val example = project {
     }
 
     dependencies {
-        apt(processorJar)
-        compile("org.apache.velocity:velocity:1.7", processorJar)
+        compile("org.apache.velocity:velocity:1.7")
     }
 
     dependenciesTest {

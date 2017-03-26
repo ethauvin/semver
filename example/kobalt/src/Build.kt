@@ -38,21 +38,9 @@ val example = project {
     val mainClassName = "net.thauvin.erik.semver.example.Example"
     val processorJar = "net.thauvin.erik:semver:"
 
-    sourceDirectories {
-        path("src/main/java")
-    }
-
-    sourceDirectoriesTest {
-        path("src/test/java")
-    }
-
     dependencies {
         apt(processorJar)
         compile(processorJar)
-    }
-
-    dependenciesTest {
-
     }
 
     apt {
