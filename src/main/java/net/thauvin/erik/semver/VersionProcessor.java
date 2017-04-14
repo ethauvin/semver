@@ -42,7 +42,8 @@ import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
-import javax.tools.JavaFileObject;
+import javax.tools.FileObject;
+import javax.tools.StandardLocation;
 import java.io.*;
 import java.net.URL;
 import java.util.HashSet;
@@ -161,7 +162,8 @@ public class VersionProcessor extends AbstractProcessor {
                     try {
                         final VersionInfo versionInfo = findValues(version);
                         note("Found version: " + versionInfo.getVersion());
-                        writeTemplate(packageElement.getQualifiedName().toString(),
+                        writeTemplate(version.type(),
+                                packageElement.getQualifiedName().toString(),
                                 version.className(),
                                 versionInfo,
                                 version.template());
@@ -178,7 +180,8 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    private void writeTemplate(final String packageName,
+    private void writeTemplate(final String type,
+                               final String packageName,
                                final String className,
                                final VersionInfo versionInfo,
                                final String template)
@@ -207,7 +210,14 @@ public class VersionProcessor extends AbstractProcessor {
 
             note("Loaded template: " + vt.getName());
 
-            final JavaFileObject jfo = filer.createSourceFile(packageName + '.' + className);
+            final FileObject jfo;
+            if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
+                jfo = filer.createResource(StandardLocation.SOURCE_OUTPUT, packageName,
+                        className + '.' + type);
+            } else {
+                jfo = filer.createSourceFile(packageName + '.' + className);
+            }
+            
             try (final Writer writer = jfo.openWriter()) {
                 vt.merge(vc, writer);
             }

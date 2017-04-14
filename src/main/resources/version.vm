@@ -28,6 +28,9 @@ import java.util.Date;
  *         Annotation Processor</a>
  */
 public final class ${className} {
+	private final static String DEFAULT_PRERELEASE_PREFIX = "-";
+	private final static string DEFAULT_BUILDMETA_PREFIX = "+";
+
     private final static String buildmeta = "${buildmeta}";
     private final static Date date = new Date(${epoch}L);
     private final static int major = ${major};
@@ -86,7 +89,7 @@ public final class ${className} {
         return Integer.toString(getMajor()) + '.'
                 + Integer.toString(getMinor()) + '.'
                 + Integer.toString(getPatch())
-                + getPreRelease(true) + getBuildMetadata(true);
+                + getPreReleaseWithPrefix + getBuildMetadataWithPrefix;
     }
 
     /**
@@ -119,46 +122,10 @@ public final class ${className} {
     /**
      * Returns the pre-release version.
      *
-     * @param isHyphen Prepend a hyphen, if <code>true</code>.
-     * @return The pre-release version, if any.
+     * @return The pre-release version, if any
      */
-    public static String getPreRelease(final boolean isHyphen) {
-        if (prerelease.length() > 0) {
-            if (isHyphen) {
-                return '-' + prerelease;
-            } else {
-                return prerelease;
-            }
-        }
-
-        return "";
-    }
-
-    /**
-     * Returns the pre-release version.
-     *
-     * @return The pre-release version, if any.
-     */
-    public static String getPreRelease() {
-        return getPreRelease(false);
-    }
-
-    /**
-     * Returns the build metadata.
-     *
-     * @param isPlus Prepend a plus sign, if <code>true</code>.
-     * @return The build metadata, if any.
-     */
-    public static String getBuildMetadata(final boolean isPlus) {
-        if (buildmeta.length() > 0) {
-            if (isPlus) {
-                return '+' + buildmeta;
-            } else {
-                return buildmeta;
-            }
-        }
-
-        return "";
+    public static int getPreRelease() {
+        return prerelease;
     }
 
     /**
@@ -167,6 +134,53 @@ public final class ${className} {
      * @return The build metadata, if any.
      */
     public static String getBuildMetadata() {
-        return getBuildMetadata(false);
+        return buildmeta;
+    }
+
+    /**
+     * Returns the pre-release version with default prefix.
+     *
+     * @return The pre-release version, if any.
+     */
+    public static String getPreReleaseWithPrefix() {
+        return getPreReleaseWithPrefix(DEFAULT_PRERELEASE_PREFIX);
+    }
+
+    /**
+     * Returns the pre-release version.
+     *
+     * @param prefix The refix to prepend.
+     * @return The pre-release version, if any.
+     */
+    public static String getPreReleaseWithPrefix(final String prefix) {
+        if (prerelease.length() > 0 && prefix.length() > 0) {
+            return prefix + prerelease;
+        } else {
+            return prerelease;
+        }
+    }
+
+    /**
+     * Returns the build metadata with default prefix.
+     *
+     * @param prefix The prefix to prepend.
+     * @return The build metadata, if any.
+     */
+    public static String getBuildMetadataWithPrefix() {
+    	return getBuildMetadataWithPrefix(DEFAULT_PRERELEASE_PREFIX);
+    }
+
+    /**
+     * Returns the build metadata.
+     *
+     * @param prefix Prefix to prepend.
+     * @return The build metadata, if any.
+     */
+    public static String getBuildMetadataWithPrefix(final String prefix) {
+        if (buildmeta.length() > 0 && prefix.length() > 0) {
+            return prefix + buildmeta;
+        } else {
+            return buildmeta;
+        }
     }
 }

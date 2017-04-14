@@ -43,62 +43,58 @@ public final class Constants {
      * The default class name.
      */
     public static final String DEFAULT_CLASS_NAME = "GeneratedVersion";
-
+    /**
+     * The default java type.
+     **/
+    public static final String DEFAULT_JAVA_TYPE = "java";
     /**
      * The default major version.
      */
     public static final int DEFAULT_MAJOR = 1;
-
     /**
      * The default minor version.
      */
     public static final int DEFAULT_MINOR = 0;
-
     /**
      * The default patch version.
      */
     public static final int DEFAULT_PATCH = 0;
-
     /**
      * The default Velocity template.
      */
     public static final String DEFAULT_TEMPLATE = "version.vm";
-
     /**
      * The empty string.
      */
     public static final String EMPTY = "";
-
     /**
      * The build metadata property key.
      */
     public static final String KEY_VERSION_BUILDMETA = "version.buildmeta";
-
     /**
      * The major version property key.
      */
     public static final String KEY_VERSION_MAJOR = "version.major";
-
     /**
      * The minor version property key.
      */
     public static final String KEY_VERSION_MINOR = "version.minor";
-
     /**
      * The patch version property key.
      */
     public static final String KEY_VERSION_PATCH = "version.patch";
-
     /**
      * The pre-release version property key.
      */
     public static final String KEY_VERSION_PRERELEASE = "version.prerelease";
-
     /**
      * The project property key.
      */
     public static final String KEY_VERSION_PROJECT = "version.project";
-
+    /**
+     * The kotlin type.
+     */
+    public static final String KOTLIN_TYPE = "kt";
     /**
      * The velocity properties name.
      */

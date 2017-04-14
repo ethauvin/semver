@@ -75,4 +75,6 @@ public @interface Version {
     String properties() default Constants.EMPTY;
 
     String template() default Constants.DEFAULT_TEMPLATE;
+
+    String type() default Constants.DEFAULT_JAVA_TYPE;
 }
