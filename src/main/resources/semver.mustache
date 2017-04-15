@@ -14,16 +14,15 @@ import java.util.Date;
  */
 public final class {{className}} {
 	private final static String DEFAULT_PRERELEASE_PREFIX = "-";
-	private final static string DEFAULT_BUILDMETA_PREFIX = "+";
+	private final static String DEFAULT_BUILDMETA_PREFIX = "+";
 
-    private final static String project = "{{project}}";
-    private final static Date date = new Date({{epoch}}L);
-    private final static int major = {{major}};
-    private final static int minor = {{minor}};
-    private final static int patch = {{patch}};
-    private final static String preRelease = "{{preRelease}}";
-    private final static String buildMeta = "{{buildMeta}}";
-    
+    final static String project = "{{project}}";
+    final static Date buildDate = new Date({{epoch}}L);
+    final static int major = {{major}};
+    final static int minor = {{minor}};
+    final static int patch = {{patch}};
+    final static String preRelease = "{{preRelease}}";
+    final static String buildMeta = "{{buildMeta}}";
 
     /**
      * Disables the default constructor.
@@ -33,24 +32,6 @@ public final class {{className}} {
     private {{className}}()
      throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Illegal constructor call.");
-    }
-
-    /**
-     * Returns the build date.
-     *
-     * @return The build date.
-     */
-    public static Date getBuildDate() {
-        return date;
-    }
-
-    /**
-     * Returns the project name.
-     *
-     * @return The project name, if any.
-     */
-    public static String getProject() {
-        return project;
     }
 
     /**
@@ -72,55 +53,10 @@ public final class {{className}} {
      * @return The version string.
      */
     public static String getVersion() {
-        return Integer.toString(getMajor()) + '.'
-         + Integer.toString(getMinor()) + '.'
-         + Integer.toString(getPatch())
-         + getPreReleaseWithPrefix + getBuildMetaWithPrefix;
-    }
-
-    /**
-     * Returns the major version.
-     *
-     * @return The major version.
-     */
-    public static int getMajor() {
-        return major;
-    }
-
-    /**
-     * Returns the minor version.
-     *
-     * @return The minor version.
-     */
-    public static int getMinor() {
-        return minor;
-    }
-
-    /**
-     * Returns the patch version.
-     *
-     * @return The patch version.
-     */
-    public static int getPatch() {
-        return patch;
-    }
-
-    /**
-     * Returns the pre-release version.
-     *
-     * @return The pre-release version, if any
-     */
-    public static int getPreRelease() {
-        return preRelease;
-    }
-
-    /**
-     * Returns the build metadata.
-     *
-     * @return The build metadata, if any.
-     */
-    public static String getBuildMeta() {
-        return buildMeta;
+        return Integer.toString(major) + '.'
+         + Integer.toString(minor) + '.'
+         + Integer.toString(patch)
+         + preReleaseWithPrefix() + buildMetaWithPrefix();
     }
 
     /**
@@ -128,8 +64,8 @@ public final class {{className}} {
      *
      * @return The pre-release version, if any.
      */
-    public static String getPreReleaseWithPrefix() {
-        return getPreReleaseWithPrefix(DEFAULT_PRERELEASE_PREFIX);
+    public static String preReleaseWithPrefix() {
+        return preReleaseWithPrefix(DEFAULT_PRERELEASE_PREFIX);
     }
 
     /**
@@ -138,11 +74,11 @@ public final class {{className}} {
      * @param prefix The prefix to prepend.
      * @return The pre-release version, if any.
      */
-    public static String getPreReleaseWithPrefix(final String prefix) {
+    public static String preReleaseWithPrefix(final String prefix) {
         if (preRelease.length() > 0 && prefix.length() > 0) {
-     return prefix + preRelease;
+    	    return prefix + preRelease;
         } else {
-     return preRelease;
+    	    return preRelease;
         }
     }
 
@@ -152,8 +88,8 @@ public final class {{className}} {
      * @param prefix The prefix to prepend.
      * @return The build metadata, if any.
      */
-    public static String getBuildMetaWithPrefix() {
-    	return getBuildMetaWithPrefix(DEFAULT_PRERELEASE_PREFIX);
+    public static String buildMetaWithPrefix() {
+    	return buildMetaWithPrefix(DEFAULT_PRERELEASE_PREFIX);
     }
 
     /**
@@ -162,11 +98,11 @@ public final class {{className}} {
      * @param prefix Prefix to prepend.
      * @return The build metadata, if any.
      */
-    public static String getBuildMetaWithPrefix(final String prefix) {
+    public static String buildMetaWithPrefix(final String prefix) {
         if (buildMeta.length() > 0 && prefix.length() > 0) {
-     return prefix + buildMeta;
+    	    return prefix + buildMeta;
         } else {
-     return buildMeta;
+    	    return buildMeta;
         }
     }
 }

@@ -49,14 +49,14 @@ public class Example {
 
         System.out.println("-----------------------------------------------------");
 
-        System.out.println("  " + GeneratedVersion.getProject() + ' ' + GeneratedVersion.getVersion());
+        System.out.println("  " + GeneratedVersion.project + ' ' + GeneratedVersion.getVersion());
 
-        System.out.println("    Built on:       " + sdf.format(GeneratedVersion.getBuildDate()));
-        System.out.println("    Major:          " + GeneratedVersion.getMajor());
-        System.out.println("    Minor:          " + GeneratedVersion.getMinor());
-        System.out.println("    Patch:          " + GeneratedVersion.getPatch());
-        System.out.println("    PreRelease:     " + GeneratedVersion.getPreRelease());
-        System.out.println("    BuildMetaData:  " + GeneratedVersion.getBuildMetadata());
+        System.out.println("    Built on:       " + sdf.format(GeneratedVersion.buildDate));
+        System.out.println("    Major:          " + GeneratedVersion.major);
+        System.out.println("    Minor:          " + GeneratedVersion.minor);
+        System.out.println("    Patch:          " + GeneratedVersion.patch);
+        System.out.println("    PreRelease:     " + GeneratedVersion.preRelease);
+        System.out.println("    BuildMetaData:  " + GeneratedVersion.buildMeta);
 
         System.out.println("-----------------------------------------------------");
     }
