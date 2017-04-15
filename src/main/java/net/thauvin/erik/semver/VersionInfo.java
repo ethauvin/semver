@@ -41,17 +41,15 @@ package net.thauvin.erik.semver;
 public class VersionInfo {
     private final long epoch = System.currentTimeMillis();
 
-    private String buildmeta;
-
+    private String buildMeta;
+    private String className;
     private int major;
-
     private int minor;
-
+    private String packageName;
     private int patch;
-
-    private String prerelease;
-
+    private String preRelease;
     private String project;
+
 
     /**
      * Creates a new object with default values
@@ -60,9 +58,11 @@ public class VersionInfo {
         major = Constants.DEFAULT_MAJOR;
         minor = Constants.DEFAULT_MINOR;
         patch = Constants.DEFAULT_PATCH;
-        buildmeta = Constants.EMPTY;
-        prerelease = Constants.EMPTY;
+        buildMeta = Constants.EMPTY;
+        preRelease = Constants.EMPTY;
         project = Constants.EMPTY;
+        className = Constants.DEFAULT_CLASS_NAME;
+        packageName = Constants.EMPTY;
     }
 
     /**
@@ -74,9 +74,10 @@ public class VersionInfo {
         major = version.major();
         minor = version.minor();
         patch = version.patch();
-        buildmeta = version.buildmeta();
-        prerelease = version.prerelease();
+        buildMeta = version.buildmeta();
+        preRelease = version.prerelease();
         project = version.project();
+        className = version.className();
     }
 
     /**
@@ -84,17 +85,35 @@ public class VersionInfo {
      *
      * @return The build metadata.
      */
-    public String getBuildMetadata() {
-        return buildmeta;
+    public String getBuildMeta() {
+        return buildMeta;
     }
 
     /**
      * Sets the build metadata.
      *
-     * @param buildmeta The new build metadata.
+     * @param buildMeta The new build metadata.
      */
-    public void setBuildMetadata(final String buildmeta) {
-        this.buildmeta = buildmeta;
+    public void setBuildMeta(final String buildMeta) {
+        this.buildMeta = buildMeta;
+    }
+
+    /**
+     * Returns the class name.
+     *
+     * @return The class name.
+     */
+    public String getClassName() {
+        return className;
+    }
+
+    /**
+     * Sets the class name.
+     *
+     * @param className The new class name.
+     */
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     /**
@@ -143,6 +162,24 @@ public class VersionInfo {
     }
 
     /**
+     * Returns the package name.
+     *
+     * @return The package name.
+     */
+    public String getPackageName() {
+        return packageName;
+    }
+
+    /**
+     * Sets the package name version.
+     *
+     * @param packageName The new patch version.
+     */
+    public void setPackageName(String packageName) {
+        this.packageName = packageName;
+    }
+
+    /**
      * Returns the patch version.
      *
      * @return The patch version.
@@ -166,16 +203,16 @@ public class VersionInfo {
      * @return The pre-release version.
      */
     public String getPreRelease() {
-        return prerelease;
+        return preRelease;
     }
 
     /**
      * Sets the pre-release version.
      *
-     * @param prerelease The new pre-release version.
+     * @param preRelease The new pre-release version.
      */
-    public void setPreRelease(final String prerelease) {
-        this.prerelease = prerelease;
+    public void setPreRelease(final String preRelease) {
+        this.preRelease = preRelease;
     }
 
     /**
@@ -218,7 +255,7 @@ public class VersionInfo {
                 + Integer.toString(minor)
                 + '.'
                 + Integer.toString(patch)
-                + (prerelease.length() > 0 ? '-' + prerelease : "")
-                + (buildmeta.length() > 0 ? '+' + buildmeta : "");
+                + (preRelease.length() > 0 ? '-' + preRelease : "")
+                + (buildMeta.length() > 0 ? '+' + buildMeta : "");
     }
 }

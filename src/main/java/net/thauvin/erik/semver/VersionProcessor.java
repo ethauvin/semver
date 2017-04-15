@@ -31,9 +31,9 @@
  */
 package net.thauvin.erik.semver;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
+import com.github.mustachejava.DefaultMustacheFactory;
+import com.github.mustachejava.Mustache;
+import com.github.mustachejava.MustacheFactory;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -45,7 +45,6 @@ import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import java.io.*;
-import java.net.URL;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -89,7 +88,7 @@ public class VersionProcessor extends AbstractProcessor {
                     versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
                     versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
                     versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
-                    versionInfo.setBuildMetadata(p.getProperty(version.buildmetaKey(), Constants.EMPTY));
+                    versionInfo.setBuildMeta(p.getProperty(version.buildmetaKey(), Constants.EMPTY));
                     versionInfo.setPreRelease(p.getProperty(version.prereleaseKey(), Constants.EMPTY));
                 }
             } else {
@@ -161,12 +160,19 @@ public class VersionProcessor extends AbstractProcessor {
                     final PackageElement packageElement = (PackageElement) enclosingElement;
                     try {
                         final VersionInfo versionInfo = findValues(version);
+                        versionInfo.setPackageName(packageElement.getQualifiedName().toString());
                         note("Found version: " + versionInfo.getVersion());
-                        writeTemplate(version.type(),
-                                packageElement.getQualifiedName().toString(),
-                                version.className(),
-                                versionInfo,
-                                version.template());
+                        final String template;
+                        if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
+                                new File(Constants.DEFAULT_TEMPLATE).exists()) {
+                            template = Constants.DEFAULT_TEMPLATE;
+                        } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
+                                version.type().equals(Constants.KOTLIN_TYPE)) {
+                            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
+                        } else {
+                            template = version.template();
+                        }
+                        writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException e) {
                         error("IOException occurred while running the annotation processor", e);
                     }
@@ -180,51 +186,26 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    private void writeTemplate(final String type,
-                               final String packageName,
-                               final String className,
-                               final VersionInfo versionInfo,
-                               final String template)
+    private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
             throws IOException {
-        final Properties p = new Properties();
-        final URL url = this.getClass().getClassLoader().getResource(Constants.VELOCITY_PROPERTIES);
+        final MustacheFactory mf = new DefaultMustacheFactory();
+        final Mustache mustache = mf.compile(template);
 
-        if (url != null) {
-            p.load(url.openStream());
+        note("Loaded template: " + mustache.getName());
 
-            final VelocityEngine ve = new VelocityEngine(p);
-            ve.init();
-
-            final VelocityContext vc = new VelocityContext();
-            vc.put("packageName", packageName);
-            vc.put("className", className);
-            vc.put("project", versionInfo.getProject());
-            vc.put("buildmeta", versionInfo.getBuildMetadata());
-            vc.put("epoch", versionInfo.getEpoch());
-            vc.put("patch", versionInfo.getPatch());
-            vc.put("major", versionInfo.getMajor());
-            vc.put("minor", versionInfo.getMinor());
-            vc.put("prerelease", versionInfo.getPreRelease());
-
-            final Template vt = ve.getTemplate(template);
-
-            note("Loaded template: " + vt.getName());
-
-            final FileObject jfo;
-            if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
-                jfo = filer.createResource(StandardLocation.SOURCE_OUTPUT, packageName,
-                        className + '.' + type);
-            } else {
-                jfo = filer.createSourceFile(packageName + '.' + className);
-            }
-            
-            try (final Writer writer = jfo.openWriter()) {
-                vt.merge(vc, writer);
-            }
-
-            note("Generated source: " + jfo.getName());
+        final FileObject jfo;
+        if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
+            jfo = filer.createResource(StandardLocation.SOURCE_OUTPUT, versionInfo.getPackageName(),
+                    versionInfo.getClassName() + '.' + type);
         } else {
-            error("Could not load '" + Constants.VELOCITY_PROPERTIES + "' from jar.");
+            jfo = filer.createSourceFile(versionInfo.getPackageName() + '.' + versionInfo.getClassName());
         }
+
+        try (final Writer writer = jfo.openWriter()) {
+            mustache.execute(writer, versionInfo).flush();
+        }
+
+        note("Generated source: " + jfo.getName());
     }
+
 }

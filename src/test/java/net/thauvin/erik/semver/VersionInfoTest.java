@@ -68,12 +68,24 @@ public class VersionInfoTest
 
 		Assert.assertEquals(version.getVersion(), "3.2.1-beta");
 
-		version.setBuildMetadata("001");
+		version.setBuildMeta("001");
 
 		Assert.assertEquals(version.getVersion(), "3.2.1-beta+001");
 
 		version.setPreRelease("");
 
 		Assert.assertEquals(version.getVersion(), "3.2.1+001");
+
+		version.setPackageName("com.example");
+
+		Assert.assertEquals(version.getPackageName(), "com.example");
+
+		version.setProject("Example");
+
+		Assert.assertEquals(version.getProject(), "Example");
+
+		version.setClassName("Example");
+
+		Assert.assertEquals(version.getClassName(), "Example");
 	}
 }

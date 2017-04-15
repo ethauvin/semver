@@ -4,8 +4,8 @@
 **/.idea/tasks.xml
 **/.idea/workspace.xml
 *.iws
-.DS_Store
 .classpath
+.DS_Store
 .gradle
 .kobalt
 .nb-gradle
@@ -17,12 +17,14 @@
 /dist
 /gen
 /gradle.properties
+/lib/kotlin*
+/libs
 /local.properties
 /out
 /proguard-project.txt
 /project.properties
 /target
 /test-output
-Thumbs.db
 ehthumbs.db
 kobaltBuild
+Thumbs.db

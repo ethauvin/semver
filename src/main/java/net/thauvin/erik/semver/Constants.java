@@ -44,9 +44,22 @@ public final class Constants {
      */
     public static final String DEFAULT_CLASS_NAME = "GeneratedVersion";
     /**
+     * The default mustache template.
+     */
+    public static final String DEFAULT_TEMPLATE = "version.mustache";
+    /**
+     * /**
+     * The default Java mustache template.
+     */
+    public static final String DEFAULT_JAVA_TEMPLATE = "semver.mustache";
+    /**
      * The default java type.
      **/
     public static final String DEFAULT_JAVA_TYPE = "java";
+    /**
+     * The default Kotlin mustache template.
+     */
+    public static final String DEFAULT_KOTLIN_TEMPLATE = "semver-kt.mustache";
     /**
      * The default major version.
      */
@@ -60,13 +73,10 @@ public final class Constants {
      */
     public static final int DEFAULT_PATCH = 0;
     /**
-     * The default Velocity template.
-     */
-    public static final String DEFAULT_TEMPLATE = "version.vm";
-    /**
      * The empty string.
      */
     public static final String EMPTY = "";
+
     /**
      * The build metadata property key.
      */
@@ -95,10 +105,6 @@ public final class Constants {
      * The kotlin type.
      */
     public static final String KOTLIN_TYPE = "kt";
-    /**
-     * The velocity properties name.
-     */
-    public static final String VELOCITY_PROPERTIES = "velocity.properties";
 
     /**
      * Disables the default constructor.
