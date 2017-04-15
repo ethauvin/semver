@@ -12,35 +12,47 @@ import java.util.*
  * @author <a href="https://github.com/ethauvin/semver">Semantic Version
  *         Annotation Processor</a>
  */
-open class {{className}}
-private constructor() {
-    companion object {
-        val project = "{{project}}"
+object {{className}} {
+    @JvmField
+    val project = "{{project}}"
 
-        val buildDate = Date({{epoch}}L)
-        val major = {{major}}
-        val minor = {{minor}}
-        val patch = {{patch}}
-        val buildMeta = "{{buildMeta}}"
-        val preRelease = "{{preRelease}}"
+    @JvmField
+    val buildDate = Date({{epoch}}L)
 
-        val version: String
-            get() = ("$major.$minor.$patch" + preReleaseWithPrefix() + buildMetaWithPrefix())
+    @JvmField
+    val major = {{major}}
 
-        fun preReleaseWithPrefix(prefix: String = "-"): String {
-            return if (preRelease.isNotEmpty() && prefix.isNotEmpty()) {
-                "$prefix$preRelease"
-            } else {
-                preRelease
-            }
+    @JvmField
+    val minor = {{minor}}
+
+    @JvmField
+    val patch = {{patch}}
+
+    @JvmField
+    val buildMeta = "{{buildMeta}}"
+
+    @JvmField
+    val preRelease = "{{preRelease}}"
+
+    @JvmStatic
+    val version: String
+        get() = ("$major.$minor.$patch" + preReleaseWithPrefix() + buildMetaWithPrefix())
+
+    @JvmStatic
+    fun preReleaseWithPrefix(prefix: String = "-"): String {
+        return if (preRelease.isNotEmpty() && prefix.isNotEmpty()) {
+            "$prefix$preRelease"
+        } else {
+            preRelease
         }
+    }
 
-        fun buildMetaWithPrefix(prefix: String = "+"): String {
-            return if (buildMeta.isNotEmpty() && prefix.isNotEmpty()) {
-                "$prefix$buildMeta"
-            } else {
-                buildMeta
-            }
+    @JvmStatic
+    fun buildMetaWithPrefix(prefix: String = "+"): String {
+        return if (buildMeta.isNotEmpty() && prefix.isNotEmpty()) {
+            "$prefix$buildMeta"
+        } else {
+            buildMeta
         }
     }
 }
