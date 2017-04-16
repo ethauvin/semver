@@ -34,9 +34,8 @@ object {{className}} {
     @JvmField
     val preRelease = "{{preRelease}}"
 
-    @JvmStatic
-    val version: String
-        get() = ("$major.$minor.$patch" + preReleaseWithPrefix() + buildMetaWithPrefix())
+    @JvmField
+    val version = "$major.$minor.$patch" + preReleaseWithPrefix() + buildMetaWithPrefix()
 
     @JvmStatic
     fun preReleaseWithPrefix(prefix: String = "-"): String {

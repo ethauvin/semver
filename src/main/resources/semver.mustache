@@ -25,17 +25,7 @@ public final class {{className}} {
     final static String buildMeta = "{{buildMeta}}";
 
     /**
-     * Disables the default constructor.
-     *
-     * @throws UnsupportedOperationException If the constructor is called.
-     */
-    private {{className}}()
-     throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Illegal constructor call.");
-    }
-
-    /**
-     * Returns the full version string.
+     * The full version string.
      * <p>
      * Formatted as:
      * <blockquote>
@@ -49,14 +39,44 @@ public final class {{className}} {
      * <li><code>1.0.0+20160124144700</code></li>
      * <li><code>1.0.0-alpha+001</code></li>
      * </ul>
-     *
-     * @return The version string.
      */
-    public static String getVersion() {
-        return Integer.toString(major) + '.'
-         + Integer.toString(minor) + '.'
-         + Integer.toString(patch)
-         + preReleaseWithPrefix() + buildMetaWithPrefix();
+    final static String version = Integer.toString(major) + '.'
+            + Integer.toString(minor) + '.'
+            + Integer.toString(patch)
+            + preReleaseWithPrefix() + buildMetaWithPrefix();
+
+    /**
+     * Disables the default constructor.
+     *
+     * @throws UnsupportedOperationException If the constructor is called.
+     */
+    private GeneratedVersion()
+            throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Illegal constructor call.");
+    }
+
+    /**
+     * Returns the build metadata with default prefix.
+     *
+     * @param prefix The prefix to prepend.
+     * @return The build metadata, if any.
+     */
+    public static String buildMetaWithPrefix() {
+        return buildMetaWithPrefix(DEFAULT_PRERELEASE_PREFIX);
+    }
+
+    /**
+     * Returns the build metadata.
+     *
+     * @param prefix Prefix to prepend.
+     * @return The build metadata, if any.
+     */
+    public static String buildMetaWithPrefix(final String prefix) {
+        if (buildMeta.length() > 0 && prefix.length() > 0) {
+            return prefix + buildMeta;
+        } else {
+            return buildMeta;
+        }
     }
 
     /**
@@ -76,33 +96,9 @@ public final class {{className}} {
      */
     public static String preReleaseWithPrefix(final String prefix) {
         if (preRelease.length() > 0 && prefix.length() > 0) {
-    	    return prefix + preRelease;
+            return prefix + preRelease;
         } else {
-    	    return preRelease;
-        }
-    }
-
-    /**
-     * Returns the build metadata with default prefix.
-     *
-     * @param prefix The prefix to prepend.
-     * @return The build metadata, if any.
-     */
-    public static String buildMetaWithPrefix() {
-    	return buildMetaWithPrefix(DEFAULT_PRERELEASE_PREFIX);
-    }
-
-    /**
-     * Returns the build metadata.
-     *
-     * @param prefix Prefix to prepend.
-     * @return The build metadata, if any.
-     */
-    public static String buildMetaWithPrefix(final String prefix) {
-        if (buildMeta.length() > 0 && prefix.length() > 0) {
-    	    return prefix + buildMeta;
-        } else {
-    	    return buildMeta;
+            return preRelease;
         }
     }
 }
