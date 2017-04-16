@@ -1,7 +1,7 @@
 /*
  * VersionInfo.java
  *
- * Copyright (c) 2016, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -74,8 +74,8 @@ public class VersionInfo {
         major = version.major();
         minor = version.minor();
         patch = version.patch();
-        buildMeta = version.buildmeta();
-        preRelease = version.prerelease();
+        buildMeta = version.buildMeta();
+        preRelease = version.preRelease();
         project = version.project();
         className = version.className();
     }

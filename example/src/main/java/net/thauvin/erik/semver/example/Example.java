@@ -1,7 +1,7 @@
 /*
  * Example.java
  *
- * Copyright (c) 2016, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -49,7 +49,7 @@ public class Example {
 
         System.out.println("-----------------------------------------------------");
 
-        System.out.println("  " + GeneratedVersion.project + ' ' + GeneratedVersion.getVersion());
+        System.out.println("  " + GeneratedVersion.project + ' ' + GeneratedVersion.version);
 
         System.out.println("    Built on:       " + sdf.format(GeneratedVersion.buildDate));
         System.out.println("    Major:          " + GeneratedVersion.major);

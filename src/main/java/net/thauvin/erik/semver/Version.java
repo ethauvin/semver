@@ -1,7 +1,7 @@
 /*
  * Version.java
  *
- * Copyright (c) 2016, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,9 +46,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Version {
-    String buildmeta() default Constants.EMPTY;
+    String buildMeta() default Constants.EMPTY;
 
-    String buildmetaKey() default Constants.KEY_VERSION_BUILDMETA;
+    String buildMetaKey() default Constants.KEY_VERSION_BUILDMETA;
 
     String className() default Constants.DEFAULT_CLASS_NAME;
 
@@ -64,9 +64,9 @@ public @interface Version {
 
     String patchKey() default Constants.KEY_VERSION_PATCH;
 
-    String prerelease() default Constants.EMPTY;
+    String preRelease() default Constants.EMPTY;
 
-    String prereleaseKey() default Constants.KEY_VERSION_PRERELEASE;
+    String preReleaseKey() default Constants.KEY_VERSION_PRERELEASE;
 
     String project() default Constants.EMPTY;
 

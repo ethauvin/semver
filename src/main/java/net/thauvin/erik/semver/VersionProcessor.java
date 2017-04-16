@@ -1,7 +1,7 @@
 /*
  * VersionProcessor.java
  *
- * Copyright (c) 2016, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -80,7 +80,7 @@ public class VersionProcessor extends AbstractProcessor {
             if (propsFile.exists()) {
                 note("Found properties: " + propsFile);
                 final Properties p = new Properties();
-
+                
                 try (FileReader reader = new FileReader(propsFile)) {
                     p.load(reader);
 
@@ -88,8 +88,8 @@ public class VersionProcessor extends AbstractProcessor {
                     versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
                     versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
                     versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
-                    versionInfo.setBuildMeta(p.getProperty(version.buildmetaKey(), Constants.EMPTY));
-                    versionInfo.setPreRelease(p.getProperty(version.prereleaseKey(), Constants.EMPTY));
+                    versionInfo.setBuildMeta(p.getProperty(version.buildMetaKey(), Constants.EMPTY));
+                    versionInfo.setPreRelease(p.getProperty(version.preReleaseKey(), Constants.EMPTY));
                 }
             } else {
                 error("Could not find: " + propsFile);
@@ -164,8 +164,8 @@ public class VersionProcessor extends AbstractProcessor {
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
                         if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
-                                new File(Constants.DEFAULT_TEMPLATE).exists()) {
-                            template = Constants.DEFAULT_TEMPLATE;
+                                new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
+                            template = Constants.DEFAULT_TEMPLATE_NAME;
                         } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
                                 version.type().equals(Constants.KOTLIN_TYPE)) {
                             template = Constants.DEFAULT_KOTLIN_TEMPLATE;
@@ -191,7 +191,15 @@ public class VersionProcessor extends AbstractProcessor {
         final MustacheFactory mf = new DefaultMustacheFactory();
         final Mustache mustache = mf.compile(template);
 
-        note("Loaded template: " + mustache.getName());
+        final String templateName;
+        if (mustache.getName().equals(Constants.DEFAULT_JAVA_TEMPLATE)) {
+            templateName = "default (java)";
+        } else if (mustache.getName().equals(Constants.DEFAULT_KOTLIN_TEMPLATE)) {
+            templateName = "default (kotlin)";
+        } else {
+            templateName = mustache.getName();
+        }
+        note("Loaded template: " + templateName);
 
         final FileObject jfo;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {

@@ -1,7 +1,7 @@
 /*
  * Constants.java
  *
- * Copyright (c) 2016, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,10 +44,6 @@ public final class Constants {
      */
     public static final String DEFAULT_CLASS_NAME = "GeneratedVersion";
     /**
-     * The default mustache template.
-     */
-    public static final String DEFAULT_TEMPLATE = "version.mustache";
-    /**
      * /**
      * The default Java mustache template.
      */
@@ -72,6 +68,10 @@ public final class Constants {
      * The default patch version.
      */
     public static final int DEFAULT_PATCH = 0;
+    /**
+     * The default mustache template.
+     */
+    public static final String DEFAULT_TEMPLATE_NAME = "version.mustache";
     /**
      * The empty string.
      */
