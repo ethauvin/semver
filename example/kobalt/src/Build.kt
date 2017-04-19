@@ -1,14 +1,13 @@
 import com.beust.kobalt.plugin.application.application
 import com.beust.kobalt.plugin.apt.apt
-import com.beust.kobalt.plugin.packaging.assemble
-import com.beust.kobalt.plugin.packaging.install
+import com.beust.kobalt.plugin.packaging.*
 import com.beust.kobalt.project
 import java.io.FileInputStream
 import java.util.*
 
 
 fun StringBuilder.prepend(s: String): StringBuilder {
-    if (this.length > 0) {
+    if (this.isNotEmpty()) {
         this.insert(0, s)
     }
     return this
@@ -40,15 +39,15 @@ val example = project {
 
     dependencies {
         apt(processorJar)
-        compile(processorJar)
+        compileOnly(processorJar)
     }
 
     apt {
-        outputDir = "/src/generated/java/"
+        outputDir = "../src/generated/java/"
     }
 
     install {
-        libDir = "deploy"
+        target = "deploy"
     }
 
     assemble {

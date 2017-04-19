@@ -1,23 +1,20 @@
-import com.beust.kobalt.file
-import com.beust.kobalt.localMaven
-import com.beust.kobalt.plugin.application.application
-import com.beust.kobalt.plugin.apt.apt
-import com.beust.kobalt.plugin.java.javaCompiler
-import com.beust.kobalt.plugin.packaging.assemble
-import com.beust.kobalt.plugin.packaging.install
-import com.beust.kobalt.plugins
-import com.beust.kobalt.project
-import com.beust.kobalt.repos
-import java.io.FileInputStream
-import java.util.*
+import com.beust.kobalt.*
+import com.beust.kobalt.plugin.application.*
+import com.beust.kobalt.plugin.packaging.*
+import com.beust.kobalt.plugin.publish.*
 import net.thauvin.erik.kobalt.plugin.exec.*
+import org.apache.maven.model.*
+import java.io.*
+import java.util.*
 
 val bs = buildScript {
+    plugins("net.thauvin.erik:kobalt-maven-local:")
     plugins("net.thauvin.erik:kobalt-exec:")
+    repos(localMaven())
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
-    if (this.length > 0) {
+    if (this.isNotEmpty()) {
         this.insert(0, s)
     }
     return this
@@ -45,8 +42,27 @@ val semver = project {
     artifactId = name
     version = versionFor()
 
+    pom = Model().apply {
+        description = "Semantic Version Annotation Processor"
+        url = "https://github.com/ethauvin/semver"
+        licenses = listOf(License().apply {
+            name = "BSD 3-Clause"
+            url = "https://opensource.org/licenses/BSD-3-Clause"
+        })
+        scm = Scm().apply {
+            url = "https://github.com/ethauvin/semver"
+            connection = "https://github.com/ethauvin/semver.git"
+            developerConnection = "git@github.com:ethauvin/semver.git"
+        }
+        developers = listOf(Developer().apply {
+            id = "ethauvin"
+            name = "Erik C. Thauvin"
+            email = "erik@thauvin.net"
+        })
+    }
+
     dependencies {
-        compile("org.apache.velocity:velocity:1.7")
+        compile("com.github.spullara.mustache.java:compiler:0.9.4")
     }
 
     dependenciesTest {
@@ -54,16 +70,28 @@ val semver = project {
     }
 
     install {
-        libDir = "deploy"
+        target = "deploy"
     }
 
     assemble {
-        jar {}
+        jar {
+            fatJar = true
+        }
+        mavenJars {}
     }
 
-    application {
-        mainClass = "com.example.Main"
+    autoGitTag {
+        enabled = true
+        message = "Version $version"
     }
+
+    bintray {
+        publish = true
+        description = "Release version $version"
+        vcsTag = version
+        sign = true
+    }
+
 
     exec {
         val args = listOf("--from", "markdown_github", "--to", "html5", "-s", "-c", "github-pandoc.css", "-o", "README.html", "README.md")
@@ -72,33 +100,13 @@ val semver = project {
     }
 }
 
-val example = project(semver){
+val example = project(semver) {
 
     name = "example"
     directory = "example"
     version = versionFor(directory)
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-
-    sourceDirectories {
-        path("src/main/java")
-    }
-
-    sourceDirectoriesTest {
-        path("src/test/java")
-    }
-
-    dependencies {
-        compile("org.apache.velocity:velocity:1.7")
-    }
-
-    dependenciesTest {
-
-    }
-
-    install {
-        libDir = "example/deploy"
-    }
 
     assemble {
         jar {
