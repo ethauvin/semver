@@ -183,7 +183,7 @@ In order to also incorporate the generated source code into the `source tree`, u
 
 ```gradle
 plugins {
-    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.3"
+    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.4"
 }
 ```
 
