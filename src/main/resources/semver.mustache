@@ -16,13 +16,13 @@ public final class {{className}} {
 	private final static String DEFAULT_PRERELEASE_PREFIX = "-";
 	private final static String DEFAULT_BUILDMETA_PREFIX = "+";
 
-    final static String project = "{{project}}";
-    final static Date buildDate = new Date({{epoch}}L);
-    final static int major = {{major}};
-    final static int minor = {{minor}};
-    final static int patch = {{patch}};
-    final static String preRelease = "{{preRelease}}";
-    final static String buildMeta = "{{buildMeta}}";
+    public final static String project = "{{project}}";
+    public final static Date buildDate = new Date({{epoch}}L);
+    public final static int major = {{major}};
+    public final static int minor = {{minor}};
+    public final static int patch = {{patch}};
+    public final static String preRelease = "{{preRelease}}";
+    public final static String buildMeta = "{{buildMeta}}";
 
     /**
      * The full version string.
@@ -40,7 +40,7 @@ public final class {{className}} {
      * <li><code>1.0.0-alpha+001</code></li>
      * </ul>
      */
-    final static String version = Integer.toString(major) + '.'
+    public final static String version = Integer.toString(major) + '.'
             + Integer.toString(minor) + '.'
             + Integer.toString(patch)
             + preReleaseWithPrefix() + buildMetaWithPrefix();
@@ -58,7 +58,6 @@ public final class {{className}} {
     /**
      * Returns the build metadata with default prefix.
      *
-     * @param prefix The prefix to prepend.
      * @return The build metadata, if any.
      */
     public static String buildMetaWithPrefix() {
