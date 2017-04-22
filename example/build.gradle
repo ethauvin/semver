@@ -1,5 +1,5 @@
 plugins {
-    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.3"
+    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.4"
 }
 apply plugin: 'java'
 apply plugin: 'idea'

@@ -99,24 +99,3 @@ val semver = project {
         commandLine(listOf("cmd", "/c", "pandoc") + args, os = setOf(Os.WINDOWS))
     }
 }
-
-val example = project(semver) {
-
-    name = "example"
-    directory = "example"
-    version = versionFor(directory)
-
-    val mainClassName = "net.thauvin.erik.semver.example.Example"
-
-    assemble {
-        jar {
-            manifest {
-                attributes("Main-Class", mainClassName)
-            }
-        }
-    }
-
-    application {
-        mainClass = mainClassName
-    }
-}
