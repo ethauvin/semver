@@ -71,16 +71,14 @@ public class VersionProcessor extends AbstractProcessor {
 
     private VersionInfo findValues(final Version version)
             throws IOException {
-        final VersionInfo versionInfo;
+        final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            versionInfo = new VersionInfo();
-
             final File propsFile = new File(version.properties());
             if (propsFile.exists()) {
                 note("Found properties: " + propsFile);
                 final Properties p = new Properties();
-                
+
                 try (FileReader reader = new FileReader(propsFile)) {
                     p.load(reader);
 
@@ -95,8 +93,6 @@ public class VersionProcessor extends AbstractProcessor {
                 error("Could not find: " + propsFile);
                 throw new FileNotFoundException(propsFile + " (The system cannot find the file specified)");
             }
-        } else {
-            versionInfo = new VersionInfo(version);
         }
 
         return versionInfo;
