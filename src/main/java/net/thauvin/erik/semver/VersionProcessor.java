@@ -82,16 +82,16 @@ public class VersionProcessor extends AbstractProcessor {
                 try (FileReader reader = new FileReader(propsFile)) {
                     p.load(reader);
 
-                    versionInfo.setProject(p.getProperty(version.projectKey(), Constants.EMPTY));
-                    versionInfo.setMajor(parseIntProperty(p, version.majorKey(), Constants.DEFAULT_MAJOR));
-                    versionInfo.setMinor(parseIntProperty(p, version.minorKey(), Constants.DEFAULT_MINOR));
-                    versionInfo.setPatch(parseIntProperty(p, version.patchKey(), Constants.DEFAULT_PATCH));
-                    versionInfo.setBuildMeta(p.getProperty(version.buildMetaKey(), Constants.EMPTY));
-                    versionInfo.setPreRelease(p.getProperty(version.preReleaseKey(), Constants.EMPTY));
+                    versionInfo.setProject(p.getProperty(version.projectKey(), version.project()));
+                    versionInfo.setMajor(parseIntProperty(p, version.majorKey(), version.major()));
+                    versionInfo.setMinor(parseIntProperty(p, version.minorKey(), version.minor()));
+                    versionInfo.setPatch(parseIntProperty(p, version.patchKey(), version.patch()));
+                    versionInfo.setBuildMeta(p.getProperty(version.buildMetaKey(), version.buildMeta()));
+                    versionInfo.setPreRelease(p.getProperty(version.preReleaseKey(), version.preRelease()));
                 }
             } else {
                 error("Could not find: " + propsFile);
-                throw new FileNotFoundException(propsFile + " (The system cannot find the file specified)");
+                throw new FileNotFoundException("The system cannot find the specified file: " + propsFile);
             }
         }
 
@@ -170,7 +170,7 @@ public class VersionProcessor extends AbstractProcessor {
                         }
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException e) {
-                        error("IOException occurred while running the annotation processor", e);
+                        error("IOException occurred while running the annotation processor: " + e.getMessage(), e);
                     }
                 }
             }
