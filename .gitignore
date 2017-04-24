@@ -3,6 +3,7 @@
 **/.idea/libraries
 **/.idea/tasks.xml
 **/.idea/workspace.xml
+*.sublime-*
 *.iws
 .classpath
 .DS_Store

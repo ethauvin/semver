@@ -48,7 +48,7 @@ val example = project {
     }
 
     apt {
-        outputDir = "../src/generated/java/"
+        //outputDir = "../src/generated/java/"
     }
 
     install {
