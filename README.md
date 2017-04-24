@@ -56,14 +56,14 @@ The [default template](https://github.com/ethauvin/semver/blob/master/src/main/r
 
 Field          | Description                      |  Example
 :--------------|:---------------------------------|:-----------------
-`project`      | The project name, if any.        | `MyProject`
-`buildDate`    | The build date.                  | [`java.util.Date`](https://docs.oracle.com/javase/8/docs/api/java/util/Date.html)
-`version`      | The full version string.         | `1.0.0-alpha+001`
-`major`        | The major version.               | `1`
-`minor`        | The minor version.               | `0`
-`patch`        | The patch version.               | `0`
-`preRelease`   | The pre-release version, if any. | `alpha`
-`buildMeta`    | The build metadata, if any.      | `001`
+`PROJECT`      | The project name, if any.        | `MyProject`
+`BUILDDATE`    | The build date.                  | [`java.util.Date`](https://docs.oracle.com/javase/8/docs/api/java/util/Date.html)
+`VERSION`      | The full version string.         | `1.0.0-alpha+001`
+`MAJOR`        | The major version.               | `1`
+`MINOR`        | The minor version.               | `0`
+`PATCH`        | The patch version.               | `0`
+`PRERELEASE`   | The pre-release version, if any. | `alpha`
+`BUILDMETA`    | The build metadata, if any.      | `001`
 
 And the following methods/functions:
 
@@ -249,3 +249,5 @@ For a solution using [Gradle](https://gradle.org/), please have a look at the [b
 ```
 gradle release run
 ```
+
+For a solution using [Kobalt]([Kobalt](http://beust.com/kobalt/) look at my [Property File Editor](https://github.com/ethauvin/kobalt-property-file) plug-in.
