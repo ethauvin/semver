@@ -250,4 +250,4 @@ For a solution using [Gradle](https://gradle.org/), please have a look at the [b
 gradle release run
 ```
 
-For a solution using [Kobalt]([Kobalt](http://beust.com/kobalt/) look at my [Property File Editor](https://github.com/ethauvin/kobalt-property-file) plug-in.
+For a solution using [Kobalt](http://beust.com/kobalt/) look at my [Property File Editor](https://github.com/ethauvin/kobalt-property-file) plug-in.
