@@ -77,7 +77,9 @@ val semver = project {
         jar {
             fatJar = true
         }
-        mavenJars {}
+        mavenJars {
+            fatJar = true
+        }
     }
 
     autoGitTag {
