@@ -156,7 +156,9 @@ public class VersionProcessor extends AbstractProcessor {
                     final PackageElement packageElement = (PackageElement) enclosingElement;
                     try {
                         final VersionInfo versionInfo = findValues(version);
-                        versionInfo.setPackageName(packageElement.getQualifiedName().toString());
+                        if (version.packageName().equals(Constants.EMPTY)) {
+                            versionInfo.setPackageName(packageElement.getQualifiedName().toString());
+                        }
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
                         if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&

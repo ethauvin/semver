@@ -62,6 +62,8 @@ public @interface Version {
 
     int patch() default Constants.DEFAULT_PATCH;
 
+    String packageName() default Constants.EMPTY;
+
     String patchKey() default Constants.KEY_VERSION_PATCH;
 
     String preRelease() default Constants.EMPTY;

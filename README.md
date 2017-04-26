@@ -112,18 +112,19 @@ Please also look at this [example](https://github.com/ethauvin/mobibot/blob/mast
 
 The following annotation elements and properties are available:
 
-Element      | Property             | Description                       | Default
-:------------|:---------------------|:----------------------------------|:----------------
-`project`    | `version.project`    | The project name.                 |
-`major`      | `version.major`      | The major version number.         | `1`
-`minor`      | `version.major`      | The minor version number.         | `0`
-`patch`      | `version.patch`      | The patch version number.         | `0`
-`preRelease` | `version.prerelease` | The pre-release version.          |
-`buildMeta`  | `version.buildmeta`  | The build metadata version.       |
-`className`  |                      | The name of the generated class.  | `GeneratedVersion`
-`properties` |                      | The properties file.              |
-`template`   |                      | The template file.                | `version.mustache`
-`type`       |                      | Either `java` or `kt` for Kotlin. | `java`
+Element       | Property             | Description                       | Default
+:-------------|:---------------------|:----------------------------------|:-------------------------
+`project`     | `version.project`    | The project name.                 |
+`major`       | `version.major`      | The major version number.         | `1`
+`minor`       | `version.major`      | The minor version number.         | `0`
+`patch`       | `version.patch`      | The patch version number.         | `0`
+`preRelease`  | `version.prerelease` | The pre-release version.          |
+`buildMeta`   | `version.buildmeta`  | The build metadata version.       |
+`packageName` |                      | The package name.                 | _Same as annotated class_
+`className`   |                      | The name of the generated class.  | `GeneratedVersion`
+`properties`  |                      | The properties file.              |
+`template`    |                      | The template file.                | `version.mustache`
+`type`        |                      | Either `java` or `kt` for Kotlin. | `java`
 
 In order to easily incorporate with existing projects, the property keys may be assigned custom values:
 

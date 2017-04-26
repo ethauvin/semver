@@ -78,6 +78,7 @@ public class VersionInfo {
         preRelease = version.preRelease();
         project = version.project();
         className = version.className();
+        packageName = version.packageName();
     }
 
     /**
