@@ -1,16 +1,25 @@
-import com.beust.kobalt.*
-import com.beust.kobalt.plugin.application.*
-import com.beust.kobalt.plugin.packaging.*
-import com.beust.kobalt.plugin.publish.*
-import net.thauvin.erik.kobalt.plugin.exec.*
-import org.apache.maven.model.*
-import java.io.*
+import com.beust.kobalt.buildScript
+import com.beust.kobalt.file
+import com.beust.kobalt.plugin.packaging.assemble
+import com.beust.kobalt.plugin.packaging.install
+import com.beust.kobalt.plugin.publish.autoGitTag
+import com.beust.kobalt.plugin.publish.bintray
+import com.beust.kobalt.project
+import net.thauvin.erik.kobalt.plugin.exec.Os
+import net.thauvin.erik.kobalt.plugin.exec.exec
+import net.thauvin.erik.kobalt.plugin.versioneye.versionEye
+import org.apache.maven.model.Developer
+import org.apache.maven.model.License
+import org.apache.maven.model.Model
+import org.apache.maven.model.Scm
+import java.io.FileInputStream
 import java.util.*
 
 val bs = buildScript {
-    plugins("net.thauvin.erik:kobalt-maven-local:")
-    plugins("net.thauvin.erik:kobalt-exec:")
-    repos(localMaven())
+    //repos(file("K:/maven/repository"))
+    plugins("net.thauvin.erik:kobalt-maven-local:",
+        "net.thauvin.erik:kobalt-exec:",
+        "net.thauvin.erik:kobalt-versioneye:")
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
@@ -99,5 +108,10 @@ val semver = project {
         val args = listOf("--from", "markdown_github", "--to", "html5", "-s", "-c", "github-pandoc.css", "-o", "README.html", "README.md")
         commandLine(listOf("pandoc") + args, os = setOf(Os.LINUX))
         commandLine(listOf("cmd", "/c", "pandoc") + args, os = setOf(Os.WINDOWS))
+    }
+
+    versionEye {
+        org = "thauvin"
+        team = "Owners"
     }
 }
