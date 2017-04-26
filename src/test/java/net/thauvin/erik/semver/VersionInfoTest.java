@@ -34,6 +34,7 @@ package net.thauvin.erik.semver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.lang.annotation.Annotation;
 import java.util.Calendar;
 
 /**
@@ -44,74 +45,209 @@ import java.util.Calendar;
  * @since 1.0
  */
 public class VersionInfoTest {
+    private final Calendar now = Calendar.getInstance();
+    private VersionInfo versionInfo = new VersionInfo();
+
     @Test
     public void testGetVersion()
             throws Exception {
 
-        final Calendar now = Calendar.getInstance();
-        final VersionInfo version = new VersionInfo();
+        Assert.assertEquals(versionInfo.getVersion(), "1.0.0", "getVersion(1.0.0)");
 
-        Assert.assertEquals(version.getVersion(), "1.0.0", "getVersion(1.0.0)");
+        versionInfo.setMajor(3);
 
-        version.setMajor(3);
+        Assert.assertEquals(versionInfo.getVersion(), "3.0.0", "getVersion(3.0.0)");
 
-        Assert.assertEquals(version.getVersion(), "3.0.0", "getVersion(3.0.0)");
+        versionInfo.setMinor(2);
 
-        version.setMinor(2);
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.0", "getVersion(3.2.0)");
 
-        Assert.assertEquals(version.getVersion(), "3.2.0", "getVersion(3.2.0)");
+        versionInfo.setPatch(1);
 
-        version.setPatch(1);
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1", "getVersion(3.2.1)");
 
-        Assert.assertEquals(version.getVersion(), "3.2.1", "getVersion(3.2.1)");
+        versionInfo.setPreRelease("beta");
 
-        version.setPreRelease("beta");
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1-beta", "getVersion(3.2.1-beta)");
 
-        Assert.assertEquals(version.getVersion(), "3.2.1-beta", "getVersion(3.2.1-beta)");
+        versionInfo.setBuildMeta("001");
 
-        version.setBuildMeta("001");
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1-beta+001", "getVersion(3.2.1-beta+001)");
 
-        Assert.assertEquals(version.getVersion(), "3.2.1-beta+001", "getVersion(3.2.1-beta+001)");
+        versionInfo.setPreRelease("");
 
-        version.setPreRelease("");
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1+001", "getVersion(3.2.1+001)");
+    }
 
-        Assert.assertEquals(version.getVersion(), "3.2.1+001", "getVersion(3.2.1+001)");
+    @Test
+    public void testSetGet()
+            throws Exception {
 
-        version.setMajor(1);
+        versionInfo.setMajor(1);
 
-        Assert.assertEquals(version.getMajor(), 1, "getMajor(1)");
+        Assert.assertEquals(versionInfo.getMajor(), 1, "getMajor(1)");
 
-        version.setMinor(2);
+        versionInfo.setMinor(2);
 
-        Assert.assertEquals(version.getMinor(), 2, "getMinor(2)");
+        Assert.assertEquals(versionInfo.getMinor(), 2, "getMinor(2)");
 
-        version.setPatch(3);
+        versionInfo.setPatch(3);
 
-        Assert.assertEquals(version.getPatch(), 3, "getPatch(3)");
+        Assert.assertEquals(versionInfo.getPatch(), 3, "getPatch(3)");
 
-        version.setPreRelease("alpha");
+        versionInfo.setPreRelease("alpha");
 
-        Assert.assertEquals(version.getPreRelease(), "alpha", "getPreRelease(alpha)");
+        Assert.assertEquals(versionInfo.getPreRelease(), "alpha", "getPreRelease(alpha)");
 
-        version.setBuildMeta("007");
+        versionInfo.setBuildMeta("001");
 
-        Assert.assertEquals(version.getBuildMeta(), "007", "getBuildMeta(007)");
+        Assert.assertEquals(versionInfo.getBuildMeta(), "001", "getBuildMeta(001)");
 
-        version.setPackageName("com.example");
+        versionInfo.setPackageName("com.example");
 
-        Assert.assertEquals(version.getPackageName(), "com.example", "getPackageName(com.example)");
+        Assert.assertEquals(versionInfo.getPackageName(), "com.example", "getPackageName(com.example)");
 
-        Assert.assertEquals(version.getVersion(), "1.2.3-alpha+007", "getVersion(1.2.3-alpha+007)");
+        Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha+001", "getVersion(1.2.3-alpha+001)");
 
-        version.setProject("My Example");
+        versionInfo.setProject("My Example");
 
-        Assert.assertEquals(version.getProject(), "My Example", "getProject(My Example)");
+        Assert.assertEquals(versionInfo.getProject(), "My Example", "getProject(My Example)");
 
-        version.setClassName("Example");
+        versionInfo.setClassName("Example");
 
-        Assert.assertEquals(version.getClassName(), "Example", "getClassName(Example");
+        Assert.assertEquals(versionInfo.getClassName(), "Example", "getClassName(Example");
 
-        Assert.assertTrue((version.getEpoch() - now.getTimeInMillis()) < 1000,
+        Assert.assertTrue((versionInfo.getEpoch() - now.getTimeInMillis()) < 1000,
                 "buildDate - now < 1s");
+    }
+
+    @Test
+    public void testVersionInfo()
+            throws Exception {
+
+        final Version version = new VersionTest();
+        versionInfo = new VersionInfo(version);
+
+        Assert.assertEquals(versionInfo.getMajor(), version.major(), "getMajor(major)");
+
+        Assert.assertEquals(versionInfo.getMinor(), version.minor(), "getMinor(minor)");
+
+        Assert.assertEquals(versionInfo.getPatch(), version.patch(), "getPatch(patch)");
+
+        Assert.assertEquals(versionInfo.getPreRelease(), version.preRelease(), "getPreRelease(preRelease)");
+
+        Assert.assertEquals(versionInfo.getBuildMeta(), version.buildMeta(), "getBuildMeta(buildMeta)");
+
+        Assert.assertEquals(versionInfo.getPackageName(), version.packageName(),
+                "getPackageName(packageName)");
+
+        Assert.assertEquals(versionInfo.getVersion(),
+                version.major()
+                        + "."
+                        + version.minor()
+                        + '.'
+                        + version.patch()
+                        + '-'
+                        + version.preRelease()
+                        + '+'
+                        + version.buildMeta(),
+                "getVersion(version)");
+
+        Assert.assertEquals(versionInfo.getProject(), version.project(), "getProject(project)");
+
+        Assert.assertEquals(versionInfo.getClassName(), version.className(), "getClassName(className)");
+    }
+}
+
+@SuppressWarnings("ClassExplicitlyAnnotation")
+class VersionTest implements Version {
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
+
+    @Override
+    public String buildMeta() {
+        return "007";
+    }
+
+    @Override
+    public String buildMetaKey() {
+        return "product.build.meta";
+    }
+
+    @Override
+    public String className() {
+        return "MyTest";
+    }
+
+    @Override
+    public int major() {
+        return 2;
+    }
+
+    @Override
+    public String majorKey() {
+        return "product.build.major";
+    }
+
+    @Override
+    public int minor() {
+        return 17;
+    }
+
+    @Override
+    public String minorKey() {
+        return "product.build.minor";
+    }
+
+    @Override
+    public String packageName() {
+        return "com.foo.example";
+    }
+
+    @Override
+    public int patch() {
+        return 52;
+    }
+
+    @Override
+    public String patchKey() {
+        return "product.build.patch";
+    }
+
+    @Override
+    public String preRelease() {
+        return "beta";
+    }
+
+    @Override
+    public String preReleaseKey() {
+        return "product.build.prerelease";
+    }
+
+    @Override
+    public String project() {
+        return "My Test Project";
+    }
+
+    @Override
+    public String projectKey() {
+        return "product.build.project";
+    }
+
+    @Override
+    public String properties() {
+        return "test.properties";
+    }
+
+    @Override
+    public String template() {
+        return "myversion.mustache";
+    }
+
+    @Override
+    public String type() {
+        return "kt";
     }
 }
