@@ -9,7 +9,7 @@ import java.util.*
 // .kobaltw run
 
 val bs = buildScript {
-    repos(file("K:/maven/repository/"))
+    repos(file("K:/maven/repository/"), localMaven())
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
