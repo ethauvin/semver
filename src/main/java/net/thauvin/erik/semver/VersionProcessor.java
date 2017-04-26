@@ -189,9 +189,9 @@ public class VersionProcessor extends AbstractProcessor {
 
         final String templateName;
         if (mustache.getName().equals(Constants.DEFAULT_JAVA_TEMPLATE)) {
-            templateName = "default (java)";
+            templateName = "default (Java)";
         } else if (mustache.getName().equals(Constants.DEFAULT_KOTLIN_TEMPLATE)) {
-            templateName = "default (kotlin)";
+            templateName = "default (Kotlin)";
         } else {
             templateName = mustache.getName();
         }
