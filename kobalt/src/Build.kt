@@ -84,10 +84,10 @@ val semver = project {
 
     assemble {
         jar {
-            fatJar = true
+            //fatJar = true
         }
         mavenJars {
-            fatJar = true
+            //fatJar = true
         }
     }
 

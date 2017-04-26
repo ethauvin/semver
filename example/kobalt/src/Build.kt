@@ -6,6 +6,7 @@ import com.beust.kobalt.project
 import java.io.FileInputStream
 import java.util.*
 
+// .kobaltw run
 
 val bs = buildScript {
     repos(file("K:/maven/repository/"))
