@@ -21,11 +21,12 @@ fi
 
 maven="/k/maven/repository/${group//.//}/${name}/${version}"
 kobalt="$HOME/.kobalt/cache/${group//.//}/${name}/${version}"
+localRepo="$HOME/.kobalt/localMavenRepo/${group//.//}/${name}/${version}"
 
 read -p "Delete version ${version}? " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-	for dir in "$kobalt" "$maven"; do
+	for dir in "$kobalt" "$maven" "$localRepo"; do
 		if [ -d "$dir" ]; then
 			echo -e "Deleting : \e[32;1m$dir\e[0m"
 			$rm "$dir"
