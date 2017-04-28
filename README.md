@@ -36,6 +36,8 @@ version.patch=0
 version.prerelease=beta
 ```
 
+[View Example](https://github.com/ethauvin/semver/tree/master/example)
+
 ## Template
 
 Upon running the annotation processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Mustache](https://mustache.github.io/) template.
@@ -45,7 +47,7 @@ To use your own template, simply create a `version.mustache` file. The processor
 To specify your own template name, use:
 
 ```java
-@Version(template = "myversion.mustache")
+@Version(template = "version.mustache")
 public class A {
 // ...
 ```
@@ -239,7 +241,7 @@ open class Main {
 ```
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
-Please look at the [Example for Kotlin](https://github.com/ethauvin/semver-example-kotlin) project for samples on using [Gradle](https://gradle.org/) and [Kobalt](http://beust.com/kobalt/).
+Please look at the [Example for Kotlin](https://github.com/ethauvin/semver-example-kotlin) project for samples on using Gradle ([build.gradle](https://github.com/ethauvin/semver-example-kotlin/blob/master/build.gradle)) and Kobalt ([Build.kt](https://github.com/ethauvin/semver-example-kotlin/blob/master/kobalt/src/Build.kt)).
 
 ### Auto-Increment
 
