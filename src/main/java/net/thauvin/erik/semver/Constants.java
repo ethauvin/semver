@@ -44,7 +44,6 @@ public final class Constants {
      */
     public static final String DEFAULT_CLASS_NAME = "GeneratedVersion";
     /**
-     * /**
      * The default Java mustache template.
      */
     public static final String DEFAULT_JAVA_TEMPLATE = "semver.mustache";
@@ -76,7 +75,6 @@ public final class Constants {
      * The empty string.
      */
     public static final String EMPTY = "";
-
     /**
      * The build metadata property key.
      */

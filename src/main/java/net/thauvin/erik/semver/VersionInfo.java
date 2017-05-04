@@ -52,7 +52,7 @@ public class VersionInfo {
 
 
     /**
-     * Creates a new object with default values
+     * Creates a new object with default values.
      */
     public VersionInfo() {
         major = Constants.DEFAULT_MAJOR;
@@ -82,18 +82,18 @@ public class VersionInfo {
     }
 
     /**
-     * Returns the build metadata.
+     * Returns the build meta-data.
      *
-     * @return The build metadata.
+     * @return The build meta-data.
      */
     public String getBuildMeta() {
         return buildMeta;
     }
 
     /**
-     * Sets the build metadata.
+     * Sets the build meta-data.
      *
-     * @param buildMeta The new build metadata.
+     * @param buildMeta The new build meta-data.
      */
     public void setBuildMeta(final String buildMeta) {
         this.buildMeta = buildMeta;
@@ -172,9 +172,9 @@ public class VersionInfo {
     }
 
     /**
-     * Sets the package name version.
+     * Sets the package name.
      *
-     * @param packageName The new patch version.
+     * @param packageName The new package name.
      */
     public void setPackageName(String packageName) {
         this.packageName = packageName;
