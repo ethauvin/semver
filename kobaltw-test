@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+JAR=$(ls -1 -t /k/GitHub/kobalt/kobaltBuild/libs/*.jar | egrep -v "(sources|javadoc)" | head -1)
+export KOBALT_JAR=$JAR
+java -jar $JAR $*

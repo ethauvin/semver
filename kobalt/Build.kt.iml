@@ -19,13 +19,13 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Kobalt: com.beust.kobalt:kobalt:jar:1.0.77">
+      <library name="Kobalt: com.beust.kobalt:kobalt:jar:1.0.83">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-1.0.77/kobalt/wrapper/kobalt-1.0.77.jar!/" />
+          <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-1.0.83/kobalt/wrapper/kobalt-1.0.83.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-1.0.77/kobalt/wrapper/kobalt-1.0.77-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.kobalt/wrapper/dist/kobalt-1.0.83/kobalt/wrapper/kobalt-1.0.83-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
@@ -39,9 +39,9 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library">
-      <library name="Kobalt: kobalt-exec-0.6.5.jar">
+      <library name="Kobalt: kobalt-exec-0.7.0.jar">
         <CLASSES>
-          <root url="jar://$USER_HOME$/.kobalt/cache/net/thauvin/erik/kobalt-exec/0.6.5/kobalt-exec-0.6.5.jar!/" />
+          <root url="jar://$USER_HOME$/.kobalt/cache/net/thauvin/erik/kobalt-exec/0.7.0/kobalt-exec-0.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
