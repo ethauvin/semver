@@ -13,38 +13,36 @@ import java.util.*
  *         Annotation Processor</a>
  */
 object {{className}} {
-    @JvmField
-    val PRERELEASE_PREFIX = "-"
+    @JvmField val PRERELEASE_PREFIX = "-"
 
-    @JvmField
-    val BUILDMEATA_PREFIX = "+"
+    @JvmField val BUILDMEATA_PREFIX = "+"
 
-    @JvmField
-    val PROJECT = "{{project}}"
+    @JvmField val PROJECT = "{{project}}"
 
-    @JvmField
-    val BUILDDATE = Date({{epoch}}L)
+    @JvmField val BUILDDATE = Date({{epoch}}L)
 
-    @JvmField
-    val MAJOR = {{major}}
+    @JvmField val MAJOR = {{major}}
 
-    @JvmField
-    val MINOR = {{minor}}
+    @JvmField val MINOR = {{minor}}
 
-    @JvmField
-    val PATCH = {{patch}}
+    @JvmField val PATCH = {{patch}}
 
-    @JvmField
-    val BUILDMETA = "{{buildMeta}}"
+    @JvmField val BUILDMETA = "{{buildMeta}}"
 
-    @JvmField
-    val PRERELEASE = "{{preRelease}}"
+    @JvmField val PRERELEASE = "{{preRelease}}"
 
-    @JvmField
-    val VERSION = "$MAJOR.$MINOR.$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
+    /**
+    * The full version string formatted as [MAJOR].[MINOR].[PATCH]-[PRERELEASE]+[BUILDMETA]
+    */
+    @JvmField val VERSION = "$MAJOR.$MINOR.$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
 
-    @JvmStatic
-    fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
+    /**
+     * Returns the pre-release version with prefix.
+     *
+     * @param prefix The prefix, defaults to [PRERELEASE_PREFIX].
+     * @return The pre-release version, if any.
+     */
+    @JvmStatic fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
         return if (PRERELEASE.isNotEmpty() && prefix.isNotEmpty()) {
             "$prefix$PRERELEASE"
         } else {
@@ -52,8 +50,13 @@ object {{className}} {
         }
     }
 
-    @JvmStatic
-    fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
+    /**
+     * Returns the build metadata with prefix.
+     *
+     * @param prefix The prefix, defaults to [BUILDMEATA_PREFIX].
+     * @return The build metadata, if any.
+     */
+    @JvmStatic fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
         return if (BUILDMETA.isNotEmpty() && prefix.isNotEmpty()) {
             "$prefix$BUILDMETA"
         } else {

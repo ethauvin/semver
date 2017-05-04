@@ -1,5 +1,6 @@
 import com.beust.kobalt.buildScript
 import com.beust.kobalt.file
+import com.beust.kobalt.plugin.java.javadoc
 import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.packaging.install
 import com.beust.kobalt.plugin.publish.autoGitTag
@@ -16,10 +17,10 @@ import java.io.FileInputStream
 import java.util.*
 
 val bs = buildScript {
-    //repos(file("K:/maven/repository"))
+    repos(file("K:/maven/repository"))
     plugins("net.thauvin.erik:kobalt-maven-local:",
-        "net.thauvin.erik:kobalt-exec:",
-        "net.thauvin.erik:kobalt-versioneye:")
+            "net.thauvin.erik:kobalt-exec:",
+            "net.thauvin.erik:kobalt-versioneye:")
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
@@ -47,12 +48,13 @@ fun versionFor(directory: String = "./"): String {
 val semver = project {
 
     name = "semver"
+    description = "Semantic Version Annotation Processor"
     group = "net.thauvin.erik"
     artifactId = name
     version = versionFor()
 
     pom = Model().apply {
-        description = "Semantic Version Annotation Processor"
+        description = project.description
         url = "https://github.com/ethauvin/semver"
         licenses = listOf(License().apply {
             name = "BSD 3-Clause"
@@ -78,10 +80,6 @@ val semver = project {
         compile("org.testng:testng:6.11")
     }
 
-    install {
-        target = "deploy"
-    }
-
     assemble {
         jar {
             //fatJar = true
@@ -89,6 +87,10 @@ val semver = project {
         mavenJars {
             //fatJar = true
         }
+    }
+
+    install {
+        target = "deploy"
     }
 
     autoGitTag {
@@ -103,11 +105,25 @@ val semver = project {
         sign = true
     }
 
+    javadoc {
+        title = project.description + ' ' + project.version
+        tags("created")
+        author = true
+        //quiet = false
+        //verbose = true
+        links("http://docs.oracle.com/javase/8/docs/api/")
+    }
 
     exec {
-        val args = listOf("--from", "markdown_github", "--to", "html5", "-s", "-c", "github-pandoc.css", "-o", "README.html", "README.md")
-        commandLine(listOf("pandoc") + args, os = setOf(Os.LINUX))
-        commandLine(listOf("cmd", "/c", "pandoc") + args, os = setOf(Os.WINDOWS))
+        taskName = "pandoc"
+        commandLine("pandoc",
+                "--from", "markdown_github",
+                "--to", "html5",
+                "-s",
+                "-c", "github-pandoc.css",
+                "-o", "README.html",
+                "README.md",
+                os = setOf(Os.LINUX, Os.MINGW, Os.CYGWIN))
     }
 
     versionEye {

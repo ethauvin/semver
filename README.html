@@ -75,11 +75,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dt">version.minor</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">version.patch</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">version.prerelease</span><span class="ot">=</span><span class="st">beta</span></code></pre></div>
+<p><a href="https://github.com/ethauvin/semver/tree/master/example">View Example</a></p>
 <h2 id="template">Template</h2>
 <p>Upon running the annotation processor, a source file <a href="https://github.com/ethauvin/semver/blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="https://mustache.github.io/">Mustache</a> template.</p>
 <p>To use your own template, simply create a <code>version.mustache</code> file. The processor will automatically look for it.</p>
 <p>To specify your own template name, use:</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(template = <span class="st">&quot;myversion.mustache&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(template = <span class="st">&quot;version.mustache&quot;</span>)
 <span class="kw">public</span> <span class="kw">class</span> A {
 <span class="co">// ...</span></code></pre></div>
 <h3 id="default-template">Default Template</h3>
@@ -94,42 +95,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><code>project</code></td>
+<td style="text-align: left;"><code>PROJECT</code></td>
 <td style="text-align: left;">The project name, if any.</td>
 <td style="text-align: left;"><code>MyProject</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>buildDate</code></td>
+<td style="text-align: left;"><code>BUILDDATE</code></td>
 <td style="text-align: left;">The build date.</td>
 <td style="text-align: left;"><a href="https://docs.oracle.com/javase/8/docs/api/java/util/Date.html"><code>java.util.Date</code></a></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>version</code></td>
+<td style="text-align: left;"><code>VERSION</code></td>
 <td style="text-align: left;">The full version string.</td>
 <td style="text-align: left;"><code>1.0.0-alpha+001</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>major</code></td>
+<td style="text-align: left;"><code>MAJOR</code></td>
 <td style="text-align: left;">The major version.</td>
 <td style="text-align: left;"><code>1</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>minor</code></td>
+<td style="text-align: left;"><code>MINOR</code></td>
 <td style="text-align: left;">The minor version.</td>
 <td style="text-align: left;"><code>0</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>patch</code></td>
+<td style="text-align: left;"><code>PATCH</code></td>
 <td style="text-align: left;">The patch version.</td>
 <td style="text-align: left;"><code>0</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><code>preRelease</code></td>
+<td style="text-align: left;"><code>PRERELEASE</code></td>
 <td style="text-align: left;">The pre-release version, if any.</td>
 <td style="text-align: left;"><code>alpha</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code>buildMeta</code></td>
+<td style="text-align: left;"><code>BUILDMETA</code></td>
 <td style="text-align: left;">The build metadata, if any.</td>
 <td style="text-align: left;"><code>001</code></td>
 </tr>
@@ -285,24 +286,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>packageName</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">The package name.</td>
+<td style="text-align: left;"><em>Same as annotated class</em></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>className</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The name of the generated class.</td>
 <td style="text-align: left;"><code>GeneratedVersion</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>properties</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The properties file.</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>template</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The template file.</td>
 <td style="text-align: left;"><code>version.mustache</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>type</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Either <code>java</code> or <code>kt</code> for Kotlin.</td>
@@ -346,7 +353,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
 <p>In order to also incorporate the generated source code into the <code>source tree</code>, use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by adding the following to the very top of the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>plugins {
-    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.3&quot;
+    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.4&quot;
 }</code></pre>
 <p>Then add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
@@ -381,10 +388,11 @@ compileJava {
 <span class="kw">open</span> <span class="kw">class</span> Main {
 <span class="co">// ...</span></code></pre></div>
 <p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache">Kotlin default template</a> implements the same static fields and functions as the <a href="#default-template">Java template</a>.</p>
-<p>Please look at the <a href="https://github.com/ethauvin/semver-example-kotlin">Example for Kotlin</a> project for samples on using <a href="https://gradle.org/">Gradle</a> and <a href="http://beust.com/kobalt/">Kobalt</a>.</p>
+<p>Please look at the <a href="https://github.com/ethauvin/semver-example-kotlin">Example for Kotlin</a> project for samples on using Gradle (<a href="https://github.com/ethauvin/semver-example-kotlin/blob/master/build.gradle">build.gradle</a>) and Kobalt (<a href="https://github.com/ethauvin/semver-example-kotlin/blob/master/kobalt/src/Build.kt">Build.kt</a>).</p>
 <h3 id="auto-increment">Auto-Increment</h3>
 <p>Incrementing the version is best left to your favorite build system.</p>
 <p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <a href="https://github.com/ethauvin/semver/blob/master/example/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
 <pre><code>gradle release run</code></pre>
+<p>For a solution using <a href="http://beust.com/kobalt/">Kobalt</a> look at my <a href="https://github.com/ethauvin/kobalt-property-file">Property File Editor</a> plug-in.</p>
 </body>
 </html>
