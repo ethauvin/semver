@@ -9,7 +9,7 @@ import java.util.*
 // .kobaltw run
 
 val bs = buildScript {
-    repos(file("K:/maven/repository/"), localMaven())
+    //repos(file("K:/maven/repository/"), localMaven())
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
@@ -41,7 +41,7 @@ val example = project {
     version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:0.9.7"
+    val processorJar = "net.thauvin.erik:semver:"
 
     dependencies {
         apt(processorJar)

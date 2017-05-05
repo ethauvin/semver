@@ -106,7 +106,7 @@ val semver = project {
     }
 
     javadoc {
-        title = project.description + ' ' + project.version
+        title = "${project.description} ${project.version}"
         tags("created")
         author = true
         //quiet = false
