@@ -1,15 +1,15 @@
 import com.beust.kobalt.*
-import com.beust.kobalt.plugin.application.application
-import com.beust.kobalt.plugin.apt.apt
+import com.beust.kobalt.plugin.application.*
+import com.beust.kobalt.plugin.apt.*
+import com.beust.kobalt.plugin.publish.*
 import com.beust.kobalt.plugin.packaging.*
-import com.beust.kobalt.project
 import java.io.FileInputStream
 import java.util.*
 
 // .kobaltw run
 
 val bs = buildScript {
-    //repos(file("K:/maven/repository/"), localMaven())
+    repos(localMaven())
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
@@ -41,7 +41,7 @@ val example = project {
     version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:"
+    val processorJar = "net.thauvin.erik:semver:1.0.0"
 
     dependencies {
         apt(processorJar)

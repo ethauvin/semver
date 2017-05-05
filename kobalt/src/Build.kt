@@ -1,5 +1,5 @@
 import com.beust.kobalt.buildScript
-import com.beust.kobalt.file
+import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.java.javadoc
 import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.packaging.install
@@ -17,9 +17,8 @@ import java.io.FileInputStream
 import java.util.*
 
 val bs = buildScript {
-    repos(file("K:/maven/repository"))
-    plugins("net.thauvin.erik:kobalt-maven-local:",
-            "net.thauvin.erik:kobalt-exec:",
+    repos(localMaven())
+    plugins("net.thauvin.erik:kobalt-exec:",
             "net.thauvin.erik:kobalt-versioneye:")
 }
 
@@ -99,8 +98,10 @@ val semver = project {
     }
 
     bintray {
+        name = "SemVer"
         publish = true
         description = "Release version $version"
+        issueTrackerUrl = "https://github.com/ethauvin/semver/issues"
         vcsTag = version
         sign = true
     }

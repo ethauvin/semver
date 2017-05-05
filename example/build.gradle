@@ -9,6 +9,7 @@ defaultTasks 'run'
 
 def isRelease = 'release' in gradle.startParameter.taskNames
 def deployDir = 'deploy'
+def processorJar = 'net.thauvin.erik:semver:1.0.0'
 
 // Get version from properties file. Increment patch if specified.
 def getVersion(isIncrement = false) {
@@ -45,13 +46,13 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:+'
+    compileOnly processorJar
 }
 
 annotationProcessor {
     // Update version, increment on release.
     project.version = getVersion(isRelease)
-    library 'net.thauvin.erik:semver:+'
+    library processorJar
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
