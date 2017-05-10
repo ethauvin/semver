@@ -94,6 +94,7 @@ val semver = project {
 
     autoGitTag {
         enabled = true
+        push = false
         message = "Version $version"
     }
 

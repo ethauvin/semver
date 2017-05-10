@@ -174,7 +174,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:1.0'
+    compileOnly 'net.thauvin.erik:semver:1.0.0'
 }
 ```
 
@@ -194,11 +194,11 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:1.0'
+    compileOnly 'net.thauvin.erik:semver:1.0.0'
 }
 
 annotationProcessor {
-    library 'net.thauvin.erik:semver:1.0'
+    library 'net.thauvin.erik:semver:1.0.0'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -219,8 +219,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:1.0")
-    compileOnly("net.thauvin.erik:semver:1.0")
+    apt("net.thauvin.erik:semver:1.0.0")
+    compileOnly("net.thauvin.erik:semver:1.0.0")
 }
 ```
 
