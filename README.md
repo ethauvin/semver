@@ -162,7 +162,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
