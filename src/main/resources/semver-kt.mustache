@@ -34,7 +34,9 @@ object {{className}} {
      * @param prefix The prefix, defaults to [PRERELEASE_PREFIX].
      * @return The pre-release version, if any.
      */
-    @JvmStatic fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
+    @JvmStatic
+    @JvmOverloads
+    fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
         return if (PRERELEASE.isNotEmpty() && prefix.isNotEmpty()) {
             "$prefix$PRERELEASE"
         } else {
@@ -48,7 +50,9 @@ object {{className}} {
      * @param prefix The prefix, defaults to [BUILDMEATA_PREFIX].
      * @return The build metadata, if any.
      */
-    @JvmStatic fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
+    @JvmStatic
+    @JvmOverloads
+    fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
         return if (BUILDMETA.isNotEmpty() && prefix.isNotEmpty()) {
             "$prefix$BUILDMETA"
         } else {
