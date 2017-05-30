@@ -41,7 +41,7 @@ val example = project {
     version = versionFor()
 
     val mainClassName = "net.thauvin.erik.semver.example.Example"
-    val processorJar = "net.thauvin.erik:semver:1.0.0"
+    val processorJar = "net.thauvin.erik:semver:1.0.1"
 
     dependencies {
         apt(processorJar)

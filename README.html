@@ -107,7 +107,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="odd">
 <td style="text-align: left;"><code>VERSION</code></td>
 <td style="text-align: left;">The full version string.</td>
-<td style="text-align: left;"><code>1.0.0-alpha+001</code></td>
+<td style="text-align: left;"><code>1.2.3-alpha+001</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>MAJOR</code></td>
@@ -117,12 +117,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <tr class="odd">
 <td style="text-align: left;"><code>MINOR</code></td>
 <td style="text-align: left;">The minor version.</td>
-<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>2</code></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>PATCH</code></td>
 <td style="text-align: left;">The patch version.</td>
-<td style="text-align: left;"><code>0</code></td>
+<td style="text-align: left;"><code>3</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>PRERELEASE</code></td>
@@ -341,13 +341,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
     <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span>
     <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span>
-    <span class="kw">&lt;version&gt;</span>1.0.0<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;version&gt;</span>1.0.1<span class="kw">&lt;/version&gt;</span>
 <span class="kw">&lt;/dependency&gt;</span></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compileOnly &#39;net.thauvin.erik:semver:1.0.0&#39;
+    compileOnly &#39;net.thauvin.erik:semver:1.0.1&#39;
 }</code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
@@ -357,11 +357,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }</code></pre>
 <p>Then add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    compileOnly &#39;net.thauvin.erik:semver:1.0.0&#39;
+    compileOnly &#39;net.thauvin.erik:semver:1.0.1&#39;
 }
 
 annotationProcessor {
-    library &#39;net.thauvin.erik:semver:1.0.0&#39;
+    library &#39;net.thauvin.erik:semver:1.0.1&#39;
     processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
     // sourcesDir &#39;src/generated/java&#39;
 }
@@ -375,8 +375,8 @@ compileJava {
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:1.0.0&quot;)
-    compileOnly(&quot;net.thauvin.erik:semver:1.0.0&quot;)
+    apt(&quot;net.thauvin.erik:semver:1.0.1&quot;)
+    compileOnly(&quot;net.thauvin.erik:semver:1.0.1&quot;)
 }</code></pre>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/example/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
 <h3 id="kotlin">Kotlin</h3>

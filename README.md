@@ -60,10 +60,10 @@ Field          | Description                      |  Example
 :--------------|:---------------------------------|:-----------------
 `PROJECT`      | The project name, if any.        | `MyProject`
 `BUILDDATE`    | The build date.                  | [`java.util.Date`](https://docs.oracle.com/javase/8/docs/api/java/util/Date.html)
-`VERSION`      | The full version string.         | `1.0.0-alpha+001`
+`VERSION`      | The full version string.         | `1.2.3-alpha+001`
 `MAJOR`        | The major version.               | `1`
-`MINOR`        | The minor version.               | `0`
-`PATCH`        | The patch version.               | `0`
+`MINOR`        | The minor version.               | `2`
+`PATCH`        | The patch version.               | `3`
 `PRERELEASE`   | The pre-release version, if any. | `alpha`
 `BUILDMETA`    | The build metadata, if any.      | `001`
 
@@ -162,7 +162,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
@@ -174,7 +174,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:1.0.0'
+    compileOnly 'net.thauvin.erik:semver:1.0.1'
 }
 ```
 
@@ -194,11 +194,11 @@ Then add the following to the `build.gradle` file:
 
 ```gradle
 dependencies {
-    compileOnly 'net.thauvin.erik:semver:1.0.0'
+    compileOnly 'net.thauvin.erik:semver:1.0.1'
 }
 
 annotationProcessor {
-    library 'net.thauvin.erik:semver:1.0.0'
+    library 'net.thauvin.erik:semver:1.0.1'
     processor 'net.thauvin.erik.semver.VersionProcessor'
     // sourcesDir 'src/generated/java'
 }
@@ -219,8 +219,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:1.0.0")
-    compileOnly("net.thauvin.erik:semver:1.0.0")
+    apt("net.thauvin.erik:semver:1.0.1")
+    compileOnly("net.thauvin.erik:semver:1.0.1")
 }
 ```
 
