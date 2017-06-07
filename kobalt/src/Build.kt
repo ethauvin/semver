@@ -118,14 +118,14 @@ val semver = project {
 
     exec {
         taskName = "pandoc"
-        commandLine("pandoc",
-                "--from", "markdown_github",
+        val args = arrayOf("--from", "markdown_github",
                 "--to", "html5",
                 "-s",
                 "-c", "github-pandoc.css",
-                "-o", "README.html",
-                "README.md",
-                os = setOf(Os.LINUX, Os.MINGW, Os.CYGWIN))
+                "-o", "docs/README.html",
+                "README.md")
+        commandLine("pandoc", *args, os = setOf(Os.LINUX, Os.MINGW, Os.CYGWIN))
+        commandLine("cmd", "/c", "pandoc", *args, os = setOf(Os.WINDOWS))
     }
 
     versionEye {
