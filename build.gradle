@@ -34,11 +34,11 @@ def getVersion(isIncrement = false) {
 }
 
 version = getVersion()
+group = 'net.thauvin.erik'
 
 def deployDir = 'deploy'
 def isRelease = 'release' in gradle.startParameter.taskNames
 
-def mavenGroupId = 'net.thauvin.erik'
 def mavenName = 'SemVer'
 def mavenDescription = 'Semantic Version Annotation Processor'
 def mavenUrl = 'https://github.com/ethauvin/semver'
@@ -117,7 +117,7 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact javadocJar
-            groupId mavenGroupId
+            groupId project.group
             artifactId rootProject.name
             version project.version
 
@@ -194,9 +194,9 @@ task wrapper(type: Wrapper) {
 }
 
 task release(dependsOn: ['wrapper', 'clean', 'deploy']) {
-    doLast {
-        group = 'Publishing'
-        description = 'Releases new version.'
+    group = 'Publishing'
+    description = 'Releases new version.'
+    doFirst {
         isRelease = true
     }
 }
