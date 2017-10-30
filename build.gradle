@@ -1,5 +1,6 @@
 plugins {
     id "com.jfrog.bintray" version "1.7.3"
+    id "com.github.ben-manes.versions" version "0.17.0"
 }
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -59,8 +60,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.spullara.mustache.java:compiler:0.9.4'
-    testCompile 'org.testng:testng:6.11'
+    compile 'com.github.spullara.mustache.java:compiler:0.9.5'
+    testCompile 'org.testng:testng:6.12'
 }
 
 bintray {
