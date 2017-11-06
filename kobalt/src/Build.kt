@@ -1,6 +1,7 @@
 import com.beust.kobalt.buildScript
 import com.beust.kobalt.localMaven
 import com.beust.kobalt.plugin.java.javadoc
+import com.beust.kobalt.plugin.java.javaCompiler
 import com.beust.kobalt.plugin.packaging.assemble
 import com.beust.kobalt.plugin.packaging.install
 import com.beust.kobalt.plugin.publish.autoGitTag
@@ -78,6 +79,10 @@ val semver = project {
 
     dependenciesTest {
         compile("org.testng:testng:6.12")
+    }
+
+    javaCompiler {
+        args("-source", "1.8", "-target", "1.8")
     }
 
     assemble {

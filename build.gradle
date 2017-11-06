@@ -52,6 +52,8 @@ def pkgLicenses = ['BSD 3-Clause']
 def pkgIssueTrackerUrl = mavenUrl + '/issues'
 def pkgLabels = ['java', 'annotation', 'processor', 'semantic', 'version']
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
