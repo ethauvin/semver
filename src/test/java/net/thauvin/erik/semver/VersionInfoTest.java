@@ -1,7 +1,7 @@
 /*
  * VersionInfoTest.java
  *
- * Copyright (c) 2016-2017, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2018, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
