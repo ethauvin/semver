@@ -74,11 +74,11 @@ val semver = project {
 
     dependencies {
         compile("com.github.spullara.mustache.java:compiler:0.9.5")
-        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.1.51")
+        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.2.10")
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.12")
+        compile("org.testng:testng:6.13.1")
     }
 
     javaCompiler {

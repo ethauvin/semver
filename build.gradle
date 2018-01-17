@@ -63,7 +63,7 @@ repositories {
 
 dependencies {
     compile 'com.github.spullara.mustache.java:compiler:0.9.5'
-    testCompile 'org.testng:testng:6.12'
+    testCompile 'org.testng:testng:6.13.1'
 }
 
 bintray {
