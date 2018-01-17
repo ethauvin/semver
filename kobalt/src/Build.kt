@@ -9,7 +9,7 @@ import com.beust.kobalt.plugin.publish.bintray
 import com.beust.kobalt.project
 import net.thauvin.erik.kobalt.plugin.exec.Os
 import net.thauvin.erik.kobalt.plugin.exec.exec
-import net.thauvin.erik.kobalt.plugin.versioneye.versionEye
+import net.thauvin.erik.kobalt.plugin.pom2xml.pom2xml
 import org.apache.maven.model.Developer
 import org.apache.maven.model.License
 import org.apache.maven.model.Model
@@ -20,7 +20,7 @@ import java.util.*
 val bs = buildScript {
     repos(localMaven())
     plugins("net.thauvin.erik:kobalt-exec:",
-            "net.thauvin.erik:kobalt-versioneye:")
+            "net.thauvin.erik:kobalt-pom2xml:")
 }
 
 fun StringBuilder.prepend(s: String): StringBuilder {
@@ -134,8 +134,7 @@ val semver = project {
         commandLine("cmd", "/c", "pandoc", *args, os = setOf(Os.WINDOWS))
     }
 
-    versionEye {
-        org = "thauvin"
-        team = "Owners"
+    pom2xml {
+
     }
 }
