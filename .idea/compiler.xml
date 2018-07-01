@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="example_annotationProcessor" target="1.8" />
+      <module name="example_main" target="1.8" />
+      <module name="example_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
