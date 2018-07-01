@@ -173,12 +173,17 @@ class VersionTest implements Version {
 
     @Override
     public String buildMetaKey() {
-        return "product.build.meta";
+        return "build.meta";
     }
 
     @Override
     public String className() {
         return "MyTest";
+    }
+
+    @Override
+    public String keysPefix() {
+        return "product.";
     }
 
     @Override
@@ -188,7 +193,7 @@ class VersionTest implements Version {
 
     @Override
     public String majorKey() {
-        return "product.build.major";
+        return "build.major";
     }
 
     @Override
@@ -198,7 +203,7 @@ class VersionTest implements Version {
 
     @Override
     public String minorKey() {
-        return "product.build.minor";
+        return "build.minor";
     }
 
     @Override
@@ -213,7 +218,7 @@ class VersionTest implements Version {
 
     @Override
     public String patchKey() {
-        return "product.build.patch";
+        return "build.patch";
     }
 
     @Override
@@ -223,7 +228,7 @@ class VersionTest implements Version {
 
     @Override
     public String preReleaseKey() {
-        return "product.build.prerelease";
+        return "build.prerelease";
     }
 
     @Override
@@ -233,7 +238,7 @@ class VersionTest implements Version {
 
     @Override
     public String projectKey() {
-        return "product.build.project";
+        return "build.project";
     }
 
     @Override
