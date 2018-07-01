@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Source" pattern="file[semver_main]:java//*.java||file[semver_test]:java//*.java" />
-</component>

@@ -1,6 +1,6 @@
 plugins {
-    id "com.jfrog.bintray" version "1.8.0"
-    id "com.github.ben-manes.versions" version "0.17.0"
+    id "com.jfrog.bintray" version "1.8.3"
+    id "com.github.ben-manes.versions" version "0.20.0"
 }
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -63,7 +63,7 @@ repositories {
 
 dependencies {
     compile 'com.github.spullara.mustache.java:compiler:0.9.5'
-    testCompile 'org.testng:testng:6.13.1'
+    testCompile 'org.testng:testng:6.14.3'
 }
 
 bintray {
@@ -114,11 +114,30 @@ def pomConfig = {
     }
 }
 
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    group = 'Build'
+    description = 'Builds an archive of the javadoc docs.'
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task sourceJar(type: Jar) {
+    group = 'Build'
+    description = 'Builds an archive of the source code.'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar
+    archives sourceJar
+}
+
 publishing {
     publications {
         MyPublication(MavenPublication) {
             from components.java
-            artifact sourcesJar
+            artifact sourceJar
             artifact javadocJar
             groupId project.group
             artifactId rootProject.name
@@ -135,30 +154,12 @@ publishing {
     }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    group = 'Build'
-    description = 'Builds an archive of the javadoc docs.'
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task sourcesJar(type: Jar) {
-    group = 'Build'
-    description = 'Builds an archive of the source code.'
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
 javadoc {
     title = mavenDescription + ' ' + version
     options.tags = ['created']
     options.author = true
     options.addStringOption('link', 'http://docs.oracle.com/javase/8/docs/api/')
+    options.addBooleanOption('html5', true)
     //options.addStringOption('sourcepath', project.hasProperty('jdkSrc') ? jdkSrc : "$System.env.JAVA_HOME/src.zip")
     if (JavaVersion.current().isJava8Compatible()) {
         options.addStringOption('Xdoclint:none', '-quiet')
@@ -173,6 +174,10 @@ compileJava {
     doFirst {
         project.version = getVersion(isRelease)
     }
+}
+
+compileTestJava {
+    options.compilerArgs.add('-proc:none')
 }
 
 clean {
@@ -190,10 +195,6 @@ task deploy(dependsOn: ['build', 'copyToDeploy']) {
     outputs.dir deployDir
     inputs.files copyToDeploy
     mustRunAfter clean
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = gradle.gradleVersion
 }
 
 task release(dependsOn: ['wrapper', 'clean', 'deploy']) {
