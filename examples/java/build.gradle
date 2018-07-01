@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+// ./gradlew
+
+defaultTasks 'run'
+
+def semverProcessor = 'net.thauvin.erik:semver:1.0.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
+
+mainClassName = 'com.example.Example'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor semverProcessor
+    compileOnly semverProcessor
+}
