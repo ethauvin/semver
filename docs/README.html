@@ -47,13 +47,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
   <![endif]-->
+  <base href="https://github.com/ethauvin/semver/">
 </head>
 <body>
 <h1 id="semantic-version-annotation-processor">Semantic Version Annotation Processor</h1>
-<p><a href="http://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square" alt="License (3-Clause BSD)" /></a> <a href="https://github.com/ethauvin/semver/releases/latest"><img src="http://github-release-version.herokuapp.com/github/ethauvin/semver/release.svg?style=flat&amp;1" alt="release" /></a> <a href="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver"><img src="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg" alt="Maven Central" /></a> <a href="https://bintray.com/ethauvin/maven/SemVer/_latestVersion"><img src="https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg" alt="Download" /></a><br />
-<a href="https://www.versioneye.com/user/projects/56a680101b78fd00390001d2"><img src="https://www.versioneye.com/user/projects/56a680101b78fd00390001d2/badge.svg?style=flat" alt="Dependency Status" /></a> <a href="https://travis-ci.org/ethauvin/semver"><img src="https://travis-ci.org/ethauvin/semver.svg?branch=master" alt="Build Status" /></a> <a href="https://ci.appveyor.com/project/ethauvin/semver"><img src="https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true" alt="Build status" /></a> <a href="https://circleci.com/gh/ethauvin/semver/tree/master"><img src="https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield" alt="CircleCI" /></a></p>
+<p><a href="http://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square" alt="License (3-Clause BSD)" /></a> <a href="https://github.com/ethauvin/semver/releases/latest"><img src="https://img.shields.io/github/release/ethauvin/semver.svg" alt="release" /></a> <a href="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver"><img src="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg" alt="Maven Central" /></a> <a href="https://bintray.com/ethauvin/maven/SemVer/_latestVersion"><img src="https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg" alt="Download" /></a><br />
+<a href="https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle"><img src="https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle" alt="Known Vulnerabilities" /></a> <a href="https://travis-ci.org/ethauvin/semver"><img src="https://travis-ci.org/ethauvin/semver.svg?branch=master" alt="Build Status" /></a> <a href="https://ci.appveyor.com/project/ethauvin/semver"><img src="https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true" alt="Build status" /></a> <a href="https://circleci.com/gh/ethauvin/semver/tree/master"><img src="https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield" alt="CircleCI" /></a></p>
 <p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>GeneratedVersion</code> class based on a <a href="https://mustache.github.io/">Mustache</a> template and containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <code>Properties</code> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
-<p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a>.</p>
+<p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a> and works well in conjunction with the <a href="https://github.com/ethauvin/semver-gradle">Semantic Version Plugin for Gralde</a>.</p>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Using annotation elements:</li>
@@ -76,16 +77,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dt">version.minor</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">version.patch</span><span class="ot">=</span><span class="dv">0</span>
 <span class="dt">version.prerelease</span><span class="ot">=</span><span class="st">beta</span></code></pre></div>
-<p><a href="https://github.com/ethauvin/semver/tree/master/example">View Example</a></p>
+<p><a href="tree/master/examples">View Example</a></p>
 <h2 id="template">Template</h2>
-<p>Upon running the annotation processor, a source file <a href="https://github.com/ethauvin/semver/blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="https://mustache.github.io/">Mustache</a> template.</p>
+<p>Upon running the annotation processor, a source file <a href="blob/master/example/src/generated/java/net/thauvin/erik/semver/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable <a href="https://mustache.github.io/">Mustache</a> template.</p>
 <p>To use your own template, simply create a <code>version.mustache</code> file. The processor will automatically look for it.</p>
 <p>To specify your own template name, use:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(template = <span class="st">&quot;version.mustache&quot;</span>)
 <span class="kw">public</span> <span class="kw">class</span> A {
 <span class="co">// ...</span></code></pre></div>
 <h3 id="default-template">Default Template</h3>
-<p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache">default template</a> implements the following static fields:</p>
+<p>The <a href="blob/master/src/main/resources/semver.mustache">default template</a> implements the following static fields:</p>
 <table>
 <thead>
 <tr class="header">
@@ -316,26 +317,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <td style="text-align: left;">Either <code>java</code> or <code>kt</code> for Kotlin.</td>
 <td style="text-align: left;"><code>java</code></td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><code>keysPrefix</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">The prefix for all property keys.</td>
+<td style="text-align: left;"><code>version.</code></td>
+</tr>
 </tbody>
 </table>
 <p>In order to easily incorporate with existing projects, the property keys may be assigned custom values:</p>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Version</span>(
   properties = <span class="st">&quot;example.properties&quot;</span>,
-  majorKey = <span class="st">&quot;example.major&quot;</span>,
-  minorKey = <span class="st">&quot;example.minor&quot;</span>,
-  patchKey = <span class="st">&quot;example.patch&quot;</span>,
-  preReleaseKey = <span class="st">&quot;example.prerelease&quot;</span>,
-  buildMetaKey = <span class="st">&quot;example.buildmeta&quot;</span>,
-  projectKey = <span class="st">&quot;example.project&quot;</span>
+  keysPrefix = <span class="st">&quot;example.&quot;</span>
+  majorKey = <span class="st">&quot;maj&quot;</span>,
+  minorKey = <span class="st">&quot;min&quot;</span>,
+  patchKey = <span class="st">&quot;build&quot;</span>,
+  preReleaseKey = <span class="st">&quot;rel&quot;</span>,
+  buildMetaKey = <span class="st">&quot;meta&quot;</span>,
+  projectKey = <span class="st">&quot;project&quot;</span>
 )
 <span class="kw">public</span> <span class="kw">class</span> Example {
 <span class="co">// ...</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode ini"><code class="sourceCode ini"><span class="co"># example.properties</span>
 <span class="dt">example.project</span><span class="ot">=</span><span class="st">Example</span>
-<span class="dt">example.major</span><span class="ot">=</span><span class="dv">1</span>
-<span class="dt">example.minor</span><span class="ot">=</span><span class="dv">0</span>
-<span class="dt">example.patch</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">example.maj</span><span class="ot">=</span><span class="dv">1</span>
+<span class="dt">example.min</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">example.build</span><span class="ot">=</span><span class="dv">0</span>
+<span class="dt">example.rel</span><span class="ot">=</span><span class="st">beta</span>
+<span class="dt">example.meta</span><span class="ot">=</span>
 <span class="co"># ...</span></code></pre></div>
+<blockquote>
+<p>⚠️ <code>keysPrefix</code> is a new element in <code>1.1.0</code> and may break older versions when using custom property keys.<br />
+⚡ A quick fix is to include <code>keysPrefix=&quot;&quot;</code> in the annotation to remove the default <code>version.</code> prefix.</p>
+</blockquote>
 <h2 id="usage-with-maven-grail-kobalt-and-kotlin">Usage with Maven, Grail, Kobalt and Kotlin</h2>
 <h3 id="maven">Maven</h3>
 <p>To install and run from <a href="http://maven.apache.org/">Maven</a>, configure an artifact as follows:</p>
@@ -348,38 +362,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
+    annotationProcessor &#39;net.thauvin.erik:semver:1.0.1&#39;
     compileOnly &#39;net.thauvin.erik:semver:1.0.1&#39;
 }</code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
-<p>In order to also incorporate the generated source code into the <code>source tree</code>, use the <a href="https://github.com/ewerk/gradle-plugins/tree/master/annotation-processor-plugin">EWERK Annotation Processor Plugin</a>. Start by adding the following to the very top of the <code>build.gradle</code> file:</p>
-<pre class="gradle"><code>plugins {
-    id &quot;com.ewerk.gradle.plugins.annotation-processor&quot; version &quot;1.0.4&quot;
-}</code></pre>
-<p>Then add the following to the <code>build.gradle</code> file:</p>
-<pre class="gradle"><code>dependencies {
-    compileOnly &#39;net.thauvin.erik:semver:1.0.1&#39;
-}
-
-annotationProcessor {
-    library &#39;net.thauvin.erik:semver:1.0.1&#39;
-    processor &#39;net.thauvin.erik.semver.VersionProcessor&#39;
-    // sourcesDir &#39;src/generated/java&#39;
-}
-
-compileJava {
-    // Disable the classpath processor
-    options.compilerArgs &lt;&lt; &#39;-proc:none&#39;
-}</code></pre>
-<p>The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.</p>
-<p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/example/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
+<p>In order to also incorporate the generated source code into the <code>source tree</code>, add the following to the very top of the <code>build.gradle</code> file:</p>
+<pre class="gradle"><code>compileJava.options.annotationProcessorGeneratedSourcesDirectory = file(&quot;${projectDir}/src/generated&quot;)</code></pre>
+<p>The <code>GeneratedVersion.java</code> file will now be located in <code>src/generated</code>.</p>
+<p>Please look at the <a href="blob/master/examples/java/build.gradle">build.gradle</a> file in the <a href="tree/master/example/java">Java example</a> module directory for a sample.</p>
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
     apt(&quot;net.thauvin.erik:semver:1.0.1&quot;)
     compileOnly(&quot;net.thauvin.erik:semver:1.0.1&quot;)
 }</code></pre>
-<p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/example/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory for a sample.</p>
+<p>Please look at the <a href="blob/master/examples/kotlin/kobalt/src/Build.kt">Build.kt</a> file in the <a href="tree/master/example/kotlin">Kotlin example</a> module directory for a sample.</p>
 <h3 id="kotlin">Kotlin</h3>
 <p>The annotation processor also supports <a href="https://kotlinlang.org/">Kotlin</a>.</p>
 <p>To generate a Kotlin version file, simply specify the <code>type</code> as follows:</p>
@@ -388,12 +386,9 @@ compileJava {
 @<span class="fu">Version</span>(properties = <span class="st">&quot;version.properties&quot;</span>, type=<span class="st">&quot;kt&quot;</span>)
 <span class="kw">open</span> <span class="kw">class</span> Main {
 <span class="co">// ...</span></code></pre></div>
-<p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache">Kotlin default template</a> implements the same static fields and functions as the <a href="#default-template">Java template</a>.</p>
-<p>Please look at the <a href="https://github.com/ethauvin/semver-example-kotlin">Example for Kotlin</a> project for samples on using Gradle (<a href="https://github.com/ethauvin/semver-example-kotlin/blob/master/build.gradle">build.gradle</a>) and Kobalt (<a href="https://github.com/ethauvin/semver-example-kotlin/blob/master/kobalt/src/Build.kt">Build.kt</a>).</p>
-<h3 id="auto-increment">Auto-Increment</h3>
-<p>Incrementing the version is best left to your favorite build system.</p>
-<p>For a solution using <a href="https://gradle.org/">Gradle</a>, please have a look at the <a href="https://github.com/ethauvin/semver/blob/master/example/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/example">example</a> module directory. To run the example with patch version auto-incrementing, issue the following command:</p>
-<pre><code>gradle release run</code></pre>
-<p>For a solution using <a href="http://beust.com/kobalt/">Kobalt</a> look at my <a href="https://github.com/ethauvin/kobalt-property-file">Property File Editor</a> plug-in.</p>
+<p>The <a href="blob/master/src/main/resources/semver-kt.mustache">Kotlin default template</a> implements the same static fields and functions as the <a href="#default-template">Java template</a>.</p>
+<p>Please look at the <a href="tree/master/examples/Kotlin">Kotlin example</a> project for samples on using Gradle (<a href="blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a>) and Kobalt (<a href="blob/master/examples/kotlin/kobalt/src/Build.kt">Build.kt</a>).</p>
+<h2 id="auto-increment">Auto-Increment</h2>
+<p>Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the <a href="https://github.com/ethauvin/semver-gradle">Semver Version Plugin for Gradle</a>.</p>
 </body>
 </html>
