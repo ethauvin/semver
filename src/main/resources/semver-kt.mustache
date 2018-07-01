@@ -4,7 +4,7 @@
  */
 package {{packageName}}
 
-import java.util.*
+import java.util.Date
 
 /**
  * Provides semantic version information.
@@ -12,21 +12,31 @@ import java.util.*
  * @author <a href="https://github.com/ethauvin/semver">Semantic Version Annotation Processor</a>
  */
 object {{className}} {
-    @JvmField val PRERELEASE_PREFIX = "-"
-    @JvmField val BUILDMEATA_PREFIX = "+"
+    @JvmField
+    val PRERELEASE_PREFIX = "-"
+    @JvmField
+    val BUILDMEATA_PREFIX = "+"
 
-    @JvmField val PROJECT = "{{project}}"
-    @JvmField val BUILDDATE = Date({{epoch}}L)
-    @JvmField val MAJOR = {{major}}
-    @JvmField val MINOR = {{minor}}
-    @JvmField val PATCH = {{patch}}
-    @JvmField val PRERELEASE = "{{preRelease}}"
-    @JvmField val BUILDMETA = "{{buildMeta}}"
+    @JvmField
+    val PROJECT = "{{project}}"
+    @JvmField
+    val BUILDDATE = Date({{epoch}}L)
+    @JvmField
+    val MAJOR = {{major}}
+    @JvmField
+    val MINOR = {{minor}}
+    @JvmField
+    val PATCH = {{patch}}
+    @JvmField
+    val PRERELEASE = "{{preRelease}}"
+    @JvmField
+    val BUILDMETA = "{{buildMeta}}"
 
     /**
     * The full version string formatted as [MAJOR].[MINOR].[PATCH]-[PRERELEASE]+[BUILDMETA]
     */
-    @JvmField val VERSION = "$MAJOR.$MINOR.$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
+    @JvmField
+    val VERSION = "$MAJOR.$MINOR.$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
 
     /**
      * Returns the pre-release version with prefix.
