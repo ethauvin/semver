@@ -212,7 +212,6 @@ task pandoc(type: Exec) {
                        '-s',
                        '-c', 'github-pandoc.css',
                        '-o', 'docs/README.html',
-                       '-H', 'docs/header.inc',
                        'README.md']
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine(['cmd', '/c', 'pandoc'] + pandoc_args)
