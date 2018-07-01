@@ -52,6 +52,10 @@ public final class Constants {
      **/
     public static final String DEFAULT_JAVA_TYPE = "java";
     /**
+     * The default keys prefix.
+     */
+    public static final String DEFAULT_KEYS_PREFIX = "version." ;
+    /**
      * The default Kotlin mustache template.
      */
     public static final String DEFAULT_KOTLIN_TEMPLATE = "semver-kt.mustache";
@@ -70,7 +74,7 @@ public final class Constants {
     /**
      * The default mustache template.
      */
-    public static final String DEFAULT_TEMPLATE_NAME = "version.mustache";
+    public static final String DEFAULT_TEMPLATE_NAME = "mustache";
     /**
      * The empty string.
      */
@@ -78,27 +82,27 @@ public final class Constants {
     /**
      * The build metadata property key.
      */
-    public static final String KEY_VERSION_BUILDMETA = "version.buildmeta";
+    public static final String KEY_VERSION_BUILDMETA = "buildmeta";
     /**
      * The major version property key.
      */
-    public static final String KEY_VERSION_MAJOR = "version.major";
+    public static final String KEY_VERSION_MAJOR = "major";
     /**
      * The minor version property key.
      */
-    public static final String KEY_VERSION_MINOR = "version.minor";
+    public static final String KEY_VERSION_MINOR = "minor";
     /**
      * The patch version property key.
      */
-    public static final String KEY_VERSION_PATCH = "version.patch";
+    public static final String KEY_VERSION_PATCH = "patch";
     /**
      * The pre-release version property key.
      */
-    public static final String KEY_VERSION_PRERELEASE = "version.prerelease";
+    public static final String KEY_VERSION_PRERELEASE = "prerelease";
     /**
      * The project property key.
      */
-    public static final String KEY_VERSION_PROJECT = "version.project";
+    public static final String KEY_VERSION_PROJECT = "project";
     /**
      * The kotlin type.
      */

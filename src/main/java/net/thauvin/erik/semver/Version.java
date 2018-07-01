@@ -79,4 +79,6 @@ public @interface Version {
     String template() default Constants.DEFAULT_JAVA_TEMPLATE;
 
     String type() default Constants.DEFAULT_JAVA_TYPE;
+
+    String keysPefix() default Constants.DEFAULT_KEYS_PREFIX;
 }

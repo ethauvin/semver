@@ -82,12 +82,18 @@ public class VersionProcessor extends AbstractProcessor {
                 try (FileReader reader = new FileReader(propsFile)) {
                     p.load(reader);
 
-                    versionInfo.setProject(p.getProperty(version.projectKey(), version.project()));
-                    versionInfo.setMajor(parseIntProperty(p, version.majorKey(), version.major()));
-                    versionInfo.setMinor(parseIntProperty(p, version.minorKey(), version.minor()));
-                    versionInfo.setPatch(parseIntProperty(p, version.patchKey(), version.patch()));
-                    versionInfo.setBuildMeta(p.getProperty(version.buildMetaKey(), version.buildMeta()));
-                    versionInfo.setPreRelease(p.getProperty(version.preReleaseKey(), version.preRelease()));
+                    versionInfo.setProject(
+                            p.getProperty(version.keysPefix() + version.projectKey(), version.project()));
+                    versionInfo.setMajor(
+                            parseIntProperty(p, version.keysPefix() + version.majorKey(), version.major()));
+                    versionInfo.setMinor(
+                            parseIntProperty(p, version.keysPefix() + version.minorKey(), version.minor()));
+                    versionInfo.setPatch(
+                            parseIntProperty(p, version.keysPefix() + version.patchKey(), version.patch()));
+                    versionInfo.setBuildMeta(
+                            p.getProperty(version.keysPefix() + version.buildMetaKey(), version.buildMeta()));
+                    versionInfo.setPreRelease(
+                            p.getProperty(version.keysPefix() + version.preReleaseKey(), version.preRelease()));
                 }
             } else {
                 error("Could not find: " + propsFile);

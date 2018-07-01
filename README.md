@@ -5,7 +5,7 @@
 
 An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a `Properties` file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
-This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor).
+This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [Semantic Version Plugin for Gralde](https://github.com/ethauvin/semver-gradle).
 
 ## Examples
 
@@ -128,18 +128,20 @@ Element       | Property             | Description                       | Defau
 `properties`  |                      | The properties file.              |
 `template`    |                      | The template file.                | `version.mustache`
 `type`        |                      | Either `java` or `kt` for Kotlin. | `java`
+`keysPrefix`  |                      | The prefix for all property keys. | `version.`
 
 In order to easily incorporate with existing projects, the property keys may be assigned custom values:
 
 ```java
 @Version(
   properties = "example.properties",
-  majorKey = "example.major",
-  minorKey = "example.minor",
-  patchKey = "example.patch",
-  preReleaseKey = "example.prerelease",
-  buildMetaKey = "example.buildmeta",
-  projectKey = "example.project"
+  keysPrefix = "example."
+  majorKey = "maj",
+  minorKey = "min",
+  patchKey = "build",
+  preReleaseKey = "rel",
+  buildMetaKey = "meta",
+  projectKey = "project"
 )
 public class Example {
 // ...
@@ -148,11 +150,17 @@ public class Example {
 ```ini
 # example.properties
 example.project=Example
-example.major=1
-example.minor=0
-example.patch=0
+example.maj=1
+example.min=0
+example.build=0
+example.rel=beta
+example.meta=
 # ...
 ```
+
+> :warning: `keysPrefix` is a new element in `1.0.0` and may break older versions when using custom property keys.  
+> :zap: A quick fix is to include `keysPrefix=""` in the annotation to remove the default `version.` prefix.
+
 ## Usage with Maven, Grail, Kobalt and Kotlin
 
 ### Maven
@@ -175,6 +183,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
+    annotationProcessor 'net.thauvin.erik:semver:1.0.1'
     compileOnly 'net.thauvin.erik:semver:1.0.1'
 }
 ```
@@ -183,34 +192,13 @@ The `GeneratedVersion` class will be automatically created in the `build/generat
 
 #### Class & Source Generation
 
-In order to also incorporate the generated source code into the `source tree`, use the [EWERK Annotation Processor Plugin](https://github.com/ewerk/gradle-plugins/tree/master/annotation-processor-plugin). Start by adding the following to the very top of the `build.gradle` file:
+In order to also incorporate the generated source code into the `source tree`, add the following to the very top of the `build.gradle` file:
 
 ```gradle
-plugins {
-    id "com.ewerk.gradle.plugins.annotation-processor" version "1.0.4"
-}
+compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
 ```
 
-Then add the following to the `build.gradle` file:
-
-```gradle
-dependencies {
-    compileOnly 'net.thauvin.erik:semver:1.0.1'
-}
-
-annotationProcessor {
-    library 'net.thauvin.erik:semver:1.0.1'
-    processor 'net.thauvin.erik.semver.VersionProcessor'
-    // sourcesDir 'src/generated/java'
-}
-
-compileJava {
-    // Disable the classpath processor
-    options.compilerArgs << '-proc:none'
-}
-```
-
-The plugin implements a separate compile task that only runs the annotation processor and is executed during the build phase.
+The `GeneratedVersion.java` file will now be located in `src/generated`.
 
 Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/example/build.gradle) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory for a sample.
 
@@ -244,14 +232,6 @@ The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src
 
 Please look at the [Example for Kotlin](https://github.com/ethauvin/semver-example-kotlin) project for samples on using Gradle ([build.gradle](https://github.com/ethauvin/semver-example-kotlin/blob/master/build.gradle)) and Kobalt ([Build.kt](https://github.com/ethauvin/semver-example-kotlin/blob/master/kobalt/src/Build.kt)).
 
-### Auto-Increment
+## Auto-Increment
 
-Incrementing the version is best left to your favorite build system.
-
-For a solution using [Gradle](https://gradle.org/), please have a look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/example/build.gradle) file in the [example](https://github.com/ethauvin/semver/tree/master/example) module directory. To run the example with patch version auto-incrementing, issue the following command:
-
-```
-gradle release run
-```
-
-For a solution using [Kobalt](http://beust.com/kobalt/) look at my [Property File Editor](https://github.com/ethauvin/kobalt-property-file) plug-in.
+Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the [Semver Version Plugin for Gradle](https://github.com/ethauvin/semver-gradle).
