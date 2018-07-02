@@ -1,7 +1,6 @@
 package com.example;
 
 import net.thauvin.erik.semver.Version;
-
 import java.text.SimpleDateFormat;
 
 @Version(properties = "version.properties")
@@ -11,7 +10,7 @@ public class Example {
 
         System.out.println("-----------------------------------------------------");
 
-        System.out.println("  " + GeneratedVersion.PROJECT + ' ' + GeneratedVersion.VERSION);
+        System.out.println("  Version:" + GeneratedVersion.PROJECT + ' ' + GeneratedVersion.VERSION);
 
         System.out.println("    Built on:       " + sdf.format(GeneratedVersion.BUILDDATE));
         System.out.println("    Major:          " + GeneratedVersion.MAJOR);

@@ -11,7 +11,7 @@ class Main {
 
             println("-----------------------------------------------------")
 
-            println("  ${GeneratedVersion.PROJECT} ${GeneratedVersion.VERSION}")
+            println("  Version: ${GeneratedVersion.PROJECT} ${GeneratedVersion.VERSION}")
 
             println("    Built on:       " + sdf.format(GeneratedVersion.BUILDDATE))
             println("    Major:          ${GeneratedVersion.MAJOR}")
