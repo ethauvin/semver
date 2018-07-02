@@ -182,7 +182,7 @@ class VersionTest implements Version {
     }
 
     @Override
-    public String keysPefix() {
+    public String keysPrefix() {
         return "product.";
     }
 

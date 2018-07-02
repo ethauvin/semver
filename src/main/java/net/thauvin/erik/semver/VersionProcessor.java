@@ -83,17 +83,17 @@ public class VersionProcessor extends AbstractProcessor {
                     p.load(reader);
 
                     versionInfo.setProject(
-                            p.getProperty(version.keysPefix() + version.projectKey(), version.project()));
+                            p.getProperty(version.keysPrefix() + version.projectKey(), version.project()));
                     versionInfo.setMajor(
-                            parseIntProperty(p, version.keysPefix() + version.majorKey(), version.major()));
+                            parseIntProperty(p, version.keysPrefix() + version.majorKey(), version.major()));
                     versionInfo.setMinor(
-                            parseIntProperty(p, version.keysPefix() + version.minorKey(), version.minor()));
+                            parseIntProperty(p, version.keysPrefix() + version.minorKey(), version.minor()));
                     versionInfo.setPatch(
-                            parseIntProperty(p, version.keysPefix() + version.patchKey(), version.patch()));
+                            parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
                     versionInfo.setBuildMeta(
-                            p.getProperty(version.keysPefix() + version.buildMetaKey(), version.buildMeta()));
+                            p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
                     versionInfo.setPreRelease(
-                            p.getProperty(version.keysPefix() + version.preReleaseKey(), version.preRelease()));
+                            p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
                 }
             } else {
                 error("Could not find: " + propsFile);
@@ -119,7 +119,7 @@ public class VersionProcessor extends AbstractProcessor {
      */
     @Override
     public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.RELEASE_8;
+        return SourceVersion.latestSupported();
     }
 
     /**

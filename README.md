@@ -37,7 +37,7 @@ version.patch=0
 version.prerelease=beta
 ```
 
-[View Example](https://github.com/ethauvin/semver/tree/master/exampled)
+[View Example](https://github.com/ethauvin/semver/tree/master/examples)
 
 ## Template
 

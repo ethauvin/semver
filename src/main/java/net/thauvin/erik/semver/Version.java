@@ -80,5 +80,5 @@ public @interface Version {
 
     String type() default Constants.DEFAULT_JAVA_TYPE;
 
-    String keysPefix() default Constants.DEFAULT_KEYS_PREFIX;
+    String keysPrefix() default Constants.DEFAULT_KEYS_PREFIX;
 }
