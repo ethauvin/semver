@@ -70,30 +70,31 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private VersionInfo findValues(final Version version)
-            throws IOException {
+        throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
             final File propsFile = new File(version.properties());
             if (propsFile.exists()) {
-                note("Found properties: " + propsFile);
+                note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
+
                 final Properties p = new Properties();
 
-                try (FileReader reader = new FileReader(propsFile)) {
+                try (final FileReader reader = new FileReader(propsFile)) {
                     p.load(reader);
 
                     versionInfo.setProject(
-                            p.getProperty(version.keysPrefix() + version.projectKey(), version.project()));
+                        p.getProperty(version.keysPrefix() + version.projectKey(), version.project()));
                     versionInfo.setMajor(
-                            parseIntProperty(p, version.keysPrefix() + version.majorKey(), version.major()));
+                        parseIntProperty(p, version.keysPrefix() + version.majorKey(), version.major()));
                     versionInfo.setMinor(
-                            parseIntProperty(p, version.keysPrefix() + version.minorKey(), version.minor()));
+                        parseIntProperty(p, version.keysPrefix() + version.minorKey(), version.minor()));
                     versionInfo.setPatch(
-                            parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
+                        parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
                     versionInfo.setBuildMeta(
-                            p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
+                        p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
                     versionInfo.setPreRelease(
-                            p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
+                        p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
                 }
             } else {
                 error("Could not find: " + propsFile);
@@ -168,10 +169,10 @@ public class VersionProcessor extends AbstractProcessor {
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
                         if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
-                                new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
+                            new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
                         } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
-                                version.type().equals(Constants.KOTLIN_TYPE)) {
+                            version.type().equals(Constants.KOTLIN_TYPE)) {
                             template = Constants.DEFAULT_KOTLIN_TEMPLATE;
                         } else {
                             template = version.template();
@@ -191,24 +192,29 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
-            throws IOException {
+        throws IOException {
         final MustacheFactory mf = new DefaultMustacheFactory();
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
-        if (mustache.getName().equals(Constants.DEFAULT_JAVA_TEMPLATE)) {
-            templateName = "default (Java)";
-        } else if (mustache.getName().equals(Constants.DEFAULT_KOTLIN_TEMPLATE)) {
-            templateName = "default (Kotlin)";
-        } else {
-            templateName = mustache.getName();
+        switch (mustache.getName()) {
+            case Constants.DEFAULT_JAVA_TEMPLATE:
+                templateName = "default (Java)";
+                break;
+            case Constants.DEFAULT_KOTLIN_TEMPLATE:
+                templateName = "default (Kotlin)";
+                break;
+            default:
+                templateName = mustache.getName();
+                break;
         }
         note("Loaded template: " + templateName);
 
         final FileObject jfo;
+        final String fileName = versionInfo.getClassName() + '.' + type;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
             jfo = filer.createResource(StandardLocation.SOURCE_OUTPUT, versionInfo.getPackageName(),
-                    versionInfo.getClassName() + '.' + type);
+                fileName);
         } else {
             jfo = filer.createSourceFile(versionInfo.getPackageName() + '.' + versionInfo.getClassName());
         }
@@ -217,7 +223,7 @@ public class VersionProcessor extends AbstractProcessor {
             mustache.execute(writer, versionInfo).flush();
         }
 
-        note("Generated source: " + jfo.getName());
+        note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
     }
 
 }
