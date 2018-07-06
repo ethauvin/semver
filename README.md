@@ -5,7 +5,7 @@
 
 An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a `Properties` file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
-This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [Semantic Version Plugin for Gralde](https://github.com/ethauvin/semver-gradle).
+This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [__Semantic Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
 ## Examples
 
@@ -235,4 +235,6 @@ Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/mast
 
 ## Auto-Increment
 
-Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the [Semver Version Plugin for Gradle](https://github.com/ethauvin/semver-gradle).
+Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the [__Semver Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
+
+There are also full [examples](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) in both [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java) and [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) showing how to use both the plugin and annotation processor concurrently.
