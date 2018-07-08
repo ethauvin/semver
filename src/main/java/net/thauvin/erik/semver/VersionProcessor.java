@@ -98,7 +98,8 @@ public class VersionProcessor extends AbstractProcessor {
                 }
             } else {
                 error("Could not find: " + propsFile);
-                throw new FileNotFoundException("The system cannot find the specified file: " + propsFile);
+                throw new FileNotFoundException("The system cannot find the specified file: `"
+                    + propsFile.getAbsolutePath() + '`');
             }
         }
 
