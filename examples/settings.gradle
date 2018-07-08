@@ -1,2 +1,0 @@
-include "java", "kotlin"
-rootProject.name = 'examples'

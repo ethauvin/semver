@@ -1,5 +1,0 @@
-task run {
-	dependsOn(
-		"java:clean", "java:run",
-		"kotlin:clean", "kotlin:run", "kotlin:runJava")
-}
