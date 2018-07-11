@@ -45,6 +45,7 @@ import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -80,7 +81,8 @@ public class VersionProcessor extends AbstractProcessor {
 
                 final Properties p = new Properties();
 
-                try (final FileReader reader = new FileReader(propsFile)) {
+                try (final InputStreamReader reader =
+                         new InputStreamReader(new FileInputStream(propsFile), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
                     versionInfo.setProject(
