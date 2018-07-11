@@ -159,7 +159,7 @@ public class VersionInfoTest {
     }
 }
 
-@SuppressWarnings("ClassExplicitlyAnnotation")
+@SuppressWarnings({"ClassExplicitlyAnnotation", "BadAnnotationImplementation"})
 class VersionTest implements Version {
     @Override
     public Class<? extends Annotation> annotationType() {
