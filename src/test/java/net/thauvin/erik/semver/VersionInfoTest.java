@@ -49,8 +49,7 @@ public class VersionInfoTest {
     private VersionInfo versionInfo = new VersionInfo();
 
     @Test
-    public void testGetVersion()
-            throws Exception {
+    public void testGetVersion() {
 
         Assert.assertEquals(versionInfo.getVersion(), "1.0.0", "getVersion(1.0.0)");
 
@@ -80,8 +79,7 @@ public class VersionInfoTest {
     }
 
     @Test
-    public void testSetGet()
-            throws Exception {
+    public void testSetGet() {
 
         versionInfo.setMajor(1);
 
@@ -118,12 +116,11 @@ public class VersionInfoTest {
         Assert.assertEquals(versionInfo.getClassName(), "Example", "getClassName(Example");
 
         Assert.assertTrue((versionInfo.getEpoch() - now.getTimeInMillis()) < 1000,
-                "buildDate - now < 1s");
+            "buildDate - now < 1s");
     }
 
     @Test
-    public void testVersionInfo()
-            throws Exception {
+    public void testVersionInfo() {
 
         final Version version = new VersionTest();
         versionInfo = new VersionInfo(version);
@@ -139,19 +136,19 @@ public class VersionInfoTest {
         Assert.assertEquals(versionInfo.getBuildMeta(), version.buildMeta(), "getBuildMeta(buildMeta)");
 
         Assert.assertEquals(versionInfo.getPackageName(), version.packageName(),
-                "getPackageName(packageName)");
+            "getPackageName(packageName)");
 
         Assert.assertEquals(versionInfo.getVersion(),
-                version.major()
-                        + "."
-                        + version.minor()
-                        + '.'
-                        + version.patch()
-                        + '-'
-                        + version.preRelease()
-                        + '+'
-                        + version.buildMeta(),
-                "getVersion(version)");
+            version.major()
+                + "."
+                + version.minor()
+                + '.'
+                + version.patch()
+                + '-'
+                + version.preRelease()
+                + '+'
+                + version.buildMeta(),
+            "getVersion(version)");
 
         Assert.assertEquals(versionInfo.getProject(), version.project(), "getProject(project)");
 
