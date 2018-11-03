@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.thauvin.erik</groupId>
   <artifactId>semver</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0-beta</version>
   <name>semver</name>
   <description>Semantic Version Annotation Processor</description>
   <url>https://github.com/ethauvin/semver</url>
@@ -35,7 +35,7 @@
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>6.13.1</version>
+      <version>6.14.3</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
