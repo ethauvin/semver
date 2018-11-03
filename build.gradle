@@ -131,7 +131,7 @@ javadoc {
     options.with {
         tags = ['created']
         author = true
-        addBooleanOption('html4', true)
+        //addBooleanOption('html4', true)
         links('https://docs.oracle.com/javase/8/docs/api/')
         addStringOption('Xdoclint:none', '-quiet')
     }

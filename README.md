@@ -43,7 +43,7 @@ version.prerelease=beta
 
 Upon running the annotation processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/net/thauvin/erik/semver/examples/java/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Mustache](https://mustache.github.io/) template.
 
-To use your own template, simply create a `version.mustache` file. The processor will automatically look for it.
+To use your own template, simply create a `version.mustache` file in the project's root directory. The processor will automatically look for it.
 
 To specify your own template name, use:
 
@@ -171,7 +171,7 @@ To install and run from [Maven](http://maven.apache.org/), configure an artifact
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.0-beta</version>
 </dependency>
 ```
 
@@ -183,8 +183,8 @@ To install and run from [Gradle](https://gradle.org/), add the following to the 
 
 ```gradle
 dependencies {
-    annotationProcessor 'net.thauvin.erik:semver:1.1.0'
-    compileOnly 'net.thauvin.erik:semver:1.1.0'
+    annotationProcessor 'net.thauvin.erik:semver:1.1.0-beta'
+    compileOnly 'net.thauvin.erik:semver:1.1.0-beta'
 }
 ```
 
@@ -208,8 +208,8 @@ To install and run from [Kobalt](http://beust.com/kobalt/), add the following to
 
 ```gradle
 dependencies {
-    apt("net.thauvin.erik:semver:1.1.0")
-    compileOnly("net.thauvin.erik:semver:1.1.0")
+    apt("net.thauvin.erik:semver:1.1.0-beta")
+    compileOnly("net.thauvin.erik:semver:1.1.0-beta")
 }
 ```
 
