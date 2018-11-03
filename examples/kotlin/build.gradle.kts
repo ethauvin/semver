@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.2.50"
+    kotlin("jvm") version "1.3.0"
     application
-    id("org.jetbrains.kotlin.kapt") version "1.2.50"
+    id("org.jetbrains.kotlin.kapt") version "1.3.0"
 }
 
 // ./gradlew
@@ -10,7 +10,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-var semverProcessor = "net.thauvin.erik:semver:1.0.1"
+var semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
 
 dependencies {
     kapt(semverProcessor)
@@ -29,8 +29,8 @@ application {
 }
 
 tasks {
-    val runJava by creating(JavaExec::class) {
+    register("runJava", JavaExec::class) {
         main = "com.example.Example"
-        classpath = java.sourceSets["main"].runtimeClasspath
+        classpath = sourceSets["main"].runtimeClasspath
     }
 }

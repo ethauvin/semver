@@ -1,11 +1,10 @@
 plugins {
     id 'java'
     id 'maven-publish'
-    id "com.jfrog.bintray" version "1.8.3"
+    id "com.jfrog.bintray" version "1.8.4"
     id "com.github.ben-manes.versions" version "0.20.0"
-    id "net.thauvin.erik.gradle.semver" version "0.9.5-beta"
-    id "com.github.spotbugs" version "1.6.2"
-    id "net.ltgt.errorprone" version "0.0.14"
+    id "net.thauvin.erik.gradle.semver" version "0.9.8-beta"
+    id "com.github.spotbugs" version "1.6.5"
 }
 
 
@@ -39,7 +38,7 @@ repositories {
 
 dependencies {
     compile 'com.github.spullara.mustache.java:compiler:0.9.5'
-    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+    compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.8'
     testCompile 'org.testng:testng:6.14.3'
 }
 
@@ -149,6 +148,7 @@ tasks.withType(SpotBugsTask) {
     }
     excludeFilter = file("$projectDir/config/spotbugs/excludeFilter.xml")
 }
+
 compileJava {
     options.compilerArgs.add('-proc:none')
 }

@@ -5,12 +5,12 @@ apply plugin: 'application'
 
 defaultTasks 'run'
 
-def semverProcessor = 'net.thauvin.erik:semver:1.0.1'
+def semverProcessor = 'net.thauvin.erik:semver:1.1.0-beta'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
+compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 
 mainClassName = 'com.example.Example'
 
