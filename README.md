@@ -195,7 +195,7 @@ The `GeneratedVersion` class will be automatically created in the `build/generat
 In order to also incorporate the generated source code into the `source tree`, add the following to the very top of the `build.gradle` file:
 
 ```gradle
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated")
+compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 ```
 
 The `GeneratedVersion.java` file will now be located in `src/generated`.
