@@ -78,7 +78,7 @@ public class VersionProcessor extends AbstractProcessor {
 
         if (version.properties().length() > 0) {
             final File propsFile = new File(version.properties());
-            if (propsFile.exists()) {
+            if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
                 final Properties p = new Properties();
@@ -101,8 +101,14 @@ public class VersionProcessor extends AbstractProcessor {
                         p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
                 }
             } else {
-                error("Could not find: " + propsFile);
-                throw new FileNotFoundException("The system cannot find the specified file: `"
+                final String findOrRead;
+                if (propsFile.canRead()) {
+                    findOrRead = "find";
+                } else {
+                    findOrRead = "read";
+                }
+                error("Could not " + findOrRead + ": " + propsFile);
+                throw new FileNotFoundException("The system cannot " + findOrRead + " the specified file: `"
                     + propsFile.getAbsolutePath() + '`');
             }
         }
