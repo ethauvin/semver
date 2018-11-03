@@ -1,6 +1,7 @@
 import com.beust.kobalt.*
 import com.beust.kobalt.plugin.application.*
 import com.beust.kobalt.plugin.apt.*
+import com.beust.kobalt.plugin.java.javaCompiler
 import com.beust.kobalt.plugin.publish.*
 import com.beust.kobalt.plugin.packaging.*
 import java.io.FileInputStream
@@ -40,7 +41,7 @@ val example = project {
 
     version = versionFor()
 
-    val mainClassName = "net.thauvin.erik.semver.example.Example"
+    val mainClassName = "com.example.Example"
     val processorJar = "net.thauvin.erik:semver:1.0.1"
 
     dependencies {
@@ -54,6 +55,10 @@ val example = project {
 
     install {
         target = "deploy"
+    }
+
+    javaCompiler {
+        args("-source", "1.8", "-target", "1.8")
     }
 
     assemble {
