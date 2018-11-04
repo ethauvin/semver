@@ -7,7 +7,6 @@ plugins {
     id "com.github.spotbugs" version "1.6.5"
 }
 
-
 import com.github.spotbugs.SpotBugsTask
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -46,7 +45,7 @@ bintray {
     user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
     publications = ['MyPublication']
-    dryRun = true
+    dryRun = false
     pkg {
         repo = 'maven'
         name = mavenName
@@ -57,14 +56,6 @@ bintray {
         vcsUrl = mavenScmCon
         labels = pkgLabels
         publicDownloadNumbers = true
-        version {
-            name = project.version
-            desc = "Version $project.version"
-            vcsTag = project.version
-            gpg {
-                sign = true
-            }
-        }
     }
 }
 
@@ -155,6 +146,13 @@ compileJava {
 
 compileTestJava {
     options.compilerArgs.add('-proc:none')
+}
+
+bintrayUpload {
+    versionName = "$project.version"
+    versionDesc  = "Beta version $project.version"
+    versionVcsTag = "$project.version"
+    signVersion = true
 }
 
 task release(dependsOn: ['wrapper', 'clean', 'publishToMavenLocal']) {
