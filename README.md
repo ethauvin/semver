@@ -158,7 +158,7 @@ example.meta=
 # ...
 ```
 
-> :warning: `keysPrefix` is a new element in `1.1.0` and may break older versions when using custom property keys.  
+> :warning: `keysPrefix` is a new element staring in `1.1.0` and may break older versions when using custom property keys.  
 > :zap: A quick fix is to include `keysPrefix=""` in the annotation to remove the default `version.` prefix.
 
 ## Usage with Maven, Grail, Kobalt and Kotlin
