@@ -237,4 +237,4 @@ Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/mast
 
 Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the [__Semver Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
-There are also full [examples](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) in both [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java) and [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) showing how to use both the plugin and annotation processor concurrently.
+There are also full [examples](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) in both [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java) and [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin) showing how to use both the plugin and annotation processor concurrently.
