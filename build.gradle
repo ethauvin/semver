@@ -56,6 +56,9 @@ bintray {
         vcsUrl = mavenScmCon
         labels = pkgLabels
         publicDownloadNumbers = true
+        version {
+            gpg { sign = true }
+        }
     }
 }
 
@@ -150,9 +153,8 @@ compileTestJava {
 
 bintrayUpload {
     versionName = "$project.version"
-    versionDesc  = "Beta version $project.version"
+    versionDesc = "Beta version $project.version"
     versionVcsTag = "$project.version"
-    signVersion = true
 }
 
 task release(dependsOn: ['wrapper', 'clean', 'publishToMavenLocal']) {
