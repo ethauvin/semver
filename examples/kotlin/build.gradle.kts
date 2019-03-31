@@ -10,7 +10,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-var semverProcessor = "net.thauvin.erik:semver:1.1.0-beta"
+var semverProcessor = "net.thauvin.erik:semver:1.1.1"
 
 dependencies {
     kapt(semverProcessor)

@@ -346,7 +346,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="dt">example.meta</span><span class="ot">=</span>
 <span class="co"># ...</span></code></pre></div>
 <blockquote>
-<p>⚠️ <code>keysPrefix</code> is a new element in <code>1.1.0</code> and may break older versions when using custom property keys.<br />
+<p>⚠️ <code>keysPrefix</code> is a new element staring in <code>1.1.0</code> and may break older versions when using custom property keys.<br />
 ⚡ A quick fix is to include <code>keysPrefix=&quot;&quot;</code> in the annotation to remove the default <code>version.</code> prefix.</p>
 </blockquote>
 <h2 id="usage-with-maven-grail-kobalt-and-kotlin">Usage with Maven, Grail, Kobalt and Kotlin</h2>
@@ -355,14 +355,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
     <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span>
     <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span>
-    <span class="kw">&lt;version&gt;</span>1.1.0-beta<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;version&gt;</span>1.1.1<span class="kw">&lt;/version&gt;</span>
 <span class="kw">&lt;/dependency&gt;</span></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    annotationProcessor &#39;net.thauvin.erik:semver:1.1.0-beta&#39;
-    compileOnly &#39;net.thauvin.erik:semver:1.1.0-beta&#39;
+    annotationProcessor &#39;net.thauvin.erik:semver:1.1.1&#39;
+    compileOnly &#39;net.thauvin.erik:semver:1.1.1&#39;
 }</code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
 <h4 id="class-source-generation">Class &amp; Source Generation</h4>
@@ -373,8 +373,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="http://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:1.1.0-beta&quot;)
-    compileOnly(&quot;net.thauvin.erik:semver:1.1.0-beta&quot;)
+    apt(&quot;net.thauvin.erik:semver:1.1.1&quot;)
+    compileOnly(&quot;net.thauvin.erik:semver:1.1.1&quot;)
 }</code></pre>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/examples/kotlin">Kotlin example</a> module directory for a sample.</p>
 <h3 id="kotlin">Kotlin</h3>
@@ -389,6 +389,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Please look at the <a href="https://github.com/ethauvin/semver/tree/master/examples/kotlin">Kotlin example</a> project for samples on using Gradle (<a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a>) and Kobalt (<a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/kobalt/src/Build.kt">Build.kt</a>).</p>
 <h2 id="auto-increment">Auto-Increment</h2>
 <p>Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the <a href="https://github.com/ethauvin/semver-gradle"><strong>Semver Version Plugin for Gradle</strong></a>.</p>
-<p>There are also full <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor">examples</a> in both <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java">Java</a> and <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor">Kotlin</a> showing how to use both the plugin and annotation processor concurrently.</p>
+<p>There are also full <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor">examples</a> in both <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java">Java</a> and <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin">Kotlin</a> showing how to use both the plugin and annotation processor concurrently.</p>
 </body>
 </html>

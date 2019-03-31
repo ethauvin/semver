@@ -16,7 +16,7 @@ public final class GeneratedVersion {
     public final static String BUILDMETA_PREFIX = "+";
 
     public final static String PROJECT = "Example";
-    public final static Date BUILDDATE = new Date(1541197895495L);
+    public final static Date BUILDDATE = new Date(1553998304899L);
     public final static int MAJOR = 2;
     public final static int MINOR = 17;
     public final static int PATCH = 52;
