@@ -66,7 +66,7 @@ public class VersionInfo {
     }
 
     /**
-     * Creates a new object with values from a {@link net.thauvin.erik.semver.Version Version} object.
+     * Creates a new object with values from a {@link net.thauvin.erik.semver.VersionInfo VersionInfo} object.
      *
      * @param version The version object.
      */
@@ -253,9 +253,9 @@ public class VersionInfo {
     public String getVersion() {
         return Integer.toString(major)
                 + '.'
-                + Integer.toString(minor)
+                + minor
                 + '.'
-                + Integer.toString(patch)
+                + patch
                 + (preRelease.length() > 0 ? '-' + preRelease : "")
                 + (buildMeta.length() > 0 ? '+' + buildMeta : "");
     }
