@@ -5,13 +5,6 @@
       <configuration version="3" platform="JVM 1.6" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
-          <option name="destination" value="$MODULE_DIR$/../../examples/kotlin/build/classes/kotlin/main" />
-          <option name="classpath" value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.0/a134b0cfe9bb44f98b0b3e889cda07923eea9428/kotlin-stdlib-1.3.0.jar;K:/maven/repository/net/thauvin/erik/semver/1.1.0-beta/semver-1.1.0-beta.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.0/84a2e0288dc17cd64d692eb1e5e0de8cd5ff0846/kotlin-stdlib-common-1.3.0.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar;C:/Users/erik/.gradle/caches/modules-2/files-2.1/com.github.spullara.mustache.java/compiler/0.9.5/2d13ba8f4e9e578ef3636c064dae4ed675c8de7d/compiler-0.9.5.jar" />
-          <option name="noStdlib" value="true" />
-          <option name="noReflect" value="true" />
-          <option name="moduleName" value="examples-kotlin" />
-          <option name="addCompilerBuiltIns" value="true" />
-          <option name="loadBuiltInsFromDependencies" value="true" />
           <option name="languageVersion" value="1.3" />
           <option name="apiVersion" value="1.3" />
           <option name="pluginOptions">
