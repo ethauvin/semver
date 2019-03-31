@@ -167,8 +167,9 @@ task release(dependsOn: ['wrapper', 'clean', 'publishToMavenLocal']) {
 
 task pandoc(type: Exec) {
     group = 'Documentation'
-    def pandoc_args = ['--from', 'markdown_github',
+    def pandoc_args = ['--from', 'gfm',
                        '--to', 'html5',
+                       '--metadata', "pagetitle=$mavenDescription",
                        '-s',
                        '-c', 'github-pandoc.css',
                        '-o', 'docs/README.html',

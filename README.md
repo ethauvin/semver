@@ -41,7 +41,7 @@ version.prerelease=beta
 
 ## Template
 
-Upon running the annotation processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/net/thauvin/erik/semver/examples/java/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Mustache](https://mustache.github.io/) template.
+Upon running the annotation processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Mustache](https://mustache.github.io/) template.
 
 To use your own template, simply create a `version.mustache` file in the project's root directory. The processor will automatically look for it.
 
@@ -165,7 +165,7 @@ example.meta=
 
 ### Maven
 
-To install and run from [Maven](http://maven.apache.org/), configure an artifact as follows:
+To install and run from [Maven](https://maven.apache.org/), configure an artifact as follows:
 
 ```xml
 <dependency>
@@ -200,11 +200,11 @@ compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${proje
 
 The `GeneratedVersion.java` file will now be located in `src/generated`.
 
-Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) file in the [Java example](https://github.com/ethauvin/semver/tree/master/example/java) module directory for a sample.
+Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
 
 ### Kobalt
 
-To install and run from [Kobalt](http://beust.com/kobalt/), add the following to the `Build.kt` file:
+To install and run from [Kobalt](https://beust.com/kobalt/), add the following to the `Build.kt` file:
 
 ```gradle
 dependencies {
@@ -213,7 +213,7 @@ dependencies {
 }
 ```
 
-Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/kotlin/kobalt/src/Build.kt) file in the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) module directory for a sample.
+Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
 
 ### Kotlin
 
@@ -230,7 +230,7 @@ open class Main {
 ```
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
-Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for samples on using Gradle ([build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts)) and Kobalt ([Build.kt](https://github.com/ethauvin/semver/blob/master/examples/kotlin/kobalt/src/Build.kt)).
+Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for samples on using Gradle ([build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts)) and Kobalt ([Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt)).
 
 
 ## Auto-Increment
