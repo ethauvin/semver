@@ -15,5 +15,5 @@ include 'shared'
 include 'api'
 include 'services:webservice'
 */
-enableFeaturePreview('STABLE_PUBLISHING')
 rootProject.name = 'semver'
+
