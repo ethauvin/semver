@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Copyright" pattern="file[semver_main]:*.java/||file[semver_test]:*.java/" />
+</component>
