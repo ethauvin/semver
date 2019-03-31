@@ -34,7 +34,6 @@ package net.thauvin.erik.semver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -47,7 +46,6 @@ import javax.tools.FileObject;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -71,7 +69,6 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
-    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
@@ -188,7 +185,6 @@ public class VersionProcessor extends AbstractProcessor {
                         } else {
                             template = version.template();
                         }
-
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException e) {
                         error("IOException occurred while running the annotation processor: " + e.getMessage(), e);
@@ -203,7 +199,6 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private void writeTemplate(final String type,
                                final VersionInfo versionInfo,
                                final String template)
@@ -227,15 +222,19 @@ public class VersionProcessor extends AbstractProcessor {
 
         final String fileName = versionInfo.getClassName() + '.' + type;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
-            final Map<String, String> options = processingEnv.getOptions();
-            final String kaptGenDir = options.get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
+            final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
             final File versionFile = new File(kaptGenDir, fileName);
-            versionFile.getParentFile().mkdirs();
-            try (final FileWriter fw = new FileWriter(versionFile);) {
-                mustache.execute(fw, versionInfo).flush();
+            if (!versionFile.getParentFile().exists()) {
+                if (!versionFile.getParentFile().mkdirs()) {
+                    note("Could not create target directory: " + versionFile.getParentFile().getAbsolutePath());
+                }
+            }
+            try (final OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(versionFile),
+                StandardCharsets.UTF_8)) {
+                mustache.execute(osw, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + versionFile.getParentFile().getAbsolutePath() + ')');
         } else {
