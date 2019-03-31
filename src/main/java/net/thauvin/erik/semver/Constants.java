@@ -80,6 +80,10 @@ public final class Constants {
      */
     public static final String EMPTY = "";
     /**
+     * The generated source files directory kotlin option.
+     */
+    public static final String KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated";
+    /**
      * The build metadata property key.
      */
     public static final String KEY_VERSION_BUILDMETA = "buildmeta";
@@ -107,6 +111,7 @@ public final class Constants {
      * The kotlin type.
      */
     public static final String KOTLIN_TYPE = "kt";
+
 
     /**
      * Disables the default constructor.

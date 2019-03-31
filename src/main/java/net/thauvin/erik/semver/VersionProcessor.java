@@ -44,10 +44,10 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.FileObject;
-import javax.tools.StandardLocation;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
@@ -68,7 +68,7 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private void error(final String s, final Throwable t) {
-        messager.printMessage(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
+        log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
@@ -108,7 +108,7 @@ public class VersionProcessor extends AbstractProcessor {
                     findOrRead = "read";
                 }
                 error("Could not " + findOrRead + ": " + propsFile);
-                throw new FileNotFoundException("The system cannot " + findOrRead + " the specified file: `"
+                throw new FileNotFoundException("Could not " + findOrRead + " the specified file: `"
                     + propsFile.getAbsolutePath() + '`');
             }
         }
@@ -188,6 +188,7 @@ public class VersionProcessor extends AbstractProcessor {
                         } else {
                             template = version.template();
                         }
+
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException e) {
                         error("IOException occurred while running the annotation processor: " + e.getMessage(), e);
@@ -203,7 +204,9 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
-    private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
+    private void writeTemplate(final String type,
+                               final VersionInfo versionInfo,
+                               final String template)
         throws IOException {
         final MustacheFactory mf = new DefaultMustacheFactory();
         final Mustache mustache = mf.compile(template);
@@ -222,20 +225,28 @@ public class VersionProcessor extends AbstractProcessor {
         }
         note("Loaded template: " + templateName);
 
-        final FileObject jfo;
         final String fileName = versionInfo.getClassName() + '.' + type;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
-            jfo = filer.createResource(StandardLocation.SOURCE_OUTPUT, versionInfo.getPackageName(),
-                fileName);
+            final Map<String, String> options = processingEnv.getOptions();
+            final String kaptGenDir = options.get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
+            if (kaptGenDir == null) {
+                throw new IOException("Could not find the target directory for generated Kotlin files.");
+            }
+            final File versionFile = new File(kaptGenDir, fileName);
+            versionFile.getParentFile().mkdirs();
+            try (final FileWriter fw = new FileWriter(versionFile);) {
+                mustache.execute(fw, versionInfo).flush();
+            }
+            note("Generated source: " + fileName + " (" + versionFile.getParentFile().getAbsolutePath() + ')');
         } else {
-            jfo = filer.createSourceFile(versionInfo.getPackageName() + '.' + versionInfo.getClassName());
+            final FileObject jfo = filer.createSourceFile(versionInfo.getPackageName() + '.'
+                + versionInfo.getClassName());
+            try (final Writer writer = jfo.openWriter()) {
+                mustache.execute(writer, versionInfo).flush();
+            }
+            note("Generated source: " + fileName + " ("
+                + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
         }
-
-        try (final Writer writer = jfo.openWriter()) {
-            mustache.execute(writer, versionInfo).flush();
-        }
-
-        note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
     }
 
 }
