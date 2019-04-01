@@ -94,8 +94,14 @@ public class VersionProcessor extends AbstractProcessor {
                         parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
                     versionInfo.setBuildMeta(
                         p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
+                    versionInfo.setBuildMetaPrefix(
+                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(), version.buildMetaPrefix()));
                     versionInfo.setPreRelease(
                         p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
+                    versionInfo.setPreReleasePrefix(
+                        p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(), version.preReleasePrefix()));
+                    versionInfo.setSeparator(
+                        p.getProperty(version.keysPrefix() + version.separatorKey(), version.separator()));
                 }
             } else {
                 final String findOrRead;

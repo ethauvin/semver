@@ -12,23 +12,23 @@ import java.util.Date;
  * @author <a href="https://github.com/ethauvin/semver">Semantic Version Annotation Processor</a>
  */
 public final class {{className}} {
-    public final static String PRERELEASE_PREFIX = "-";
-    public final static String BUILDMETA_PREFIX = "+";
-
     public final static String PROJECT = "{{project}}";
     public final static Date BUILDDATE = new Date({{epoch}}L);
     public final static int MAJOR = {{major}};
     public final static int MINOR = {{minor}};
     public final static int PATCH = {{patch}};
     public final static String PRERELEASE = "{{preRelease}}";
+    public final static String PRERELEASE_PREFIX = "{{preReleasePrefix}}";
     public final static String BUILDMETA = "{{buildMeta}}";
+    public final static String BUILDMETA_PREFIX = "{{buildMetaPrefix}}";
+    public final static String SEPARATOR = "{{separator}}";
 
     /**
      * The full version string.
      * <p>
      * Formatted as:
      * <blockquote>
-     * <code>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]</code>
+     * <code>[MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE_PREFIX][PRERELEASE]][[BUILDMETA_PREFIX][BUILDMETA]]</code>
      * </blockquote>
      * <p>
      * For example:
@@ -39,10 +39,8 @@ public final class {{className}} {
      * <li><code>1.0.0-alpha+001</code></li>
      * </ul>
      */
-    public final static String VERSION = Integer.toString(MAJOR) + '.'
-            + Integer.toString(MINOR) + '.'
-            + Integer.toString(PATCH)
-            + preReleaseWithPrefix() + buildMetaWithPrefix();
+    public final static String VERSION = Integer.toString(MAJOR) + SEPARATOR + Integer.toString(MINOR) + SEPARATOR
+            + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();
 
     /**
      * Disables the default constructor.
@@ -70,7 +68,7 @@ public final class {{className}} {
      * @return The build metadata, if any.
      */
     public static String buildMetaWithPrefix(final String prefix) {
-        if (BUILDMETA.length() > 0 && prefix.length() > 0) {
+        if (BUILDMETA.length() > 0) {
             return prefix + BUILDMETA;
         } else {
             return BUILDMETA;
@@ -93,7 +91,7 @@ public final class {{className}} {
      * @return The pre-release version, if any.
      */
     public static String preReleaseWithPrefix(final String prefix) {
-        if (PRERELEASE.length() > 0 && prefix.length() > 0) {
+        if (PRERELEASE.length() > 0) {
             return prefix + PRERELEASE;
         } else {
             return PRERELEASE;

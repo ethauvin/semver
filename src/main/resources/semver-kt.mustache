@@ -13,11 +13,6 @@ import java.util.Date
  */
 object {{className}} {
     @JvmField
-    val PRERELEASE_PREFIX = "-"
-    @JvmField
-    val BUILDMEATA_PREFIX = "+"
-
-    @JvmField
     val PROJECT = "{{project}}"
     @JvmField
     val BUILDDATE = Date({{epoch}}L)
@@ -30,13 +25,19 @@ object {{className}} {
     @JvmField
     val PRERELEASE = "{{preRelease}}"
     @JvmField
+    val PRERELEASE_PREFIX = "{{preReleasePrefix}}"
+    @JvmField
     val BUILDMETA = "{{buildMeta}}"
+    @JvmField
+    val BUILDMEATA_PREFIX = "{{buildMetaPrefix}}"
+    @JvmField
+    val SEPARATOR = "{{separator}}"
 
     /**
-    * The full version string formatted as [MAJOR].[MINOR].[PATCH]-[PRERELEASE]+[BUILDMETA]
+    * The full version string formatted as [MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE_PREFIX][PRERELEASE]][[BUILDMETA_PREFIX][BUILDMETA]]
     */
     @JvmField
-    val VERSION = "$MAJOR.$MINOR.$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
+    val VERSION = "$MAJOR$SEPARATOR$MINOR$SEPARATOR$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
 
     /**
      * Returns the pre-release version with prefix.
@@ -47,7 +48,7 @@ object {{className}} {
     @JvmStatic
     @JvmOverloads
     fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
-        return if (PRERELEASE.isNotEmpty() && prefix.isNotEmpty()) {
+        return if (PRERELEASE.isNotEmpty()) {
             "$prefix$PRERELEASE"
         } else {
             PRERELEASE
@@ -63,7 +64,7 @@ object {{className}} {
     @JvmStatic
     @JvmOverloads
     fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
-        return if (BUILDMETA.isNotEmpty() && prefix.isNotEmpty()) {
+        return if (BUILDMETA.isNotEmpty()) {
             "$prefix$BUILDMETA"
         } else {
             BUILDMETA

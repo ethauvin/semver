@@ -73,9 +73,28 @@ public class VersionInfoTest {
 
         Assert.assertEquals(versionInfo.getVersion(), "3.2.1-beta+001", "getVersion(3.2.1-beta+001)");
 
+        versionInfo.setPreReleasePrefix("+");
+
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1+beta+001", "getVersion(3.2.1+beta+001)");
+
+        versionInfo.setPreReleasePrefix("-");
+
         versionInfo.setPreRelease("");
 
         Assert.assertEquals(versionInfo.getVersion(), "3.2.1+001", "getVersion(3.2.1+001)");
+
+        versionInfo.setBuildMetaPrefix(".");
+
+        Assert.assertEquals(versionInfo.getVersion(), "3.2.1.001", "getVersion(3.2.1.001)");
+
+        versionInfo.setBuildMetaPrefix("+");
+
+        versionInfo.setSeparator("-");
+
+        Assert.assertEquals(versionInfo.getVersion(), "3-2-1+001", "getVersion(3-2-1+001)");
+
+        versionInfo.setSeparator(".");
+
     }
 
     @Test
@@ -107,6 +126,19 @@ public class VersionInfoTest {
 
         Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha+001", "getVersion(1.2.3-alpha+001)");
 
+        versionInfo.setBuildMeta("1");
+        versionInfo.setBuildMetaPrefix("");
+
+        Assert.assertEquals(versionInfo.getBuildMetaPrefix(), "", "getBuildMetaPrefix( )");
+
+        Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha1", "getVersion(1.2.3-alpha1)");
+
+        versionInfo.setPreReleasePrefix(".");
+
+        Assert.assertEquals(versionInfo.getPreReleasePrefix(), ".", "getPreReleasePrefix(.)");
+
+        Assert.assertEquals(versionInfo.getVersion(), "1.2.3.alpha1", "getVersion(1.2.3.alpha1)");
+
         versionInfo.setProject("My Example");
 
         Assert.assertEquals(versionInfo.getProject(), "My Example", "getProject(My Example)");
@@ -133,7 +165,13 @@ public class VersionInfoTest {
 
         Assert.assertEquals(versionInfo.getPreRelease(), version.preRelease(), "getPreRelease(preRelease)");
 
+        Assert.assertEquals(versionInfo.getPreReleasePrefix(), version.preReleasePrefix(),
+            "getPreReleasePrefix(preReleasePrefix)");
+
         Assert.assertEquals(versionInfo.getBuildMeta(), version.buildMeta(), "getBuildMeta(buildMeta)");
+
+        Assert.assertEquals(versionInfo.getBuildMetaPrefix(), version.buildMetaPrefix(),
+            "getBuildMetaPrefix(buildMetaPrefix)");
 
         Assert.assertEquals(versionInfo.getPackageName(), version.packageName(),
             "getPackageName(packageName)");
@@ -171,6 +209,16 @@ class VersionTest implements Version {
     @Override
     public String buildMetaKey() {
         return "build.meta";
+    }
+
+    @Override
+    public String buildMetaPrefix() {
+        return "+";
+    }
+
+    @Override
+    public String buildMetaPrefixKey() {
+        return "build.meta.prefix";
     }
 
     @Override
@@ -229,6 +277,16 @@ class VersionTest implements Version {
     }
 
     @Override
+    public String preReleasePrefix() {
+        return "-";
+    }
+
+    @Override
+    public String preReleasePrefixKey() {
+        return "build.prerelase.prefix";
+    }
+
+    @Override
     public String project() {
         return "My Test Project";
     }
@@ -241,6 +299,16 @@ class VersionTest implements Version {
     @Override
     public String properties() {
         return "test.properties";
+    }
+
+    @Override
+    public String separator() {
+        return ".";
+    }
+
+    @Override
+    public String separatorKey() {
+        return "build.separator";
     }
 
     @Override

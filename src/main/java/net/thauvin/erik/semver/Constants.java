@@ -40,6 +40,10 @@ package net.thauvin.erik.semver;
  */
 public final class Constants {
     /**
+     * The default metadata prefix.
+     */
+    public static final String DEFAULT_BUILDMETA_PREFIX = "+";
+    /**
      * The default class name.
      */
     public static final String DEFAULT_CLASS_NAME = "GeneratedVersion";
@@ -54,7 +58,7 @@ public final class Constants {
     /**
      * The default keys prefix.
      */
-    public static final String DEFAULT_KEYS_PREFIX = "version." ;
+    public static final String DEFAULT_KEYS_PREFIX = "version.";
     /**
      * The default Kotlin mustache template.
      */
@@ -72,6 +76,14 @@ public final class Constants {
      */
     public static final int DEFAULT_PATCH = 0;
     /**
+     * The default prerelease prefix.
+     */
+    public static final String DEFAULT_PRERELEASE_PREFIX = "-";
+    /**
+     * The default version separator.
+     */
+    public static final String DEFAULT_SEPARATOR = ".";
+    /**
      * The default mustache template.
      */
     public static final String DEFAULT_TEMPLATE_NAME = "mustache";
@@ -87,6 +99,10 @@ public final class Constants {
      * The build metadata property key.
      */
     public static final String KEY_VERSION_BUILDMETA = "buildmeta";
+    /**
+     * The build metadata prefix property key.
+     */
+    public static final String KEY_VERSION_BUILDMETA_PREFIX = "buildmeta.prefix";
     /**
      * The major version property key.
      */
@@ -104,9 +120,17 @@ public final class Constants {
      */
     public static final String KEY_VERSION_PRERELEASE = "prerelease";
     /**
+     * The pre-release prefix property key.
+     */
+    public static final String KEY_VERSION_PRERELEASE_PREFIX = "prerelease.prefix";
+    /**
      * The project property key.
      */
     public static final String KEY_VERSION_PROJECT = "project";
+    /**
+     * The version separator property key.
+     */
+    public static final String KEY_VERSION_SEPARATOR = "separator";
     /**
      * The kotlin type.
      */
@@ -119,7 +143,7 @@ public final class Constants {
      * @throws UnsupportedOperationException if the constructor is called.
      */
     private Constants()
-            throws UnsupportedOperationException {
+        throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Illegal constructor call.");
     }
 }

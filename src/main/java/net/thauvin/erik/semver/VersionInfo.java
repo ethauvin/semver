@@ -42,13 +42,16 @@ public class VersionInfo {
     private final long epoch = System.currentTimeMillis();
 
     private String buildMeta;
+    private String buildMetaPrefix;
     private String className;
     private int major;
     private int minor;
     private String packageName;
     private int patch;
     private String preRelease;
+    private String preReleasePrefix;
     private String project;
+    private String separator;
 
 
     /**
@@ -59,7 +62,10 @@ public class VersionInfo {
         minor = Constants.DEFAULT_MINOR;
         patch = Constants.DEFAULT_PATCH;
         buildMeta = Constants.EMPTY;
+        buildMetaPrefix = Constants.DEFAULT_BUILDMETA_PREFIX;
         preRelease = Constants.EMPTY;
+        preReleasePrefix = Constants.DEFAULT_PRERELEASE_PREFIX;
+        separator = Constants.DEFAULT_SEPARATOR;
         project = Constants.EMPTY;
         className = Constants.DEFAULT_CLASS_NAME;
         packageName = Constants.EMPTY;
@@ -75,7 +81,10 @@ public class VersionInfo {
         minor = version.minor();
         patch = version.patch();
         buildMeta = version.buildMeta();
+        buildMetaPrefix = version.buildMetaPrefix();
         preRelease = version.preRelease();
+        preReleasePrefix = version.preReleasePrefix();
+        separator = version.separator();
         project = version.project();
         className = version.className();
         packageName = version.packageName();
@@ -97,6 +106,24 @@ public class VersionInfo {
      */
     public void setBuildMeta(final String buildMeta) {
         this.buildMeta = buildMeta;
+    }
+
+    /**
+     * Returns the meta-data prefix.
+     *
+     * @return The meta-data prefix.
+     */
+    public String getBuildMetaPrefix() {
+        return buildMetaPrefix;
+    }
+
+    /**
+     * Sets the meta-data prefix.
+     *
+     * @param buildMetaPrefix The meta-data prefix.
+     */
+    public void setBuildMetaPrefix(String buildMetaPrefix) {
+        this.buildMetaPrefix = buildMetaPrefix;
     }
 
     /**
@@ -217,6 +244,24 @@ public class VersionInfo {
     }
 
     /**
+     * Returns the pre-release prefix.
+     *
+     * @return The pre-release prefix.
+     */
+    public String getPreReleasePrefix() {
+        return preReleasePrefix;
+    }
+
+    /**
+     * Sets the pre-release prefix.
+     *
+     * @param preReleasePrefix The new pre-release prefix.
+     */
+    public void setPreReleasePrefix(String preReleasePrefix) {
+        this.preReleasePrefix = preReleasePrefix;
+    }
+
+    /**
      * Returns the project name.
      *
      * @return The project name.
@@ -235,10 +280,28 @@ public class VersionInfo {
     }
 
     /**
+     * Returns the version separator.
+     *
+     * @return The version separator.
+     */
+    public String getSeparator() {
+        return separator;
+    }
+
+    /**
+     * Setsthe version separtor.
+     *
+     * @param separator The new version separator.
+     */
+    public void setSeparator(String separator) {
+        this.separator = separator;
+    }
+
+    /**
      * Returns the full version string.
      * <p>
      * Formatted as:
-     * <blockquote><code>MAJOR.MINOR.PATCH[-PRERELEASE][+BUILDMETADATA]</code></blockquote>
+     * <blockquote><code>[MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE-PREFIX][PRERELEASE]][[BUILDMETA-PREFIX][BUILDMETA]]</code></blockquote>
      * <p>
      * For example:
      * <ul>
@@ -251,12 +314,12 @@ public class VersionInfo {
      * @return The version string.
      */
     public String getVersion() {
-        return Integer.toString(major)
-                + '.'
-                + minor
-                + '.'
-                + patch
-                + (preRelease.length() > 0 ? '-' + preRelease : "")
-                + (buildMeta.length() > 0 ? '+' + buildMeta : "");
+        return major
+            + separator
+            + minor
+            + separator
+            + patch
+            + (preRelease.length() > 0 ? preReleasePrefix + preRelease : "")
+            + (buildMeta.length() > 0 ? buildMetaPrefix + buildMeta : "");
     }
 }

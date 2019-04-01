@@ -50,7 +50,13 @@ public @interface Version {
 
     String buildMetaKey() default Constants.KEY_VERSION_BUILDMETA;
 
+    String buildMetaPrefix() default Constants.DEFAULT_BUILDMETA_PREFIX;
+
+    String buildMetaPrefixKey() default Constants.KEY_VERSION_BUILDMETA_PREFIX;
+
     String className() default Constants.DEFAULT_CLASS_NAME;
+
+    String keysPrefix() default Constants.DEFAULT_KEYS_PREFIX;
 
     int major() default Constants.DEFAULT_MAJOR;
 
@@ -60,9 +66,9 @@ public @interface Version {
 
     String minorKey() default Constants.KEY_VERSION_MINOR;
 
-    int patch() default Constants.DEFAULT_PATCH;
-
     String packageName() default Constants.EMPTY;
+
+    int patch() default Constants.DEFAULT_PATCH;
 
     String patchKey() default Constants.KEY_VERSION_PATCH;
 
@@ -70,15 +76,21 @@ public @interface Version {
 
     String preReleaseKey() default Constants.KEY_VERSION_PRERELEASE;
 
+    String preReleasePrefix() default Constants.DEFAULT_PRERELEASE_PREFIX;
+
+    String preReleasePrefixKey() default Constants.KEY_VERSION_PRERELEASE_PREFIX;
+
     String project() default Constants.EMPTY;
 
     String projectKey() default Constants.KEY_VERSION_PROJECT;
 
     String properties() default Constants.EMPTY;
 
+    String separator() default Constants.DEFAULT_SEPARATOR;
+
+    String separatorKey() default Constants.KEY_VERSION_SEPARATOR;
+
     String template() default Constants.DEFAULT_JAVA_TEMPLATE;
 
     String type() default Constants.DEFAULT_JAVA_TYPE;
-
-    String keysPrefix() default Constants.DEFAULT_KEYS_PREFIX;
 }
