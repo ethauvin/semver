@@ -233,10 +233,8 @@ public class VersionProcessor extends AbstractProcessor {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
             final File versionFile = new File(kaptGenDir, fileName);
-            if (!versionFile.getParentFile().exists()) {
-                if (!versionFile.getParentFile().mkdirs()) {
-                    note("Could not create target directory: " + versionFile.getParentFile().getAbsolutePath());
-                }
+            if (!versionFile.getParentFile().exists() && !versionFile.getParentFile().mkdirs()) {
+                note("Could not create target directory: " + versionFile.getParentFile().getAbsolutePath());
             }
             try (final OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(versionFile),
                 StandardCharsets.UTF_8)) {
