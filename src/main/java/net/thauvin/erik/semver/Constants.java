@@ -139,11 +139,8 @@ public final class Constants {
 
     /**
      * Disables the default constructor.
-     *
-     * @throws UnsupportedOperationException if the constructor is called.
      */
-    private Constants()
-        throws UnsupportedOperationException {
+    private Constants() {
         throw new UnsupportedOperationException("Illegal constructor call.");
     }
 }
