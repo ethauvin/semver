@@ -24,20 +24,7 @@ public final class {{className}} {
     public final static String SEPARATOR = "{{separator}}";
 
     /**
-     * The full version string.
-     * <p>
-     * Formatted as:
-     * <blockquote>
-     * <code>[MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE_PREFIX][PRERELEASE]][[BUILDMETA_PREFIX][BUILDMETA]]</code>
-     * </blockquote>
-     * <p>
-     * For example:
-     * <ul>
-     * <li><code>1.0.0</code></li>
-     * <li><code>1.0.0-beta</code></li>
-     * <li><code>1.0.0+20160124144700</code></li>
-     * <li><code>1.0.0-alpha+001</code></li>
-     * </ul>
+     * The full semantic version string.
      */
     public final static String VERSION = Integer.toString(MAJOR) + SEPARATOR + Integer.toString(MINOR) + SEPARATOR
             + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();

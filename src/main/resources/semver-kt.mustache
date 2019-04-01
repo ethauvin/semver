@@ -34,7 +34,7 @@ object {{className}} {
     val SEPARATOR = "{{separator}}"
 
     /**
-    * The full version string formatted as [MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE_PREFIX][PRERELEASE]][[BUILDMETA_PREFIX][BUILDMETA]]
+    * The full semantic version string.
     */
     @JvmField
     val VERSION = "$MAJOR$SEPARATOR$MINOR$SEPARATOR$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
