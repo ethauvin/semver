@@ -162,9 +162,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;"><code>alpha</code></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>PRERELASE_PREFIX</code></td>
+<td style="text-align: left;">The pre-release prefix</td>
+<td style="text-align: left;"><code>-</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>BUILDMETA</code></td>
 <td style="text-align: left;">The build metadata, if any.</td>
 <td style="text-align: left;"><code>001</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>BUILDMETA_PREFIX</code></td>
+<td style="text-align: left;">The metadata prefix.</td>
+<td style="text-align: left;"><code>+</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>SEPARATOR</code></td>
+<td style="text-align: left;">The version separator.</td>
+<td style="text-align: left;"><code>.</code></td>
 </tr>
 </tbody>
 </table>
@@ -253,12 +268,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>{{preRelease}}</code></td>
-<td style="text-align: left;">The pre/release version.</td>
+<td style="text-align: left;">The pre-release version.</td>
 <td style="text-align: left;"><code>String</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;"><code>{{preReleasePrefix}}</code></td>
+<td style="text-align: left;">The pre-release prefix.</td>
+<td style="text-align: left;"><code>String</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>{{buildMeta}}</code></td>
 <td style="text-align: left;">The build metadata version.</td>
+<td style="text-align: left;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>{{buildMetaPrefix}}</code></td>
+<td style="text-align: left;">The metadata prefix.</td>
+<td style="text-align: left;"><code>String</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>{{separator}}</code></td>
+<td style="text-align: left;">The version separator.</td>
 <td style="text-align: left;"><code>String</code></td>
 </tr>
 </tbody>
@@ -307,42 +337,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
+<td style="text-align: left;"><code>preReleasePrefix</code></td>
+<td style="text-align: left;"><code>version.prerelease.prefix</code></td>
+<td style="text-align: left;">The pre-release prefix.</td>
+<td style="text-align: left;"><code>-</code></td>
+</tr>
+<tr class="odd">
 <td style="text-align: left;"><code>buildMeta</code></td>
 <td style="text-align: left;"><code>version.buildmeta</code></td>
 <td style="text-align: left;">The build metadata version.</td>
 <td style="text-align: left;"></td>
 </tr>
+<tr class="even">
+<td style="text-align: left;"><code>buildMetaPrefix</code></td>
+<td style="text-align: left;"><code>version.buildmeta.prefix</code></td>
+<td style="text-align: left;">The metadata prefix.</td>
+<td style="text-align: left;"><code>+</code></td>
+</tr>
 <tr class="odd">
+<td style="text-align: left;"><code>separator</code></td>
+<td style="text-align: left;"><code>version.separator</code></td>
+<td style="text-align: left;">The version separator.</td>
+<td style="text-align: left;"><code>.</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>packageName</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The package name.</td>
 <td style="text-align: left;"><em>Same as annotated class</em></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>className</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The name of the generated class.</td>
 <td style="text-align: left;"><code>GeneratedVersion</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>properties</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The properties file.</td>
 <td style="text-align: left;"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>template</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The template file.</td>
 <td style="text-align: left;"><code>version.mustache</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;"><code>type</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">Either <code>java</code> or <code>kt</code> for Kotlin.</td>
 <td style="text-align: left;"><code>java</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;"><code>keysPrefix</code></td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;">The prefix for all property keys.</td>
@@ -381,14 +429,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">&lt;dependency&gt;</span></a>
 <a class="sourceLine" id="cb8-2" title="2">    <span class="kw">&lt;groupId&gt;</span>net.thauvin.erik<span class="kw">&lt;/groupId&gt;</span></a>
 <a class="sourceLine" id="cb8-3" title="3">    <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span></a>
-<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">&lt;version&gt;</span>1.1.1<span class="kw">&lt;/version&gt;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">&lt;version&gt;</span>1.2.0<span class="kw">&lt;/version&gt;</span></a>
 <a class="sourceLine" id="cb8-5" title="5"><span class="kw">&lt;/dependency&gt;</span></a></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    annotationProcessor &#39;net.thauvin.erik:semver:1.1.1&#39;
-    compileOnly &#39;net.thauvin.erik:semver:1.1.1&#39;
+    annotationProcessor &#39;net.thauvin.erik:semver:1.2.0&#39;
+    compileOnly &#39;net.thauvin.erik:semver:1.2.0&#39;
 }
 </code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
@@ -401,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="kobalt">Kobalt</h3>
 <p>To install and run from <a href="https://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
 <pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:1.1.1&quot;)
-    compileOnly(&quot;net.thauvin.erik:semver:1.1.1&quot;)
+    apt(&quot;net.thauvin.erik:semver:1.2.0&quot;)
+    compileOnly(&quot;net.thauvin.erik:semver:1.2.0&quot;)
 }
 </code></pre>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> module directory for a sample.</p>

@@ -5,7 +5,7 @@ apply plugin: 'application'
 
 defaultTasks 'run'
 
-def semverProcessor = 'net.thauvin.erik:semver:1.1.1'
+def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
