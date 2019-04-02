@@ -27,15 +27,12 @@ public final class {{className}} {
      * The full semantic version string.
      */
     public final static String VERSION = Integer.toString(MAJOR) + SEPARATOR + Integer.toString(MINOR) + SEPARATOR
-            + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();
+        + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();
 
     /**
      * Disables the default constructor.
-     *
-     * @throws UnsupportedOperationException If the constructor is called.
      */
-    private {{className}}()
-            throws UnsupportedOperationException {
+    private {{className}}() {
         throw new UnsupportedOperationException("Illegal constructor call.");
     }
 
