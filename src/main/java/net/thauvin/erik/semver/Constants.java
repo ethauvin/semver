@@ -86,7 +86,7 @@ public final class Constants {
     /**
      * The default mustache template.
      */
-    public static final String DEFAULT_TEMPLATE_NAME = "mustache";
+    public static final String DEFAULT_TEMPLATE_NAME = "version.mustache";
     /**
      * The empty string.
      */
