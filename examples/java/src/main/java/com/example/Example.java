@@ -1,8 +1,10 @@
 package com.example;
 
 import net.thauvin.erik.semver.Version;
+
 import java.text.SimpleDateFormat;
 
+//@Version(properties = "version.properties", template = "example.mustache")
 @Version(properties = "version.properties")
 public class Example {
     public static void main(final String... args) {

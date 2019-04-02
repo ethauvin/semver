@@ -3,10 +3,12 @@ package com.example
 import net.thauvin.erik.semver.Version
 import java.text.SimpleDateFormat
 
+//@Version(properties = "version.properties", type = "kt", template = "example.mustache")
 @Version(properties = "version.properties", type = "kt")
 class Main {
     companion object {
-        @JvmStatic fun main(args: Array<String>) {
+        @JvmStatic
+        fun main(args: Array<String>) {
             val sdf = SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z")
 
             println("-----------------------------------------------------")
