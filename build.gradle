@@ -5,6 +5,7 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.21.0'
     id 'net.thauvin.erik.gradle.semver' version '0.9.9-beta'
     id 'com.github.spotbugs' version '1.7.1'
+    id 'org.sonarqube' version '2.7'
 }
 
 import com.github.spotbugs.SpotBugsTask

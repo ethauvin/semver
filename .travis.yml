@@ -1,7 +1,15 @@
 language: java
+dist: trusty
+
+addons:
+  sonarcloud:
+    organization: "ethauvin-github"
+
+script:
+  - sonar-scanner
 
 jdk:
   - oraclejdk8
- 
+
 before_install:
   - chmod +x gradlew

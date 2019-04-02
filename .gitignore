@@ -9,6 +9,7 @@
 .kobalt
 .nb-gradle
 .project
+.scannerwork
 .settings
 .vscode/*
 *.code-workspace
