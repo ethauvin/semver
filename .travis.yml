@@ -1,15 +1,17 @@
 language: java
-dist: trusty
+
+jdk:
+  - oraclejdk8
 
 addons:
   sonarcloud:
     organization: "ethauvin-github"
 
-script:
-  - sonar-scanner
-
-jdk:
-  - oraclejdk8
-
 before_install:
   - chmod +x gradlew
+
+after_success:
+  - |
+      if [ "${TRAVIS_TEST_RESULT}" == 0 ]; then
+        ./gradlew sonarqube
+      fi
