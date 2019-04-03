@@ -6,12 +6,12 @@ if [ $# -eq 0 ]; then
 fi
 
 dir=$(dirname "$(readlink -f "$0")")
-color=$(tput setaf 6)
+cyan=$(tput setaf 6)
 normal=$(tput sgr0)
 
 for ex in "java" "kotlin"; do
     cd "$dir/$ex" || exit 1
-    echo "> Project: ${color}${ex}${normal}"
-    ./gradlew clean "$@" --console=plain --no-build-cache || exit 1
+    echo "> Project: ${cyanlor}${ex}${normal}"
+    ./gradlew --console=plain --no-build-cache clean "$@" || exit 1
     echo
 done
