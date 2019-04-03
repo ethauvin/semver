@@ -50,7 +50,6 @@ public class VersionInfoTest {
 
     @Test
     public void testGetVersion() {
-
         Assert.assertEquals(versionInfo.getVersion(), "1.0.0", "getVersion(1.0.0)");
 
         versionInfo.setMajor(3);
@@ -92,13 +91,11 @@ public class VersionInfoTest {
         versionInfo.setSeparator("-");
 
         Assert.assertEquals(versionInfo.getVersion(), "3-2-1+001", "getVersion(3-2-1+001)");
-
-        versionInfo.setSeparator(".");
-
     }
 
     @Test
     public void testSetGet() {
+        versionInfo.setSeparator(".");
 
         versionInfo.setMajor(1);
 
@@ -126,18 +123,23 @@ public class VersionInfoTest {
 
         Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha+001", "getVersion(1.2.3-alpha+001)");
 
-        versionInfo.setBuildMeta("1");
         versionInfo.setBuildMetaPrefix("");
 
         Assert.assertEquals(versionInfo.getBuildMetaPrefix(), "", "getBuildMetaPrefix( )");
 
-        Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha1", "getVersion(1.2.3-alpha1)");
+        Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha001", "getVersion(1.2.3+alpha001)");
 
         versionInfo.setPreReleasePrefix(".");
 
         Assert.assertEquals(versionInfo.getPreReleasePrefix(), ".", "getPreReleasePrefix(.)");
 
-        Assert.assertEquals(versionInfo.getVersion(), "1.2.3.alpha1", "getVersion(1.2.3.alpha1)");
+        Assert.assertEquals(versionInfo.getVersion(), "1.2.3.alpha001", "getVersion(1.2.3.alpha001");
+
+        versionInfo.setSeparator("-");
+
+        Assert.assertEquals(versionInfo.getSeparator(), "-", "getSeparator(-)");
+
+        Assert.assertEquals(versionInfo.getVersion(), "1-2-3.alpha001", "getVersion(1-2-3.alpha001)");
 
         versionInfo.setProject("My Example");
 
@@ -153,7 +155,6 @@ public class VersionInfoTest {
 
     @Test
     public void testVersionInfo() {
-
         final Version version = new VersionTest();
         versionInfo = new VersionInfo(version);
 
