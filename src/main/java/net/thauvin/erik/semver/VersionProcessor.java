@@ -148,7 +148,9 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private void log(final Diagnostic.Kind kind, final String s) {
-        messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s);
+        if (messager != null) {
+            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s);
+        }
     }
 
     private void note(final String s) {
@@ -157,7 +159,7 @@ public class VersionProcessor extends AbstractProcessor {
 
     private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
         try {
-            return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)));
+            return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim());
         } catch (NumberFormatException ignore) {
             warn("Invalid property value: " + property);
             return defaultValue;
@@ -251,5 +253,4 @@ public class VersionProcessor extends AbstractProcessor {
                 + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
         }
     }
-
 }
