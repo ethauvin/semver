@@ -194,3 +194,7 @@ sonarqube {
         property("sonar.sourceEncoding", "UTF-8")
     }
 }
+
+tasks.sonarqube {
+    dependsOn("jacocoTestReport")
+}
