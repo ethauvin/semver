@@ -39,7 +39,10 @@ repositories {
 
 dependencies {
     implementation 'com.github.spullara.mustache.java:compiler:0.9.6'
-    // compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.12'
+
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.9.0'
+    compileOnly 'com.github.spotbugs:spotbugs-annotations:3.1.11'
+
     testImplementation 'org.testng:testng:6.14.3'
 }
 

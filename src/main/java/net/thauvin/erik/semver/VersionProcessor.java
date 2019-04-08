@@ -34,6 +34,7 @@ package net.thauvin.erik.semver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -69,6 +70,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
@@ -207,6 +209,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
+    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private void writeTemplate(final String type,
                                final VersionInfo versionInfo,
                                final String template)
