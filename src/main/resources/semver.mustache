@@ -22,63 +22,12 @@ public final class {{className}} {
     public final static String BUILDMETA = "{{buildMeta}}";
     public final static String BUILDMETA_PREFIX = "{{buildMetaPrefix}}";
     public final static String SEPARATOR = "{{separator}}";
-
-    /**
-     * The full semantic version string.
-     */
-    public final static String VERSION = Integer.toString(MAJOR) + SEPARATOR + Integer.toString(MINOR) + SEPARATOR
-        + Integer.toString(PATCH) + preReleaseWithPrefix() + buildMetaWithPrefix();
+    public final static String VERSION = "{{version}}";
 
     /**
      * Disables the default constructor.
      */
     private {{className}}() {
         throw new UnsupportedOperationException("Illegal constructor call.");
-    }
-
-    /**
-     * Returns the build metadata with {@value #BUILDMETA_PREFIX} prefix.
-     *
-     * @return The build metadata, if any.
-     */
-    public static String buildMetaWithPrefix() {
-        return buildMetaWithPrefix(BUILDMETA_PREFIX);
-    }
-
-    /**
-     * Returns the build metadata.
-     *
-     * @param prefix Prefix to prepend.
-     * @return The build metadata, if any.
-     */
-    public static String buildMetaWithPrefix(final String prefix) {
-        if (BUILDMETA.length() > 0) {
-            return prefix + BUILDMETA;
-        } else {
-            return BUILDMETA;
-        }
-    }
-
-    /**
-     * Returns the pre-release version with {@value #PRERELEASE_PREFIX} prefix.
-     *
-     * @return The pre-release version, if any.
-     */
-    public static String preReleaseWithPrefix() {
-        return preReleaseWithPrefix(PRERELEASE_PREFIX);
-    }
-
-    /**
-     * Returns the pre-release version.
-     *
-     * @param prefix The prefix to prepend.
-     * @return The pre-release version, if any.
-     */
-    public static String preReleaseWithPrefix(final String prefix) {
-        if (PRERELEASE.length() > 0) {
-            return prefix + PRERELEASE;
-        } else {
-            return PRERELEASE;
-        }
     }
 }

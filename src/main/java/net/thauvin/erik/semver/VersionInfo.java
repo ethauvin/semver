@@ -122,7 +122,7 @@ public class VersionInfo {
      *
      * @param buildMetaPrefix The meta-data prefix.
      */
-    public void setBuildMetaPrefix(String buildMetaPrefix) {
+    public void setBuildMetaPrefix(final String buildMetaPrefix) {
         this.buildMetaPrefix = buildMetaPrefix;
     }
 
@@ -140,7 +140,7 @@ public class VersionInfo {
      *
      * @param className The new class name.
      */
-    public void setClassName(String className) {
+    public void setClassName(final String className) {
         this.className = className;
     }
 
@@ -203,7 +203,7 @@ public class VersionInfo {
      *
      * @param packageName The new package name.
      */
-    public void setPackageName(String packageName) {
+    public void setPackageName(final String packageName) {
         this.packageName = packageName;
     }
 
@@ -257,7 +257,7 @@ public class VersionInfo {
      *
      * @param preReleasePrefix The new pre-release prefix.
      */
-    public void setPreReleasePrefix(String preReleasePrefix) {
+    public void setPreReleasePrefix(final String preReleasePrefix) {
         this.preReleasePrefix = preReleasePrefix;
     }
 
@@ -279,6 +279,14 @@ public class VersionInfo {
         this.project = project;
     }
 
+
+    /**
+     * Sames as {@link #getVersion()}
+     */
+    public String getSemver() {
+        return getVersion();
+    }
+
     /**
      * Returns the version separator.
      *
@@ -289,11 +297,11 @@ public class VersionInfo {
     }
 
     /**
-     * Setsthe version separtor.
+     * Sets the version separator.
      *
      * @param separator The new version separator.
      */
-    public void setSeparator(String separator) {
+    public void setSeparator(final String separator) {
         this.separator = separator;
     }
 

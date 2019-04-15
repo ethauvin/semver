@@ -55,7 +55,7 @@ public class A {
 
 ### Default Template
 
-The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache    ) implements the following static fields:
+The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache    ) implements the following static variables:
 
 Field              | Description                      |  Example
 :------------------|:---------------------------------|:-----------------
@@ -71,13 +71,6 @@ Field              | Description                      |  Example
 `BUILDMETA_PREFIX` | The metadata prefix.             | `+`
 `SEPARATOR`        | The version separator.           | `.`
 
-And the following methods/functions:
-
-Method                   | Description                                               | Example
-:------------------------|:----------------------------------------------------------|:--------
-`preReleaseWithPrefix()` | Returns the pre-release with a prefix, `-` by default.    | `-alpha`
-`buildMetaWithPrefix()`  | Returns the build metadata with a prefix, `+` by default. | `+001`
-
 ### Custom Template
 
 A very simple custom template might look something like:
@@ -91,29 +84,27 @@ import java.util.Date;
 public final class {{className}} {
     public final static String PROJECT = "{{project}}";
     public final static Date DATE = new Date({{epoch}}L);
-    public final static int MAJOR = {{major}};
-    public final static int MINOR = {{minor}};
-    public final static int PATCH = {{patch}};
-    public final static String PRERELEASE = "{{preRelease}}";
-    public final static String BUILDMETA = "{{buildMeta}}";
+    public final static String VERSION = "{{semver}}";
 }
 ```
+
 The mustache variables automatically filled in by the processor are:
 
-Variable               | Description                 | Type
-:----------------------|:----------------------------|:--------
-`{{packageName}}`      | The package name.           | `String`
-`{{className}}`        | The class name.             | `String`
-`{{project}}`          | The project name.           | `String`
-`{{epoch}}`            | The build epoch/unix time.  | `long`
-`{{major}}`            | The major version.          | `int`
-`{{minor}}`            | The minor version.          | `int`
-`{{patch}}`            | The patch version.          | `int`
-`{{preRelease}}`       | The pre-release version.    | `String`
-`{{preReleasePrefix}}` | The pre-release prefix.     | `String`
-`{{buildMeta}}`        | The build metadata version. | `String`
-`{{buildMetaPrefix}}`  | The metadata prefix.        | `String`
-`{{separator}}`        | The version separator.      | `String`
+Variable                      | Description                 | Type
+:-----------------------------|:----------------------------|:--------
+`{{packageName}}`             | The package name.           | `String`
+`{{className}}`               | The class name.             | `String`
+`{{project}}`                 | The project name.           | `String`
+`{{epoch}}`                   | The build epoch/unix time.  | `long`
+`{{major}}`                   | The major version.          | `int`
+`{{minor}}`                   | The minor version.          | `int`
+`{{patch}}`                   | The patch version.          | `int`
+`{{preRelease}}`              | The pre-release version.    | `String`
+`{{preReleasePrefix}}`        | The pre-release prefix.     | `String`
+`{{buildMeta}}`               | The build metadata version. | `String`
+`{{buildMetaPrefix}}`         | The metadata prefix.        | `String`
+`{{separator}}`               | The version separator.      | `String`
+`{{semver}}` or `{{version}}` | The full semantic version.  | `String`
 
 Please also look at this [example](https://github.com/ethauvin/mobibot/blob/master/version.mustache) using [`java.time`](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
 

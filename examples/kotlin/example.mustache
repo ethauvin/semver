@@ -26,11 +26,6 @@ object {{className}} {
     val PRERELEASE = "{{preRelease}}"
     @JvmField
     val BUILDMETA = "{{buildMeta}}"
-
-    /**
-    * The full semantic version string.
-    */
     @JvmField
-    val VERSION = ("$MAJOR.$MINOR.$PATCH" + if (PRERELEASE.isNotEmpty()) "-$PRERELEASE" else ""
-        + if (BUILDMETA.isNotEmpty()) "+$BUILDMETA" else "")
+    val VERSION = "{{version}}"
 }

@@ -90,6 +90,9 @@ public class VersionInfoTest {
         versionInfo.setSeparator("-");
 
         Assert.assertEquals(versionInfo.getVersion(), "3-2-1+001", "getVersion(3-2-1+001)");
+
+        Assert.assertEquals(versionInfo.getVersion(), versionInfo.getSemver(),
+            "getVersion(3-2-1+001) = getSemver(3-2-1+001) ");
     }
 
     @Test
@@ -121,6 +124,8 @@ public class VersionInfoTest {
         Assert.assertEquals(versionInfo.getPackageName(), "com.example", "getPackageName(com.example)");
 
         Assert.assertEquals(versionInfo.getVersion(), "1.2.3-alpha+001", "getVersion(1.2.3-alpha+001)");
+
+        Assert.assertEquals(versionInfo.getVersion(), versionInfo.getSemver(), "getVersion() = getSemver()");
 
         versionInfo.setBuildMetaPrefix("");
 
@@ -187,6 +192,9 @@ public class VersionInfoTest {
                 + '+'
                 + version.buildMeta(),
             "getVersion(version)");
+
+        Assert.assertEquals(versionInfo.getVersion(), versionInfo.getSemver(),
+            "getVersion(version) = getSemver(version)");
 
         Assert.assertEquals(versionInfo.getProject(), version.project(), "getProject(project)");
 

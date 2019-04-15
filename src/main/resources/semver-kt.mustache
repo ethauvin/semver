@@ -32,42 +32,6 @@ object {{className}} {
     val BUILDMEATA_PREFIX = "{{buildMetaPrefix}}"
     @JvmField
     val SEPARATOR = "{{separator}}"
-
-    /**
-    * The full semantic version string.
-    */
     @JvmField
-    val VERSION = "$MAJOR$SEPARATOR$MINOR$SEPARATOR$PATCH" + preReleaseWithPrefix() + buildMetaWithPrefix()
-
-    /**
-     * Returns the pre-release version with prefix.
-     *
-     * @param prefix The prefix, defaults to [PRERELEASE_PREFIX].
-     * @return The pre-release version, if any.
-     */
-    @JvmStatic
-    @JvmOverloads
-    fun preReleaseWithPrefix(prefix: String = PRERELEASE_PREFIX): String {
-        return if (PRERELEASE.isNotEmpty()) {
-            "$prefix$PRERELEASE"
-        } else {
-            PRERELEASE
-        }
-    }
-
-    /**
-     * Returns the build metadata with prefix.
-     *
-     * @param prefix The prefix, defaults to [BUILDMEATA_PREFIX].
-     * @return The build metadata, if any.
-     */
-    @JvmStatic
-    @JvmOverloads
-    fun buildMetaWithPrefix(prefix: String = BUILDMEATA_PREFIX): String {
-        return if (BUILDMETA.isNotEmpty()) {
-            "$prefix$BUILDMETA"
-        } else {
-            BUILDMETA
-        }
-    }
+    val VERSION = "{{version}}"
 }
