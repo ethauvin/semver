@@ -7,6 +7,22 @@ An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annota
 
 This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [__Semantic Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
+## Table of Contents
+- [Examples](#examples)
+- [Template](#template)
+  - [Default Template](#default-template)
+  - [Custom Template](#custom-template)
+- [Elements & Properties](#elements---properties)
+- [Usage with Maven, Gradle, Kotlin and Kobalt](#usage-with-maven--gradle--kotlin-and-kobalt)
+  - [Maven](#maven)
+  - [Gradle](#gradle)
+    - [Class Generation](#class-generation)
+    - [Class & Source Generation](#class---source-generation)
+  - [Kotlin](#kotlin)
+    - [Kotlin & Gradle](#kotlin---gradle)
+  - [Kobalt](#kobalt)
+- [Auto-Increment](#auto-increment)
+  
 ## Examples
 
 * Using annotation elements:
@@ -161,7 +177,7 @@ example.meta=
 > :warning: `keysPrefix` is a new element staring in `1.1.0` and may break older versions when using custom property keys.  
 > :zap: A quick fix is to include `keysPrefix=""` in the annotation to remove the default `version.` prefix.
 
-## Usage with Maven, Grail, Kobalt and Kotlin
+## Usage with Maven, Gradle, Kotlin and Kobalt
 
 ### Maven
 
@@ -202,19 +218,6 @@ The `GeneratedVersion.java` file will now be located in `src/generated`.
 
 Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
 
-### Kobalt
-
-To install and run from [Kobalt](https://beust.com/kobalt/), add the following to the `Build.kt` file:
-
-```gradle
-dependencies {
-    apt("net.thauvin.erik:semver:1.2.0")
-    compileOnly("net.thauvin.erik:semver:1.2.0")
-}
-```
-
-Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
-
 ### Kotlin
 
 The annotation processor also supports [Kotlin](https://kotlinlang.org/).
@@ -230,7 +233,40 @@ open class Main {
 ```
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
-Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for samples on using Gradle ([build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts)) and Kobalt ([Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt)).
+#### Kotlin & Gradle
+
+To install and run from [Gradle](https://gradle.org/), add the following to the `build.gradle.kts` file:
+
+```kotlin
+var semverProcessor = "net.thauvin.erik:semver:1.2.0"
+
+dependencies {
+    kapt(semverProcessor)
+    compileOnly(semverProcessor)
+}
+```
+As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following to the [gradle.properties](https://github.com/ethauvin/semver/blob/master/examples/kotlin/gralde.properties) file:
+
+```ini
+kapt.use.worker.api=true
+```
+
+This option will likely be enabled by default in the future.
+
+Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
+
+### Kobalt
+
+To install and run from [Kobalt](https://beust.com/kobalt/), add the following to the `Build.kt` file:
+
+```gradle
+dependencies {
+    apt("net.thauvin.erik:semver:1.2.0")
+    compileOnly("net.thauvin.erik:semver:1.2.0")
+}
+```
+
+Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
 
 
 ## Auto-Increment
