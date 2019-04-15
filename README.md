@@ -245,7 +245,7 @@ dependencies {
     compileOnly(semverProcessor)
 }
 ```
-As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following to the [gradle.properties](https://github.com/ethauvin/semver/blob/master/examples/kotlin/gralde.properties) file:
+As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following to the `gradle.properties` file:
 
 ```ini
 kapt.use.worker.api=true
