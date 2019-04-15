@@ -151,7 +151,8 @@ public class VersionProcessor extends AbstractProcessor {
 
     private void log(final Diagnostic.Kind kind, final String s) {
         if (messager != null) {
-            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s);
+            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s
+                + System.lineSeparator());
         }
     }
 
