@@ -191,11 +191,17 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 </dependency>
 ```
 
+Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample:
+
+```bash
+mvn compile exec:java
+```
+
 ### Gradle
 
 #### Class Generation
 
-To install and run from [Gradle](https://gradle.org/), add the following to the `build.gradle` file:
+To install and run from [Gradle](https://gradle.org/), add the following to `build.gradle`:
 
 ```gradle
 dependencies {
@@ -208,7 +214,7 @@ The `GeneratedVersion` class will be automatically created in the `build/generat
 
 #### Class & Source Generation
 
-In order to also incorporate the generated source code into the `source tree`, add the following to the very top of the `build.gradle` file:
+In order to also incorporate the generated source code into the `source tree`, add the following to the very top of `build.gradle`:
 
 ```gradle
 compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
@@ -216,7 +222,7 @@ compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${proje
 
 The `GeneratedVersion.java` file will now be located in `src/generated`.
 
-Please look at the [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
+Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
 
 ### Kotlin
 
@@ -235,7 +241,7 @@ The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src
 
 #### Kotlin & Gradle
 
-To install and run from [Gradle](https://gradle.org/), add the following to the `build.gradle.kts` file:
+To install and run from [Gradle](https://gradle.org/), add the following to `build.gradle.kts`:
 
 ```kotlin
 var semverProcessor = "net.thauvin.erik:semver:1.2.0"
@@ -245,19 +251,19 @@ dependencies {
     compileOnly(semverProcessor)
 }
 ```
-As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following to the `gradle.properties` file:
+As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following in `gradle.properties`:
 
 ```ini
 kapt.use.worker.api=true
 ```
 
-This option will likely be enabled by default in the future.
+This option will likely be enabled by default in the future, but is currently not working under Java 10/11 see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203). 
 
 Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
 
 ### Kobalt
 
-To install and run from [Kobalt](https://beust.com/kobalt/), add the following to the `Build.kt` file:
+To install and run from [Kobalt](https://beust.com/kobalt/), add the following to `Build.kt`:
 
 ```gradle
 dependencies {
@@ -266,7 +272,7 @@ dependencies {
 }
 ```
 
-Please look at the [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) file in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) module directory for a sample.
+Please look at [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
 
 
 ## Auto-Increment

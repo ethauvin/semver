@@ -85,6 +85,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle"><img src="https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle" alt="Known Vulnerabilities" /></a> <a href="https://sonarcloud.io/dashboard?id=ethauvin_semver"><img src="https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&amp;metric=alert_status" alt="Quality Gate Status" /></a> <a href="https://travis-ci.org/ethauvin/semver"><img src="https://travis-ci.org/ethauvin/semver.svg?branch=master" alt="Build Status" /></a> <a href="https://ci.appveyor.com/project/ethauvin/semver"><img src="https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true" alt="Build status" /></a> <a href="https://circleci.com/gh/ethauvin/semver/tree/master"><img src="https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield" alt="CircleCI" /></a></p>
 <p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>GeneratedVersion</code> class based on a <a href="https://mustache.github.io/">Mustache</a> template and containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <code>Properties</code> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
 <p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a> and works well in conjunction with the <a href="https://github.com/ethauvin/semver-gradle"><strong>Semantic Version Plugin for Gradle</strong></a>.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#template">Template</a>
+<ul>
+<li><a href="#default-template">Default Template</a></li>
+<li><a href="#custom-template">Custom Template</a></li>
+</ul></li>
+<li><a href="#elements---properties">Elements &amp; Properties</a></li>
+<li><a href="#usage-with-maven--gradle--kotlin-and-kobalt">Usage with Maven, Gradle, Kotlin and Kobalt</a>
+<ul>
+<li><a href="#maven">Maven</a></li>
+<li><a href="#gradle">Gradle</a>
+<ul>
+<li><a href="#class-generation">Class Generation</a></li>
+<li><a href="#class---source-generation">Class &amp; Source Generation</a></li>
+</ul></li>
+<li><a href="#kotlin">Kotlin</a>
+<ul>
+<li><a href="#kotlin---gradle">Kotlin &amp; Gradle</a></li>
+</ul></li>
+<li><a href="#kobalt">Kobalt</a></li>
+</ul></li>
+<li><a href="#auto-increment">Auto-Increment</a></li>
+</ul>
 <h2 id="examples">Examples</h2>
 <ul>
 <li>Using annotation elements:</li>
@@ -116,7 +141,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw">public</span> <span class="kw">class</span> A {</a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">// ...</span></a></code></pre></div>
 <h3 id="default-template">Default Template</h3>
-<p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache">default template</a> implements the following static fields:</p>
+<p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache">default template</a> implements the following static variables:</p>
 <table>
 <thead>
 <tr class="header">
@@ -183,28 +208,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>And the following methods/functions:</p>
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Method</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: left;">Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>preReleaseWithPrefix()</code></td>
-<td style="text-align: left;">Returns the pre-release with a prefix, <code>-</code> by default.</td>
-<td style="text-align: left;"><code>-alpha</code></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>buildMetaWithPrefix()</code></td>
-<td style="text-align: left;">Returns the build metadata with a prefix, <code>+</code> by default.</td>
-<td style="text-align: left;"><code>+001</code></td>
-</tr>
-</tbody>
-</table>
 <h3 id="custom-template">Custom Template</h3>
 <p>A very simple custom template might look something like:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" title="1"><span class="co">/* version.mustache */</span></a>
@@ -215,12 +218,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-6" title="6"><span class="kw">public</span> <span class="dt">final</span> <span class="kw">class</span> {{className}} {</a>
 <a class="sourceLine" id="cb5-7" title="7">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> PROJECT = <span class="st">&quot;{{project}}&quot;</span>;</a>
 <a class="sourceLine" id="cb5-8" title="8">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">Date</span> DATE = <span class="kw">new</span> <span class="bu">Date</span>({{epoch}}L);</a>
-<a class="sourceLine" id="cb5-9" title="9">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> MAJOR = {{major}};</a>
-<a class="sourceLine" id="cb5-10" title="10">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> MINOR = {{minor}};</a>
-<a class="sourceLine" id="cb5-11" title="11">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="dt">int</span> PATCH = {{patch}};</a>
-<a class="sourceLine" id="cb5-12" title="12">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> PRERELEASE = <span class="st">&quot;{{preRelease}}&quot;</span>;</a>
-<a class="sourceLine" id="cb5-13" title="13">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> BUILDMETA = <span class="st">&quot;{{buildMeta}}&quot;</span>;</a>
-<a class="sourceLine" id="cb5-14" title="14">}</a></code></pre></div>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="kw">public</span> <span class="dt">final</span> <span class="dt">static</span> <span class="bu">String</span> VERSION = <span class="st">&quot;{{semver}}&quot;</span>;</a>
+<a class="sourceLine" id="cb5-10" title="10">}</a></code></pre></div>
 <p>The mustache variables automatically filled in by the processor are:</p>
 <table>
 <thead>
@@ -289,6 +288,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tr class="even">
 <td style="text-align: left;"><code>{{separator}}</code></td>
 <td style="text-align: left;">The version separator.</td>
+<td style="text-align: left;"><code>String</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>{{semver}}</code> or <code>{{version}}</code></td>
+<td style="text-align: left;">The full semantic version.</td>
 <td style="text-align: left;"><code>String</code></td>
 </tr>
 </tbody>
@@ -423,7 +427,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="emoji" data-emoji="warning">⚠️</span> <code>keysPrefix</code> is a new element staring in <code>1.1.0</code> and may break older versions when using custom property keys.<br />
 <span class="emoji" data-emoji="zap">⚡</span> A quick fix is to include <code>keysPrefix=""</code> in the annotation to remove the default <code>version.</code> prefix.</p>
 </blockquote>
-<h2 id="usage-with-maven-grail-kobalt-and-kotlin">Usage with Maven, Grail, Kobalt and Kotlin</h2>
+<h2 id="usage-with-maven-gradle-kotlin-and-kobalt">Usage with Maven, Gradle, Kotlin and Kobalt</h2>
 <h3 id="maven">Maven</h3>
 <p>To install and run from <a href="https://maven.apache.org/">Maven</a>, configure an artifact as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">&lt;dependency&gt;</span></a>
@@ -431,9 +435,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb8-3" title="3">    <span class="kw">&lt;artifactId&gt;</span>semver<span class="kw">&lt;/artifactId&gt;</span></a>
 <a class="sourceLine" id="cb8-4" title="4">    <span class="kw">&lt;version&gt;</span>1.2.0<span class="kw">&lt;/version&gt;</span></a>
 <a class="sourceLine" id="cb8-5" title="5"><span class="kw">&lt;/dependency&gt;</span></a></code></pre></div>
+<p>Please look at <a href="https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml">pom.xml</a> in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> directory for a sample:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">mvn</span> compile exec:java</a></code></pre></div>
 <h3 id="gradle">Gradle</h3>
 <h4 id="class-generation">Class Generation</h4>
-<p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to the <code>build.gradle</code> file:</p>
+<p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to <code>build.gradle</code>:</p>
 <pre class="gradle"><code>dependencies {
     annotationProcessor &#39;net.thauvin.erik:semver:1.2.0&#39;
     compileOnly &#39;net.thauvin.erik:semver:1.2.0&#39;
@@ -441,19 +447,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </code></pre>
 <p>The <code>GeneratedVersion</code> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
 <h4 id="class--source-generation">Class &amp; Source Generation</h4>
-<p>In order to also incorporate the generated source code into the <code>source tree</code>, add the following to the very top of the <code>build.gradle</code> file:</p>
+<p>In order to also incorporate the generated source code into the <code>source tree</code>, add the following to the very top of <code>build.gradle</code>:</p>
 <pre class="gradle"><code>compileJava.options.annotationProcessorGeneratedSourcesDirectory = file(&quot;${projectDir}/src/generated/java&quot;)
 </code></pre>
 <p>The <code>GeneratedVersion.java</code> file will now be located in <code>src/generated</code>.</p>
-<p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> module directory for a sample.</p>
-<h3 id="kobalt">Kobalt</h3>
-<p>To install and run from <a href="https://beust.com/kobalt/">Kobalt</a>, add the following to the <code>Build.kt</code> file:</p>
-<pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:1.2.0&quot;)
-    compileOnly(&quot;net.thauvin.erik:semver:1.2.0&quot;)
-}
-</code></pre>
-<p>Please look at the <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a> file in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> module directory for a sample.</p>
+<p>Please look at <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a> in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> directory for a sample.</p>
 <h3 id="kotlin">Kotlin</h3>
 <p>The annotation processor also supports <a href="https://kotlinlang.org/">Kotlin</a>.</p>
 <p>To generate a Kotlin version file, simply specify the <code>type</code> as follows:</p>
@@ -463,7 +461,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb12-4" title="4"><span class="kw">open</span> <span class="kw">class</span> Main {</a>
 <a class="sourceLine" id="cb12-5" title="5"><span class="co">// ...</span></a></code></pre></div>
 <p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache">Kotlin default template</a> implements the same static fields and functions as the <a href="#default-template">Java template</a>.</p>
-<p>Please look at the <a href="https://github.com/ethauvin/semver/tree/master/examples/kotlin">Kotlin example</a> project for samples on using Gradle (<a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a>) and Kobalt (<a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a>).</p>
+<h4 id="kotlin--gradle">Kotlin &amp; Gradle</h4>
+<p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to <code>build.gradle.kts</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">var</span> <span class="va">semverProcessor</span> = <span class="st">&quot;net.thauvin.erik:semver:1.2.0&quot;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">dependencies {</a>
+<a class="sourceLine" id="cb13-4" title="4">    kapt(semverProcessor)</a>
+<a class="sourceLine" id="cb13-5" title="5">    compileOnly(semverProcessor)</a>
+<a class="sourceLine" id="cb13-6" title="6">}</a></code></pre></div>
+<p>As of <a href="https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991">Kotlin 1.2.30</a>, when using <code>kapt</code> you must include the following in <code>gradle.properties</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb14-1" title="1"><span class="dt">kapt.use.worker.api</span><span class="ot">=</span><span class="kw">true</span></a></code></pre></div>
+<p>This option will likely be enabled by default in the future, but is currently not working under Java 10/11 see <a href="https://youtrack.jetbrains.net/issue/KT-26203">KT-26203</a>.</p>
+<p>Please look at the <a href="https://github.com/ethauvin/semver/tree/master/examples/kotlin">Kotlin example</a> project for a <a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a> sample.</p>
+<h3 id="kobalt">Kobalt</h3>
+<p>To install and run from <a href="https://beust.com/kobalt/">Kobalt</a>, add the following to <code>Build.kt</code>:</p>
+<pre class="gradle"><code>dependencies {
+    apt(&quot;net.thauvin.erik:semver:1.2.0&quot;)
+    compileOnly(&quot;net.thauvin.erik:semver:1.2.0&quot;)
+}
+</code></pre>
+<p>Please look at <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a> in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">Java example</a> directory for a sample.</p>
 <h2 id="auto-increment">Auto-Increment</h2>
 <p>Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the <a href="https://github.com/ethauvin/semver-gradle"><strong>Semver Version Plugin for Gradle</strong></a>.</p>
 <p>There are also full <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor">examples</a> in both <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java">Java</a> and <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin">Kotlin</a> showing how to use both the plugin and annotation processor concurrently.</p>
