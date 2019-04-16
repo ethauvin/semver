@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Version: 1.0.1
+# Version: 1.0.2
 #
 
 # set the examples directories
@@ -11,13 +11,13 @@ declare -a dirs=(
     "examples/kotlin")
 java8=true
 
+###
+
 pwd=$PWD
 cyan=$(tput setaf 6)
 green=$(tput setaf 2)
 red=$(tput setaf 1)
 std=$(tput sgr0)
-
-###
 
 if [ "$java8" = true ]
 then
@@ -50,11 +50,11 @@ updateWrappers() {
 
 echo -e "Updating wrappers..."
 
-for d in "${dirs[@]}"; do
-    if [ -d "$d" ]; then
-        cd "$d" || exit 1
+for d in "${!dirs[@]}"; do
+    if [ "$d" -ne 0 ]; then
+        cd "${dirs[d]}" || exit 1
     fi
-    echo -e "    ${cyan}${d}${std}"
+    echo -e "    ${cyan}${dirs[d]}${std}"
     updateWrappers
     cd "$pwd"
 done
