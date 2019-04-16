@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Version: 1.1
+# Version: 1.1.1
 #
 
 # set source and test locations
@@ -15,12 +15,13 @@ declare -a examples=(
     "examples/java run"
     "examples/kotlin run runJava")
 # e.g: empty or javadoc, etc.
-doc="javadoc pandoc"
+gradle_doc="javadoc pandoc"
 # e.g. empty or sonarqube
-sonar="sonarqube"
-
-# gradle default command line args
-opts="--console=plain --no-build-cache --no-daemon"
+gradle_sonar="sonarqube"
+# gradle options for examples
+gradle_opts="--console=plain --no-build-cache --no-daemon"
+# maven arguments for examples
+maven_args="compile exec:java"
 
 ###
 
@@ -52,9 +53,10 @@ checkCopyright() {
 runGradle() {
     cd "$1" || exit 1
     clear
+    reset
     echo -e "> Project: ${cyan}${1}${std} [Gradle]"
     shift
-    ./gradlew $opts clean $@ || exit 1
+    ./gradlew $@ || exit 1
     pause
     cd "$pwd"
 }
@@ -64,9 +66,10 @@ runKobalt() {
     if [ -f kobalt/src/Build.kt ]
     then
         clear
+        reset
         echo -e "> Project: ${cyan}${1}${std} [Kobalt]"
         shift
-        ./kobaltw clean $@ || exit 1
+        ./kobaltw $@ || exit 1
         pause
     fi
     cd "$pwd"
@@ -77,8 +80,10 @@ runMaven() {
     if [ -f pom.xml ]
     then
         clear
+        reset
         echo -e "> Project: ${cyan}${1}${std} [Maven]"
-        mvn clean compile exec:java || exit 1
+        shift
+        mvn $@ || exit 1
         pause
     fi
     cd "$pwd"
@@ -97,41 +102,38 @@ checkDeps() {
     read -p "Check Examples depencencies? [y/n] " cont
     clear
     case $cont in
-        [Yy] )  for ex in "${examples[@]}"
-                do
-                    runGradle $(echo "$ex" | cut -d " " -f 1) dU
-                    runKobalt $(echo "$ex" | cut -d " " -f 1) checkVersions
-                    runMaven $(echo "$ex" | cut -d " " -f 1) versions:display-dependency-updates 
+        * ) for ex in "${!examples[@]}"
+            do
+                runGradle $(echo "${examples[ex]}" | cut -d " " -f 1) dU
+                runKobalt $(echo "${examples[ex]}" | cut -d " " -f 1) checkVersions
+                runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) versions:display-dependency-updates 
+                if [ "$ex" -eq "${#examples}"]
+                then
                     read -p "Continue? [y/n]: " cont
                     clear
                     case $cont in
-                        [Yy] ) continue ;;
-                        * ) return ;;
+                        * ) continue ;;
+                        [Nn] ) return ;;
                     esac
-                done ;;
-        * ) return ;;
+                fi
+            done ;;
+        [Nn] ) return ;;
     esac
 }
 
 gradleCheck() {
     clear
     echo -e "${cyan}Checking Gradle build....${std}"
-    gradle $opts clean check $doc $sonar || exit 1
+    gradle $gradle_opts clean check $gradle_doc $gradle_sonar || exit 1
     pause
 }
 
 runExamples() {
-    for ex in "${examples[@]}"
+    for ex in "${!examples[@]}"
     do
-        runGradle $ex
-        runKobalt $ex
-        runMaven $ex
-        read -p "Continue? [y/n]: " cont
-        clear
-        case $cont in
-            [Yy] ) continue ;;
-            * ) return ;;
-        esac
+        runGradle ${examples[ex]} clean $gradle_opts
+        runKobalt ${examples[ex]} clean
+        runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) clean $maven_args
     done
 }
 
@@ -153,7 +155,7 @@ examplesMenu() {
                 else
                     runGradle ${examples[$(($choice - 1))]}
                     runKobalt ${examples[$(($choice - 1))]}
-                    runMaven ${examples[$(($choice - 1))]}
+                    runMaven $(echo "${examples[$(($choice - 1))]}" | cut -d " " -f 1) $maven_args
                     examplesMenu
                 fi ;;
         * ) return ;;
