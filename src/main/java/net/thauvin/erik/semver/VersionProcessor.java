@@ -165,7 +165,7 @@ public class VersionProcessor extends AbstractProcessor {
 
     private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
         try {
-            return Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim());
+            return Math.abs(Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim()));
         } catch (NumberFormatException ignore) {
             warn("Invalid property value: " + property);
             return defaultValue;
