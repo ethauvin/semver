@@ -71,14 +71,14 @@ bintray {
 task javadocJar(type: Jar, dependsOn: javadoc) {
     group = 'Build'
     description = 'Builds an archive of the javadoc docs.'
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
 task sourceJar(type: Jar) {
     group = 'Build'
     description = 'Builds an archive of the source code.'
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
@@ -151,14 +151,9 @@ tasks.withType(SpotBugsTask) {
 
 tasks.withType(Checkstyle) {
     reports {
-        xml.enabled false
-        html.enabled true
-        //html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+        xml.enabled = false
+        html.enabled = true
     }
-}
-
-checkstyle {
-    toolVersion "8.18"
 }
 
 compileJava {
