@@ -29,6 +29,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package net.thauvin.erik.semver;
 
 /**
@@ -281,7 +282,7 @@ public class VersionInfo {
 
 
     /**
-     * Sames as {@link #getVersion()}
+     * Sames as {@link #getVersion()}.
      */
     public String getSemver() {
         return getVersion();
@@ -307,11 +308,15 @@ public class VersionInfo {
 
     /**
      * Returns the full version string.
-     * <p>
-     * Formatted as:
-     * <blockquote><code>[MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE-PREFIX][PRERELEASE]][[BUILDMETA-PREFIX][BUILDMETA]]</code></blockquote>
-     * <p>
-     * For example:
+     *
+     * <p>Formatted as:
+     * <blockquote>
+     * <code>
+     * [MAJOR][SEPARATOR][MINOR][SEPARATOR][PATCH][[PRERELEASE-PREFIX][PRERELEASE]][[BUILDMETA-PREFIX][BUILDMETA]]
+     * </code>
+     * </blockquote>
+     *
+     * <p>For example:
      * <ul>
      * <li><code>1.0.0</code></li>
      * <li><code>1.0.0-beta</code></li>

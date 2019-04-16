@@ -29,6 +29,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package net.thauvin.erik.semver;
 
 import com.github.mustachejava.DefaultMustacheFactory;
@@ -97,11 +98,13 @@ public class VersionProcessor extends AbstractProcessor {
                     versionInfo.setBuildMeta(
                         p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
                     versionInfo.setBuildMetaPrefix(
-                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(), version.buildMetaPrefix()));
+                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(),
+                            version.buildMetaPrefix()));
                     versionInfo.setPreRelease(
                         p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
                     versionInfo.setPreReleasePrefix(
-                        p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(), version.preReleasePrefix()));
+                        p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(),
+                            version.preReleasePrefix()));
                     versionInfo.setSeparator(
                         p.getProperty(version.keysPrefix() + version.separatorKey(), version.separator()));
                 }
@@ -187,11 +190,11 @@ public class VersionProcessor extends AbstractProcessor {
                         }
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
-                        if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
-                            new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
+                        if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE)
+                            && new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
-                        } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE) &&
-                            version.type().equals(Constants.KOTLIN_TYPE)) {
+                        } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE)
+                            && version.type().equals(Constants.KOTLIN_TYPE)) {
                             template = Constants.DEFAULT_KOTLIN_TEMPLATE;
                         } else {
                             template = version.template();
