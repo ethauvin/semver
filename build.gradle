@@ -1,4 +1,5 @@
 plugins {
+    id 'checkstyle'
     id 'java'
     id 'jacoco'
     id 'maven-publish'
@@ -146,6 +147,18 @@ tasks.withType(SpotBugsTask) {
         html.enabled = true
     }
     excludeFilter = file("$projectDir/config/spotbugs/excludeFilter.xml")
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled false
+        html.enabled true
+        //html.stylesheet resources.text.fromFile('config/xsl/checkstyle-custom.xsl')
+    }
+}
+
+checkstyle {
+    toolVersion "8.18"
 }
 
 compileJava {
