@@ -10,57 +10,55 @@
     <name>Example</name>
 
     <properties>
-        <semver>1.2.0</semver>
+        <semver.version>1.2.0</semver.version>
     </properties>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                        <encoding>UTF-8</encoding>
-                        <generatedSourcesDirectory>src/generated/java</generatedSourcesDirectory>
-                        <annotationProcessorPaths>
-                            <annotationProcessorPath>
-                                <groupId>net.thauvin.erik</groupId>
-                                <artifactId>semver</artifactId>
-                                <version>${semver}</version>
-                            </annotationProcessorPath>
-                        </annotationProcessorPaths>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>1.6.0</version>
-                    <executions>
-                        <execution>
-                            <id>my-execution</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>java</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <mainClass>com.example.Example</mainClass>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 
     <dependencies>
         <dependency>
             <groupId>net.thauvin.erik</groupId>
             <artifactId>semver</artifactId>
-            <version>${semver}</version>
+            <version>${semver.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <generatedSourcesDirectory>src/generated/java</generatedSourcesDirectory>
+                    <annotationProcessorPaths>
+                        <annotationProcessorPath>
+                            <groupId>net.thauvin.erik</groupId>
+                            <artifactId>semver</artifactId>
+                            <version>${semver.version}</version>
+                        </annotationProcessorPath>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>run</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.example.Example</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

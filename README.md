@@ -194,7 +194,7 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample:
 
 ```bash
-mvn compile exec:java
+mvn verify
 ```
 
 ### Gradle
