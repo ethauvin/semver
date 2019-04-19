@@ -91,7 +91,7 @@ public class VersionProcessor extends AbstractProcessor {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            final File propsFile = new File(getEnv(Constants.SEMVER_PROJECT_DIR_ARG, version.properties()));
+            final File propsFile = new File(getProjectDir(version.properties()));
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
@@ -138,9 +138,9 @@ public class VersionProcessor extends AbstractProcessor {
         return versionInfo;
     }
 
-    private String getEnv(String envOption, String fileName) {
+    private String getProjectDir(String fileName) {
         if (processingEnv != null) { // null when testing.
-            final String prop = processingEnv.getOptions().get(envOption);
+            final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
             if (prop != null) {
                 return prop + File.separator + fileName;
             }
@@ -245,7 +245,7 @@ public class VersionProcessor extends AbstractProcessor {
                                final String template)
         throws IOException {
         final MustacheFactory mf = new DefaultMustacheFactory(
-            new File(getEnv(Constants.SEMVER_PROJECT_DIR_ARG, ".")));
+            new File(getProjectDir(".")));
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
