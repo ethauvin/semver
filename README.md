@@ -12,14 +12,14 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 - [Template](#template)
   - [Default Template](#default-template)
   - [Custom Template](#custom-template)
-- [Elements & Properties](#elements---properties)
-- [Usage with Maven, Gradle, Kotlin and Kobalt](#usage-with-maven--gradle--kotlin-and-kobalt)
+- [Elements & Properties](#elements--properties)
+- [Usage with Maven, Gradle, Kotlin and Kobalt](#usage-with-maven-gradle-kotlin-and-kobalt)
   - [Maven](#maven)
   - [Gradle](#gradle)
     - [Class Generation](#class-generation)
-    - [Class & Source Generation](#class---source-generation)
+    - [Class & Source Generation](#class-source-generation)
   - [Kotlin](#kotlin)
-    - [Kotlin & Gradle](#kotlin---gradle)
+    - [Kotlin & Gradle](#kotlin--gradle)
   - [Kobalt](#kobalt)
 - [Auto-Increment](#auto-increment)
   
@@ -253,7 +253,7 @@ dependencies {
 
 kapt {
     arguments {
-        arg("semver.properties", "$projectDir/version.properties")
+        arg("semver.project.dir", projectDir)
     }
 }
 ```
@@ -264,7 +264,7 @@ The arguments block is not required if `kapt` is configured to use the Gradle Wo
 kapt.use.worker.api=true
 ```
 
-This option will likely be enabled by default in the future, but is currently not working under Java 10/11 see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203). 
+This option will likely be enabled by default in the future, but is currently not working under Java 10+ see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203). 
 
 Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
 

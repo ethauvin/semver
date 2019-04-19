@@ -22,7 +22,7 @@ dependencies {
 
 kapt {
     arguments {
-        arg("semver.properties", "$projectDir/version.properties")
+        arg("semver.project.dir", projectDir)
     }
 }
 

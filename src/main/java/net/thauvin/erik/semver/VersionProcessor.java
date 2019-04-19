@@ -35,6 +35,7 @@ package net.thauvin.erik.semver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import com.github.mustachejava.MustacheNotFoundException;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -70,7 +71,7 @@ import java.util.Set;
  * @created 2016-01-13
  * @since 1.0
  */
-@SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROPERTIES_ARG})
+@SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
 
@@ -84,23 +85,13 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
-    private String getEnv(String envOption, String defaultValue) {
-        if (processingEnv != null) { // null when testing.
-            final String prop =  processingEnv.getOptions().get(envOption);
-            if (prop != null) {
-                return prop;
-            }
-        }
-        return defaultValue;
-    }
-
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            final File propsFile = new File(getEnv(Constants.SEMVER_PROPERTIES_ARG, version.properties()));
+            final File propsFile = new File(getEnv(Constants.SEMVER_PROJECT_DIR_ARG, version.properties()));
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
@@ -146,6 +137,17 @@ public class VersionProcessor extends AbstractProcessor {
 
         return versionInfo;
     }
+
+    private String getEnv(String envOption, String fileName) {
+        if (processingEnv != null) { // null when testing.
+            final String prop = processingEnv.getOptions().get(envOption);
+            if (prop != null) {
+                return prop + File.separator + fileName;
+            }
+        }
+        return fileName;
+    }
+
 
     /**
      * {@inheritDoc}
@@ -222,9 +224,10 @@ public class VersionProcessor extends AbstractProcessor {
                         } else {
                             template = version.template();
                         }
+
                         writeTemplate(version.type(), versionInfo, template);
-                    } catch (IOException e) {
-                        error("IOException occurred while running the annotation processor: " + e.getMessage(), e);
+                    } catch (IOException | MustacheNotFoundException e) {
+                        error("An error occurred while running the annotation processor: " + e.getMessage(), e);
                     }
                 }
             }
@@ -241,7 +244,8 @@ public class VersionProcessor extends AbstractProcessor {
                                final VersionInfo versionInfo,
                                final String template)
         throws IOException {
-        final MustacheFactory mf = new DefaultMustacheFactory();
+        final MustacheFactory mf = new DefaultMustacheFactory(
+            new File(getEnv(Constants.SEMVER_PROJECT_DIR_ARG, ".")));
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
@@ -260,7 +264,7 @@ public class VersionProcessor extends AbstractProcessor {
 
         final String fileName = versionInfo.getClassName() + '.' + type;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
-            final String kaptGenDir = getEnv(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, null);
+            final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
