@@ -42,6 +42,7 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedOptions;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -69,6 +70,7 @@ import java.util.Set;
  * @created 2016-01-13
  * @since 1.0
  */
+@SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROPERTIES_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
 
@@ -82,13 +84,23 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
+    private String getEnv(String envOption, String defaultValue) {
+        if (processingEnv != null) { // null when testing.
+            final String prop =  processingEnv.getOptions().get(envOption);
+            if (prop != null) {
+                return prop;
+            }
+        }
+        return defaultValue;
+    }
+
     @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            final File propsFile = new File(version.properties());
+            final File propsFile = new File(getEnv(Constants.SEMVER_PROPERTIES_ARG, version.properties()));
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
@@ -248,19 +260,19 @@ public class VersionProcessor extends AbstractProcessor {
 
         final String fileName = versionInfo.getClassName() + '.' + type;
         if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
-            final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
+            final String kaptGenDir = getEnv(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, null);
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
-            final File versionFile = new File(kaptGenDir, fileName);
-            if (!versionFile.getParentFile().exists() && !versionFile.getParentFile().mkdirs()) {
-                note("Could not create target directory: " + versionFile.getParentFile().getAbsolutePath());
+            final File ktFile = new File(kaptGenDir, fileName);
+            if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
+                note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
-            try (final OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(versionFile),
+            try (final OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(ktFile),
                 StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
-            note("Generated source: " + fileName + " (" + versionFile.getParentFile().getAbsolutePath() + ')');
+            note("Generated source: " + fileName + " (" + ktFile.getParentFile().getAbsolutePath() + ')');
         } else {
             final FileObject jfo = filer.createSourceFile(versionInfo.getPackageName() + '.'
                 + versionInfo.getClassName());

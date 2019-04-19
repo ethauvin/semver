@@ -20,6 +20,12 @@ dependencies {
     implementation(kotlin("stdlib"))
 }
 
+kapt {
+    arguments {
+        arg("semver.properties", "$projectDir/version.properties")
+    }
+}
+
 repositories {
     mavenLocal()
     jcenter()

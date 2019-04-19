@@ -138,6 +138,11 @@ public final class Constants {
      */
     public static final String KOTLIN_TYPE = "kt";
 
+    /**
+     * The argument used to specify the properties file location.
+     */
+    public static final String SEMVER_PROPERTIES_ARG = "semver.properties";
+
 
     /**
      * Disables the default constructor.

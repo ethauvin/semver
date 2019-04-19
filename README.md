@@ -250,8 +250,15 @@ dependencies {
     kapt(semverProcessor)
     compileOnly(semverProcessor)
 }
+
+kapt {
+    arguments {
+        arg("semver.properties", "$projectDir/version.properties")
+    }
+}
 ```
-As of [Kotlin 1.2.30](https://blog.jetbrains.com/kotlin/2019/04/kotlin-1-3-30-released/#more-6991), when using `kapt` you must include the following in `gradle.properties`:
+
+The arguments block is not required if `kapt` is configured to use the Gradle Worker API in `gradle.properties`:
 
 ```ini
 kapt.use.worker.api=true
