@@ -17,7 +17,7 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
   - [Maven](#maven)
   - [Gradle](#gradle)
     - [Class Generation](#class-generation)
-    - [Class & Source Generation](#class-source-generation)
+    - [Class & Source Generation](#class--source-generation)
   - [Kotlin](#kotlin)
     - [Kotlin & Gradle](#kotlin--gradle)
   - [Kobalt](#kobalt)
