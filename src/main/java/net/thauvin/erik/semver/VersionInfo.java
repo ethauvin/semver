@@ -59,17 +59,17 @@ public class VersionInfo {
      * Creates a new object with default values.
      */
     public VersionInfo() {
-        major = Constants.DEFAULT_MAJOR;
-        minor = Constants.DEFAULT_MINOR;
-        patch = Constants.DEFAULT_PATCH;
         buildMeta = Constants.EMPTY;
         buildMetaPrefix = Constants.DEFAULT_BUILDMETA_PREFIX;
+        className = Constants.DEFAULT_CLASS_NAME;
+        minor = Constants.DEFAULT_MINOR;
+        packageName = Constants.EMPTY;
+        patch = Constants.DEFAULT_PATCH;
         preRelease = Constants.EMPTY;
         preReleasePrefix = Constants.DEFAULT_PRERELEASE_PREFIX;
-        separator = Constants.DEFAULT_SEPARATOR;
         project = Constants.EMPTY;
-        className = Constants.DEFAULT_CLASS_NAME;
-        packageName = Constants.EMPTY;
+        separator = Constants.DEFAULT_SEPARATOR;
+        major = Constants.DEFAULT_MAJOR;
     }
 
     /**
@@ -78,17 +78,17 @@ public class VersionInfo {
      * @param version The version object.
      */
     public VersionInfo(final Version version) {
-        major = version.major();
-        minor = version.minor();
-        patch = version.patch();
         buildMeta = version.buildMeta();
         buildMetaPrefix = version.buildMetaPrefix();
+        className = version.className();
+        major = version.major();
+        minor = version.minor();
+        packageName = version.packageName();
+        patch = version.patch();
         preRelease = version.preRelease();
         preReleasePrefix = version.preReleasePrefix();
-        separator = version.separator();
         project = version.project();
-        className = version.className();
-        packageName = version.packageName();
+        separator = version.separator();
     }
 
     /**
@@ -279,7 +279,6 @@ public class VersionInfo {
     public void setProject(final String project) {
         this.project = project;
     }
-
 
     /**
      * Sames as {@link #getVersion()}.
