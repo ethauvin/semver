@@ -52,14 +52,13 @@ import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -85,7 +84,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
-    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
+    @SuppressFBWarnings(value = {"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
@@ -98,7 +97,7 @@ public class VersionProcessor extends AbstractProcessor {
                 final Properties p = new Properties();
 
                 try (final InputStreamReader reader =
-                         new InputStreamReader(new FileInputStream(propsFile), StandardCharsets.UTF_8)) {
+                         new InputStreamReader(Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
                     versionInfo.setProject(
@@ -210,16 +209,16 @@ public class VersionProcessor extends AbstractProcessor {
                     final PackageElement packageElement = (PackageElement) enclosingElement;
                     try {
                         final VersionInfo versionInfo = findValues(version);
-                        if (version.packageName().equals(Constants.EMPTY)) {
+                        if (Constants.EMPTY.equals(version.packageName())) {
                             versionInfo.setPackageName(packageElement.getQualifiedName().toString());
                         }
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
-                        if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE)
+                        if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
                             && new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
-                        } else if (version.template().equals(Constants.DEFAULT_JAVA_TEMPLATE)
-                            && version.type().equals(Constants.KOTLIN_TYPE)) {
+                        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
+                            && Constants.KOTLIN_TYPE.equals(version.type())) {
                             template = Constants.DEFAULT_KOTLIN_TEMPLATE;
                         } else {
                             template = version.template();
@@ -239,7 +238,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    @SuppressFBWarnings(value = "PATH_TRAVERSAL_IN")
+    @SuppressFBWarnings(value = {"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type,
                                final VersionInfo versionInfo,
                                final String template)
@@ -263,7 +262,7 @@ public class VersionProcessor extends AbstractProcessor {
         note("Loaded template: " + templateName);
 
         final String fileName = versionInfo.getClassName() + '.' + type;
-        if (type.equalsIgnoreCase(Constants.KOTLIN_TYPE)) {
+        if (Constants.KOTLIN_TYPE.equalsIgnoreCase(type)) {
             final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
@@ -272,7 +271,7 @@ public class VersionProcessor extends AbstractProcessor {
             if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
                 note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
-            try (final OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(ktFile),
+            try (final OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
                 StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }

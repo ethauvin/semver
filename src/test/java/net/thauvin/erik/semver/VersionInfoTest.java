@@ -32,6 +32,7 @@
 
 package net.thauvin.erik.semver;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -44,6 +45,7 @@ import java.util.Calendar;
  * @created 2016-02-03
  * @since 1.0
  */
+@SuppressFBWarnings("PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS")
 public class VersionInfoTest {
     private final Calendar now = Calendar.getInstance();
     private VersionInfo versionInfo = new VersionInfo();

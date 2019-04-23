@@ -32,6 +32,7 @@
 
 package net.thauvin.erik.semver;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -50,6 +51,7 @@ public class VersionProcessorTest {
     private final VersionProcessor processor = new VersionProcessor();
     private final Version version = new VersionTest();
 
+    @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
     @Test
     public void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Method method = processor.getClass().getDeclaredMethod("findValues", Version.class);
@@ -60,6 +62,7 @@ public class VersionProcessorTest {
         Assert.assertEquals(versionInfo.getProject(), "James Bond", "getProject(James Bond)");
     }
 
+    @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
     @Test
     public void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Properties p = new Properties();
