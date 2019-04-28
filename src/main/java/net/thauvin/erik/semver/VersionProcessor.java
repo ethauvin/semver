@@ -178,26 +178,6 @@ public class VersionProcessor extends AbstractProcessor {
         messager = processingEnv.getMessager();
     }
 
-    private void log(final Diagnostic.Kind kind, final String s) {
-        if (messager != null) {
-            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s
-                + System.lineSeparator());
-        }
-    }
-
-    private void note(final String s) {
-        log(Diagnostic.Kind.NOTE, s);
-    }
-
-    private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
-        try {
-            return Math.abs(Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim()));
-        } catch (NumberFormatException ignore) {
-            warn("Invalid property value: " + property);
-            return defaultValue;
-        }
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -217,8 +197,7 @@ public class VersionProcessor extends AbstractProcessor {
                         }
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
-                        if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
-                            && isLocalTemplate) {
+                        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
                         } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
                             && Constants.KOTLIN_TYPE.equals(version.type())) {
@@ -235,6 +214,26 @@ public class VersionProcessor extends AbstractProcessor {
             }
         }
         return true;
+    }
+
+    private void log(final Diagnostic.Kind kind, final String s) {
+        if (messager != null) {
+            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s
+                + System.lineSeparator());
+        }
+    }
+
+    private void note(final String s) {
+        log(Diagnostic.Kind.NOTE, s);
+    }
+
+    private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
+        try {
+            return Math.abs(Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim()));
+        } catch (NumberFormatException ignore) {
+            warn("Invalid property value: " + property);
+            return defaultValue;
+        }
     }
 
     private void warn(final String s) {
