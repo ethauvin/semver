@@ -70,6 +70,7 @@ import java.util.Set;
  * @created 2016-01-13
  * @since 1.0
  */
+@SuppressWarnings("PMD.GuardLogStatement")
 @SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
@@ -84,7 +85,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
     }
 
-    @SuppressFBWarnings(value = {"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
+    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private VersionInfo findValues(final Version version)
         throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
@@ -137,7 +138,7 @@ public class VersionProcessor extends AbstractProcessor {
         return versionInfo;
     }
 
-    private String getProjectDir(String fileName) {
+    private String getProjectDir(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
             if (prop != null) {
@@ -169,6 +170,7 @@ public class VersionProcessor extends AbstractProcessor {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
     @Override
     public synchronized void init(final ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
@@ -201,6 +203,7 @@ public class VersionProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+        final boolean isLocalTemplate = new File(Constants.DEFAULT_TEMPLATE_NAME).exists();
         for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
             final Version version = element.getAnnotation(Version.class);
             if (element.getKind() == ElementKind.CLASS) {
@@ -215,7 +218,7 @@ public class VersionProcessor extends AbstractProcessor {
                         note("Found version: " + versionInfo.getVersion());
                         final String template;
                         if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
-                            && new File(Constants.DEFAULT_TEMPLATE_NAME).exists()) {
+                            && isLocalTemplate) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
                         } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
                             && Constants.KOTLIN_TYPE.equals(version.type())) {
@@ -238,7 +241,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    @SuppressFBWarnings(value = {"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
+    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type,
                                final VersionInfo versionInfo,
                                final String template)

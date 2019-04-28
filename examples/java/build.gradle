@@ -4,7 +4,8 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
-// ./gradlew
+// ./gradlew run
+// ./gradlew runExample
 
 defaultTasks 'run'
 
@@ -15,7 +16,7 @@ targetCompatibility = 1.8
 
 compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 
-mainClassName = 'com.example.Example'
+mainClassName = 'com.example.App'
 
 repositories {
     mavenLocal()
@@ -25,4 +26,11 @@ repositories {
 dependencies {
     annotationProcessor semverProcessor
     compileOnly semverProcessor
+}
+
+task runExample(type: JavaExec) {
+    group = 'application'
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'com.example.Example'
 }

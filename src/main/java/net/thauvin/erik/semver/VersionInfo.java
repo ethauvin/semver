@@ -39,6 +39,7 @@ package net.thauvin.erik.semver;
  * @created 2016-01-16
  * @since 1.0
  */
+@SuppressWarnings("PMD.DataClass")
 public class VersionInfo {
     private final long epoch = System.currentTimeMillis();
 

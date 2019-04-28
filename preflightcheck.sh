@@ -8,8 +8,8 @@ ext=".java"
 java8=true
 # e.g: <example directory> <gradle args...>
 declare -a examples=(
-    "examples/java run"
-    "examples/kotlin run runJava")
+    "examples/java run runExample"
+    "examples/kotlin run runJava runExample runJavaExample")
 # e.g: empty or javadoc, etc.
 gradle_doc="javadoc pandoc"
 # e.g. empty or sonarqube

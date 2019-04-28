@@ -6,8 +6,10 @@ plugins {
 }
 
 // ./gradlew
+// ./gradlew run
 // ./gradlew runJava
-// ./gradlew run runJava
+// ./gradlew runExample
+// ./gradlew runJavaExample
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
@@ -32,11 +34,25 @@ repositories {
 }
 
 application {
-    mainClassName = "com.example.Main"
+    mainClassName = "com.example.App"
 }
 
 tasks {
     register("runJava", JavaExec::class) {
+        group = "application"
+        main = "com.example.JavaApp"
+        classpath = sourceSets["main"].runtimeClasspath
+
+    }
+
+    register("runJavaExample", JavaExec::class) {
+        group = "application"
+        main = "com.example.JavaExample"
+        classpath = sourceSets["main"].runtimeClasspath
+    }
+
+    register("runExample", JavaExec::class) {
+        group = "application"
         main = "com.example.Example"
         classpath = sourceSets["main"].runtimeClasspath
     }

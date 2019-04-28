@@ -50,6 +50,7 @@ public class VersionInfoTest {
     private final Calendar now = Calendar.getInstance();
     private VersionInfo versionInfo = new VersionInfo();
 
+    @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     @Test
     public void testGetVersion() {
         Assert.assertEquals(versionInfo.getVersion(), "1.0.0", "getVersion(1.0.0)");

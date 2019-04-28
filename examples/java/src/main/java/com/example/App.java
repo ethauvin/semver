@@ -1,12 +1,21 @@
 package com.example;
 
+import net.thauvin.erik.semver.Version;
+
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
-public class Example {
+@Version(properties = "version.properties")
+public final class App {
+    /**
+     * Command line interface.
+     *
+     * @param args The command line parameters.
+     */
     public static void main(final String... args) {
-        final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z");
+        final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z", Locale.US);
 
-        System.out.println("-- From Java ----------------------------------------");
+        System.out.println("-----------------------------------------------------");
 
         System.out.println("  Version: " + GeneratedVersion.PROJECT + ' ' + GeneratedVersion.VERSION);
 

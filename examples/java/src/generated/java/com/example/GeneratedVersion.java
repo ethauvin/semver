@@ -6,15 +6,23 @@ package com.example;
 
 import java.util.Date;
 
+/**
+ * Provides semantic version information.
+ *
+ * @author <a href="https://github.com/ethauvin/semver">Semantic Version Annotation Processor</a>
+ */
 public final class GeneratedVersion {
-    public final static String PROJECT = "Java Example";
-    public final static Date BUILDDATE = new Date(1555703771370L);
-    public final static int MAJOR = 2;
-    public final static int MINOR = 0;
-    public final static int PATCH = 52;
+    public final static String PROJECT = "Java App";
+    public final static Date BUILDDATE = new Date(1556420335600L);
+    public final static int MAJOR = 11;
+    public final static int MINOR = 11;
+    public final static int PATCH = 20;
     public final static String PRERELEASE = "beta";
+    public final static String PRERELEASE_PREFIX = "-";
     public final static String BUILDMETA = "007";
-    public final static String VERSION = "2.0.52-beta+007";
+    public final static String BUILDMETA_PREFIX = "+";
+    public final static String SEPARATOR = ".";
+    public final static String VERSION = "11.11.20-beta+007";
 
     /**
      * Disables the default constructor.
