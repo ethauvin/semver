@@ -240,7 +240,8 @@ public class VersionProcessor extends AbstractProcessor {
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
         throws IOException {
-        final MustacheFactory mf = new DefaultMustacheFactory(getLocalFile(""));
+        final File dir = getLocalFile("");
+        final MustacheFactory mf = new DefaultMustacheFactory(dir);
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
@@ -252,7 +253,7 @@ public class VersionProcessor extends AbstractProcessor {
                 templateName = "default (Kotlin)";
                 break;
             default:
-                templateName = mustache.getName();
+                templateName = mustache.getName() + " (" + dir.getAbsolutePath() + ')';
                 break;
         }
         note("Loaded template: " + templateName);
