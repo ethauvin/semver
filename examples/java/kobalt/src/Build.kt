@@ -15,7 +15,7 @@ val example = project {
     name = "example"
     version = "1.0"
 
-    val mainClassName = "com.example.Example"
+    val mainClassName = "com.example.App"
     val processorJar = "net.thauvin.erik:semver:1.2.0"
 
     dependencies {
@@ -41,5 +41,10 @@ val example = project {
 
     application {
         mainClass = mainClassName
+    }
+
+    application {
+        taskName = "runExample"
+        mainClass = "com.example.Example"
     }
 }
