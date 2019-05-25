@@ -248,7 +248,7 @@ var semverProcessor = "net.thauvin.erik:semver:1.2.0"
 
 dependencies {
     kapt(semverProcessor)
-    compileOnly(semverProcessor)
+    implementation (semverProcessor)
 }
 
 kapt {
