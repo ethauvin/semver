@@ -9,7 +9,7 @@ import java.util.Date;
 
 public final class ExampleVersion {
     public static final String PROJECT = "Java Example";
-    public static final Date BUILDDATE = new Date(1558819540129L);
+    public static final Date BUILDDATE = new Date(1558820496856L);
     public static final String VERSION = "8.4.97-alpha+T800";
 
     /**
