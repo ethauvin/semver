@@ -90,14 +90,14 @@ public class VersionProcessor extends AbstractProcessor {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            final File propsFile = getPropertiesFile(version.properties());
+            final File propsFile = getLocalFile(version.properties());
             if (propsFile.isFile() && propsFile.canRead()) {
-                note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
+                note("Found properties: " + propsFile.getName() + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
                 final Properties p = new Properties();
 
-                try (final InputStreamReader reader = new InputStreamReader(Files.newInputStream(propsFile.toPath()),
-                                                                            StandardCharsets.UTF_8)) {
+                try (final InputStreamReader reader = new InputStreamReader(
+                    Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
                     versionInfo.setProject(
@@ -136,14 +136,14 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     @SuppressFBWarnings("PATH_TRAVERSAL_IN")
-    private File getPropertiesFile(final String fileName) {
+    private File getLocalFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
             if (prop != null) {
                 return new File(prop, fileName);
             }
         }
-        return new File(fileName);
+        return new File(new File("").getAbsolutePath(), fileName);
     }
 
     /**
@@ -180,7 +180,7 @@ public class VersionProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
-        final boolean isLocalTemplate = new File(Constants.DEFAULT_TEMPLATE_NAME).exists();
+        final boolean isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
         for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
             final Version version = element.getAnnotation(Version.class);
             if (element.getKind() == ElementKind.CLASS) {
@@ -240,7 +240,7 @@ public class VersionProcessor extends AbstractProcessor {
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
         throws IOException {
-        final MustacheFactory mf = new DefaultMustacheFactory(getPropertiesFile("."));
+        final MustacheFactory mf = new DefaultMustacheFactory(getLocalFile(""));
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
