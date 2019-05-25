@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     annotationProcessor semverProcessor
-    compileOnly semverProcessor
+    implementation semverProcessor
 }
 
 task runExample(type: JavaExec) {
