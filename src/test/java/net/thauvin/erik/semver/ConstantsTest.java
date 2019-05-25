@@ -38,6 +38,8 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 /**
  * The <code>ConstantsTest</code> class.
  *
@@ -48,12 +50,12 @@ import java.util.List;
 public class ConstantsTest {
     @Test
     public void testDefaults() {
-        Assert.assertEquals(Constants.DEFAULT_MAJOR, 1, "major");
-        Assert.assertEquals(Constants.DEFAULT_MINOR, 0, "minor");
-        Assert.assertEquals(Constants.DEFAULT_PATCH, 0, "patch");
-        Assert.assertEquals(Constants.DEFAULT_PRERELEASE_PREFIX, "-", "preRelease");
-        Assert.assertEquals(Constants.DEFAULT_BUILDMETA_PREFIX, "+", "buildMeta");
-        Assert.assertEquals(Constants.DEFAULT_SEPARATOR, ".", "separator");
+        assertEquals(Constants.DEFAULT_MAJOR, 1, "major");
+        assertEquals(Constants.DEFAULT_MINOR, 0, "minor");
+        assertEquals(Constants.DEFAULT_PATCH, 0, "patch");
+        assertEquals(Constants.DEFAULT_PRERELEASE_PREFIX, "-", "preRelease");
+        assertEquals(Constants.DEFAULT_BUILDMETA_PREFIX, "+", "buildMeta");
+        assertEquals(Constants.DEFAULT_SEPARATOR, ".", "separator");
     }
 
     @Test

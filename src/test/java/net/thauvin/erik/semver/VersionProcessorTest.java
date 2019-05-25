@@ -33,12 +33,13 @@
 package net.thauvin.erik.semver;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * The <code>VersionProcessorTest</code> class.
@@ -58,8 +59,8 @@ public class VersionProcessorTest {
         method.setAccessible(true);
         final VersionInfo versionInfo = (VersionInfo) method.invoke(processor, version);
 
-        Assert.assertEquals(versionInfo.getVersion(), "0-0-7:vodka++martini", "getVersion(0-0-7:vodka++martin)");
-        Assert.assertEquals(versionInfo.getProject(), "James Bond", "getProject(James Bond)");
+        assertEquals(versionInfo.getVersion(), "0-0-7:vodka++martini", "getVersion(0-0-7:vodka++martin)");
+        assertEquals(versionInfo.getProject(), "James Bond", "getProject(James Bond)");
     }
 
     @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
@@ -71,13 +72,13 @@ public class VersionProcessorTest {
         p.setProperty("3", "zero");
         p.setProperty("4", " 4 ");
 
-        final Method method = processor.getClass().getDeclaredMethod(
-            "parseIntProperty", Properties.class, String.class, int.class);
+        final Method method = processor.getClass().getDeclaredMethod("parseIntProperty", Properties.class, String.class,
+                                                                     int.class);
         method.setAccessible(true);
 
-        Assert.assertEquals(method.invoke(processor, p, "1", -1), 1, "parseIntProperty(1)");
-        Assert.assertEquals(method.invoke(processor, p, "2", -1), -1, "parseIntProperty(2.1)");
-        Assert.assertEquals(method.invoke(processor, p, "3", -1), -1, "parseIntProperty(zero)");
-        Assert.assertEquals(method.invoke(processor, p, "4", -1), 4, "parseIntProperty( 4 )");
+        assertEquals(method.invoke(processor, p, "1", -1), 1, "parseIntProperty(1)");
+        assertEquals(method.invoke(processor, p, "2", -1), -1, "parseIntProperty(2.1)");
+        assertEquals(method.invoke(processor, p, "3", -1), -1, "parseIntProperty(zero)");
+        assertEquals(method.invoke(processor, p, "4", -1), 4, "parseIntProperty( 4 )");
     }
 }
