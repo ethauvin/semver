@@ -86,19 +86,18 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
-    private VersionInfo findValues(final Version version)
-        throws IOException {
+    private VersionInfo findValues(final Version version) throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
         if (version.properties().length() > 0) {
-            final File propsFile = new File(getProjectDir(version.properties()));
+            final File propsFile = getPropertiesFile(version.properties());
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
                 final Properties p = new Properties();
 
-                try (final InputStreamReader reader =
-                         new InputStreamReader(Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
+                try (final InputStreamReader reader = new InputStreamReader(Files.newInputStream(propsFile.toPath()),
+                                                                            StandardCharsets.UTF_8)) {
                     p.load(reader);
 
                     versionInfo.setProject(
@@ -112,13 +111,11 @@ public class VersionProcessor extends AbstractProcessor {
                     versionInfo.setBuildMeta(
                         p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
                     versionInfo.setBuildMetaPrefix(
-                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(),
-                            version.buildMetaPrefix()));
+                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(), version.buildMetaPrefix()));
                     versionInfo.setPreRelease(
                         p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
-                    versionInfo.setPreReleasePrefix(
-                        p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(),
-                            version.preReleasePrefix()));
+                    versionInfo.setPreReleasePrefix(p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(),
+                                                                  version.preReleasePrefix()));
                     versionInfo.setSeparator(
                         p.getProperty(version.keysPrefix() + version.separatorKey(), version.separator()));
                 }
@@ -130,24 +127,24 @@ public class VersionProcessor extends AbstractProcessor {
                     findOrRead = "read";
                 }
                 error("Could not " + findOrRead + ": " + propsFile);
-                throw new FileNotFoundException("Could not " + findOrRead + " the specified file: `"
-                    + propsFile.getAbsolutePath() + '`');
+                throw new FileNotFoundException(
+                    "Could not " + findOrRead + " the specified file: `" + propsFile.getAbsolutePath() + '`');
             }
         }
 
         return versionInfo;
     }
 
-    private String getProjectDir(final String fileName) {
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
+    private File getPropertiesFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
             if (prop != null) {
-                return prop + File.separator + fileName;
+                return new File(prop, fileName);
             }
         }
-        return fileName;
+        return new File(fileName);
     }
-
 
     /**
      * {@inheritDoc}
@@ -199,8 +196,8 @@ public class VersionProcessor extends AbstractProcessor {
                         final String template;
                         if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
                             template = Constants.DEFAULT_TEMPLATE_NAME;
-                        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())
-                            && Constants.KOTLIN_TYPE.equals(version.type())) {
+                        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
+                            .equals(version.type())) {
                             template = Constants.DEFAULT_KOTLIN_TEMPLATE;
                         } else {
                             template = version.template();
@@ -218,8 +215,8 @@ public class VersionProcessor extends AbstractProcessor {
 
     private void log(final Diagnostic.Kind kind, final String s) {
         if (messager != null) {
-            messager.printMessage(kind, '[' + VersionProcessor.class.getSimpleName() + "] " + s
-                + System.lineSeparator());
+            messager.printMessage(kind,
+                                  '[' + VersionProcessor.class.getSimpleName() + "] " + s + System.lineSeparator());
         }
     }
 
@@ -227,11 +224,11 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.NOTE, s);
     }
 
-    private int parseIntProperty(final Properties p, final String property, final int defaultValue) {
+    private int parseIntProperty(final Properties p, final String key, final int defaultValue) {
         try {
-            return Math.abs(Integer.parseInt(p.getProperty(property, Integer.toString(defaultValue)).trim()));
+            return Math.abs(Integer.parseInt(p.getProperty(key, Integer.toString(defaultValue)).trim()));
         } catch (NumberFormatException ignore) {
-            warn("Invalid property value: " + property);
+            warn("Invalid property value: " + key);
             return defaultValue;
         }
     }
@@ -241,12 +238,9 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
-    private void writeTemplate(final String type,
-                               final VersionInfo versionInfo,
-                               final String template)
+    private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
         throws IOException {
-        final MustacheFactory mf = new DefaultMustacheFactory(
-            new File(getProjectDir(".")));
+        final MustacheFactory mf = new DefaultMustacheFactory(getPropertiesFile("."));
         final Mustache mustache = mf.compile(template);
 
         final String templateName;
@@ -274,18 +268,17 @@ public class VersionProcessor extends AbstractProcessor {
                 note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
             try (final OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
-                StandardCharsets.UTF_8)) {
+                                                                       StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + ktFile.getParentFile().getAbsolutePath() + ')');
         } else {
-            final FileObject jfo = filer.createSourceFile(versionInfo.getPackageName() + '.'
-                + versionInfo.getClassName());
+            final FileObject jfo = filer.createSourceFile(
+                versionInfo.getPackageName() + '.' + versionInfo.getClassName());
             try (final Writer writer = jfo.openWriter()) {
                 mustache.execute(writer, versionInfo).flush();
             }
-            note("Generated source: " + fileName + " ("
-                + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
+            note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');
         }
     }
 }
