@@ -1,15 +1,18 @@
 # Change Log
 
-## [Unreleased](https://github.com/ethauvin/semver/tree/HEAD)
-
-[Full Changelog](https://github.com/ethauvin/semver/compare/1.1.1...HEAD)
+## [1.2.0](https://github.com/ethauvin/semver/tree/1.2.0) (2019-05-25)
+[Full Changelog](https://github.com/ethauvin/semver/compare/1.1.1...1.2.0)
 
 **Implemented enhancements:**
 
+- Calculate the version internally. [\#4](https://github.com/ethauvin/semver/issues/4)
+- Attempt to compile non-existent Java source in Gradle project using Kapt [\#3](https://github.com/ethauvin/semver/issues/3)
 - kapt and Kotlin 1.3.30 require kapt.use.worker.api=true [\#2](https://github.com/ethauvin/semver/issues/2)
 
 **Fixed bugs:**
 
+- Default template is not found in 1.1.1 [\#5](https://github.com/ethauvin/semver/issues/5)
+- Attempt to compile non-existent Java source in Gradle project using Kapt [\#3](https://github.com/ethauvin/semver/issues/3)
 - kapt and Kotlin 1.3.30 require kapt.use.worker.api=true [\#2](https://github.com/ethauvin/semver/issues/2)
 
 ## [1.1.1](https://github.com/ethauvin/semver/tree/1.1.1) (2019-03-31)
