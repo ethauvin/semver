@@ -28,6 +28,11 @@ dependencies {
     implementation semverProcessor
 }
 
+// For Java 12+
+tasks.withType(JavaCompile) {
+  options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+}
+
 task runExample(type: JavaExec) {
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath

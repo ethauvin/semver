@@ -18,6 +18,7 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
   - [Gradle](#gradle)
     - [Class Generation](#class-generation)
     - [Class & Source Generation](#class--source-generation)
+    - [Java 12](#java-12)
   - [Kotlin](#kotlin)
     - [Kotlin & Gradle](#kotlin--gradle)
   - [Kobalt](#kobalt)
@@ -221,6 +222,19 @@ compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${proje
 ```
 
 The `GeneratedVersion.java` file will now be located in `src/generated`.
+
+
+#### Java 12
+
+When using properties file (`version.properties`) under Java 12+ and Gradle 5.4.1+, the directory containing the properties file must be specified using the `semver.project.dir` processor argument.
+
+For example, if the properties file is in the Gradle project directory:
+
+```gradle
+tasks.withType(JavaCompile) {
+  options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+}
+```
 
 Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
 
