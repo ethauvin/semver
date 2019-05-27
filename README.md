@@ -1,9 +1,9 @@
 #  Semantic Version Annotation Processor
 
-[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver) [ ![Download](https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg) ](https://bintray.com/ethauvin/maven/SemVer/_latestVersion)  
+[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver) [ ![Download](https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg) ](https://bintray.com/ethauvin/maven/SemVer/_latestVersion)\
 [![Known Vulnerabilities](https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver) [![Build Status](https://travis-ci.org/ethauvin/semver.svg?branch=master)](https://travis-ci.org/ethauvin/semver) [![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver) [![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
 
-An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a `Properties` file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
+An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a [Properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
 This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [__Semantic Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
@@ -13,17 +13,16 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
   - [Default Template](#default-template)
   - [Custom Template](#custom-template)
 - [Elements & Properties](#elements--properties)
-- [Usage with Maven, Gradle, Kotlin and Kobalt](#usage-with-maven-gradle-kotlin-and-kobalt)
-  - [Maven](#maven)
-  - [Gradle](#gradle)
-    - [Class Generation](#class-generation)
-    - [Class & Source Generation](#class--source-generation)
-    - [Java 12](#java-12)
-  - [Kotlin](#kotlin)
-    - [Kotlin & Gradle](#kotlin--gradle)
-  - [Kobalt](#kobalt)
+- [Maven](#maven)
+- [Gradle](#gradle)
+  - [Class Generation](#class-generation)
+  - [Class & Source Generation](#class--source-generation)
+  - [Java 12](#java-12)
+- [Kotlin](#kotlin)
+  - [Kotlin & Gradle](#kotlin--gradle)
+- [Kobalt](#kobalt)
 - [Auto-Increment](#auto-increment)
-  
+
 ## Examples
 
 * Using annotation elements:
@@ -36,7 +35,7 @@ public class A {
 // ...
 ```
 
-* Or using a [properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file:
+* Or using a [properties](hhttps://github.com/ethauvin/semver/blob/master/examples/java/version.properties) file:
 
 ```java
 import net.thauvin.erik.semver.Version;
@@ -54,11 +53,11 @@ version.patch=0
 version.prerelease=beta
 ```
 
-[View Example](https://github.com/ethauvin/semver/tree/master/examples)
+[View Examples](https://github.com/ethauvin/semver/tree/master/examples)
 
 ## Template
 
-Upon running the annotation processor, a source file [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable [Mustache](https://mustache.github.io/) template.
+Upon running the annotation processor, a source file [GeneratedVersion.java](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) is automatically generated with static methods to access the semantic version data. The source is based on a fully customizable Mustache [template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache).
 
 To use your own template, simply create a `version.mustache` file in the project's root directory. The processor will automatically look for it.
 
@@ -72,7 +71,7 @@ public class A {
 
 ### Default Template
 
-The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache    ) implements the following static variables:
+The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache) implements the following static variables:
 
 Field              | Description                      |  Example
 :------------------|:---------------------------------|:-----------------
@@ -175,12 +174,10 @@ example.meta=
 # ...
 ```
 
-> :warning: `keysPrefix` is a new element staring in `1.1.0` and may break older versions when using custom property keys.  
+> :warning: `keysPrefix` is a new element staring in `1.1.0` and may break older versions when using custom property keys.\
 > :zap: A quick fix is to include `keysPrefix=""` in the annotation to remove the default `version.` prefix.
 
-## Usage with Maven, Gradle, Kotlin and Kobalt
-
-### Maven
+## Maven
 
 To install and run from [Maven](https://maven.apache.org/), configure an artifact as follows:
 
@@ -192,17 +189,17 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 </dependency>
 ```
 
-Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample:
+Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample:
 
 ```bash
 mvn verify
 ```
 
-### Gradle
+## Gradle
 
-#### Class Generation
+### Class Generation
 
-To install and run from [Gradle](https://gradle.org/), add the following to `build.gradle`:
+To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
 dependencies {
@@ -211,24 +208,25 @@ dependencies {
 }
 ```
 
-The `GeneratedVersion` class will be automatically created in the `build/generated` directory upon compiling.
+The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) class will be automatically created in the `build/generated` directory upon compiling.
 
-#### Class & Source Generation
+Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
 
-In order to also incorporate the generated source code into the `source tree`, add the following to the very top of `build.gradle`:
+### Class & Source Generation
+
+In order to also incorporate the generated source code into the `source tree`, add the following to the very top of [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
 compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
 ```
 
-The `GeneratedVersion.java` file will now be located in `src/generated`.
+The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) file will now be located in `src/generated`.
 
-
-#### Java 12
+### Java 12
 
 When using properties file (`version.properties`) under Java 12+ and Gradle 5.4.1+, the directory containing the properties file must be specified using the `semver.project.dir` processor argument.
 
-For example, if the properties file is in the Gradle project directory:
+For example, if the properties file is in the Gradle project directory, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
 tasks.withType(JavaCompile) {
@@ -236,9 +234,7 @@ tasks.withType(JavaCompile) {
 }
 ```
 
-Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
-
-### Kotlin
+## Kotlin
 
 The annotation processor also supports [Kotlin](https://kotlinlang.org/).
 
@@ -253,9 +249,11 @@ open class Main {
 ```
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
-#### Kotlin & Gradle
+Please look at the [examples/kotlin](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
 
-To install and run from [Gradle](https://gradle.org/), add the following to `build.gradle.kts`:
+### Kotlin & Gradle
+
+To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts):
 
 ```kotlin
 var semverProcessor = "net.thauvin.erik:semver:1.2.0"
@@ -272,19 +270,17 @@ kapt {
 }
 ```
 
-The arguments block is not required if `kapt` is configured to use the Gradle Worker API in `gradle.properties`:
+The arguments block is not required if `kapt` is configured to use the Gradle Worker API in [gradle.properties](https://github.com/ethauvin/semver/blob/master/examples/kotlin/gradle.properties):
 
 ```ini
 kapt.use.worker.api=true
 ```
 
-This option will likely be enabled by default in the future, but is currently not working under Java 10+ see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203). 
+This option will likely be enabled by default in the future, but is currently not working under Java 10+ see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203).
 
-Please look at the [Kotlin example](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
+## Kobalt
 
-### Kobalt
-
-To install and run from [Kobalt](https://beust.com/kobalt/), add the following to `Build.kt`:
+To install and run from [Kobalt](https://beust.com/kobalt/), add the following to [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt):
 
 ```gradle
 dependencies {
@@ -293,7 +289,7 @@ dependencies {
 }
 ```
 
-Please look at [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) in the [Java example](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
+Please look at [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
 
 
 ## Auto-Increment
