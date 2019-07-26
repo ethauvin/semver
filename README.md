@@ -230,7 +230,9 @@ For example, if the properties file is in the Gradle project directory, add the 
 
 ```gradle
 tasks.withType(JavaCompile) {
-  options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+    if (JavaVersion.current().isJava12Compatible()) {
+        options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+    }
 }
 ```
 
