@@ -14,8 +14,6 @@ final def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
-
 mainClassName = 'com.example.App'
 
 repositories {
@@ -29,6 +27,7 @@ dependencies {
 }
 
 tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
     if (JavaVersion.current().isJava12Compatible()) {
         options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
     }

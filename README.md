@@ -214,19 +214,21 @@ Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/exa
 
 ### Class & Source Generation
 
-In order to also incorporate the generated source code into the `source tree`, add the following to the very top of [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
+In order to also incorporate the generated source code into the `source tree`, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
-compileJava.options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
+tasks.withType(JavaCompile) {
+    options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
+}
 ```
 
 The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) file will now be located in `src/generated`.
 
 ### Java 12
 
-When using properties file (`version.properties`) under Java 12+ and Gradle 5.4.1+, the directory containing the properties file must be specified using the `semver.project.dir` processor argument.
+Under Java 12+ (Gradle 5.4.1+), the directory containing the configuration files (`version.properties`, `version.mustache`) must be specified using the `semver.project.dir` processor argument.
 
-For example, if the properties file is in the Gradle project directory, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
+For example, if the configuration files are in the Gradle project directory, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
 tasks.withType(JavaCompile) {
@@ -272,7 +274,7 @@ kapt {
 }
 ```
 
-The directory containing the properties file (`version.properties`) must be specified using the `semver.project.dir` processor argument.
+The directory containing the configuration files (`version.properties`, `version.mustache`) must be specified using the `semver.project.dir` processor argument.
 
 ## Kobalt
 
