@@ -262,7 +262,7 @@ var semverProcessor = "net.thauvin.erik:semver:1.2.0"
 
 dependencies {
     kapt(semverProcessor)
-    implementation (semverProcessor)
+    implementation(semverProcessor)
 }
 
 kapt {
@@ -272,13 +272,7 @@ kapt {
 }
 ```
 
-The arguments block is not required if `kapt` is configured to use the Gradle Worker API in [gradle.properties](https://github.com/ethauvin/semver/blob/master/examples/kotlin/gradle.properties):
-
-```ini
-kapt.use.worker.api=true
-```
-
-This option will likely be enabled by default in the future, but is currently not working under Java 10+ see [KT-26203](https://youtrack.jetbrains.net/issue/KT-26203).
+The directory containing the properties file (`version.properties`) must be specified using the `semver.project.dir` processor argument.
 
 ## Kobalt
 
