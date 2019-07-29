@@ -17,7 +17,6 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 - [Gradle](#gradle)
   - [Class Generation](#class-generation)
   - [Class & Source Generation](#class--source-generation)
-  - [Java 12](#java-12)
 - [Kotlin](#kotlin)
   - [Kotlin & Gradle](#kotlin--gradle)
 - [Kobalt](#kobalt)
@@ -206,7 +205,13 @@ dependencies {
     annotationProcessor 'net.thauvin.erik:semver:1.2.0'
     implementation 'net.thauvin.erik:semver:1.2.0'
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+}
 ```
+
+The directory containing the configuration files (`version.properties`, `version.mustache`) must be specified using the `semver.project.dir` processor argument.
 
 The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) class will be automatically created in the `build/generated` directory upon compiling.
 
@@ -223,20 +228,6 @@ tasks.withType(JavaCompile) {
 ```
 
 The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) file will now be located in `src/generated`.
-
-### Java 12
-
-Under Java 12+ (Gradle 5.4.1+), the directory containing the configuration files (`version.properties`, `version.mustache`) must be specified using the `semver.project.dir` processor argument.
-
-For example, if the configuration files are in the Gradle project directory, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
-
-```gradle
-tasks.withType(JavaCompile) {
-    if (JavaVersion.current().isJava12Compatible()) {
-        options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
-    }
-}
-```
 
 ## Kotlin
 
