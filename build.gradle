@@ -44,7 +44,7 @@ dependencies {
     implementation 'com.github.spullara.mustache.java:compiler:0.9.6'
 
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.9.0'
-    spotbugsPlugins 'com.mebigfatguy.fb-contrib:fb-contrib:7.4.6'
+    spotbugsPlugins 'com.mebigfatguy.sb-contrib:sb-contrib:7.4.6'
 
     compileOnly 'com.github.spotbugs:spotbugs-annotations:4.0.0-beta3'
     testCompileOnly 'com.github.spotbugs:spotbugs-annotations:4.0.0-beta3'
