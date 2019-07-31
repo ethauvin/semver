@@ -32,7 +32,6 @@ final def pkgLabels = ['java', 'kotlin', 'annotation', 'processor', 'semantic', 
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
     mavenLocal()
@@ -51,6 +50,10 @@ dependencies {
 
 
     testImplementation 'org.testng:testng:6.14.3'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 pmd {

@@ -99,7 +99,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#class-generation">Class Generation</a></li>
 <li><a href="#class--source-generation">Class &amp; Source Generation</a></li>
-<li><a href="#java-12">Java 12</a></li>
 </ul></li>
 <li><a href="#kotlin">Kotlin</a>
 <ul>
@@ -441,50 +440,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     annotationProcessor &#39;net.thauvin.erik:semver:1.2.0&#39;
     implementation &#39;net.thauvin.erik:semver:1.2.0&#39;
 }
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += [ &quot;-Asemver.project.dir=$projectDir&quot; ]
+}
 </code></pre>
+<p>The directory containing the configuration files (<code>version.properties</code>, <code>version.mustache</code>) must be specified using the <code>semver.project.dir</code> processor argument.</p>
 <p>The <a href="https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> class will be automatically created in the <code>build/generated</code> directory upon compiling.</p>
 <p>Please look at <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a> in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">examples/java</a> directory for a sample.</p>
 <h3 id="class--source-generation">Class &amp; Source Generation</h3>
-<p>In order to also incorporate the generated source code into the <code>source tree</code>, add the following to the very top of <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
-<pre class="gradle"><code>compileJava.options.annotationProcessorGeneratedSourcesDirectory = file(&quot;${projectDir}/src/generated/java&quot;)
-</code></pre>
-<p>The <a href="https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> file will now be located in <code>src/generated</code>.</p>
-<h3 id="java-12">Java 12</h3>
-<p>When using properties file (<code>version.properties</code>) under Java 12+ and Gradle 5.4.1+, the directory containing the properties file must be specified using the <code>semver.project.dir</code> processor argument.</p>
-<p>For example, if the properties file is in the Gradle project directory, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
+<p>In order to also incorporate the generated source code into the <code>source tree</code>, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
 <pre class="gradle"><code>tasks.withType(JavaCompile) {
-    if (JavaVersion.current().isJava12Compatible()) {
-        options.compilerArgs += [ &quot;-Asemver.project.dir=$projectDir&quot; ]
-    }
+    options.annotationProcessorGeneratedSourcesDirectory = file(&quot;${projectDir}/src/generated/java&quot;)
 }
 </code></pre>
+<p>The <a href="https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a> file will now be located in <code>src/generated</code>.</p>
 <h2 id="kotlin">Kotlin</h2>
 <p>The annotation processor also supports <a href="https://kotlinlang.org/">Kotlin</a>.</p>
 <p>To generate a Kotlin version file, simply specify the <code>type</code> as follows:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">import</span> <span class="im">net.thauvin.erik.semver.Version</span></a>
-<a class="sourceLine" id="cb13-2" title="2"></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="at">@Version</span>(properties = <span class="st">&quot;version.properties&quot;</span>, type=<span class="st">&quot;kt&quot;</span>)</a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="kw">open</span> <span class="kw">class</span> Main {</a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="co">// ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">import</span> <span class="im">net.thauvin.erik.semver.Version</span></a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="at">@Version</span>(properties = <span class="st">&quot;version.properties&quot;</span>, type=<span class="st">&quot;kt&quot;</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">open</span> <span class="kw">class</span> Main {</a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">// ...</span></a></code></pre></div>
 <p>The <a href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache">Kotlin default template</a> implements the same static fields and functions as the <a href="#default-template">Java template</a>.</p>
 <p>Please look at the <a href="https://github.com/ethauvin/semver/tree/master/examples/kotlin">examples/kotlin</a> project for a <a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a> sample.</p>
 <h3 id="kotlin--gradle">Kotlin &amp; Gradle</h3>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a>:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">var</span> <span class="va">semverProcessor</span> = <span class="st">&quot;net.thauvin.erik:semver:1.2.0&quot;</span></a>
-<a class="sourceLine" id="cb14-2" title="2"></a>
-<a class="sourceLine" id="cb14-3" title="3">dependencies {</a>
-<a class="sourceLine" id="cb14-4" title="4">    kapt(semverProcessor)</a>
-<a class="sourceLine" id="cb14-5" title="5">    implementation (semverProcessor)</a>
-<a class="sourceLine" id="cb14-6" title="6">}</a>
-<a class="sourceLine" id="cb14-7" title="7"></a>
-<a class="sourceLine" id="cb14-8" title="8">kapt {</a>
-<a class="sourceLine" id="cb14-9" title="9">    arguments {</a>
-<a class="sourceLine" id="cb14-10" title="10">        arg(<span class="st">&quot;semver.project.dir&quot;</span>, projectDir)</a>
-<a class="sourceLine" id="cb14-11" title="11">    }</a>
-<a class="sourceLine" id="cb14-12" title="12">}</a></code></pre></div>
-<p>The arguments block is not required if <code>kapt</code> is configured to use the Gradle Worker API in <a href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/gradle.properties">gradle.properties</a>:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode ini"><code class="sourceCode ini"><a class="sourceLine" id="cb15-1" title="1"><span class="dt">kapt.use.worker.api</span><span class="ot">=</span><span class="kw">true</span></a></code></pre></div>
-<p>This option will likely be enabled by default in the future, but is currently not working under Java 10+ see <a href="https://youtrack.jetbrains.net/issue/KT-26203">KT-26203</a>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode kotlin"><code class="sourceCode kotlin"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">var</span> <span class="va">semverProcessor</span> = <span class="st">&quot;net.thauvin.erik:semver:1.2.0&quot;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">dependencies {</a>
+<a class="sourceLine" id="cb13-4" title="4">    kapt(semverProcessor)</a>
+<a class="sourceLine" id="cb13-5" title="5">    implementation(semverProcessor)</a>
+<a class="sourceLine" id="cb13-6" title="6">}</a>
+<a class="sourceLine" id="cb13-7" title="7"></a>
+<a class="sourceLine" id="cb13-8" title="8">kapt {</a>
+<a class="sourceLine" id="cb13-9" title="9">    arguments {</a>
+<a class="sourceLine" id="cb13-10" title="10">        arg(<span class="st">&quot;semver.project.dir&quot;</span>, projectDir)</a>
+<a class="sourceLine" id="cb13-11" title="11">    }</a>
+<a class="sourceLine" id="cb13-12" title="12">}</a></code></pre></div>
+<p>The directory containing the configuration files (<code>version.properties</code>, <code>version.mustache</code>) must be specified using the <code>semver.project.dir</code> processor argument.</p>
 <h2 id="kobalt">Kobalt</h2>
 <p>To install and run from <a href="https://beust.com/kobalt/">Kobalt</a>, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a>:</p>
 <pre class="gradle"><code>dependencies {
