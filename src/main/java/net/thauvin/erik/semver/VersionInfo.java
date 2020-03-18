@@ -1,7 +1,7 @@
 /*
  * VersionInfo.java
  *
- * Copyright (c) 2016-2019, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -283,6 +283,8 @@ public class VersionInfo {
 
     /**
      * Sames as {@link #getVersion()}.
+     *
+     * @return The version string.
      */
     public String getSemver() {
         return getVersion();

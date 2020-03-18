@@ -203,7 +203,7 @@ To install and run from [Gradle](https://gradle.org/), add the following to [bui
 ```gradle
 dependencies {
     annotationProcessor 'net.thauvin.erik:semver:1.2.0'
-    implementation 'net.thauvin.erik:semver:1.2.0'
+    compileOnly 'net.thauvin.erik:semver:1.2.0'
 }
 
 tasks.withType(JavaCompile) {
@@ -255,7 +255,7 @@ var semverProcessor = "net.thauvin.erik:semver:1.2.0"
 
 dependencies {
     kapt(semverProcessor)
-    implementation(semverProcessor)
+    compileOnly(semverProcessor)
 }
 
 kapt {
