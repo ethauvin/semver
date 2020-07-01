@@ -1,7 +1,7 @@
 #  Semantic Version Annotation Processor
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](http://opensource.org/licenses/BSD-3-Clause) [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver) [ ![Download](https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg) ](https://bintray.com/ethauvin/maven/SemVer/_latestVersion)\
-[![Known Vulnerabilities](https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver) [![Build Status](https://travis-ci.org/ethauvin/semver.svg?branch=master)](https://travis-ci.org/ethauvin/semver) [![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver) [![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
+[![Known Vulnerabilities](https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver) [![Build Status](https://travis-ci.com/ethauvin/semver.svg?branch=master)](https://travis-ci.com/ethauvin/semver) [![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver) [![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
 
 An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](http://semver.org/) (major, minor, patch, etc.) that is read from a [Properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
@@ -19,7 +19,6 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
   - [Class & Source Generation](#class--source-generation)
 - [Kotlin](#kotlin)
   - [Kotlin & Gradle](#kotlin--gradle)
-- [Kobalt](#kobalt)
 - [Auto-Increment](#auto-increment)
 
 ## Examples
@@ -266,20 +265,6 @@ kapt {
 ```
 
 The directory containing the configuration files (`version.properties`, `version.mustache`) must be specified using the `semver.project.dir` processor argument.
-
-## Kobalt
-
-To install and run from [Kobalt](https://beust.com/kobalt/), add the following to [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt):
-
-```gradle
-dependencies {
-    apt("net.thauvin.erik:semver:1.2.0")
-    compileOnly("net.thauvin.erik:semver:1.2.0")
-}
-```
-
-Please look at [Build.kt](https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
-
 
 ## Auto-Increment
 
