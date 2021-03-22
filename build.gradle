@@ -4,11 +4,11 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'pmd'
-    id 'com.jfrog.bintray' version '1.8.5'
-    id 'com.github.ben-manes.versions' version '0.28.0'
+    id 'signing'
+    id 'com.github.ben-manes.versions' version '0.38.0'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
-    id 'com.github.spotbugs' version '4.4.4'
-    id 'org.sonarqube' version '3.0'
+    id 'com.github.spotbugs' version '4.7.0'
+    id 'org.sonarqube' version '3.1.1'
 }
 
 import com.github.spotbugs.snom.SpotBugsTask
@@ -26,30 +26,25 @@ final def mavenLicenseUrl = 'http://opensource.org/licenses/BSD-3-Clause'
 final def mavenScmCon = 'https://github.com/ethauvin/semver.git'
 final def mavenScmDevCon = 'git@github.com:ethauvin/semver.git'
 
-final def pkgLicenses = ['BSD 3-Clause']
-final def pkgIssueTrackerUrl = mavenUrl + '/issues'
-final def pkgLabels = ['java', 'kotlin', 'annotation', 'processor', 'semantic', 'version']
-
 ext.versions = [
-    spotbugs: '4.0.6'
+    spotbugs: '4.2.2'
 ]
 
 repositories {
     mavenLocal()
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    implementation 'com.github.spullara.mustache.java:compiler:0.9.6'
+    implementation 'com.github.spullara.mustache.java:compiler:0.9.7'
 
-    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.10.1'
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
     spotbugsPlugins 'com.mebigfatguy.sb-contrib:sb-contrib:7.4.7'
 
     compileOnly "com.github.spotbugs:spotbugs-annotations:$versions.spotbugs"
     testCompileOnly "com.github.spotbugs:spotbugs-annotations:$versions.spotbugs"
 
-    testImplementation 'org.testng:testng:7.2.0'
+    testImplementation 'org.testng:testng:7.4.0'
 }
 
 
@@ -60,6 +55,8 @@ tasks.withType(JavaCompile) {
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+    withJavadocJar()
 }
 
 pmd {
@@ -69,60 +66,10 @@ pmd {
     consoleOutput = true
 }
 
-bintray {
-    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-    publications = ['MyPublication']
-    dryRun = false
-    pkg {
-        repo = 'maven'
-        name = mavenName
-        licenses = pkgLicenses
-        desc = mavenDescription
-        //released  = new Date()
-        websiteUrl = mavenUrl
-        issueTrackerUrl = pkgIssueTrackerUrl
-        vcsUrl = mavenScmCon
-        labels = pkgLabels
-        publicDownloadNumbers = true
-        version {
-            gpg { sign = true }
-        }
-    }
-}
-
-bintrayUpload {
-    versionName = "$project.version"
-    versionDesc = "$mavenName $project.version"
-    versionVcsTag = "$project.version"
-    versionReleased = new Date()
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    group = 'Build'
-    description = 'Builds an archive of the javadoc docs.'
-    archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
-}
-
-task sourceJar(type: Jar) {
-    group = 'Build'
-    description = 'Builds an archive of the source code.'
-    archiveClassifier.set('sources')
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar
-    archives sourceJar
-}
-
 publishing {
     publications {
-        MyPublication(MavenPublication) {
+        mavenJava(MavenPublication) {
             from components.java
-            artifact sourceJar
-            artifact javadocJar
             groupId project.group
             artifactId rootProject.name
 
@@ -134,7 +81,6 @@ publishing {
                     license {
                         name = mavenLicense
                         url = mavenLicenseUrl
-                        distribution = 'repo'
                     }
                 }
                 developers {
@@ -142,16 +88,29 @@ publishing {
                         id = 'ethauvin'
                         name = 'Erik C. Thauvin'
                         email = 'erik@thauvin.net'
+                        url = 'https://erik.thauvin.net/'
                     }
                 }
                 scm {
                     connection = "scm:git:" + mavenScmCon
                     developerConnection = "scm:git:" + mavenScmDevCon
-                    url = mavenScmCon
+                    url = mavenUrl
                 }
             }
         }
     }
+    repositories {
+        maven {
+            name = "ossrh"
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials(PasswordCredentials)
+        }
+   }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
 }
 
 javadoc {
@@ -224,7 +183,6 @@ jacocoTestReport {
         html.enabled = true
         xml.enabled = true
     }
-
 }
 
 sonarqube {
