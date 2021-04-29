@@ -20,7 +20,7 @@ gradle_opts="--console=plain --no-build-cache --no-daemon"
 maven_args="compile exec:java"
 
 #
-# Version: 1.1.3
+# Version: 1.1.5
 #
 
 if [ "$java8" = true ]
@@ -40,7 +40,7 @@ pause() {
 }
 
 checkCopyright() {
-    if [ "$(grep -c "$date" "$1")" -eq 0 ]
+    if [ "$(grep -c "$date" "$1")" == "0" ]
     then
         echo -e "   Invalid: ${red}$f${std}"
     else
@@ -104,7 +104,7 @@ checkDeps() {
         * ) for ex in "${!examples[@]}"
             do
                 runGradle $(echo "${examples[ex]}" | cut -d " " -f 1) dU
-                runKobalt $(echo "${examples[ex]}" | cut -d " " -f 1) checkVersions
+                # runKobalt $(echo "${examples[ex]}" | cut -d " " -f 1) checkVersions
                 runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) versions:display-dependency-updates 
                 if [ "$ex" -eq "${#examples}" ]
                 then
@@ -130,7 +130,7 @@ runExamples() {
     for ex in "${!examples[@]}"
     do
         runGradle ${examples[ex]} clean $gradle_opts
-        runKobalt ${examples[ex]} clean
+        # runKobalt ${examples[ex]} clean
         runMaven $(echo "${examples[ex]}" | cut -d " " -f 1) clean $maven_args
     done
 }
@@ -152,7 +152,7 @@ examplesMenu() {
                     examplesMenu
                 else
                     runGradle ${examples[$(($choice - 1))]}
-                    runKobalt ${examples[$(($choice - 1))]}
+                    # runKobalt ${examples[$(($choice - 1))]}
                     runMaven $(echo "${examples[$(($choice - 1))]}" | cut -d " " -f 1) $maven_args
                     examplesMenu
                 fi ;;
@@ -163,9 +163,12 @@ examplesMenu() {
 validateCopyrights() {
     clear
     echo -e "${cyan}Validating copyrights...${std}"
-    for f in LICENSE.TXT ${src}/*${ext} ${test}/*${ext}
+    for f in "LICENSE.txt" ${src}/*${ext} ${test}/*${ext}
     do
-        checkCopyright "$f"
+        if [ -f "$f" ]
+        then
+            checkCopyright "$f"
+        fi
     done
     pause
 }
@@ -189,7 +192,7 @@ showMenu() {
     echo "    6. Check Everything"
 }
 
-readOptions(){
+readOptions() {
 	local choice
 	read -p "Enter choice [1-6]: " choice
 	case $choice in

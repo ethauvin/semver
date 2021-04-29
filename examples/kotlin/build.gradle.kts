@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm").version("1.3.72")
+    kotlin("jvm").version("1.5.0")
     application
-    id("org.jetbrains.kotlin.kapt").version("1.3.72")
-    id("com.github.ben-manes.versions").version("0.28.0")
+    id("org.jetbrains.kotlin.kapt").version("1.5.0")
+    id("com.github.ben-manes.versions").version("0.38.0")
 }
 
 // ./gradlew
@@ -30,7 +30,7 @@ kapt {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
 }
 
 application {

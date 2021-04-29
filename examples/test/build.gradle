@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'com.github.ben-manes.versions' version '0.21.0'
+    id 'com.github.ben-manes.versions' version '0.38.0'
 }
 
 // ./gradlew run
@@ -13,8 +13,6 @@ final def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-compileJava.
 
 mainClassName = 'com.example.Example'
 

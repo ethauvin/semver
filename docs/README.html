@@ -5,13 +5,13 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>Semantic Version Annotation Processor</title>
-  <style>
+  <style type="text/css">
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
       div.column{display: inline-block; vertical-align: top; width: 50%;}
   </style>
-  <style>
+  <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -75,14 +75,11 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="github-pandoc.css" />
-  <!--[if lt IE 9]>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
-  <![endif]-->
 </head>
 <body>
 <h1 id="semantic-version-annotation-processor">Semantic Version Annotation Processor</h1>
-<p><a href="http://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square" alt="License (3-Clause BSD)" /></a> <a href="https://github.com/ethauvin/semver/releases/latest"><img src="https://img.shields.io/github/release/ethauvin/semver.svg" alt="release" /></a> <a href="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver"><img src="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg" alt="Maven Central" /></a> <a href="https://bintray.com/ethauvin/maven/SemVer/_latestVersion"> <img src="https://api.bintray.com/packages/ethauvin/maven/SemVer/images/download.svg" alt="Download" /> </a><br />
-<a href="https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle"><img src="https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle" alt="Known Vulnerabilities" /></a> <a href="https://sonarcloud.io/dashboard?id=ethauvin_semver"><img src="https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&amp;metric=alert_status" alt="Quality Gate Status" /></a> <a href="https://travis-ci.org/ethauvin/semver"><img src="https://travis-ci.org/ethauvin/semver.svg?branch=master" alt="Build Status" /></a> <a href="https://ci.appveyor.com/project/ethauvin/semver"><img src="https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true" alt="Build status" /></a> <a href="https://circleci.com/gh/ethauvin/semver/tree/master"><img src="https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield" alt="CircleCI" /></a></p>
+<p><a href="http://opensource.org/licenses/BSD-3-Clause"><img src="https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square" alt="License (3-Clause BSD)" /></a> <a href="https://github.com/ethauvin/semver/releases/latest"><img src="https://img.shields.io/github/release/ethauvin/semver.svg" alt="release" /></a> <a href="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver"><img src="https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg" alt="Maven Central" /></a><br />
+<a href="https://snyk.io/test/github/ethauvin/semver?targetFile=build.gradle"><img src="https://snyk.io/test/github/ethauvin/semver/badge.svg?targetFile=build.gradle" alt="Known Vulnerabilities" /></a> <a href="https://sonarcloud.io/dashboard?id=ethauvin_semver"><img src="https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&amp;metric=alert_status" alt="Quality Gate Status" /></a> <a href="https://travis-ci.com/ethauvin/semver"><img src="https://travis-ci.com/ethauvin/semver.svg?branch=master" alt="Build Status" /></a> <a href="https://ci.appveyor.com/project/ethauvin/semver"><img src="https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true" alt="Build status" /></a> <a href="https://circleci.com/gh/ethauvin/semver/tree/master"><img src="https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield" alt="CircleCI" /></a></p>
 <p>An <a href="https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html">annotation processor</a> that automatically generates a <code>GeneratedVersion</code> class based on a <a href="https://mustache.github.io/">Mustache</a> template and containing the <a href="http://semver.org/">semantic version</a> (major, minor, patch, etc.) that is read from a <a href="https://docs.oracle.com/javase/tutorial/essential/environment/properties.html">Properties</a> file or defined in the <a href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">annotation</a>.</p>
 <p>This processor was inspired by Cédric Beust's <a href="https://github.com/cbeust/version-processor">version-processor</a> and works well in conjunction with the <a href="https://github.com/ethauvin/semver-gradle"><strong>Semantic Version Plugin for Gradle</strong></a>.</p>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -104,7 +101,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#kotlin--gradle">Kotlin &amp; Gradle</a></li>
 </ul></li>
-<li><a href="#kobalt">Kobalt</a></li>
 <li><a href="#auto-increment">Auto-Increment</a></li>
 </ul>
 <h2 id="examples">Examples</h2>
@@ -438,7 +434,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
 <pre class="gradle"><code>dependencies {
     annotationProcessor &#39;net.thauvin.erik:semver:1.2.0&#39;
-    implementation &#39;net.thauvin.erik:semver:1.2.0&#39;
+    compileOnly &#39;net.thauvin.erik:semver:1.2.0&#39;
 }
 
 tasks.withType(JavaCompile) {
@@ -471,7 +467,7 @@ tasks.withType(JavaCompile) {
 <a class="sourceLine" id="cb13-2" title="2"></a>
 <a class="sourceLine" id="cb13-3" title="3">dependencies {</a>
 <a class="sourceLine" id="cb13-4" title="4">    kapt(semverProcessor)</a>
-<a class="sourceLine" id="cb13-5" title="5">    implementation(semverProcessor)</a>
+<a class="sourceLine" id="cb13-5" title="5">    compileOnly(semverProcessor)</a>
 <a class="sourceLine" id="cb13-6" title="6">}</a>
 <a class="sourceLine" id="cb13-7" title="7"></a>
 <a class="sourceLine" id="cb13-8" title="8">kapt {</a>
@@ -480,14 +476,6 @@ tasks.withType(JavaCompile) {
 <a class="sourceLine" id="cb13-11" title="11">    }</a>
 <a class="sourceLine" id="cb13-12" title="12">}</a></code></pre></div>
 <p>The directory containing the configuration files (<code>version.properties</code>, <code>version.mustache</code>) must be specified using the <code>semver.project.dir</code> processor argument.</p>
-<h2 id="kobalt">Kobalt</h2>
-<p>To install and run from <a href="https://beust.com/kobalt/">Kobalt</a>, add the following to <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a>:</p>
-<pre class="gradle"><code>dependencies {
-    apt(&quot;net.thauvin.erik:semver:1.2.0&quot;)
-    compileOnly(&quot;net.thauvin.erik:semver:1.2.0&quot;)
-}
-</code></pre>
-<p>Please look at <a href="https://github.com/ethauvin/semver/blob/master/examples/java/kobalt/src/Build.kt">Build.kt</a> in the <a href="https://github.com/ethauvin/semver/tree/master/examples/java">examples/java</a> directory for a sample.</p>
 <h2 id="auto-increment">Auto-Increment</h2>
 <p>Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the <a href="https://github.com/ethauvin/semver-gradle"><strong>Semver Version Plugin for Gradle</strong></a>.</p>
 <p>There are also full <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor">examples</a> in both <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java">Java</a> and <a href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin">Kotlin</a> showing how to use both the plugin and annotation processor concurrently.</p>

@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public final class GeneratedVersion {
     public static final String PROJECT = "Java App";
-    public static final Date BUILDDATE = new Date(1558820521932L);
+    public static final Date BUILDDATE = new Date(1619704020387L);
     public static final int MAJOR = 11;
     public static final int MINOR = 11;
     public static final int PATCH = 20;
