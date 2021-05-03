@@ -27,7 +27,7 @@ final def mavenScmCon = 'https://github.com/ethauvin/semver.git'
 final def mavenScmDevCon = 'git@github.com:ethauvin/semver.git'
 
 ext.versions = [
-    spotbugs: '4.2.3'
+        spotbugs: '4.2.3'
 ]
 
 repositories {
@@ -102,10 +102,14 @@ publishing {
     repositories {
         maven {
             name = "ossrh"
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            project.afterEvaluate {
+                url = project.version.contains("SNAPSHOT")
+                        ? "https://oss.sonatype.org/content/repositories/snapshots/"
+                        : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            }
             credentials(PasswordCredentials)
         }
-   }
+    }
 }
 
 signing {
@@ -118,6 +122,7 @@ javadoc {
         title = "$mavenDescription $project.version API"
     }
     options.with {
+        source = '8'
         tags = ['created']
         author = true
         //addBooleanOption('html4', true)
