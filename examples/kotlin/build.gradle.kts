@@ -34,26 +34,26 @@ repositories {
 }
 
 application {
-    mainClassName = "com.example.App"
+    mainClass.set("com.example.App")
 }
 
 tasks {
     register("runJava", JavaExec::class) {
         group = "application"
         main = "com.example.JavaApp"
-        classpath = sourceSets["main"].runtimeClasspath
+        classpath = sourceSets.main.get().runtimeClasspath
 
     }
 
     register("runJavaExample", JavaExec::class) {
         group = "application"
         main = "com.example.JavaExample"
-        classpath = sourceSets["main"].runtimeClasspath
+        classpath = sourceSets.main.get().runtimeClasspath
     }
 
     register("runExample", JavaExec::class) {
         group = "application"
         main = "com.example.Example"
-        classpath = sourceSets["main"].runtimeClasspath
+        classpath = sourceSets.main.get().runtimeClasspath
     }
 }
