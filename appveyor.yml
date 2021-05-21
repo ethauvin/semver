@@ -1,3 +1,6 @@
+image:
+    - Visual Studio 2019
+
 version: "{branch} {build}"
 skip_tags: true
 
@@ -13,6 +16,7 @@ test_script:
 branches:
   only:
     - master
+    - 1.2.1-dev
 
 cache:
   - C:\Users\appveyor\.gradle
