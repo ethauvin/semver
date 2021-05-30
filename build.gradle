@@ -5,7 +5,7 @@ plugins {
     id 'maven-publish'
     id 'pmd'
     id 'signing'
-    id 'com.github.ben-manes.versions' version '0.38.0'
+    id 'com.github.ben-manes.versions' version '0.39.0'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
     id 'com.github.spotbugs' version '4.7.1'
     id 'org.sonarqube' version '3.2.0'
@@ -27,6 +27,7 @@ final def mavenScmCon = 'https://github.com/ethauvin/semver.git'
 final def mavenScmDevCon = 'git@github.com:ethauvin/semver.git'
 
 ext.versions = [
+        pmd: '6.35.0',
         spotbugs: '4.2.3'
 ]
 
@@ -36,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.spullara.mustache.java:compiler:0.9.7'
+    implementation 'com.github.spullara.mustache.java:compiler:0.9.10'
 
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.11.0'
     spotbugsPlugins 'com.mebigfatguy.sb-contrib:sb-contrib:7.4.7'
@@ -60,6 +61,7 @@ java {
 }
 
 pmd {
+    toolVersion = versions.pmd
     ignoreFailures = true
     ruleSets = []
     ruleSetFiles = files("${projectDir}/config/pmd.xml")
@@ -69,9 +71,9 @@ pmd {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java
-            groupId project.group
-            artifactId rootProject.name
+            from(components.java)
+            groupId = project.group
+            artifactId = rootProject.name
 
             pom {
                 name = mavenName
@@ -133,8 +135,8 @@ javadoc {
 
 test {
     testLogging {
-        exceptionFormat "full"
-        events "passed", "skipped", "failed"
+        exceptionFormat = "full"
+        events("passed", "skipped", "failed")
     }
 
     useTestNG()
@@ -179,8 +181,8 @@ task pandoc(type: Exec) {
     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
         commandLine(['cmd', '/c', 'pandoc'] + pandoc_args)
     } else {
-        executable 'pandoc'
-        args pandoc_args
+        executable = 'pandoc'
+        args(pandoc_args)
     }
     standardOutput = new ByteArrayOutputStream()
     ext.output = {
@@ -198,9 +200,9 @@ jacocoTestReport {
 
 sonarqube {
     properties {
-        property "sonar.organization", "ethauvin-github"
-        property "sonar.projectKey", "ethauvin_semver"
-        property "sonar.host.url", "https://sonarcloud.io"
+        property("sonar.organization", "ethauvin-github")
+        property("sonar.projectKey", "ethauvin_semver")
+        property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.sourceEncoding", "UTF-8")
     }
 }

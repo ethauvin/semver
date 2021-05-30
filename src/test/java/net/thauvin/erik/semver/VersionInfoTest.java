@@ -36,7 +36,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import static org.testng.Assert.assertEquals;
 
@@ -49,7 +49,6 @@ import static org.testng.Assert.assertEquals;
  */
 @SuppressFBWarnings("PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS")
 public class VersionInfoTest {
-    private final Calendar now = Calendar.getInstance();
     private VersionInfo versionInfo = new VersionInfo();
 
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
@@ -159,7 +158,7 @@ public class VersionInfoTest {
 
         assertEquals(versionInfo.getClassName(), "Example", "getClassName(Example");
 
-        Assert.assertTrue((versionInfo.getEpoch() - now.getTimeInMillis()) < 1000, "buildDate - now < 1s");
+        Assert.assertTrue((versionInfo.getEpoch() - new Date().getTime()) < 1000, "buildDate - now < 1s");
     }
 
     @Test

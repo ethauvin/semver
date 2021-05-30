@@ -70,7 +70,7 @@ import java.util.Set;
  * @created 2016-01-13
  * @since 1.0
  */
-@SuppressWarnings("PMD.GuardLogStatement")
+@SuppressWarnings({ "PMD.GuardLogStatement", "PMD.BeanMembersShouldSerialize"})
 @SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
@@ -82,7 +82,7 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private void error(final String s, final Throwable t) {
-        log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
+        log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }
 
     @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
@@ -96,7 +96,7 @@ public class VersionProcessor extends AbstractProcessor {
 
                 final Properties p = new Properties();
 
-                try (final InputStreamReader reader = new InputStreamReader(
+                try (InputStreamReader reader = new InputStreamReader(
                     Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
@@ -268,7 +268,7 @@ public class VersionProcessor extends AbstractProcessor {
             if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
                 note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
-            try (final OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
+            try (OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
                                                                        StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
@@ -276,7 +276,7 @@ public class VersionProcessor extends AbstractProcessor {
         } else {
             final FileObject jfo = filer.createSourceFile(
                 versionInfo.getPackageName() + '.' + versionInfo.getClassName());
-            try (final Writer writer = jfo.openWriter()) {
+            try (Writer writer = jfo.openWriter()) {
                 mustache.execute(writer, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');

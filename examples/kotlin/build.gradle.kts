@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm").version("1.5.0")
-    application
-    id("org.jetbrains.kotlin.kapt").version("1.5.0")
-    id("com.github.ben-manes.versions").version("0.38.0")
+    id("application")
+    id("com.github.ben-manes.versions") version "0.39.0"
+    kotlin("jvm") version "1.5.10"
+    kotlin("kapt") version "1.5.10"
 }
 
 // ./gradlew
