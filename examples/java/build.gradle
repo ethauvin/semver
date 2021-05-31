@@ -34,6 +34,5 @@ tasks.withType(JavaCompile) {
 task runExample(type: JavaExec) {
     group = 'application'
     classpath = sourceSets.main.runtimeClasspath
-
     main = 'com.example.Example'
 }

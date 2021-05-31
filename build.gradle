@@ -71,7 +71,7 @@ pmd {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from(components.java)
+            from components.java
             groupId = project.group
             artifactId = rootProject.name
 
@@ -94,8 +94,8 @@ publishing {
                     }
                 }
                 scm {
-                    connection = "scm:git:" + mavenScmCon
-                    developerConnection = "scm:git:" + mavenScmDevCon
+                    connection = 'scm:git:' + mavenScmCon
+                    developerConnection = 'scm:git:' + mavenScmDevCon
                     url = mavenUrl
                 }
             }
@@ -103,11 +103,11 @@ publishing {
     }
     repositories {
         maven {
-            name = "ossrh"
+            name = 'ossrh'
             project.afterEvaluate {
-                url = project.version.contains("SNAPSHOT")
-                        ? "https://oss.sonatype.org/content/repositories/snapshots/"
-                        : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+                url = project.version.contains('SNAPSHOT')
+                        ? 'https://oss.sonatype.org/content/repositories/snapshots/'
+                        : 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
             }
             credentials(PasswordCredentials)
         }
@@ -135,8 +135,8 @@ javadoc {
 
 test {
     testLogging {
-        exceptionFormat = "full"
-        events("passed", "skipped", "failed")
+        exceptionFormat = 'full'
+        events('passed', 'skipped', 'failed')
     }
 
     useTestNG()
@@ -161,11 +161,12 @@ tasks.withType(Checkstyle) {
     }
 }
 
-task release(dependsOn: ['wrapper', 'clean', 'publishToMavenLocal']) {
+task release {
     group = 'Publishing'
     description = 'Releases new version to local maven repository.'
+    dependsOn(wrapper, clean, publishToMavenLocal)
     doFirst {
-        println("Version: $version")
+        println "Version: $version"
     }
 }
 
@@ -200,13 +201,13 @@ jacocoTestReport {
 
 sonarqube {
     properties {
-        property("sonar.organization", "ethauvin-github")
-        property("sonar.projectKey", "ethauvin_semver")
-        property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.sourceEncoding", "UTF-8")
+        property('sonar.organization', 'ethauvin-github')
+        property('sonar.projectKey', 'ethauvin_semver')
+        property('sonar.host.url', 'https://sonarcloud.io')
+        property('sonar.sourceEncoding', 'UTF-8')
     }
 }
 
 tasks.sonarqube {
-    dependsOn("jacocoTestReport")
+    dependsOn 'jacocoTestReport'
 }
