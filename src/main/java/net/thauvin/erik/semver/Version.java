@@ -44,6 +44,7 @@ import java.lang.annotation.Target;
  * @created 2016-01-13
  * @since 1.0
  */
+@SuppressWarnings("SameReturnValue")
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Version {

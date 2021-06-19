@@ -330,11 +330,11 @@ public class VersionInfo {
      */
     public String getVersion() {
         return major
-            + separator
-            + minor
-            + separator
-            + patch
-            + (preRelease.length() > 0 ? preReleasePrefix + preRelease : "")
-            + (buildMeta.length() > 0 ? buildMetaPrefix + buildMeta : "");
+                + separator
+                + minor
+                + separator
+                + patch
+                + (preRelease.length() > 0 ? preReleasePrefix + preRelease : "")
+                + (buildMeta.length() > 0 ? buildMetaPrefix + buildMeta : "");
     }
 }

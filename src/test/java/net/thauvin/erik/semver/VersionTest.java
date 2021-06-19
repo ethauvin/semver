@@ -41,7 +41,7 @@ import java.lang.annotation.Annotation;
  * @created 2019-04-02
  * @since 1.2.0
  */
-@SuppressWarnings({"ClassExplicitlyAnnotation"})
+@SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue"})
 class VersionTest implements Version {
     @Override
     public Class<? extends Annotation> annotationType() {

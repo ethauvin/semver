@@ -97,7 +97,7 @@ public class VersionInfoTest {
         assertEquals(versionInfo.getVersion(), "3-2-1+001", "getVersion(3-2-1+001)");
 
         assertEquals(versionInfo.getVersion(), versionInfo.getSemver(),
-                     "getVersion(3-2-1+001) = getSemver(3-2-1+001) ");
+                "getVersion(3-2-1+001) = getSemver(3-2-1+001) ");
     }
 
     @Test
@@ -175,18 +175,18 @@ public class VersionInfoTest {
         assertEquals(versionInfo.getPreRelease(), version.preRelease(), "getPreRelease(preRelease)");
 
         assertEquals(versionInfo.getPreReleasePrefix(), version.preReleasePrefix(),
-                     "getPreReleasePrefix(preReleasePrefix)");
+                "getPreReleasePrefix(preReleasePrefix)");
 
         assertEquals(versionInfo.getBuildMeta(), version.buildMeta(), "getBuildMeta(buildMeta)");
 
         assertEquals(versionInfo.getBuildMetaPrefix(), version.buildMetaPrefix(),
-                     "getBuildMetaPrefix(buildMetaPrefix)");
+                "getBuildMetaPrefix(buildMetaPrefix)");
 
         assertEquals(versionInfo.getPackageName(), version.packageName(), "getPackageName(packageName)");
 
         assertEquals(versionInfo.getVersion(),
-                     version.major() + "." + version.minor() + '.' + version.patch() + '-' + version.preRelease() + '+'
-                     + version.buildMeta(), "getVersion(version)");
+                version.major() + "." + version.minor() + '.' + version.patch() + '-' + version.preRelease() + '+'
+                        + version.buildMeta(), "getVersion(version)");
 
         assertEquals(versionInfo.getVersion(), versionInfo.getSemver(), "getVersion(version) = getSemver(version)");
 

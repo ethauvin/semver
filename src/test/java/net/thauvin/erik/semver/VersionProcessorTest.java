@@ -73,7 +73,7 @@ public class VersionProcessorTest {
         p.setProperty("4", " 4 ");
 
         final Method method = processor.getClass().getDeclaredMethod("parseIntProperty", Properties.class, String.class,
-                                                                     int.class);
+                int.class);
         method.setAccessible(true);
 
         assertEquals(method.invoke(processor, p, "1", -1), 1, "parseIntProperty(1)");

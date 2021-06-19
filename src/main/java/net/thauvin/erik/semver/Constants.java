@@ -39,7 +39,6 @@ package net.thauvin.erik.semver;
  * @created 2016-01-13
  * @since 1.0
  */
-@SuppressWarnings("WeakerAccess")
 public final class Constants {
     /**
      * The default metadata prefix.

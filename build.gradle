@@ -1,5 +1,4 @@
 plugins {
-    id 'checkstyle'
     id 'java'
     id 'jacoco'
     id 'maven-publish'
@@ -154,13 +153,6 @@ tasks.withType(SpotBugsTask) {
     }
 }
 
-tasks.withType(Checkstyle) {
-    reports {
-        xml.enabled = false
-        html.enabled = true
-    }
-}
-
 task release {
     group = 'Publishing'
     description = 'Releases new version to local maven repository.'
@@ -194,8 +186,8 @@ task pandoc(type: Exec) {
 jacocoTestReport {
     dependsOn(test)
     reports {
-        html.enabled = true
-        xml.enabled = true
+        html.required = true
+        xml.required = true
     }
 }
 
