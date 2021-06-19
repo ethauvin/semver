@@ -222,7 +222,7 @@ In order to also incorporate the generated source code into the `source tree`, a
 
 ```gradle
 tasks.withType(JavaCompile) {
-    options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
+    options.generatedSourceOutputDirectory.set(file("${projectDir}/src/generated/java"))
 }
 ```
 
