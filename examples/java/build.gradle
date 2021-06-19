@@ -19,6 +19,7 @@ mainClassName = 'com.example.App'
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 dependencies {
@@ -28,7 +29,7 @@ dependencies {
 
 tasks.withType(JavaCompile) {
     options.generatedSourceOutputDirectory.set(file("${projectDir}/src/generated/java"))
-    options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
+    options.compilerArgs += ["-Asemver.project.dir=$projectDir"]
 }
 
 task runExample(type: JavaExec) {

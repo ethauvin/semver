@@ -27,6 +27,6 @@ dependencies {
 }
 
 tasks.withType(JavaCompile) {
-    options.annotationProcessorGeneratedSourcesDirectory = file("${projectDir}/src/generated/java")
-    options.compilerArgs += [ "-Asemver.project.dir=${projectDir}/example" ]
+    options.generatedSourceOutputDirectory.set(file("${projectDir}/src/generated/java"))
+    options.compilerArgs += ["-Asemver.project.dir=${projectDir}/example"]
 }

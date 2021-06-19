@@ -31,6 +31,7 @@ kapt {
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 application {
@@ -40,7 +41,7 @@ application {
 tasks {
     register("runJava", JavaExec::class) {
         group = "application"
-        main = "com.example.JavaApp"
+        mainClass.set("com.example.JavaApp")
         classpath = sourceSets.main.get().runtimeClasspath
 
     }

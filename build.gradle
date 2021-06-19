@@ -142,8 +142,8 @@ test {
 }
 
 spotbugs {
-    toolVersion = versions.spotbugs
-    excludeFilter = file("$projectDir/config/spotbugs/excludeFilter.xml")
+    toolVersion.set("${versions.spotbugs}")
+    excludeFilter.set(file("$projectDir/config/spotbugs/excludeFilter.xml"))
 }
 
 tasks.withType(SpotBugsTask) {

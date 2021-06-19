@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Version(properties = "example.properties", type = "kt", template = "example.mustache", className = "ExampleVersion",
-    keysPrefix = "example.")
+        keysPrefix = "example.")
 class Example {
     companion object {
         @JvmStatic
@@ -15,7 +15,7 @@ class Example {
             println("-------------------------------------------------------")
 
             println("  ${ExampleVersion.PROJECT} ${ExampleVersion.VERSION} ("
-                + sdf.format(ExampleVersion.BUILDDATE) + ')')
+                    + sdf.format(ExampleVersion.BUILDDATE) + ')')
 
             println("-------------------------------------------------------")
         }
