@@ -1,7 +1,7 @@
 /*
  * VersionProcessorTest.java
  *
- * Copyright (c) 2016-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,6 +53,7 @@ public class VersionProcessorTest {
     private final Version version = new VersionTest();
 
     @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
+    @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     public void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Method method = processor.getClass().getDeclaredMethod("findValues", Version.class);
@@ -64,6 +65,7 @@ public class VersionProcessorTest {
     }
 
     @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
+    @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     public void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Properties p = new Properties();

@@ -1,7 +1,3 @@
 <component name="CopyrightManager">
-  <settings>
-    <module2copyright>
-      <element module="Copyright" copyright="Erik's Copyright Notice" />
-    </module2copyright>
-  </settings>
+  <settings default="Erik's Copyright Notice" />
 </component>

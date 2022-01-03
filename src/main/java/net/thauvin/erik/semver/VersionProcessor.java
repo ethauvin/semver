@@ -1,7 +1,7 @@
 /*
  * VersionProcessor.java
  *
- * Copyright (c) 2016-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -75,7 +75,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }
 
-    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
+    @SuppressFBWarnings({"PATH_TRAVERSAL_IN"})
     private VersionInfo findValues(final Version version) throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 

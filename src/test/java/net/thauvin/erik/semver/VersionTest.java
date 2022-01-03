@@ -1,7 +1,7 @@
 /*
  * VersionTest.java
  *
- * Copyright (c) 2016-2021, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@ import java.lang.annotation.Annotation;
  * @created 2019-04-02
  * @since 1.2.0
  */
-@SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue"})
+@SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue", "java:S2187"})
 class VersionTest implements Version {
     @Override
     public Class<? extends Annotation> annotationType() {
