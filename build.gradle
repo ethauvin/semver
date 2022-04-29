@@ -4,7 +4,7 @@ plugins {
     id 'maven-publish'
     id 'pmd'
     id 'signing'
-    id 'com.github.ben-manes.versions' version '0.40.0'
+    id 'com.github.ben-manes.versions' version '0.42.0'
     id 'net.thauvin.erik.gradle.semver' version '1.0.4'
     id 'com.github.spotbugs' version '5.0.3'
     id 'org.sonarqube' version '3.3'
@@ -32,13 +32,14 @@ def isNonStable = { String version ->
 }
 
 ext.versions = [
-        pmd: '6.41.0',
-        spotbugs: '4.5.2'
+        pmd: '6.44.0',
+        spotbugs: '4.5.3'
 ]
 
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 }
 
 dependencies {
@@ -50,7 +51,7 @@ dependencies {
     compileOnly "com.github.spotbugs:spotbugs-annotations:$versions.spotbugs"
     testCompileOnly "com.github.spotbugs:spotbugs-annotations:$versions.spotbugs"
 
-    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'org.testng:testng:7.5'
 }
 
 
@@ -160,8 +161,8 @@ spotbugs {
 
 tasks.withType(SpotBugsTask) {
     reports {
-        xml.enabled = false
-        html.enabled = true
+        xml.required = false
+        html.required = true
     }
 }
 
@@ -193,6 +194,10 @@ task pandoc(type: Exec) {
     ext.output = {
         return standardOutput.toString()
     }
+}
+
+jacoco {
+    toolVersion = '0.8.9-SNAPSHOT'
 }
 
 jacocoTestReport {
