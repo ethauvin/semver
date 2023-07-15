@@ -50,5 +50,5 @@ workflows:
   version: 2
   gradle:
     jobs:
-      - build_gradle_jdk11
+      - build_gradle_jdk20
       - build_gradle_jdk17
