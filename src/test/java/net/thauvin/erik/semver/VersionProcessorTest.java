@@ -1,7 +1,7 @@
 /*
  * VersionProcessorTest.java
  *
- * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,6 @@
 
 package net.thauvin.erik.semver;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.InvocationTargetException;
@@ -52,7 +51,6 @@ public class VersionProcessorTest {
     private final VersionProcessor processor = new VersionProcessor();
     private final Version version = new VersionTest();
 
-    @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     public void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -64,7 +62,6 @@ public class VersionProcessorTest {
         assertEquals(versionInfo.getProject(), "James Bond", "getProject(James Bond)");
     }
 
-    @SuppressFBWarnings("RFI_SET_ACCESSIBLE")
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     public void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

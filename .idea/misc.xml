@@ -55,6 +55,42 @@
     <pattern value="net.thauvin.erik.semver.VersionInfo" />
     <pattern value="net.thauvin.erik.semver.VersionInfo" method="VersionInfo" />
     <pattern value="net.thauvin.erik.semver.Constants" method="Constants" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMeta" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaPrefix" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaPrefixKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="className" />
+    <pattern value="net.thauvin.erik.semver.ConstantsTest" />
+    <pattern value="net.thauvin.erik.semver.VersionInfoTest" />
+    <pattern value="net.thauvin.erik.semver.VersionProcessor" />
+    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="keysPrefix" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="major" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="majorKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="minor" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="minorKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="packageName" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="patch" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="patchKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="preRelease" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleaseKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleasePrefix" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleasePrefixKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="project" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="projectKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="properties" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="separator" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="separatorKey" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="template" />
+    <pattern value="net.thauvin.erik.semver.ConstantsTest" method="testDefaults" />
+    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" method="testFindValues" />
+    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testGetVersion" />
+    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" method="testParseIntProperty" />
+    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testSetGet" />
+    <pattern value="net.thauvin.erik.semver.ConstantsTest" method="testTemplates" />
+    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testVersionInfo" />
+    <pattern value="net.thauvin.erik.semver.VersionTest" method="type" />
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -71,12 +107,12 @@
     </option>
     <option name="options">
       <map>
-        <entry key="Encoding" value="" />
+        <entry key="Statistics URL" value="" />
         <entry key="Target JDK" value="1.8" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="15" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

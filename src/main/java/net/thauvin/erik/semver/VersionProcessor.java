@@ -1,7 +1,7 @@
 /*
  * VersionProcessor.java
  *
- * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,6 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.github.mustachejava.MustacheNotFoundException;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -75,7 +74,6 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }
 
-    @SuppressFBWarnings({"PATH_TRAVERSAL_IN"})
     private VersionInfo findValues(final Version version) throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
@@ -125,7 +123,6 @@ public class VersionProcessor extends AbstractProcessor {
         return versionInfo;
     }
 
-    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private File getLocalFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
@@ -227,25 +224,17 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
             throws IOException {
         final File dir = getLocalFile("");
         final MustacheFactory mf = new DefaultMustacheFactory(dir);
         final Mustache mustache = mf.compile(template);
 
-        final String templateName;
-        switch (mustache.getName()) {
-            case Constants.DEFAULT_JAVA_TEMPLATE:
-                templateName = "default (Java)";
-                break;
-            case Constants.DEFAULT_KOTLIN_TEMPLATE:
-                templateName = "default (Kotlin)";
-                break;
-            default:
-                templateName = mustache.getName() + " (" + dir.getAbsolutePath() + ')';
-                break;
-        }
+        final String templateName = switch (mustache.getName()) {
+            case Constants.DEFAULT_JAVA_TEMPLATE -> "default (Java)";
+            case Constants.DEFAULT_KOTLIN_TEMPLATE -> "default (Kotlin)";
+            default -> mustache.getName() + " (" + dir.getAbsolutePath() + ')';
+        };
         note("Loaded template: " + templateName);
 
         final String fileName = versionInfo.getClassName() + '.' + type;

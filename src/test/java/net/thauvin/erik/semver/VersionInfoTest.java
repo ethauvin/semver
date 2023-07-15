@@ -1,7 +1,7 @@
 /*
  * VersionInfoTest.java
  *
- * Copyright (c) 2016-2022, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,6 @@
 
 package net.thauvin.erik.semver;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -47,7 +46,6 @@ import static org.testng.Assert.assertEquals;
  * @created 2016-02-03
  * @since 1.0
  */
-@SuppressFBWarnings("PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS")
 public class VersionInfoTest {
     private VersionInfo versionInfo = new VersionInfo();
 

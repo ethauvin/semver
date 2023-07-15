@@ -1,8 +1,8 @@
 plugins {
     id("application")
-    id("com.github.ben-manes.versions") version "0.42.0"
-    kotlin("jvm") version "1.6.21"
-    kotlin("kapt") version "1.6.21"
+    id("com.github.ben-manes.versions") version "0.46.0"
+    kotlin("jvm") version "1.7.22"
+    kotlin("kapt") version "1.7.22"
 }
 
 // ./gradlew
@@ -48,13 +48,13 @@ tasks {
 
     register("runJavaExample", JavaExec::class) {
         group = "application"
-        main = "com.example.JavaExample"
+        mainClass.set("com.example.JavaExample")
         classpath = sourceSets.main.get().runtimeClasspath
     }
 
     register("runExample", JavaExec::class) {
         group = "application"
-        main = "com.example.Example"
+        mainClass.set("com.example.Example")
         classpath = sourceSets.main.get().runtimeClasspath
     }
 }
