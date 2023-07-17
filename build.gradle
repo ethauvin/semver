@@ -152,6 +152,8 @@ test {
     }
 
     useTestNG()
+
+    finalizedBy jacocoTestReport
 }
 
 // spotbugs {
@@ -196,17 +198,14 @@ tasks.register('pandoc', Exec) {
     }
 }
 
-jacoco {
-    //toolVersion = '0.8.9'
-}
-
 jacocoTestReport {
     dependsOn test
     reports {
-        html.required = true
         xml.required = true
+        html.required = true
     }
 }
+
 
 sonarqube {
     properties {
