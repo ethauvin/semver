@@ -36,7 +36,6 @@ import rife.bld.BuildCommand;
 import rife.bld.Project;
 import rife.bld.extension.JacocoReportOperation;
 import rife.bld.extension.PmdOperation;
-import rife.bld.extension.TestNgOperation;
 import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
@@ -45,7 +44,8 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
-import static rife.bld.dependencies.Scope.*;
+import static rife.bld.dependencies.Scope.compile;
+import static rife.bld.dependencies.Scope.test;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
@@ -66,7 +66,6 @@ public class SemverBuild extends Project {
                 .include(dependency("com.github.spullara.mustache.java", "compiler",
                         version(0, 9, 10)));
         scope(test)
-                .include(dependency("org.assertj", "assertj-joda-time", version(2, 2, 0)))
                 .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 0)))
                 .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 0)));
 
@@ -122,11 +121,6 @@ public class SemverBuild extends Project {
                 .execute();
     }
 
-    private void rootPom() throws FileUtilsErrorException {
-        PomBuilder.generateInto(publishOperation().info(), publishOperation().dependencies(),
-                Path.of(workDirectory.getPath(), "pom.xml").toFile());
-    }
-
     @Override
     public void publish() throws Exception {
         super.publish();
@@ -137,5 +131,10 @@ public class SemverBuild extends Project {
     public void publishLocal() throws Exception {
         super.publishLocal();
         rootPom();
+    }
+
+    private void rootPom() throws FileUtilsErrorException {
+        PomBuilder.generateInto(publishOperation().info(), publishOperation().dependencies(),
+                Path.of(workDirectory.getPath(), "pom.xml").toFile());
     }
 }

@@ -38,8 +38,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertTrue; // NOPMD
 
 /**
  * The <code>ConstantsTest</code> class.
@@ -48,9 +48,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @created.on 2019-04-14
  * @since 1.0
  */
-public class ConstantsTest {
+class ConstantsTest {
     @Test
-    public void testDefaults() {
+    void testDefaults() {
         assertEquals(1, Constants.DEFAULT_MAJOR, "major");
         assertEquals(0, Constants.DEFAULT_MINOR, "minor");
         assertEquals(0, Constants.DEFAULT_PATCH, "patch");
@@ -60,7 +60,7 @@ public class ConstantsTest {
     }
 
     @Test
-    public void testTemplates() {
+    void testTemplates() {
         final List<String> templates = new ArrayList<>();
         templates.add(Constants.DEFAULT_JAVA_TEMPLATE);
         templates.add(Constants.DEFAULT_KOTLIN_TEMPLATE);

@@ -38,7 +38,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals; // NOPMD
 
 /**
  * The <code>VersionProcessorTest</code> class.
@@ -47,13 +47,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @created.on 2019-04-02
  * @since 1.2.0
  */
-public class VersionProcessorTest {
+class VersionProcessorTest {
     private final VersionProcessor processor = new VersionProcessor();
     private final Version version = new VersionTest();
 
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
-    public void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Method method = processor.getClass().getDeclaredMethod("findValues", Version.class);
         method.setAccessible(true);
         final VersionInfo versionInfo = (VersionInfo) method.invoke(processor, version);
@@ -64,7 +64,7 @@ public class VersionProcessorTest {
 
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
-    public void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         final Properties p = new Properties();
         p.setProperty("1", "1");
         p.setProperty("2", "2.1");

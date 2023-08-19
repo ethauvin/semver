@@ -34,10 +34,10 @@ package net.thauvin.erik.semver;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.util.Date; // NOPMD
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertTrue; // NOPMD
 
 /**
  * The <code>VersionInfoTest</code> class.
@@ -46,12 +46,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @created.on 2016-02-03
  * @since 1.0
  */
-public class VersionInfoTest {
+class VersionInfoTest {
     private VersionInfo versionInfo = new VersionInfo();
 
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     @Test
-    public void testGetVersion() {
+    void testGetVersion() {
         assertEquals("1.0.0", versionInfo.getVersion(), "getVersion(1.0.0)");
 
         versionInfo.setMajor(3);
@@ -99,7 +99,7 @@ public class VersionInfoTest {
     }
 
     @Test
-    public void testSetGet() {
+    void testSetGet() {
         versionInfo.setSeparator(".");
 
         versionInfo.setMajor(1);
@@ -160,7 +160,7 @@ public class VersionInfoTest {
     }
 
     @Test
-    public void testVersionInfo() {
+    void testVersionInfo() {
         final Version version = new VersionTest();
         versionInfo = new VersionInfo(version);
 
