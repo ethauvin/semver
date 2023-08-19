@@ -32,13 +32,14 @@
 
 package net.thauvin.erik.semver;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The <code>ConstantsTest</code> class.
@@ -50,12 +51,12 @@ import static org.testng.Assert.assertEquals; // NOPMD
 public class ConstantsTest {
     @Test
     public void testDefaults() {
-        assertEquals(Constants.DEFAULT_MAJOR, 1, "major");
-        assertEquals(Constants.DEFAULT_MINOR, 0, "minor");
-        assertEquals(Constants.DEFAULT_PATCH, 0, "patch");
-        assertEquals(Constants.DEFAULT_PRERELEASE_PREFIX, "-", "preRelease");
-        assertEquals(Constants.DEFAULT_BUILDMETA_PREFIX, "+", "buildMeta");
-        assertEquals(Constants.DEFAULT_SEPARATOR, ".", "separator");
+        assertEquals(1, Constants.DEFAULT_MAJOR, "major");
+        assertEquals(0, Constants.DEFAULT_MINOR, "minor");
+        assertEquals(0, Constants.DEFAULT_PATCH, "patch");
+        assertEquals("-", Constants.DEFAULT_PRERELEASE_PREFIX, "preRelease");
+        assertEquals("+", Constants.DEFAULT_BUILDMETA_PREFIX, "buildMeta");
+        assertEquals(".", Constants.DEFAULT_SEPARATOR, "separator");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class ConstantsTest {
         templates.add(Constants.DEFAULT_TEMPLATE_NAME);
 
         for (final String tp : templates) {
-            Assert.assertTrue(tp.endsWith(".mustache"), tp);
+            assertTrue(tp.endsWith(".mustache"), tp);
         }
     }
 }

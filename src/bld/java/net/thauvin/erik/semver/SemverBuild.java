@@ -67,7 +67,10 @@ public class SemverBuild extends Project {
                 .include(dependency("com.github.spullara.mustache.java", "compiler",
                         version(0, 9, 10)));
         scope(test)
-                .include(dependency("org.testng", "testng", version(7, 8, 0)));
+                .include(dependency("org.assertj", "assertj-joda-time", version(2, 2, 0)))
+                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 0)))
+                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 0)));
+
 
         javadocOperation().javadocOptions()
                 .tag("created.on", "a", "Created on:")
@@ -123,14 +126,6 @@ public class SemverBuild extends Project {
     private void rootPom() throws FileUtilsErrorException {
         PomBuilder.generateInto(publishOperation().info(), publishOperation().dependencies(),
                 Path.of(workDirectory.getPath(), "pom.xml").toFile());
-    }
-
-    @BuildCommand(summary = "Run tests with TestNG")
-    public void test() throws Exception {
-        new TestNgOperation()
-                .fromProject(this)
-                .packages("net.thauvin.erik.semver")
-                .execute();
     }
 
     @Override

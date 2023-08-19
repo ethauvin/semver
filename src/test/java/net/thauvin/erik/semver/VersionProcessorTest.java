@@ -32,13 +32,13 @@
 
 package net.thauvin.erik.semver;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
-import static org.testng.Assert.assertEquals; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The <code>VersionProcessorTest</code> class.
@@ -58,8 +58,8 @@ public class VersionProcessorTest {
         method.setAccessible(true);
         final VersionInfo versionInfo = (VersionInfo) method.invoke(processor, version);
 
-        assertEquals(versionInfo.getVersion(), "0-0-7:vodka++martini", "getVersion(0-0-7:vodka++martin)");
-        assertEquals(versionInfo.getProject(), "James Bond", "getProject(James Bond)");
+        assertEquals("0-0-7:vodka++martini", versionInfo.getVersion(), "getVersion(0-0-7:vodka++martin)");
+        assertEquals("James Bond", versionInfo.getProject(), "getProject(James Bond)");
     }
 
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
@@ -75,9 +75,9 @@ public class VersionProcessorTest {
                 int.class);
         method.setAccessible(true);
 
-        assertEquals(method.invoke(processor, p, "1", -1), 1, "parseIntProperty(1)");
-        assertEquals(method.invoke(processor, p, "2", -1), -1, "parseIntProperty(2.1)");
-        assertEquals(method.invoke(processor, p, "3", -1), -1, "parseIntProperty(zero)");
-        assertEquals(method.invoke(processor, p, "4", -1), 4, "parseIntProperty( 4 )");
+        assertEquals(1, method.invoke(processor, p, "1", -1), "parseIntProperty(1)");
+        assertEquals(-1, method.invoke(processor, p, "2", -1), "parseIntProperty(2.1)");
+        assertEquals(-1, method.invoke(processor, p, "3", -1), "parseIntProperty(zero)");
+        assertEquals(4, method.invoke(processor, p, "4", -1), "parseIntProperty( 4 )");
     }
 }
