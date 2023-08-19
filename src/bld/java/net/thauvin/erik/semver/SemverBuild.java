@@ -52,7 +52,7 @@ public class SemverBuild extends Project {
     public SemverBuild() {
         pkg = "net.thauvin.erik";
         name = "SemVer";
-        version = version(1, 2, 2, "SNAPSHOT");
+        version = version(1, 2, 1, "SNAPSHOT");
 
         var description = "Semantic Version Annotation Processor";
         var url = "https://github.com/ethauvin/semver";
