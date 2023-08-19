@@ -5,7 +5,7 @@
 [![bld](https://img.shields.io/badge/1.7.1-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
 [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver)
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/net.thauvin.erik.httpstatus/httpstatus?server=https%3A%2F%2Foss.sonatype.org)
+[![Nexus Snapshot](https://img.shields.io/nexus/s/net.thauvin.erik/semver?label=snapshot&server=https%3A%2F%2Foss.sonatype.org%2F)](https://oss.sonatype.org/content/repositories/snapshots/net/thauvin/erik/semver/)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver)
 [![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/gradle.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/gradle.yml)
