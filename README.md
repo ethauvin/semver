@@ -23,6 +23,7 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
   - [Custom Template](#custom-template)
 - [Elements & Properties](#elements--properties)
 - [Maven](#maven)
+- [bld](#bld)
 - [Gradle](#gradle)
   - [Class Generation](#class-generation)
   - [Class & Source Generation](#class--source-generation)
@@ -192,7 +193,7 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -202,11 +203,22 @@ Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples
 mvn verify
 ```
 
+## bld
+
+To install and run from [bld](https://rife2.com/bld), just add the dependency to your build file:
+
+```java
+scope(compile)
+        .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1, "SNAPSHOT")));
+```
+Please look at [ExamapleBuild](https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java) in the [examples/java/bld](https://github.com/ethauvin/semver/tree/master/examples/java/bld) directory for a sample.
+
+
 ## Gradle
 
 ### Class Generation
 
-To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
+To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/gradle/build.gradle):
 
 ```gradle
 repositories {
@@ -214,8 +226,8 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor 'net.thauvin.erik:semver:1.2.0'
-    compileOnly 'net.thauvin.erik:semver:1.2.0'
+    annotationProcessor 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
+    compileOnly 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
 }
 
 tasks.withType(JavaCompile) {
@@ -227,7 +239,7 @@ The directory containing the configuration files (`version.properties`, `version
 
 The [`GeneratedVersion.java`](https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java) class will be automatically created in the `build/generated` directory upon compiling.
 
-Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample.
+Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/gradle/build.gradle) in the [examples/java/gradle](https://github.com/ethauvin/semver/tree/master/examples/java/gradle) directory for a sample.
 
 ### Class & Source Generation
 
@@ -263,7 +275,7 @@ Please look at the [examples/kotlin](https://github.com/ethauvin/semver/tree/mas
 To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts):
 
 ```kotlin
-var semverProcessor = "net.thauvin.erik:semver:1.2.0"
+var semverProcessor = "net.thauvin.erik:semver:1.2.1-SNAPSHOT"
 
 dependencies {
     kapt(semverProcessor)
