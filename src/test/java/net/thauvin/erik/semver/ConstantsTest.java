@@ -38,8 +38,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals; // NOPMD
-import static org.junit.jupiter.api.Assertions.assertTrue; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The <code>ConstantsTest</code> class.

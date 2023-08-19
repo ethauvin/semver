@@ -38,7 +38,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.assertEquals; // NOPMD
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * The <code>VersionProcessorTest</code> class.
