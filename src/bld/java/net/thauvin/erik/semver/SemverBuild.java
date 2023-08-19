@@ -45,15 +45,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
-import static rife.bld.dependencies.Scope.compile;
-import static rife.bld.dependencies.Scope.test;
+import static rife.bld.dependencies.Scope.*;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
     public SemverBuild() {
-        pkg = "net.thauvin.erik.semver";
+        pkg = "net.thauvin.erik";
         name = "SemVer";
-        version = version(1, 2, 1, "SNAPSHOT");
+        version = version(1, 2, 2, "SNAPSHOT");
 
         var description = "Semantic Version Annotation Processor";
         var url = "https://github.com/ethauvin/semver";
@@ -82,11 +81,11 @@ public class SemverBuild extends Project {
                         .withCredentials(property("sonatype.user"), property("sonatype.password"))
                         : repository(SONATYPE_RELEASES.location())
                         .withCredentials(property("sonatype.user"), property("sonatype.password")))
-                .repository(MAVEN_LOCAL)
                 .info(new PublishInfo()
                         .groupId(pkg)
                         .artifactId(name.toLowerCase())
-                        .name(name).version(version)
+                        .name(name)
+                        .version(version)
                         .description(description)
                         .url(url)
                         .developer(new PublishDeveloper()
