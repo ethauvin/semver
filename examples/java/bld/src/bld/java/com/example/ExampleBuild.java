@@ -21,8 +21,7 @@ public class ExampleBuild extends Project {
         repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL);
 
         scope(compile)
-                .include(dependency("net.thauvin.erik", "semver",
-                        version(1, 2, 1, "SNAPSHOT")));
+                .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1, "SNAPSHOT")));
     }
 
     @BuildCommand(summary = "Run the example")
