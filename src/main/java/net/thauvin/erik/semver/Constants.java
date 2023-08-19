@@ -1,7 +1,7 @@
 /*
  * Constants.java
  *
- * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,10 +36,10 @@ package net.thauvin.erik.semver;
  * The <code>Constants</code> class holds the constant variables used throughout this project.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("PMD.DataClass")
 public final class Constants {
     /**
      * The default metadata prefix.

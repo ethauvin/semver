@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 @Version(properties = "example.properties", template = "example.mustache", className = "ExampleVersion",
-    keysPrefix = "example.")
+        keysPrefix = "example.")
 public final class Example {
     /**
      * Command line interface.
@@ -19,7 +19,7 @@ public final class Example {
         System.out.println("-- From Example -------------------------------------");
 
         System.out.println("  " + ExampleVersion.PROJECT + ' ' + ExampleVersion.VERSION
-            + " (" + sdf.format(ExampleVersion.BUILDDATE) + ')');
+                + " (" + sdf.format(ExampleVersion.BUILDDATE) + ')');
 
         System.out.println("-----------------------------------------------------");
     }

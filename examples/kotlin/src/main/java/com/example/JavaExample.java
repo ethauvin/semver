@@ -15,7 +15,7 @@ public final class JavaExample {
         System.out.println("-- From JavaExample -----------------------------------");
 
         System.out.println("  " + ExampleVersion.PROJECT + ' ' + ExampleVersion.VERSION
-            + " (" + sdf.format(ExampleVersion.BUILDDATE) + ')');
+                + " (" + sdf.format(ExampleVersion.BUILDDATE) + ')');
 
         System.out.println("-------------------------------------------------------");
     }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.thauvin.erik.semver</groupId>
+  <artifactId>semver</artifactId>
+  <version>1.2.1-SNAPSHOT</version>
+  <name>SemVer</name>
+  <description>Semantic Version Annotation Processor</description>
+  <url>https://github.com/ethauvin/semver</url>
+  <licenses>
+    <license>
+      <name>The BSD 3-Clause License</name>
+      <url>http://opensource.org/licenses/BSD-3-Clause</url>
+    </license>
+  </licenses>
+  <dependencies>
+    <dependency>
+      <groupId>com.github.spullara.mustache.java</groupId>
+      <artifactId>compiler</artifactId>
+      <version>0.9.10</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+  <developers>
+    <developer>
+      <id>ethauvin</id>
+      <name>Erik C. Thauvin</name>
+      <email>erik@thauvin.net</email>
+      <url>https://erik.thauvin.net/</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:https://github.com/ethauvin/semver.git</connection>
+    <developerConnection>scm:git:git@github.com:ethauvin/semver.git</developerConnection>
+    <url>https://github.com/ethauvin/semver</url>
+  </scm>
+</project>

@@ -1,7 +1,7 @@
 /*
  * ConstantsTest.java
  *
- * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,30 +32,31 @@
 
 package net.thauvin.erik.semver;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The <code>ConstantsTest</code> class.
  *
  * @author <a href="https://erik.thauvin.net/" target="_blank">Erik C. Thauvin</a>
- * @created 2019-04-14
+ * @created.on 2019-04-14
  * @since 1.0
  */
 public class ConstantsTest {
     @Test
     public void testDefaults() {
-        assertEquals(Constants.DEFAULT_MAJOR, 1, "major");
-        assertEquals(Constants.DEFAULT_MINOR, 0, "minor");
-        assertEquals(Constants.DEFAULT_PATCH, 0, "patch");
-        assertEquals(Constants.DEFAULT_PRERELEASE_PREFIX, "-", "preRelease");
-        assertEquals(Constants.DEFAULT_BUILDMETA_PREFIX, "+", "buildMeta");
-        assertEquals(Constants.DEFAULT_SEPARATOR, ".", "separator");
+        assertEquals(1, Constants.DEFAULT_MAJOR, "major");
+        assertEquals(0, Constants.DEFAULT_MINOR, "minor");
+        assertEquals(0, Constants.DEFAULT_PATCH, "patch");
+        assertEquals("-", Constants.DEFAULT_PRERELEASE_PREFIX, "preRelease");
+        assertEquals("+", Constants.DEFAULT_BUILDMETA_PREFIX, "buildMeta");
+        assertEquals(".", Constants.DEFAULT_SEPARATOR, "separator");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class ConstantsTest {
         templates.add(Constants.DEFAULT_TEMPLATE_NAME);
 
         for (final String tp : templates) {
-            Assert.assertTrue(tp.endsWith(".mustache"), tp);
+            assertTrue(tp.endsWith(".mustache"), tp);
         }
     }
 }

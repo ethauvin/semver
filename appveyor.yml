@@ -1,3 +1,6 @@
+image:
+  - Visual Studio 2022
+
 version: "{branch} {build}"
 skip_tags: true
 
@@ -5,22 +8,20 @@ build:
   verbosity: detailed
 
 build_script:
-  - gradlew.bat assemble --info --no-daemon
+  - bld.bat download compile
 
 test_script:
-  - gradlew.bat check --info --no-daemon
+  - bld.bat test
 
 branches:
   only:
     - master
-
-cache:
-  - C:\Users\appveyor\.gradle
+    - 1.2.1-dev
 
 environment:
   matrix:
-  - JAVA_HOME: C:\Program Files\Java\jdk1.8.0
-  - JAVA_HOME: C:\Program Files (x86)\Java\jdk1.8.0
+    - JAVA_HOME: C:\Program Files\Java\jdk17
+    - JAVA_HOME: C:\Program Files\Java\jdk20
 
 matrix:
   fast_finish: true

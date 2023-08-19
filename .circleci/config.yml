@@ -1,44 +1,41 @@
-version: 2
+inversion: 2
 defaults: &defaults
   working_directory: ~/repo
-  docker:
-    - image: circleci/openjdk:8-jdk
   environment:
     JVM_OPTS: -Xmx3200m
     TERM: dumb
+    CI_NAME: "CircleCI"
+
+defaults_gradle: &defaults_bld
+  steps:
+    - checkout
+    - run:
+        name: Download the dependencies
+        command: ./bld download
+    - run:
+        name: Run tests with bld
+        command: ./bld compile test
 
 jobs:
-  build_gradle:
+  bld_jdk20:
     <<: *defaults
 
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - gradle-dependencies-{{ checksum "build.gradle" }}
-          # fallback to using the latest cache if no exact match is found
-          - gradle-dependencies-
+    docker:
+      - image: cimg/openjdk:20.0
 
-      - run:
-          name: Gradle Dependencies
-          command: ./gradlew dependencies
+    <<: *defaults_bld
 
-      - save_cache:
-          paths: ~/.m2
-          key: gradle-dependencies-{{ checksum "build.gradle" }}
+  bld_jdk17:
+    <<: *defaults
 
-      - run:
-          name: Run All Checks
-          command: ./gradlew check
+    docker:
+      - image: cimg/openjdk:17.0
 
-      - store_artifacts:
-          path: build/reports/
-          destination: reports
-      - store_test_results:
-          path: build/reports/
+    <<: *defaults_bld
 
 workflows:
   version: 2
-  build_gradle_jdk8:
+  bld:
     jobs:
-      - build_gradle
+      - bld_jdk17
+      - bld_jdk20

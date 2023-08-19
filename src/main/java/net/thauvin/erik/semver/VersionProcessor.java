@@ -1,7 +1,7 @@
 /*
  * VersionProcessor.java
  *
- * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,14 +36,8 @@ import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
 import com.github.mustachejava.MustacheNotFoundException;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Filer;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedOptions;
+import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
@@ -51,12 +45,7 @@ import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 import javax.tools.FileObject;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashSet;
@@ -67,57 +56,70 @@ import java.util.Set;
  * The <code>VersionProcessor</code> class implements a semantic version annotation processor.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
-@SuppressWarnings("PMD.GuardLogStatement")
+@SuppressWarnings({"PMD.GuardLogStatement", "PMD.BeanMembersShouldSerialize"})
 @SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
 
     private Messager messager;
 
+    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
+        final String template;
+        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
+            template = Constants.DEFAULT_TEMPLATE_NAME;
+        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
+                .equals(version.type())) {
+            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
+        } else {
+            template = version.template();
+        }
+        return template;
+    }
+
     private void error(final String s) {
         log(Diagnostic.Kind.ERROR, s);
     }
 
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void error(final String s, final Throwable t) {
-        log(Diagnostic.Kind.ERROR, (t != null ? t.toString() : s));
+        log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }
 
-    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private VersionInfo findValues(final Version version) throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
-        if (version.properties().length() > 0) {
+        if (!version.properties().isEmpty()) {
             final File propsFile = getLocalFile(version.properties());
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile.getName() + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
                 final Properties p = new Properties();
 
-                try (final InputStreamReader reader = new InputStreamReader(
-                    Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
+                try (InputStreamReader reader = new InputStreamReader(
+                        Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
                     versionInfo.setProject(
-                        p.getProperty(version.keysPrefix() + version.projectKey(), version.project()));
+                            p.getProperty(version.keysPrefix() + version.projectKey(), version.project()));
                     versionInfo.setMajor(
-                        parseIntProperty(p, version.keysPrefix() + version.majorKey(), version.major()));
+                            parseIntProperty(p, version.keysPrefix() + version.majorKey(), version.major()));
                     versionInfo.setMinor(
-                        parseIntProperty(p, version.keysPrefix() + version.minorKey(), version.minor()));
+                            parseIntProperty(p, version.keysPrefix() + version.minorKey(), version.minor()));
                     versionInfo.setPatch(
-                        parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
+                            parseIntProperty(p, version.keysPrefix() + version.patchKey(), version.patch()));
                     versionInfo.setBuildMeta(
-                        p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
+                            p.getProperty(version.keysPrefix() + version.buildMetaKey(), version.buildMeta()));
                     versionInfo.setBuildMetaPrefix(
-                        p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(), version.buildMetaPrefix()));
+                            p.getProperty(version.keysPrefix() + version.buildMetaPrefixKey(), version.buildMetaPrefix()));
                     versionInfo.setPreRelease(
-                        p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
+                            p.getProperty(version.keysPrefix() + version.preReleaseKey(), version.preRelease()));
                     versionInfo.setPreReleasePrefix(p.getProperty(version.keysPrefix() + version.preReleasePrefixKey(),
-                                                                  version.preReleasePrefix()));
+                            version.preReleasePrefix()));
                     versionInfo.setSeparator(
-                        p.getProperty(version.keysPrefix() + version.separatorKey(), version.separator()));
+                            p.getProperty(version.keysPrefix() + version.separatorKey(), version.separator()));
                 }
             } else {
                 final String findOrRead;
@@ -128,14 +130,13 @@ public class VersionProcessor extends AbstractProcessor {
                 }
                 error("Could not " + findOrRead + ": " + propsFile);
                 throw new FileNotFoundException(
-                    "Could not " + findOrRead + " the specified file: `" + propsFile.getAbsolutePath() + '`');
+                        "Could not " + findOrRead + " the specified file: `" + propsFile.getAbsolutePath() + '`');
             }
         }
 
         return versionInfo;
     }
 
-    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private File getLocalFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
@@ -193,15 +194,7 @@ public class VersionProcessor extends AbstractProcessor {
                             versionInfo.setPackageName(packageElement.getQualifiedName().toString());
                         }
                         note("Found version: " + versionInfo.getVersion());
-                        final String template;
-                        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
-                            template = Constants.DEFAULT_TEMPLATE_NAME;
-                        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
-                            .equals(version.type())) {
-                            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
-                        } else {
-                            template = version.template();
-                        }
+                        final String template = getTemplate(isLocalTemplate, version);
 
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException | MustacheNotFoundException e) {
@@ -216,7 +209,7 @@ public class VersionProcessor extends AbstractProcessor {
     private void log(final Diagnostic.Kind kind, final String s) {
         if (messager != null) {
             messager.printMessage(kind,
-                                  '[' + VersionProcessor.class.getSimpleName() + "] " + s + System.lineSeparator());
+                    '[' + VersionProcessor.class.getSimpleName() + "] " + s + System.lineSeparator());
         }
     }
 
@@ -237,25 +230,17 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
-    @SuppressFBWarnings({"PATH_TRAVERSAL_IN", "UAC_UNNECESSARY_API_CONVERSION_FILE_TO_PATH"})
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
-        throws IOException {
+            throws IOException {
         final File dir = getLocalFile("");
         final MustacheFactory mf = new DefaultMustacheFactory(dir);
         final Mustache mustache = mf.compile(template);
 
-        final String templateName;
-        switch (mustache.getName()) {
-            case Constants.DEFAULT_JAVA_TEMPLATE:
-                templateName = "default (Java)";
-                break;
-            case Constants.DEFAULT_KOTLIN_TEMPLATE:
-                templateName = "default (Kotlin)";
-                break;
-            default:
-                templateName = mustache.getName() + " (" + dir.getAbsolutePath() + ')';
-                break;
-        }
+        final String templateName = switch (mustache.getName()) {
+            case Constants.DEFAULT_JAVA_TEMPLATE -> "default (Java)";
+            case Constants.DEFAULT_KOTLIN_TEMPLATE -> "default (Kotlin)";
+            default -> mustache.getName() + " (" + dir.getAbsolutePath() + ')';
+        };
         note("Loaded template: " + templateName);
 
         final String fileName = versionInfo.getClassName() + '.' + type;
@@ -268,15 +253,15 @@ public class VersionProcessor extends AbstractProcessor {
             if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
                 note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
-            try (final OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
-                                                                       StandardCharsets.UTF_8)) {
+            try (OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
+                    StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + ktFile.getParentFile().getAbsolutePath() + ')');
         } else {
             final FileObject jfo = filer.createSourceFile(
-                versionInfo.getPackageName() + '.' + versionInfo.getClassName());
-            try (final Writer writer = jfo.openWriter()) {
+                    versionInfo.getPackageName() + '.' + versionInfo.getClassName());
+            try (Writer writer = jfo.openWriter()) {
                 mustache.execute(writer, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');

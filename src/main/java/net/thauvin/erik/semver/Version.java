@@ -1,7 +1,7 @@
 /*
  * Version.java
  *
- * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,9 +41,10 @@ import java.lang.annotation.Target;
  * The <code>Version</code> class implements the annotation interface.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
+@SuppressWarnings("SameReturnValue")
 @Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.TYPE)
 public @interface Version {

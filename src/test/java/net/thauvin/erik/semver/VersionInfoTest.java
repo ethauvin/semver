@@ -1,7 +1,7 @@
 /*
  * VersionInfoTest.java
  *
- * Copyright (c) 2016-2020, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,73 +32,70 @@
 
 package net.thauvin.erik.semver;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
+import java.util.Date;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The <code>VersionInfoTest</code> class.
  *
  * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
- * @created 2016-02-03
+ * @created.on 2016-02-03
  * @since 1.0
  */
-@SuppressFBWarnings("PRMC_POSSIBLY_REDUNDANT_METHOD_CALLS")
 public class VersionInfoTest {
-    private final Calendar now = Calendar.getInstance();
     private VersionInfo versionInfo = new VersionInfo();
 
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     @Test
     public void testGetVersion() {
-        assertEquals(versionInfo.getVersion(), "1.0.0", "getVersion(1.0.0)");
+        assertEquals("1.0.0", versionInfo.getVersion(), "getVersion(1.0.0)");
 
         versionInfo.setMajor(3);
 
-        assertEquals(versionInfo.getVersion(), "3.0.0", "getVersion(3.0.0)");
+        assertEquals("3.0.0", versionInfo.getVersion(), "getVersion(3.0.0)");
 
         versionInfo.setMinor(2);
 
-        assertEquals(versionInfo.getVersion(), "3.2.0", "getVersion(3.2.0)");
+        assertEquals("3.2.0", versionInfo.getVersion(), "getVersion(3.2.0)");
 
         versionInfo.setPatch(1);
 
-        assertEquals(versionInfo.getVersion(), "3.2.1", "getVersion(3.2.1)");
+        assertEquals("3.2.1", versionInfo.getVersion(), "getVersion(3.2.1)");
 
         versionInfo.setPreRelease("beta");
 
-        assertEquals(versionInfo.getVersion(), "3.2.1-beta", "getVersion(3.2.1-beta)");
+        assertEquals("3.2.1-beta", versionInfo.getVersion(), "getVersion(3.2.1-beta)");
 
         versionInfo.setBuildMeta("001");
 
-        assertEquals(versionInfo.getVersion(), "3.2.1-beta+001", "getVersion(3.2.1-beta+001)");
+        assertEquals("3.2.1-beta+001", versionInfo.getVersion(), "getVersion(3.2.1-beta+001)");
 
         versionInfo.setPreReleasePrefix("+");
 
-        assertEquals(versionInfo.getVersion(), "3.2.1+beta+001", "getVersion(3.2.1+beta+001)");
+        assertEquals("3.2.1+beta+001", versionInfo.getVersion(), "getVersion(3.2.1+beta+001)");
 
         versionInfo.setPreReleasePrefix("-");
 
         versionInfo.setPreRelease("");
 
-        assertEquals(versionInfo.getVersion(), "3.2.1+001", "getVersion(3.2.1+001)");
+        assertEquals("3.2.1+001", versionInfo.getVersion(), "getVersion(3.2.1+001)");
 
         versionInfo.setBuildMetaPrefix(".");
 
-        assertEquals(versionInfo.getVersion(), "3.2.1.001", "getVersion(3.2.1.001)");
+        assertEquals("3.2.1.001", versionInfo.getVersion(), "getVersion(3.2.1.001)");
 
         versionInfo.setBuildMetaPrefix("+");
 
         versionInfo.setSeparator("-");
 
-        assertEquals(versionInfo.getVersion(), "3-2-1+001", "getVersion(3-2-1+001)");
+        assertEquals("3-2-1+001", versionInfo.getVersion(), "getVersion(3-2-1+001)");
 
-        assertEquals(versionInfo.getVersion(), versionInfo.getSemver(),
-                     "getVersion(3-2-1+001) = getSemver(3-2-1+001) ");
+        assertEquals(versionInfo.getSemver(), versionInfo.getVersion(),
+                "getVersion(3-2-1+001) = getSemver(3-2-1+001) ");
     }
 
     @Test
@@ -107,59 +104,59 @@ public class VersionInfoTest {
 
         versionInfo.setMajor(1);
 
-        assertEquals(versionInfo.getMajor(), 1, "getMajor(1)");
+        assertEquals(1, versionInfo.getMajor(), "getMajor(1)");
 
         versionInfo.setMinor(2);
 
-        assertEquals(versionInfo.getMinor(), 2, "getMinor(2)");
+        assertEquals(2, versionInfo.getMinor(), "getMinor(2)");
 
         versionInfo.setPatch(3);
 
-        assertEquals(versionInfo.getPatch(), 3, "getPatch(3)");
+        assertEquals(3, versionInfo.getPatch(), "getPatch(3)");
 
         versionInfo.setPreRelease("alpha");
 
-        assertEquals(versionInfo.getPreRelease(), "alpha", "getPreRelease(alpha)");
+        assertEquals("alpha", versionInfo.getPreRelease(), "getPreRelease(alpha)");
 
         versionInfo.setBuildMeta("001");
 
-        assertEquals(versionInfo.getBuildMeta(), "001", "getBuildMeta(001)");
+        assertEquals("001", versionInfo.getBuildMeta(), "getBuildMeta(001)");
 
         versionInfo.setPackageName("com.example");
 
-        assertEquals(versionInfo.getPackageName(), "com.example", "getPackageName(com.example)");
+        assertEquals("com.example", versionInfo.getPackageName(), "getPackageName(com.example)");
 
-        assertEquals(versionInfo.getVersion(), "1.2.3-alpha+001", "getVersion(1.2.3-alpha+001)");
+        assertEquals("1.2.3-alpha+001", versionInfo.getVersion(), "getVersion(1.2.3-alpha+001)");
 
-        assertEquals(versionInfo.getVersion(), versionInfo.getSemver(), "getVersion() = getSemver()");
+        assertEquals(versionInfo.getSemver(), versionInfo.getVersion(), "getVersion() = getSemver()");
 
         versionInfo.setBuildMetaPrefix("");
 
-        assertEquals(versionInfo.getBuildMetaPrefix(), "", "getBuildMetaPrefix( )");
+        assertEquals("", versionInfo.getBuildMetaPrefix(), "getBuildMetaPrefix( )");
 
-        assertEquals(versionInfo.getVersion(), "1.2.3-alpha001", "getVersion(1.2.3+alpha001)");
+        assertEquals("1.2.3-alpha001", versionInfo.getVersion(), "getVersion(1.2.3+alpha001)");
 
         versionInfo.setPreReleasePrefix(".");
 
-        assertEquals(versionInfo.getPreReleasePrefix(), ".", "getPreReleasePrefix(.)");
+        assertEquals(".", versionInfo.getPreReleasePrefix(), "getPreReleasePrefix(.)");
 
-        assertEquals(versionInfo.getVersion(), "1.2.3.alpha001", "getVersion(1.2.3.alpha001");
+        assertEquals("1.2.3.alpha001", versionInfo.getVersion(), "getVersion(1.2.3.alpha001");
 
         versionInfo.setSeparator("-");
 
-        assertEquals(versionInfo.getSeparator(), "-", "getSeparator(-)");
+        assertEquals("-", versionInfo.getSeparator(), "getSeparator(-)");
 
-        assertEquals(versionInfo.getVersion(), "1-2-3.alpha001", "getVersion(1-2-3.alpha001)");
+        assertEquals("1-2-3.alpha001", versionInfo.getVersion(), "getVersion(1-2-3.alpha001)");
 
         versionInfo.setProject("My Example");
 
-        assertEquals(versionInfo.getProject(), "My Example", "getProject(My Example)");
+        assertEquals("My Example", versionInfo.getProject(), "getProject(My Example)");
 
         versionInfo.setClassName("Example");
 
-        assertEquals(versionInfo.getClassName(), "Example", "getClassName(Example");
+        assertEquals("Example", versionInfo.getClassName(), "getClassName(Example");
 
-        Assert.assertTrue((versionInfo.getEpoch() - now.getTimeInMillis()) < 1000, "buildDate - now < 1s");
+        assertTrue((versionInfo.getEpoch() - new Date().getTime()) < 1000, "buildDate - now < 1s");
     }
 
     @Test
@@ -167,32 +164,32 @@ public class VersionInfoTest {
         final Version version = new VersionTest();
         versionInfo = new VersionInfo(version);
 
-        assertEquals(versionInfo.getMajor(), version.major(), "getMajor(major)");
+        assertEquals(version.major(), versionInfo.getMajor(), "getMajor(major)");
 
-        assertEquals(versionInfo.getMinor(), version.minor(), "getMinor(minor)");
+        assertEquals(version.minor(), versionInfo.getMinor(), "getMinor(minor)");
 
-        assertEquals(versionInfo.getPatch(), version.patch(), "getPatch(patch)");
+        assertEquals(version.patch(), versionInfo.getPatch(), "getPatch(patch)");
 
-        assertEquals(versionInfo.getPreRelease(), version.preRelease(), "getPreRelease(preRelease)");
+        assertEquals(version.preRelease(), versionInfo.getPreRelease(), "getPreRelease(preRelease)");
 
-        assertEquals(versionInfo.getPreReleasePrefix(), version.preReleasePrefix(),
-                     "getPreReleasePrefix(preReleasePrefix)");
+        assertEquals(version.preReleasePrefix(), versionInfo.getPreReleasePrefix(),
+                "getPreReleasePrefix(preReleasePrefix)");
 
-        assertEquals(versionInfo.getBuildMeta(), version.buildMeta(), "getBuildMeta(buildMeta)");
+        assertEquals(version.buildMeta(), versionInfo.getBuildMeta(), "getBuildMeta(buildMeta)");
 
-        assertEquals(versionInfo.getBuildMetaPrefix(), version.buildMetaPrefix(),
-                     "getBuildMetaPrefix(buildMetaPrefix)");
+        assertEquals(version.buildMetaPrefix(), versionInfo.getBuildMetaPrefix(),
+                "getBuildMetaPrefix(buildMetaPrefix)");
 
-        assertEquals(versionInfo.getPackageName(), version.packageName(), "getPackageName(packageName)");
+        assertEquals(version.packageName(), versionInfo.getPackageName(), "getPackageName(packageName)");
 
         assertEquals(versionInfo.getVersion(),
-                     version.major() + "." + version.minor() + '.' + version.patch() + '-' + version.preRelease() + '+'
-                     + version.buildMeta(), "getVersion(version)");
+                version.major() + "." + version.minor() + '.' + version.patch() + '-' + version.preRelease() + '+'
+                        + version.buildMeta(), "getVersion(version)");
 
-        assertEquals(versionInfo.getVersion(), versionInfo.getSemver(), "getVersion(version) = getSemver(version)");
+        assertEquals(versionInfo.getSemver(), versionInfo.getVersion(), "getVersion(version) = getSemver(version)");
 
-        assertEquals(versionInfo.getProject(), version.project(), "getProject(project)");
+        assertEquals(version.project(), versionInfo.getProject(), "getProject(project)");
 
-        assertEquals(versionInfo.getClassName(), version.className(), "getClassName(className)");
+        assertEquals(version.className(), versionInfo.getClassName(), "getClassName(className)");
     }
 }

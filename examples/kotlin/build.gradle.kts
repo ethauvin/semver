@@ -1,8 +1,8 @@
 plugins {
-    kotlin("jvm").version("1.3.72")
-    application
-    id("org.jetbrains.kotlin.kapt").version("1.3.72")
-    id("com.github.ben-manes.versions").version("0.28.0")
+    id("application")
+    id("com.github.ben-manes.versions") version "0.46.0"
+    kotlin("jvm") version "1.7.22"
+    kotlin("kapt") version "1.7.22"
 }
 
 // ./gradlew
@@ -13,7 +13,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-val semverProcessor = "net.thauvin.erik:semver:1.2.0"
+val semverProcessor = "net.thauvin.erik:semver:1.2.1-SNAPSHOT"
 
 dependencies {
     kapt(semverProcessor)
@@ -30,30 +30,31 @@ kapt {
 
 repositories {
     mavenLocal()
-    jcenter()
+    mavenCentral()
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 application {
-    mainClassName = "com.example.App"
+    mainClass.set("com.example.App")
 }
 
 tasks {
     register("runJava", JavaExec::class) {
         group = "application"
-        main = "com.example.JavaApp"
-        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("com.example.JavaApp")
+        classpath = sourceSets.main.get().runtimeClasspath
 
     }
 
     register("runJavaExample", JavaExec::class) {
         group = "application"
-        main = "com.example.JavaExample"
-        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("com.example.JavaExample")
+        classpath = sourceSets.main.get().runtimeClasspath
     }
 
     register("runExample", JavaExec::class) {
         group = "application"
-        main = "com.example.Example"
-        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("com.example.Example")
+        classpath = sourceSets.main.get().runtimeClasspath
     }
 }
