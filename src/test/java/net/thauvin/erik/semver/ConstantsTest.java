@@ -38,13 +38,13 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEquals; // NOPMD
 
 /**
  * The <code>ConstantsTest</code> class.
  *
  * @author <a href="https://erik.thauvin.net/" target="_blank">Erik C. Thauvin</a>
- * @created 2019-04-14
+ * @created.on 2019-04-14
  * @since 1.0
  */
 public class ConstantsTest {

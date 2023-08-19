@@ -56,7 +56,7 @@ import java.util.Set;
  * The <code>VersionProcessor</code> class implements a semantic version annotation processor.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
 @SuppressWarnings({"PMD.GuardLogStatement", "PMD.BeanMembersShouldSerialize"})
@@ -66,10 +66,24 @@ public class VersionProcessor extends AbstractProcessor {
 
     private Messager messager;
 
+    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
+        final String template;
+        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
+            template = Constants.DEFAULT_TEMPLATE_NAME;
+        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
+                .equals(version.type())) {
+            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
+        } else {
+            template = version.template();
+        }
+        return template;
+    }
+
     private void error(final String s) {
         log(Diagnostic.Kind.ERROR, s);
     }
 
+    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void error(final String s, final Throwable t) {
         log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }
@@ -77,7 +91,7 @@ public class VersionProcessor extends AbstractProcessor {
     private VersionInfo findValues(final Version version) throws IOException {
         final VersionInfo versionInfo = new VersionInfo(version);
 
-        if (version.properties().length() > 0) {
+        if (!version.properties().isEmpty()) {
             final File propsFile = getLocalFile(version.properties());
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile.getName() + " (" + propsFile.getAbsoluteFile().getParent() + ')');
@@ -180,15 +194,7 @@ public class VersionProcessor extends AbstractProcessor {
                             versionInfo.setPackageName(packageElement.getQualifiedName().toString());
                         }
                         note("Found version: " + versionInfo.getVersion());
-                        final String template;
-                        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
-                            template = Constants.DEFAULT_TEMPLATE_NAME;
-                        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
-                                .equals(version.type())) {
-                            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
-                        } else {
-                            template = version.template();
-                        }
+                        final String template = getTemplate(isLocalTemplate, version);
 
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException | MustacheNotFoundException e) {

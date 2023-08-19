@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
  * The <code>Version</code> class implements the annotation interface.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
 @SuppressWarnings("SameReturnValue")

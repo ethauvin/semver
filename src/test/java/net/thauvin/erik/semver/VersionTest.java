@@ -38,7 +38,7 @@ import java.lang.annotation.Annotation;
  * The <code>VersionTest</code> class.
  *
  * @author <a href="https://erik.thauvin.net/" target="_blank">Erik C. Thauvin</a>
- * @created 2019-04-02
+ * @created.on 2019-04-02
  * @since 1.2.0
  */
 @SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue", "java:S2187", "PMD.TestClassWithoutTestCases"})

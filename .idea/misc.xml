@@ -1,118 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
-    <entry_points version="2.0">
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_BUILDMETA_PREFIX" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_CLASS_NAME" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_JAVA_TEMPLATE" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_JAVA_TYPE" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_KEYS_PREFIX" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_KOTLIN_TEMPLATE" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_MAJOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_MINOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_PATCH" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_PRERELEASE_PREFIX" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_SEPARATOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants DEFAULT_TEMPLATE_NAME" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants EMPTY" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KAPT_KOTLIN_GENERATED_OPTION_NAME" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_BUILDMETA" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_BUILDMETA_PREFIX" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_MAJOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_MINOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_PATCH" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_PRERELEASE" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_PRERELEASE_PREFIX" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_PROJECT" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KEY_VERSION_SEPARATOR" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants KOTLIN_TYPE" />
-      <entry_point TYPE="field" FQNAME="net.thauvin.erik.semver.Constants SEMVER_PROJECT_DIR_ARG" />
-    </entry_points>
-    <pattern value="net.thauvin.erik.semver.Constants" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getBuildMeta" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getBuildMetaPrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getClassName" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getEpoch" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getMajor" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getMinor" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getPackageName" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getPatch" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getPreRelease" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getPreReleasePrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getSemver" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="getSeparator" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setBuildMeta" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setBuildMetaPrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setClassName" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setMajor" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setMinor" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setPackageName" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setPatch" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setPreRelease" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setPreReleasePrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setProject" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="setSeparator" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" />
-    <pattern value="net.thauvin.erik.semver.VersionInfo" method="VersionInfo" />
-    <pattern value="net.thauvin.erik.semver.Constants" method="Constants" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMeta" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaPrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="buildMetaPrefixKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="className" />
-    <pattern value="net.thauvin.erik.semver.ConstantsTest" />
-    <pattern value="net.thauvin.erik.semver.VersionInfoTest" />
-    <pattern value="net.thauvin.erik.semver.VersionProcessor" />
-    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="keysPrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="major" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="majorKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="minor" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="minorKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="packageName" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="patch" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="patchKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="preRelease" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleaseKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleasePrefix" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="preReleasePrefixKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="project" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="projectKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="properties" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="separator" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="separatorKey" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="template" />
-    <pattern value="net.thauvin.erik.semver.ConstantsTest" method="testDefaults" />
-    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" method="testFindValues" />
-    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testGetVersion" />
-    <pattern value="net.thauvin.erik.semver.VersionProcessorTest" method="testParseIntProperty" />
-    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testSetGet" />
-    <pattern value="net.thauvin.erik.semver.ConstantsTest" method="testTemplates" />
-    <pattern value="net.thauvin.erik.semver.VersionInfoTest" method="testVersionInfo" />
-    <pattern value="net.thauvin.erik.semver.VersionTest" method="type" />
-  </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="FrameworkDetectionExcludesConfiguration">
-    <file type="web" url="file://$PROJECT_DIR$" />
-  </component>
-  <component name="JavaScriptSettings">
-    <option name="languageLevel" value="ES6" />
+    <pattern value="net.thauvin.erik.semver.SemverBuild" method="jacoco" />
+    <pattern value="net.thauvin.erik.semver.SemverBuild" method="pmd" />
   </component>
   <component name="PDMPlugin">
-    <option name="customRuleSets">
-      <list>
-        <option value="K:\java\semver\config\pmd.xml" />
-      </list>
-    </option>
-    <option name="options">
-      <map>
-        <entry key="Statistics URL" value="" />
-        <entry key="Target JDK" value="1.8" />
-      </map>
-    </option>
+    <option name="skipTestSources" value="false" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/out" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build" />
   </component>
 </project>

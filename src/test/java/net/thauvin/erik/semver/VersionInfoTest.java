@@ -37,13 +37,13 @@ import org.testng.annotations.Test;
 
 import java.util.Date;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertEquals; // NOPMD
 
 /**
  * The <code>VersionInfoTest</code> class.
  *
  * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
- * @created 2016-02-03
+ * @created.on 2016-02-03
  * @since 1.0
  */
 public class VersionInfoTest {

@@ -36,9 +36,10 @@ package net.thauvin.erik.semver;
  * The <code>Constants</code> class holds the constant variables used throughout this project.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created 2016-01-13
+ * @created.on 2016-01-13
  * @since 1.0
  */
+@SuppressWarnings("PMD.DataClass")
 public final class Constants {
     /**
      * The default metadata prefix.

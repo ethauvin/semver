@@ -1,8 +1,16 @@
 #  Semantic Version Annotation Processor
 
-[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause) [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver)  
+[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
+[![Java](https://img.shields.io/badge/java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![bld](https://img.shields.io/badge/1.7.1-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
+[![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver)
+![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/net.thauvin.erik.httpstatus/httpstatus?server=https%3A%2F%2Foss.sonatype.org)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver) [![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/gradle.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/gradle.yml) [![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver) [![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver)
+[![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/gradle.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/gradle.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver)
+[![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
 
 An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annotation/processing/Processor.html) that automatically generates a `GeneratedVersion` class based on a [Mustache](https://mustache.github.io/) template and containing the [semantic version](https://semver.org/) (major, minor, patch, etc.) that is read from a [Properties](https://docs.oracle.com/javase/tutorial/essential/environment/properties.html) file or defined in the [annotation](https://docs.oracle.com/javase/tutorial/java/annotations/basics.html).
 
