@@ -37,6 +37,7 @@ import rife.bld.Project;
 import rife.bld.extension.JacocoReportOperation;
 import rife.bld.extension.PmdOperation;
 import rife.bld.publish.*;
+import rife.tools.FileUtils;
 import rife.tools.exceptions.FileUtilsErrorException;
 
 import java.io.IOException;
@@ -133,8 +134,9 @@ public class SemverBuild extends Project {
         rootPom();
     }
 
-    private void rootPom() throws FileUtilsErrorException {
-        PomBuilder.generateInto(publishOperation().info(), publishOperation().dependencies(),
+    @BuildCommand(value = "pom-root", summary = "Generates the POM file in the root directory")
+    public void rootPom() throws FileUtilsErrorException {
+        PomBuilder.generateInto(publishOperation().info(), dependencies(),
                 Path.of(workDirectory.getPath(), "pom.xml").toFile());
     }
 }
