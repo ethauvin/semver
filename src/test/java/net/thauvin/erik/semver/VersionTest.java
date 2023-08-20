@@ -43,6 +43,8 @@ import java.lang.annotation.Annotation;
  */
 @SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue", "java:S2187", "PMD.TestClassWithoutTestCases"})
 class VersionTest implements Version {
+    String template = "myversion.mustache";
+
     @Override
     public Class<? extends Annotation> annotationType() {
         return null;
@@ -160,11 +162,15 @@ class VersionTest implements Version {
 
     @Override
     public String template() {
-        return "myversion.mustache";
+        return template;
     }
 
     @Override
     public String type() {
         return "kt";
+    }
+
+    public void setTemplate(final String template) {
+        this.template = template;
     }
 }

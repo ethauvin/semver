@@ -34,7 +34,6 @@ package net.thauvin.erik.semver;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
 import com.github.mustachejava.MustacheNotFoundException;
 
 import javax.annotation.processing.*;
@@ -77,6 +76,11 @@ public class VersionProcessor extends AbstractProcessor {
             template = version.template();
         }
         return template;
+    }
+
+    private Mustache compileTemplate(final File dir, final String template) {
+        final var mf = new DefaultMustacheFactory(dir);
+        return mf.compile(template);
     }
 
     private void error(final String s) {
@@ -232,9 +236,8 @@ public class VersionProcessor extends AbstractProcessor {
 
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
             throws IOException {
-        final File dir = getLocalFile("");
-        final MustacheFactory mf = new DefaultMustacheFactory(dir);
-        final Mustache mustache = mf.compile(template);
+        final var dir = getLocalFile("");
+        final var mustache = compileTemplate(dir, template);
 
         final String templateName = switch (mustache.getName()) {
             case Constants.DEFAULT_JAVA_TEMPLATE -> "default (Java)";
@@ -243,7 +246,7 @@ public class VersionProcessor extends AbstractProcessor {
         };
         note("Loaded template: " + templateName);
 
-        final String fileName = versionInfo.getClassName() + '.' + type;
+        final var fileName = versionInfo.getClassName() + '.' + type;
         if (Constants.KOTLIN_TYPE.equalsIgnoreCase(type)) {
             final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
             if (kaptGenDir == null) {
