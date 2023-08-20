@@ -41,7 +41,8 @@ import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * The <code>VersionProcessorTest</code> class.
@@ -119,6 +120,16 @@ class VersionProcessorTest {
 
         assertEquals("0-0-7:vodka++martini", versionInfo.getVersion(), "getVersion(0-0-7:vodka++martin)");
         assertEquals("James Bond", versionInfo.getProject(), "getProject(James Bond)");
+    }
+
+    @Test
+    void testGetSupportedAnnotationTypes() {
+        assertTrue(processor.getSupportedAnnotationTypes().contains("net.thauvin.erik.semver.Version"));
+    }
+
+    @Test
+    void testGetSupportedSourceVersion() {
+        assertTrue(processor.getSupportedSourceVersion().ordinal() >= 17);
     }
 
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
