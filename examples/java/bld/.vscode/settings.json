@@ -7,7 +7,7 @@
     ],
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.project.referencedLibraries": [
-        "${HOME}/.bld/dist/bld-1.7.1.jar",
+        "${HOME}bld-1.7.2.jar",
         "lib/compile/*.jar",
         "lib/runtime/*.jar",
         "lib/test/*.jar"
