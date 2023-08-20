@@ -13,7 +13,7 @@ public final class App {
      * @param args The command line parameters.
      */
     public static void main(final String... args) {
-        final SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z", Locale.US);
+        final var sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z", Locale.US);
 
         System.out.println("-----------------------------------------------------");
 

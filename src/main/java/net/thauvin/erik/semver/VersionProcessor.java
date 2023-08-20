@@ -93,16 +93,16 @@ public class VersionProcessor extends AbstractProcessor {
     }
 
     private VersionInfo findValues(final Version version) throws IOException {
-        final VersionInfo versionInfo = new VersionInfo(version);
+        final var versionInfo = new VersionInfo(version);
 
         if (!version.properties().isEmpty()) {
-            final File propsFile = getLocalFile(version.properties());
+            final var propsFile = getLocalFile(version.properties());
             if (propsFile.isFile() && propsFile.canRead()) {
                 note("Found properties: " + propsFile.getName() + " (" + propsFile.getAbsoluteFile().getParent() + ')');
 
-                final Properties p = new Properties();
+                final var p = new Properties();
 
-                try (InputStreamReader reader = new InputStreamReader(
+                try (var reader = new InputStreamReader(
                         Files.newInputStream(propsFile.toPath()), StandardCharsets.UTF_8)) {
                     p.load(reader);
 
@@ -143,7 +143,7 @@ public class VersionProcessor extends AbstractProcessor {
 
     private File getLocalFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
-            final String prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
+            final var prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
             if (prop != null) {
                 return new File(prop, fileName);
             }
@@ -185,20 +185,20 @@ public class VersionProcessor extends AbstractProcessor {
      */
     @Override
     public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
-        final boolean isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
+        final var isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
         for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
-            final Version version = element.getAnnotation(Version.class);
+            final var version = element.getAnnotation(Version.class);
             if (element.getKind() == ElementKind.CLASS) {
-                final Element enclosingElement = element.getEnclosingElement();
+                final var enclosingElement = element.getEnclosingElement();
                 if (enclosingElement.getKind() == ElementKind.PACKAGE) {
-                    final PackageElement packageElement = (PackageElement) enclosingElement;
+                    final var packageElement = (PackageElement) enclosingElement;
                     try {
-                        final VersionInfo versionInfo = findValues(version);
+                        final var versionInfo = findValues(version);
                         if (Constants.EMPTY.equals(version.packageName())) {
                             versionInfo.setPackageName(packageElement.getQualifiedName().toString());
                         }
                         note("Found version: " + versionInfo.getVersion());
-                        final String template = getTemplate(isLocalTemplate, version);
+                        final var template = getTemplate(isLocalTemplate, version);
 
                         writeTemplate(version.type(), versionInfo, template);
                     } catch (IOException | MustacheNotFoundException e) {
@@ -239,7 +239,7 @@ public class VersionProcessor extends AbstractProcessor {
         final var dir = getLocalFile("");
         final var mustache = compileTemplate(dir, template);
 
-        final String templateName = switch (mustache.getName()) {
+        final var templateName = switch (mustache.getName()) {
             case Constants.DEFAULT_JAVA_TEMPLATE -> "default (Java)";
             case Constants.DEFAULT_KOTLIN_TEMPLATE -> "default (Kotlin)";
             default -> mustache.getName() + " (" + dir.getAbsolutePath() + ')';
@@ -248,15 +248,15 @@ public class VersionProcessor extends AbstractProcessor {
 
         final var fileName = versionInfo.getClassName() + '.' + type;
         if (Constants.KOTLIN_TYPE.equalsIgnoreCase(type)) {
-            final String kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
+            final var kaptGenDir = processingEnv.getOptions().get(Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME);
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
-            final File ktFile = new File(kaptGenDir, fileName);
+            final var ktFile = new File(kaptGenDir, fileName);
             if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
                 note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
             }
-            try (OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
+            try (var osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
                     StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
@@ -264,7 +264,7 @@ public class VersionProcessor extends AbstractProcessor {
         } else {
             final FileObject jfo = filer.createSourceFile(
                     versionInfo.getPackageName() + '.' + versionInfo.getClassName());
-            try (Writer writer = jfo.openWriter()) {
+            try (var writer = jfo.openWriter()) {
                 mustache.execute(writer, versionInfo).flush();
             }
             note("Generated source: " + fileName + " (" + new File(jfo.getName()).getAbsoluteFile().getParent() + ')');

@@ -39,7 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -114,9 +113,9 @@ class VersionProcessorTest {
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     void testFindValues() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method method = processor.getClass().getDeclaredMethod("findValues", Version.class);
+        final var method = processor.getClass().getDeclaredMethod("findValues", Version.class);
         method.setAccessible(true);
-        final VersionInfo versionInfo = (VersionInfo) method.invoke(processor, version);
+        final var versionInfo = (VersionInfo) method.invoke(processor, version);
 
         assertEquals("0-0-7:vodka++martini", versionInfo.getVersion(), "getVersion(0-0-7:vodka++martin)");
         assertEquals("James Bond", versionInfo.getProject(), "getProject(James Bond)");
@@ -125,7 +124,7 @@ class VersionProcessorTest {
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     void testGetTemplate() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Method method = processor.getClass().getDeclaredMethod("getTemplate", boolean.class, Version.class);
+        final var method = processor.getClass().getDeclaredMethod("getTemplate", boolean.class, Version.class);
         method.setAccessible(true);
 
         assertEquals(version.template(), method.invoke(processor, true, version), version.template);
@@ -139,13 +138,13 @@ class VersionProcessorTest {
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     void testParseIntProperty() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        final Properties p = new Properties();
+        final var p = new Properties();
         p.setProperty("1", "1");
         p.setProperty("2", "2.1");
         p.setProperty("3", "zero");
         p.setProperty("4", " 4 ");
 
-        final Method method = processor.getClass().getDeclaredMethod("parseIntProperty", Properties.class, String.class,
+        final var method = processor.getClass().getDeclaredMethod("parseIntProperty", Properties.class, String.class,
                 int.class);
         method.setAccessible(true);
 

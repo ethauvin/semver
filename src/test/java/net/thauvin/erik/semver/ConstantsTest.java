@@ -66,7 +66,7 @@ class ConstantsTest {
         templates.add(Constants.DEFAULT_KOTLIN_TEMPLATE);
         templates.add(Constants.DEFAULT_TEMPLATE_NAME);
 
-        for (final String tp : templates) {
+        for (final var tp : templates) {
             assertTrue(tp.endsWith(".mustache"), tp);
         }
     }

@@ -14,7 +14,7 @@ public final class Example {
      * @param args The command line parameters.
      */
     public static void main(final String... args) {
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+        final var sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 
         System.out.println("-- From Example -------------------------------------");
 
