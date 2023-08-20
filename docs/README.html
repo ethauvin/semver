@@ -145,6 +145,7 @@ Version Plugin for Gradle</strong></a>.</p>
 </ul></li>
 <li><a href="#elements--properties">Elements &amp; Properties</a></li>
 <li><a href="#maven">Maven</a></li>
+<li><a href="#bld">bld</a></li>
 <li><a href="#gradle">Gradle</a>
 <ul>
 <li><a href="#class-generation">Class Generation</a></li>
@@ -164,9 +165,10 @@ Generation</a></li>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">net</span><span class="op">.</span><span class="im">thauvin</span><span class="op">.</span><span class="im">erik</span><span class="op">.</span><span class="im">semver</span><span class="op">.</span><span class="im">Version</span><span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>major <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> minor <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> patch <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> preRelease <span class="op">=</span> <span class="st">&quot;beta&quot;</span><span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>major <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> minor <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> patch <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> preRelease <span class="op">=</span> <span class="st">&quot;beta&quot;</span><span class="op">)</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> A <span class="op">{</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <ul>
 <li>Or using a <a
 href="hhttps://github.com/ethauvin/semver/blob/master/examples/java/version.properties">properties</a>
@@ -177,7 +179,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb2-1"><a href="
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>properties <span class="op">=</span> <span class="st">&quot;version.properties&quot;</span><span class="op">)</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> A <span class="op">{</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># version.properties</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">version.major</span><span class="ot">=</span><span class="dv">1</span></span>
@@ -200,7 +203,8 @@ processor will automatically look for it.</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>template <span class="op">=</span> <span class="st">&quot;version.mustache&quot;</span><span class="op">)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> A <span class="op">{</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h3 id="default-template">Default Template</h3>
 <p>The <a
 href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache">default
@@ -479,7 +483,7 @@ keys may be assigned custom values:</p>
 <div class="sourceCode" id="cb6"><pre
 class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  properties <span class="op">=</span> <span class="st">&quot;example.properties&quot;</span><span class="op">,</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  keysPrefix <span class="op">=</span> <span class="st">&quot;example.&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  keysPrefix <span class="op">=</span> <span class="st">&quot;example.&quot;</span><span class="op">,</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  majorKey <span class="op">=</span> <span class="st">&quot;maj&quot;</span><span class="op">,</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  minorKey <span class="op">=</span> <span class="st">&quot;min&quot;</span><span class="op">,</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  patchKey <span class="op">=</span> <span class="st">&quot;build&quot;</span><span class="op">,</span></span>
@@ -488,7 +492,8 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb6-1"><a href="
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  projectKey <span class="op">=</span> <span class="st">&quot;project&quot;</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">)</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Example <span class="op">{</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre
 class="sourceCode ini"><code class="sourceCode ini"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># example.properties</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">example.project</span><span class="ot">=</span><span class="st">Example</span></span>
@@ -514,7 +519,7 @@ follows:</p>
 class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">dependency</span>&gt;</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">groupId</span>&gt;net.thauvin.erik&lt;/<span class="kw">groupId</span>&gt;</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">artifactId</span>&gt;semver&lt;/<span class="kw">artifactId</span>&gt;</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;1.2.0&lt;/<span class="kw">version</span>&gt;</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">version</span>&gt;1.2.1-SNAPSHOT&lt;/<span class="kw">version</span>&gt;</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">dependency</span>&gt;</span></code></pre></div>
 <p>Please look at <a
 href="https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml">pom.xml</a>
@@ -523,24 +528,40 @@ href="https://github.com/ethauvin/semver/tree/master/examples/java">examples/jav
 directory for a sample:</p>
 <div class="sourceCode" id="cb9"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mvn</span> verify</span></code></pre></div>
+<h2 id="bld">bld</h2>
+<p>To install and run from <a href="https://rife2.com/bld">bld</a>, just
+add the dependency to your build file:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> ExampleBuild <span class="kw">extends</span> Project <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="fu">ExampleBuild</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scope</span><span class="op">(</span>compile<span class="op">)</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                <span class="op">.</span><span class="fu">include</span><span class="op">(</span><span class="fu">dependency</span><span class="op">(</span><span class="st">&quot;net.thauvin.erik&quot;</span><span class="op">,</span> <span class="st">&quot;semver&quot;</span><span class="op">,</span> <span class="fu">version</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="st">&quot;SNAPSHOT&quot;</span><span class="op">)));</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>Please look at <a
+href="https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java">ExamapleBuild</a>
+in the <a
+href="https://github.com/ethauvin/semver/tree/master/examples/java/bld">examples/java/bld</a>
+directory for a sample.</p>
 <h2 id="gradle">Gradle</h2>
 <h3 id="class-generation">Class Generation</h3>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add
 the following to <a
-href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
-<div class="sourceCode" id="cb10"><pre
-class="sourceCode gradle"><code class="sourceCode groovy"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>repositories <span class="op">{</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mavenCentral</span><span class="op">()</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>dependencies <span class="op">{</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    annotationProcessor <span class="st">&#39;net.thauvin.erik:semver:1.2.0&#39;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    compileOnly <span class="st">&#39;net.thauvin.erik:semver:1.2.0&#39;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>tasks<span class="op">.</span><span class="fu">withType</span><span class="op">(</span>JavaCompile<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span>compilerArgs <span class="op">+=</span> <span class="op">[</span> <span class="st">&quot;-Asemver.project.dir=</span><span class="ss">$projectDir</span><span class="st">&quot;</span> <span class="op">]</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+href="https://github.com/ethauvin/semver/blob/master/examples/java/gradle/build.gradle">build.gradle</a>:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode gradle"><code class="sourceCode groovy"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>repositories <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mavenCentral</span><span class="op">()</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>dependencies <span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    annotationProcessor <span class="st">&#39;net.thauvin.erik:semver:1.2.1-SNAPSHOT&#39;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    compileOnly <span class="st">&#39;net.thauvin.erik:semver:1.2.1-SNAPSHOT&#39;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>tasks<span class="op">.</span><span class="fu">withType</span><span class="op">(</span>JavaCompile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span>compilerArgs <span class="op">+=</span> <span class="op">[</span> <span class="st">&quot;-Asemver.project.dir=</span><span class="ss">$projectDir</span><span class="st">&quot;</span> <span class="op">]</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The directory containing the configuration files
 (<code>version.properties</code>, <code>version.mustache</code>) must be
 specified using the <code>semver.project.dir</code> processor
@@ -550,18 +571,18 @@ href="https://github.com/ethauvin/semver/blob/master/examples/java/src/generated
 class will be automatically created in the <code>build/generated</code>
 directory upon compiling.</p>
 <p>Please look at <a
-href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>
+href="https://github.com/ethauvin/semver/blob/master/examples/java/gradle/build.gradle">build.gradle</a>
 in the <a
-href="https://github.com/ethauvin/semver/tree/master/examples/java">examples/java</a>
+href="https://github.com/ethauvin/semver/tree/master/examples/java/gradle">examples/java/gradle</a>
 directory for a sample.</p>
 <h3 id="class--source-generation">Class &amp; Source Generation</h3>
 <p>In order to also incorporate the generated source code into the
 <code>source tree</code>, add the following to <a
 href="https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle">build.gradle</a>:</p>
-<div class="sourceCode" id="cb11"><pre
-class="sourceCode gradle"><code class="sourceCode groovy"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tasks<span class="op">.</span><span class="fu">withType</span><span class="op">(</span>JavaCompile<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span>generatedSourceOutputDirectory<span class="op">.</span><span class="fu">set</span><span class="op">(</span><span class="fu">file</span><span class="op">(</span><span class="st">&quot;</span><span class="ss">${</span>projectDir<span class="ss">}</span><span class="st">/src/generated/java&quot;</span><span class="op">))</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode gradle"><code class="sourceCode groovy"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>tasks<span class="op">.</span><span class="fu">withType</span><span class="op">(</span>JavaCompile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    options<span class="op">.</span>generatedSourceOutputDirectory<span class="op">.</span><span class="fu">set</span><span class="op">(</span><span class="fu">file</span><span class="op">(</span><span class="st">&quot;</span><span class="ss">${</span>projectDir<span class="ss">}</span><span class="st">/src/generated/java&quot;</span><span class="op">))</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <a
 href="https://github.com/ethauvin/semver/blob/master/examples/java/src/generated/java/com/example/GeneratedVersion.java"><code>GeneratedVersion.java</code></a>
 file will now be located in <code>src/generated</code>.</p>
@@ -570,12 +591,13 @@ file will now be located in <code>src/generated</code>.</p>
 href="https://kotlinlang.org/">Kotlin</a>.</p>
 <p>To generate a Kotlin version file, simply specify the
 <code>type</code> as follows:</p>
-<div class="sourceCode" id="cb12"><pre
-class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">net</span><span class="op">.</span><span class="im">thauvin</span><span class="op">.</span><span class="im">erik</span><span class="op">.</span><span class="im">semver</span><span class="op">.</span><span class="im">Version</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>properties <span class="op">=</span> <span class="st">&quot;version.properties&quot;</span><span class="op">,</span> type<span class="op">=</span><span class="st">&quot;kt&quot;</span><span class="op">)</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">open</span> <span class="kw">class</span> Main <span class="op">{</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">import</span> <span class="im">net</span><span class="op">.</span><span class="im">thauvin</span><span class="op">.</span><span class="im">erik</span><span class="op">.</span><span class="im">semver</span><span class="op">.</span><span class="im">Version</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">@Version</span><span class="op">(</span>properties <span class="op">=</span> <span class="st">&quot;version.properties&quot;</span><span class="op">,</span> type<span class="op">=</span><span class="st">&quot;kt&quot;</span><span class="op">)</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">open</span> <span class="kw">class</span> Main <span class="op">{</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The <a
 href="https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache">Kotlin
 default template</a> implements the same static fields and functions as
@@ -589,19 +611,19 @@ sample.</p>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add
 the following to <a
 href="https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts">build.gradle.kts</a>:</p>
-<div class="sourceCode" id="cb13"><pre
-class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> <span class="va">semverProcessor</span> <span class="op">=</span> <span class="st">&quot;net.thauvin.erik:semver:1.2.0&quot;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dependencies <span class="op">{</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    kapt<span class="op">(</span>semverProcessor<span class="op">)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    compileOnly<span class="op">(</span>semverProcessor<span class="op">)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>kapt <span class="op">{</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    arguments <span class="op">{</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        arg<span class="op">(</span><span class="st">&quot;semver.project.dir&quot;</span><span class="op">,</span> projectDir<span class="op">)</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode kotlin"><code class="sourceCode kotlin"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> <span class="va">semverProcessor</span> <span class="op">=</span> <span class="st">&quot;net.thauvin.erik:semver:1.2.1-SNAPSHOT&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dependencies <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    kapt<span class="op">(</span>semverProcessor<span class="op">)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    compileOnly<span class="op">(</span>semverProcessor<span class="op">)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>kapt <span class="op">{</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    arguments <span class="op">{</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        arg<span class="op">(</span><span class="st">&quot;semver.project.dir&quot;</span><span class="op">,</span> projectDir<span class="op">)</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>The directory containing the configuration files
 (<code>version.properties</code>, <code>version.mustache</code>) must be
 specified using the <code>semver.project.dir</code> processor

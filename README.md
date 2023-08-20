@@ -38,9 +38,10 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 ```java
 import net.thauvin.erik.semver.Version;
 
-@Version(major = 1, minor = 0, patch = 0, preRelease = "beta")
+@Version(major = 2, minor = 1, patch = 1, preRelease = "beta")
 public class A {
-// ...
+    // ...
+}
 ```
 
 * Or using a [properties](hhttps://github.com/ethauvin/semver/blob/master/examples/java/version.properties) file:
@@ -50,7 +51,8 @@ import net.thauvin.erik.semver.Version;
 
 @Version(properties = "version.properties")
 public class A {
-// ...
+    // ...
+}
 ```
 
 ```ini
@@ -74,26 +76,27 @@ To specify your own template name, use:
 ```java
 @Version(template = "version.mustache")
 public class A {
-// ...
+    // ...
+}
 ```
 
 ### Default Template
 
 The [default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver.mustache) implements the following static variables:
 
-Field              | Description                      |  Example
-:------------------|:---------------------------------|:-----------------
-`PROJECT`          | The project name, if any.        | `MyProject`
-`BUILDDATE`        | The build date.                  | [`java.util.Date`](https://docs.oracle.com/javase/8/docs/api/java/util/Date.html)
-`VERSION`          | The full version string.         | `1.2.3-alpha+001`
-`MAJOR`            | The major version.               | `1`
-`MINOR`            | The minor version.               | `2`
-`PATCH`            | The patch version.               | `3`
-`PRERELEASE`       | The pre-release version, if any. | `alpha`
-`PRERELASE_PREFIX` | The pre-release prefix           | `-`
-`BUILDMETA`        | The build metadata, if any.      | `001`
-`BUILDMETA_PREFIX` | The metadata prefix.             | `+`
-`SEPARATOR`        | The version separator.           | `.`
+| Field              | Description                      | Example                                                                           |
+|:-------------------|:---------------------------------|:----------------------------------------------------------------------------------|
+| `PROJECT`          | The project name, if any.        | `MyProject`                                                                       |
+| `BUILDDATE`        | The build date.                  | [`java.util.Date`](https://docs.oracle.com/javase/8/docs/api/java/util/Date.html) |
+| `VERSION`          | The full version string.         | `1.2.3-alpha+001`                                                                 |
+| `MAJOR`            | The major version.               | `1`                                                                               |
+| `MINOR`            | The minor version.               | `2`                                                                               |
+| `PATCH`            | The patch version.               | `3`                                                                               |
+| `PRERELEASE`       | The pre-release version, if any. | `alpha`                                                                           |
+| `PRERELASE_PREFIX` | The pre-release prefix           | `-`                                                                               |
+| `BUILDMETA`        | The build metadata, if any.      | `001`                                                                             |
+| `BUILDMETA_PREFIX` | The metadata prefix.             | `+`                                                                               |
+| `SEPARATOR`        | The version separator.           | `.`                                                                               |
 
 ### Custom Template
 
@@ -114,21 +117,21 @@ public final class {{className}} {
 
 The mustache variables automatically filled in by the processor are:
 
-Variable                      | Description                 | Type
-:-----------------------------|:----------------------------|:--------
-`{{packageName}}`             | The package name.           | `String`
-`{{className}}`               | The class name.             | `String`
-`{{project}}`                 | The project name.           | `String`
-`{{epoch}}`                   | The build epoch/unix time.  | `long`
-`{{major}}`                   | The major version.          | `int`
-`{{minor}}`                   | The minor version.          | `int`
-`{{patch}}`                   | The patch version.          | `int`
-`{{preRelease}}`              | The pre-release version.    | `String`
-`{{preReleasePrefix}}`        | The pre-release prefix.     | `String`
-`{{buildMeta}}`               | The build metadata version. | `String`
-`{{buildMetaPrefix}}`         | The metadata prefix.        | `String`
-`{{separator}}`               | The version separator.      | `String`
-`{{semver}}` or `{{version}}` | The full semantic version.  | `String`
+| Variable                      | Description                 | Type     |
+|:------------------------------|:----------------------------|:---------|
+| `{{packageName}}`             | The package name.           | `String` |
+| `{{className}}`               | The class name.             | `String` |
+| `{{project}}`                 | The project name.           | `String` |
+| `{{epoch}}`                   | The build epoch/unix time.  | `long`   |
+| `{{major}}`                   | The major version.          | `int`    |
+| `{{minor}}`                   | The minor version.          | `int`    |
+| `{{patch}}`                   | The patch version.          | `int`    |
+| `{{preRelease}}`              | The pre-release version.    | `String` |
+| `{{preReleasePrefix}}`        | The pre-release prefix.     | `String` |
+| `{{buildMeta}}`               | The build metadata version. | `String` |
+| `{{buildMetaPrefix}}`         | The metadata prefix.        | `String` |
+| `{{separator}}`               | The version separator.      | `String` |
+| `{{semver}}` or `{{version}}` | The full semantic version.  | `String` |
 
 Please also look at this [example](https://github.com/ethauvin/mobibot/blob/master/version.mustache) using [`java.time`](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
 
@@ -136,30 +139,30 @@ Please also look at this [example](https://github.com/ethauvin/mobibot/blob/mast
 
 The following annotation elements and properties are available:
 
-Element            | Property                    | Description                       | Default
-:------------------|:----------------------------|:----------------------------------|:-------------------------
-`project`          | `version.project`           | The project name.                 |
-`major`            | `version.major`             | The major version number.         | `1`
-`minor`            | `version.major`             | The minor version number.         | `0`
-`patch`            | `version.patch`             | The patch version number.         | `0`
-`preRelease`       | `version.prerelease`        | The pre-release version.          |
-`preReleasePrefix` | `version.prerelease.prefix` | The pre-release prefix.           | `-`
-`buildMeta`        | `version.buildmeta`         | The build metadata version.       |
-`buildMetaPrefix`  | `version.buildmeta.prefix`  | The metadata prefix.              | `+`
-`separator`        | `version.separator`         | The version separator.            | `.`
-`packageName`      |                             | The package name.                 | _Same as annotated class_
-`className`        |                             | The name of the generated class.  | `GeneratedVersion`
-`properties`       |                             | The properties file.              |
-`template`         |                             | The template file.                | `version.mustache`
-`type`             |                             | Either `java` or `kt` for Kotlin. | `java`
-`keysPrefix`       |                             | The prefix for all property keys. | `version.`
+| Element            | Property                    | Description                       | Default                   |
+|:-------------------|:----------------------------|:----------------------------------|:--------------------------|
+| `project`          | `version.project`           | The project name.                 |                           |
+| `major`            | `version.major`             | The major version number.         | `1`                       |
+| `minor`            | `version.major`             | The minor version number.         | `0`                       |
+| `patch`            | `version.patch`             | The patch version number.         | `0`                       |
+| `preRelease`       | `version.prerelease`        | The pre-release version.          |                           |
+| `preReleasePrefix` | `version.prerelease.prefix` | The pre-release prefix.           | `-`                       |
+| `buildMeta`        | `version.buildmeta`         | The build metadata version.       |                           |
+| `buildMetaPrefix`  | `version.buildmeta.prefix`  | The metadata prefix.              | `+`                       |
+| `separator`        | `version.separator`         | The version separator.            | `.`                       |
+| `packageName`      |                             | The package name.                 | _Same as annotated class_ |
+| `className`        |                             | The name of the generated class.  | `GeneratedVersion`        |
+| `properties`       |                             | The properties file.              |                           |
+| `template`         |                             | The template file.                | `version.mustache`        |
+| `type`             |                             | Either `java` or `kt` for Kotlin. | `java`                    |
+| `keysPrefix`       |                             | The prefix for all property keys. | `version.`                |
 
 In order to easily incorporate with existing projects, the property keys may be assigned custom values:
 
 ```java
 @Version(
   properties = "example.properties",
-  keysPrefix = "example."
+  keysPrefix = "example.",
   majorKey = "maj",
   minorKey = "min",
   patchKey = "build",
@@ -168,7 +171,8 @@ In order to easily incorporate with existing projects, the property keys may be 
   projectKey = "project"
 )
 public class Example {
-// ...
+    // ...
+}
 ```
 
 ```ini
@@ -208,8 +212,13 @@ mvn verify
 To install and run from [bld](https://rife2.com/bld), just add the dependency to your build file:
 
 ```java
-scope(compile)
-        .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1, "SNAPSHOT")));
+public class ExampleBuild extends Project {
+    public ExampleBuild() {
+        // ...
+        scope(compile)
+                .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1, "SNAPSHOT")));
+    }
+}
 ```
 Please look at [ExamapleBuild](https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java) in the [examples/java/bld](https://github.com/ethauvin/semver/tree/master/examples/java/bld) directory for a sample.
 
@@ -264,7 +273,8 @@ import net.thauvin.erik.semver.Version
 
 @Version(properties = "version.properties", type="kt")
 open class Main {
-// ...
+    // ...
+}
 ```
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
