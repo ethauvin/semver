@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
     <pattern value="net.thauvin.erik.semver.SemverBuild" method="jacoco" />
     <pattern value="net.thauvin.erik.semver.SemverBuild" method="pmd" />
+    <pattern value="net.thauvin.erik.semver.SemverBuild" method="pandoc" />
+    <pattern value="net.thauvin.erik.semver.SemverBuild" />
   </component>
   <component name="PDMPlugin">
     <option name="skipTestSources" value="false" />

@@ -34,10 +34,10 @@ package net.thauvin.erik.semver;
 
 import rife.bld.BuildCommand;
 import rife.bld.Project;
+import rife.bld.extension.ExecOperation;
 import rife.bld.extension.JacocoReportOperation;
 import rife.bld.extension.PmdOperation;
 import rife.bld.publish.*;
-import rife.tools.FileUtils;
 import rife.tools.exceptions.FileUtilsErrorException;
 
 import java.io.IOException;
@@ -111,6 +111,22 @@ public class SemverBuild extends Project {
     @BuildCommand(summary = "Generates JaCoCo Reports")
     public void jacoco() throws IOException {
         new JacocoReportOperation().fromProject(this).execute();
+    }
+
+    @BuildCommand(summary = "Build the docs with Pandoc")
+    public void pandoc() throws Exception {
+        new ExecOperation()
+                .fromProject(this)
+                .command("pandoc",
+                        "--from", "gfm",
+                        "--to", "html5",
+                        "--metadata", "pagetitle=Semantic Version Annotation Processor",
+                        "-s",
+                        "-c", "docs/github-pandoc.css",
+                        "-o", "docs/README.html",
+                        "README.md")
+                .execute();
+
     }
 
     @BuildCommand(summary = "Runs PMD analysis")

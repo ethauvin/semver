@@ -46,7 +46,7 @@ public class ExampleBuild extends Project {
     public void compile() throws Exception {
         var generated = new File(buildDirectory(), "generated");
         var ignore = generated.mkdir();
-        this.compileOperation().compileOptions().addAll(List.of("-s", generated.getAbsolutePath()));
+        compileOperation().compileOptions().addAll(List.of("-s", generated.getAbsolutePath()));
         super.compile();
     }
 
