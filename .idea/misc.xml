@@ -6,7 +6,13 @@
     <pattern value="net.thauvin.erik.semver.SemverBuild" method="pandoc" />
     <pattern value="net.thauvin.erik.semver.SemverBuild" />
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="PDMPlugin">
+    <option name="customRuleSets">
+      <list>
+        <option value="$PROJECT_DIR$/../bld-exec/config/pmd.xml" />
+      </list>
+    </option>
     <option name="skipTestSources" value="false" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
