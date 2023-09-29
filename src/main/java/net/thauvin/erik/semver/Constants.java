@@ -137,12 +137,10 @@ public final class Constants {
      * The kotlin type.
      */
     public static final String KOTLIN_TYPE = "kt";
-
     /**
      * The argument used to specify the project location.
      */
     public static final String SEMVER_PROJECT_DIR_ARG = "semver.project.dir";
-
 
     /**
      * Disables the default constructor.

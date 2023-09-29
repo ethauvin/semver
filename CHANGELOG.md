@@ -1,8 +1,12 @@
 # Changelog
 
-## [1.2.1](https://github.com/ethauvin/semver/tree/1.2.1) (2021-04-29)
+## [1.2.1](https://github.com/ethauvin/semver/tree/1.2.1) (2023-09-29)
 
 [Full Changelog](https://github.com/ethauvin/semver/compare/1.2.0...1.2.1)
+
+**Implemented enhancements:**
+
+- Move from Gradle to bld [\#7](https://github.com/ethauvin/semver/issues/7)
 
 **Fixed bugs:**
 

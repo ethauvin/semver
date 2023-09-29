@@ -1,11 +1,11 @@
-#  Semantic Version Annotation Processor
+# Semantic Version Annotation Processor
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 [![Java](https://img.shields.io/badge/java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-[![bld](https://img.shields.io/badge/1.7.1-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
+[![bld](https://img.shields.io/badge/1.7.2-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
 [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.thauvin.erik/semver)
 [![Nexus Snapshot](https://img.shields.io/nexus/s/net.thauvin.erik/semver?label=snapshot&server=https%3A%2F%2Foss.sonatype.org%2F)](https://oss.sonatype.org/content/repositories/snapshots/net/thauvin/erik/semver/)
+[![Maven Central](https://img.shields.io/maven-central/v/net.thauvin.erik/semver.svg)](https://central.sonatype.com/artifact/net.thauvin.erik/semver)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver)
 [![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/gradle.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/gradle.yml)
@@ -17,6 +17,7 @@ An [annotation processor](https://docs.oracle.com/javase/8/docs/api/javax/annota
 This processor was inspired by Cédric Beust's [version-processor](https://github.com/cbeust/version-processor) and works well in conjunction with the [__Semantic Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
 ## Table of Contents
+
 - [Examples](#examples)
 - [Template](#template)
   - [Default Template](#default-template)
@@ -33,7 +34,7 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 
 ## Examples
 
-* Using annotation elements:
+- Using annotation elements:
 
 ```java
 import net.thauvin.erik.semver.Version;
@@ -44,7 +45,7 @@ public class A {
 }
 ```
 
-* Or using a [properties](hhttps://github.com/ethauvin/semver/blob/master/examples/java/version.properties) file:
+- Or using a [properties](hhttps://github.com/ethauvin/semver/blob/master/examples/java/version.properties) file:
 
 ```java
 import net.thauvin.erik.semver.Version;
@@ -220,8 +221,8 @@ public class ExampleBuild extends Project {
     }
 }
 ```
-Please look at [ExamapleBuild](https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java) in the [examples/java/bld](https://github.com/ethauvin/semver/tree/master/examples/java/bld) directory for a sample.
 
+Please look at [ExampleBuild](https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java) in the [examples/java/bld](https://github.com/ethauvin/semver/tree/master/examples/java/bld) directory for a sample. It also shows how to incorporate the generated code into the `source tree`, more information is also available [here](https://forum.uwyn.com/post/36).
 
 ## Gradle
 
@@ -239,7 +240,7 @@ dependencies {
     compileOnly 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += [ "-Asemver.project.dir=$projectDir" ]
 }
 ```
@@ -255,7 +256,7 @@ Please look at [build.gradle](https://github.com/ethauvin/semver/blob/master/exa
 In order to also incorporate the generated source code into the `source tree`, add the following to [build.gradle](https://github.com/ethauvin/semver/blob/master/examples/java/build.gradle):
 
 ```gradle
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.generatedSourceOutputDirectory.set(file("${projectDir}/src/generated/java"))
 }
 ```
@@ -276,6 +277,7 @@ open class Main {
     // ...
 }
 ```
+
 The [Kotlin default template](https://github.com/ethauvin/semver/blob/master/src/main/resources/semver-kt.mustache) implements the same static fields and functions as the [Java template](#default-template).
 
 Please look at the [examples/kotlin](https://github.com/ethauvin/semver/tree/master/examples/kotlin) project for a [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts) sample.
