@@ -224,6 +224,8 @@ public class ExampleBuild extends Project {
 
 Please look at [ExampleBuild](https://github.com/ethauvin/semver/blob/master/examples/java/bld/src/bld/java/com/example/ExampleBuild.java) in the [examples/java/bld](https://github.com/ethauvin/semver/tree/master/examples/java/bld) directory for a sample. It also shows how to incorporate the generated code into the `source tree`, more information is also available [here](https://forum.uwyn.com/post/36).
 
+bld also has a [Generated Version](https://github.com/rife2/bld-generated-version) extension which provides similar functionalities.
+
 ## Gradle
 
 ### Class Generation
