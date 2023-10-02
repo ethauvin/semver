@@ -9,7 +9,8 @@ fi
 
 # set the examples directories
 declare -a examples=(
-  "java"
+  "java/bld"
+  "java/gradle"
   "kotlin")
 
 dir=$(dirname "$(readlink -f "$0")")
@@ -24,6 +25,10 @@ for ex in "${examples[@]}"; do
   fi
   cd "$dir/$ex" || exit 1
   echo "> Project: ${cyan}${ex}${normal}"
-  ./gradlew --console=plain --no-build-cache clean "$@" || exit 1
+  if [ -x "bld" ]; then
+    ./bld compile "$@" || exit 1
+  else
+    ./gradlew --console=plain --no-build-cache clean "$@" || exit 1
+  fi
   ((i++))
 done

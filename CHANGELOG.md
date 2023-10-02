@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.1](https://github.com/ethauvin/semver/tree/1.2.1) (2023-09-29)
+## [1.2.1](https://github.com/ethauvin/semver/tree/1.2.1) (2023-10-02)
 
 [Full Changelog](https://github.com/ethauvin/semver/compare/1.2.0...1.2.1)
 
