@@ -9,7 +9,7 @@ plugins {
 
 defaultTasks 'run'
 
-final def semverProcessor = 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
+final def semverProcessor = 'net.thauvin.erik:semver:1.2.1'
 
 repositories {
     mavenLocal()

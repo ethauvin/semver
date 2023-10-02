@@ -53,7 +53,7 @@ public class SemverBuild extends Project {
     public SemverBuild() {
         pkg = "net.thauvin.erik";
         name = "SemVer";
-        version = version(1, 2, 1, "SNAPSHOT");
+        version = version(1, 2, 1);
 
         var description = "Semantic Version Annotation Processor";
         var url = "https://github.com/ethauvin/semver";
@@ -79,7 +79,7 @@ public class SemverBuild extends Project {
         publishOperation()
                 .repository(version.isSnapshot() ? repository(SONATYPE_SNAPSHOTS_LEGACY.location())
                         .withCredentials(property("sonatype.user"), property("sonatype.password"))
-                        : repository(SONATYPE_RELEASES.location())
+                        : repository("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                         .withCredentials(property("sonatype.user"), property("sonatype.password")))
                 .info(new PublishInfo()
                         .groupId(pkg)

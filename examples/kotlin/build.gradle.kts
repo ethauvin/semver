@@ -13,7 +13,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-val semverProcessor = "net.thauvin.erik:semver:1.2.1-SNAPSHOT"
+val semverProcessor = "net.thauvin.erik:semver:1.2.1"
 
 dependencies {
     kapt(semverProcessor)

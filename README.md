@@ -198,7 +198,7 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 <dependency>
     <groupId>net.thauvin.erik</groupId>
     <artifactId>semver</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.2.1</version>
 </dependency>
 ```
 
@@ -217,7 +217,7 @@ public class ExampleBuild extends Project {
     public ExampleBuild() {
         // ...
         scope(compile)
-                .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1, "SNAPSHOT")));
+            .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1)));
     }
 }
 ```
@@ -236,8 +236,8 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
-    compileOnly 'net.thauvin.erik:semver:1.2.1-SNAPSHOT'
+    annotationProcessor 'net.thauvin.erik:semver:1.2.1'
+    compileOnly 'net.thauvin.erik:semver:1.2.1'
 }
 
 tasks.withType(JavaCompile).configureEach {
@@ -287,7 +287,7 @@ Please look at the [examples/kotlin](https://github.com/ethauvin/semver/tree/mas
 To install and run from [Gradle](https://gradle.org/), add the following to [build.gradle.kts](https://github.com/ethauvin/semver/blob/master/examples/kotlin/build.gradle.kts):
 
 ```kotlin
-var semverProcessor = "net.thauvin.erik:semver:1.2.1-SNAPSHOT"
+var semverProcessor = "net.thauvin.erik:semver:1.2.1"
 
 dependencies {
     kapt(semverProcessor)
