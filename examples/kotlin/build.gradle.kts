@@ -1,6 +1,6 @@
 plugins {
     id("application")
-    id("com.github.ben-manes.versions") version "0.48.0"
+    id("com.github.ben-manes.versions") version "0.49.0"
     kotlin("jvm") version "1.9.10"
     kotlin("kapt") version "1.9.10"
 }
@@ -13,7 +13,7 @@ plugins {
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
-val semverProcessor = "net.thauvin.erik:semver:1.2.1"
+val semverProcessor = "net.thauvin.erik:semver:1.2.1-SNAPSHOT"
 
 dependencies {
     kapt(semverProcessor)

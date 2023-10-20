@@ -53,7 +53,7 @@ public class SemverBuild extends Project {
     public SemverBuild() {
         pkg = "net.thauvin.erik";
         name = "SemVer";
-        version = version(1, 2, 1);
+        version = version(1, 2, 2, "SNAPSHOT");
 
         var description = "Semantic Version Annotation Processor";
         var url = "https://github.com/ethauvin/semver";
@@ -64,8 +64,7 @@ public class SemverBuild extends Project {
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
 
         scope(compile)
-                .include(dependency("com.github.spullara.mustache.java", "compiler",
-                        version(0, 9, 10)));
+                .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 11)));
         scope(test)
                 .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 0)))
                 .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 0)));
@@ -79,7 +78,7 @@ public class SemverBuild extends Project {
         publishOperation()
                 .repository(version.isSnapshot() ? repository(SONATYPE_SNAPSHOTS_LEGACY.location())
                         .withCredentials(property("sonatype.user"), property("sonatype.password"))
-                        : repository("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                        : repository(SONATYPE_RELEASES_LEGACY.location())
                         .withCredentials(property("sonatype.user"), property("sonatype.password")))
                 .info(new PublishInfo()
                         .groupId(pkg)

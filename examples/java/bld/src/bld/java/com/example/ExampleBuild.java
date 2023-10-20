@@ -29,7 +29,7 @@ public class ExampleBuild extends Project {
 
         repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL);
 
-        scope(compile).include(dependency("net.thauvin.erik", "semver", version(1, 2, 1)));
+        scope(compile).include(dependency("net.thauvin.erik", "semver", version(1, 2, 2, "SNAPSHOT")));
     }
 
     public static void main(String[] args) {

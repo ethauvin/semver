@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.thauvin.erik</groupId>
   <artifactId>semver</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2-SNAPSHOT</version>
   <name>SemVer</name>
   <description>Semantic Version Annotation Processor</description>
   <url>https://github.com/ethauvin/semver</url>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>com.github.spullara.mustache.java</groupId>
       <artifactId>compiler</artifactId>
-      <version>0.9.10</version>
+      <version>0.9.11</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
