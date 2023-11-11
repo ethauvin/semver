@@ -61,13 +61,14 @@ public class SemverBuild extends Project {
         javaRelease = 17;
 
         downloadSources = true;
+        autoDownloadPurge = true;
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
 
         scope(compile)
                 .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 11)));
         scope(test)
-                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 0)))
-                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 0)));
+                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 1)))
+                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 1)));
 
 
         javadocOperation().javadocOptions()
