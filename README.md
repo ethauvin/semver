@@ -134,8 +134,6 @@ The mustache variables automatically filled in by the processor are:
 | `{{separator}}`               | The version separator.      | `String` |
 | `{{semver}}` or `{{version}}` | The full semantic version.  | `String` |
 
-Please also look at this [example](https://github.com/ethauvin/mobibot/blob/master/version.mustache) using [`java.time`](https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html)
-
 ## Elements & Properties
 
 The following annotation elements and properties are available:
