@@ -62,6 +62,7 @@ public class SemverBuild extends Project {
 
         downloadSources = true;
         autoDownloadPurge = true;
+
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
 
         scope(compile)
@@ -88,18 +89,25 @@ public class SemverBuild extends Project {
                         .version(version)
                         .description(description)
                         .url(url)
-                        .developer(new PublishDeveloper()
-                                .id("ethauvin")
-                                .name("Erik C. Thauvin")
-                                .email("erik@thauvin.net")
-                                .url("https://erik.thauvin.net/"))
-                        .license(new PublishLicense()
-                                .name("The BSD 3-Clause License")
-                                .url("http://opensource.org/licenses/BSD-3-Clause"))
-                        .scm(new PublishScm()
-                                .connection("scm:git:" + url + ".git")
-                                .developerConnection("scm:git:git@github.com:ethauvin/" + name.toLowerCase() + ".git")
-                                .url(url))
+                        .developer(
+                                new PublishDeveloper()
+                                        .id("ethauvin")
+                                        .name("Erik C. Thauvin")
+                                        .email("erik@thauvin.net")
+                                        .url("https://erik.thauvin.net/")
+                        )
+                        .license(
+                                new PublishLicense()
+                                        .name("The BSD 3-Clause License")
+                                        .url("http://opensource.org/licenses/BSD-3-Clause")
+                        )
+                        .scm(
+                                new PublishScm()
+                                        .connection("scm:git:" + url + ".git")
+                                        .developerConnection("scm:git:git@github.com:ethauvin/" + name.toLowerCase()
+                                                + ".git")
+                                        .url(url)
+                        )
                         .signKey(property("sign.key"))
                         .signPassphrase(property("sign.passphrase")));
     }
