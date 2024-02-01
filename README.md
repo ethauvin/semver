@@ -31,6 +31,7 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 - [Kotlin](#kotlin)
   - [Kotlin & Gradle](#kotlin--gradle)
 - [Auto-Increment](#auto-increment)
+- [Contributing](#contributing)
 
 ## Examples
 
@@ -308,3 +309,22 @@ The directory containing the configuration files (`version.properties`, `version
 Incrementing the version is best left to your favorite build system. For a solution using Gradle, please have a look at the [__Semver Version Plugin for Gradle__](https://github.com/ethauvin/semver-gradle).
 
 There are also full [examples](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor) in both [Java](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/java) and [Kotlin](https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin) showing how to use both the plugin and annotation processor concurrently.
+
+## Contributing
+
+If you want to contribute to this project, all you have to do is clone the GitHub
+repository:
+
+```console
+git clone git@github.com:ethauvin/semver.git
+```
+
+Then use [bld](https://rife2.com/bld) to build:
+
+```console
+cd semver
+./bld compile
+```
+
+The project has an [IntelliJ IDEA](https://www.jetbrains.com/idea/) project structure. You can just open it after all
+the dependencies were downloaded and peruse the code.
