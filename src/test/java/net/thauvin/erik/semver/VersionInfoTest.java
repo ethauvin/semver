@@ -1,7 +1,7 @@
 /*
  * VersionInfoTest.java
  *
- * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * The <code>VersionInfoTest</code> class.
  *
  * @author <a href="mailto:erik@thauvin.net">Erik C. Thauvin</a>
- * @created.on 2016-02-03
+ * @created 2016-02-03
  * @since 1.0
  */
 class VersionInfoTest {

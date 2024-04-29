@@ -1,7 +1,3 @@
 <component name="CopyrightManager">
-  <settings>
-    <module2copyright>
-      <element module="Source Code" copyright="BSD-3 Clause" />
-    </module2copyright>
-  </settings>
+  <settings default="BSD-3 Clause" />
 </component>

@@ -11,8 +11,11 @@
     div.columns{display: flex; gap: min(4vw, 1.5em);}
     div.column{flex: auto; overflow-x: auto;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
     ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
       width: 0.8em;
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
@@ -97,7 +100,7 @@ alt="License (3-Clause BSD)" /></a> <a
 href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html"><img
 src="https://img.shields.io/badge/java-17%2B-blue" alt="Java" /></a> <a
 href="https://rife2.com/bld"><img
-src="https://img.shields.io/badge/1.7.2-FA9052?label=bld&amp;labelColor=2392FF"
+src="https://img.shields.io/badge/1.9.0-FA9052?label=bld&amp;labelColor=2392FF"
 alt="bld" /></a> <a
 href="https://github.com/ethauvin/semver/releases/latest"><img
 src="https://img.shields.io/github/release/ethauvin/semver.svg"
@@ -157,6 +160,7 @@ Generation</a></li>
 <li><a href="#kotlin--gradle">Kotlin &amp; Gradle</a></li>
 </ul></li>
 <li><a href="#auto-increment">Auto-Increment</a></li>
+<li><a href="#contributing">Contributing</a></li>
 </ul>
 <h2 id="examples">Examples</h2>
 <ul>
@@ -368,10 +372,6 @@ are:</p>
 </tr>
 </tbody>
 </table>
-<p>Please also look at this <a
-href="https://github.com/ethauvin/mobibot/blob/master/version.mustache">example</a>
-using <a
-href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html"><code>java.time</code></a></p>
 <h2 id="elements--properties">Elements &amp; Properties</h2>
 <p>The following annotation elements and properties are available:</p>
 <table>
@@ -546,6 +546,9 @@ href="https://github.com/ethauvin/semver/tree/master/examples/java/bld">examples
 directory for a sample. It also shows how to incorporate the generated
 code into the <code>source tree</code>, more information is also
 available <a href="https://forum.uwyn.com/post/36">here</a>.</p>
+<p>bld also has a <a
+href="https://github.com/rife2/bld-generated-version">Generated
+Version</a> extension which provides similar functionalities.</p>
 <h2 id="gradle">Gradle</h2>
 <h3 id="class-generation">Class Generation</h3>
 <p>To install and run from <a href="https://gradle.org/">Gradle</a>, add
@@ -643,5 +646,15 @@ and <a
 href="https://github.com/ethauvin/semver-gradle/tree/master/examples/annotation-processor/kotlin">Kotlin</a>
 showing how to use both the plugin and annotation processor
 concurrently.</p>
+<h2 id="contributing">Contributing</h2>
+<p>If you want to contribute to this project, all you have to do is
+clone the GitHub repository:</p>
+<pre class="console"><code>git clone git@github.com:ethauvin/semver.git</code></pre>
+<p>Then use <a href="https://rife2.com/bld">bld</a> to build:</p>
+<pre class="console"><code>cd semver
+./bld compile</code></pre>
+<p>The project has an <a href="https://www.jetbrains.com/idea/">IntelliJ
+IDEA</a> project structure. You can just open it after all the
+dependencies were downloaded and peruse the code.</p>
 </body>
 </html>

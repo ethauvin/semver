@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel>
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <option name="semver.project.dir" value="$PROJECT_DIR$" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/net/thauvin/erik/semver/1.2.2-SNAPSHOT/semver-1.2.2-SNAPSHOT.jar" />
+          <entry name="$MAVEN_REPOSITORY$/com/github/spullara/mustache/java/compiler/0.9.12/compiler-0.9.12.jar" />
+        </processorPath>
+        <module name="examples-java.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="17">
       <module name="examples-java_main" target="1.8" />
       <module name="examples-java_test" target="1.8" />
     </bytecodeTargetLevel>

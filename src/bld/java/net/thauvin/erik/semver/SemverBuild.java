@@ -1,7 +1,7 @@
 /*
  * SemverBuild.java
  *
- * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,6 +50,11 @@ import static rife.bld.dependencies.Scope.test;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
+    final PmdOperation pmdOp = new PmdOperation()
+            .fromProject(this)
+            .failOnViolation(true)
+            .ruleSets("config/pmd.xml");
+
     public SemverBuild() {
         pkg = "net.thauvin.erik";
         name = "SemVer";
@@ -73,7 +78,6 @@ public class SemverBuild extends Project {
 
 
         javadocOperation().javadocOptions()
-                .tag("created.on", "a", "Created on:")
                 .windowTitle(name + ' ' + version.toString() + " API")
                 .docLint(NO_MISSING);
 
@@ -99,7 +103,7 @@ public class SemverBuild extends Project {
                         .license(
                                 new PublishLicense()
                                         .name("The BSD 3-Clause License")
-                                        .url("http://opensource.org/licenses/BSD-3-Clause")
+                                        .url("https://opensource.org/licenses/BSD-3-Clause")
                         )
                         .scm(
                                 new PublishScm()
@@ -139,11 +143,12 @@ public class SemverBuild extends Project {
 
     @BuildCommand(summary = "Runs PMD analysis")
     public void pmd() {
-        new PmdOperation()
-                .fromProject(this)
-                .failOnViolation(true)
-                .ruleSets("config/pmd.xml")
-                .execute();
+        pmdOp.execute();
+    }
+
+    @BuildCommand(value = "pmd-cli", summary = "Runs PMD analysis (CLI)")
+    public void pmdCli() {
+        pmdOp.includeLineNumber(false).execute();
     }
 
     @Override

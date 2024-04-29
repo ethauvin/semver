@@ -1,7 +1,7 @@
 /*
  * VersionInfo.java
  *
- * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@ package net.thauvin.erik.semver;
  * The <code>VersionInfo</code> class is used to hold and retrieve the semantic version values.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created.on 2016-01-16
+ * @created 2016-01-16
  * @since 1.0
  */
 @SuppressWarnings("PMD.DataClass")

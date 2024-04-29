@@ -1,7 +1,7 @@
 /*
  * VersionProcessor.java
  *
- * Copyright (c) 2016-2023, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -55,7 +55,7 @@ import java.util.Set;
  * The <code>VersionProcessor</code> class implements a semantic version annotation processor.
  *
  * @author <a href="mailto:erik@thauvin.net" target="_blank">Erik C. Thauvin</a>
- * @created.on 2016-01-13
+ * @created 2016-01-13
  * @since 1.0
  */
 @SuppressWarnings({"PMD.GuardLogStatement", "PMD.BeanMembersShouldSerialize"})
