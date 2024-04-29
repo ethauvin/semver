@@ -9,6 +9,7 @@
         <exclude name="AvoidPrintStackTrace"/>
         <exclude name="JUnit4TestShouldUseTestAnnotation"/>
         <exclude name="JUnitTestContainsTooManyAsserts"/>
+        <exclude name="GuardLogStatement"/>
     </rule>
 
     <rule ref="category/java/bestpractices.xml/MissingOverride">
@@ -23,17 +24,20 @@
     <rule ref="category/java/codestyle.xml">
         <exclude name="AtLeastOneConstructor"/>
         <exclude name="ClassNamingConventions"/>
-        <exclude name="ConfusingTernary"/>
         <exclude name="CommentDefaultAccessModifier"/>
+        <exclude name="ConfusingTernary"/>
         <exclude name="FieldNamingConventions"/>
+        <exclude name="LocalVariableCouldBeFinal"/>
         <exclude name="LongVariable"/>
+        <exclude name="MethodArgumentCouldBeFinal"/>
         <exclude name="OnlyOneReturn"/>
         <exclude name="PackageCase"/>
         <exclude name="ShortClassName"/>
         <exclude name="ShortMethodName"/>
         <exclude name="ShortVariable"/>
-        <exclude name="UselessParentheses"/>
+        <exclude name="UseExplicitTypes"/>
         <exclude name="UseUnderscoresInNumericLiterals"/>
+        <exclude name="UselessParentheses"/>
     </rule>
 
     <rule ref="category/java/codestyle.xml/UnnecessaryImport">
@@ -49,8 +53,6 @@
         <exclude name="AvoidUncheckedExceptionsInSignatures"/>
         <exclude name="CognitiveComplexity"/>
         <exclude name="CyclomaticComplexity"/>
-        <exclude name="ExcessiveClassLength"/>
-        <exclude name="ExcessiveMethodLength"/>
         <exclude name="ExcessiveParameterList"/>
         <exclude name="ExcessivePublicCount"/>
         <exclude name="GodClass"/>
@@ -77,7 +79,6 @@
         <exclude name="AvoidFieldNameMatchingMethodName"/>
         <exclude name="AvoidFieldNameMatchingTypeName"/>
         <exclude name="AvoidLiteralsInIfCondition"/>
-        <exclude name="EmptyCatchBlock"/>
         <exclude name="NullAssignment"/>
     </rule>
 
@@ -91,13 +92,6 @@
     <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
         <properties>
             <property name="skipAnnotations" value="true"/>
-        </properties>
-    </rule>
-    <rule ref="category/java/errorprone.xml/EmptyCatchBlock">
-        <properties>
-            <property name="allowExceptionNameRegex">
-                <value>^ignore$</value>
-            </property>
         </properties>
     </rule>
 
