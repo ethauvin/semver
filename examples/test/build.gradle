@@ -9,7 +9,7 @@ plugins {
 
 defaultTasks 'run'
 
-final def semverProcessor = 'net.thauvin.erik:semver:1.2.0'
+final def semverProcessor = 'net.thauvin.erik:semver:1.2.2-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
