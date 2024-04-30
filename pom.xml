@@ -11,14 +11,14 @@
   <licenses>
     <license>
       <name>The BSD 3-Clause License</name>
-      <url>http://opensource.org/licenses/BSD-3-Clause</url>
+      <url>https://opensource.org/licenses/BSD-3-Clause</url>
     </license>
   </licenses>
   <dependencies>
     <dependency>
       <groupId>com.github.spullara.mustache.java</groupId>
       <artifactId>compiler</artifactId>
-      <version>0.9.11</version>
+      <version>0.9.12</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
