@@ -78,9 +78,20 @@ public class VersionProcessor extends AbstractProcessor {
         return template;
     }
 
-    private Mustache compileTemplate(final File dir, final String template) {
-        final var mf = new DefaultMustacheFactory(dir);
-        return mf.compile(template);
+    private Mustache compileTemplate(final File dir, final String template) throws IOException {
+        if (Constants.DEFAULT_JAVA_TEMPLATE.equals(template) || Constants.DEFAULT_KOTLIN_TEMPLATE.equals(template)) {
+            try (var in = getClass().getResourceAsStream("/" + template)) {
+                if (in != null) {
+                    try (var reader = new BufferedReader(new InputStreamReader(in))) {
+                        return new DefaultMustacheFactory().compile(reader, template);
+                    }
+                } else {
+                    throw new IOException("Resource not found: " + template);
+                }
+            }
+        } else {
+            return new DefaultMustacheFactory(dir).compile(template);
+        }
     }
 
     private void error(final String s) {
@@ -237,7 +248,7 @@ public class VersionProcessor extends AbstractProcessor {
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
             throws IOException {
         final var dir = getLocalFile("");
-        final var mustache = compileTemplate(dir, template);
+        final Mustache mustache = compileTemplate(dir, template);
 
         final var templateName = switch (mustache.getName()) {
             case Constants.DEFAULT_JAVA_TEMPLATE -> "default (Java)";
