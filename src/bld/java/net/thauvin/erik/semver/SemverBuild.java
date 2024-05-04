@@ -71,7 +71,7 @@ public class SemverBuild extends Project {
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
 
         scope(compile)
-                .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 12)));
+                .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 13)));
         scope(test)
                 .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 2)))
                 .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 2)));
