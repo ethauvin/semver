@@ -40,8 +40,7 @@ import rife.bld.extension.PmdOperation;
 import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
-import java.io.IOException;
-import java.nio.file.Path;
+import java.io.File;
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
@@ -71,10 +70,10 @@ public class SemverBuild extends Project {
         repositories = List.of(MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
 
         scope(compile)
-                .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 13)));
+                .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 14)));
         scope(test)
-                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 10, 2)))
-                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 10, 2)));
+                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 11, 0)))
+                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 11, 0)));
 
 
         javadocOperation().javadocOptions()
@@ -86,6 +85,7 @@ public class SemverBuild extends Project {
                         .withCredentials(property("sonatype.user"), property("sonatype.password"))
                         : repository(SONATYPE_RELEASES_LEGACY.location())
                         .withCredentials(property("sonatype.user"), property("sonatype.password")))
+                .repository(repository("github"))
                 .info(new PublishInfo()
                         .groupId(pkg)
                         .artifactId(name.toLowerCase())
@@ -93,24 +93,20 @@ public class SemverBuild extends Project {
                         .version(version)
                         .description(description)
                         .url(url)
-                        .developer(
-                                new PublishDeveloper()
-                                        .id("ethauvin")
-                                        .name("Erik C. Thauvin")
-                                        .email("erik@thauvin.net")
-                                        .url("https://erik.thauvin.net/")
+                        .developer(new PublishDeveloper()
+                                .id("ethauvin")
+                                .name("Erik C. Thauvin")
+                                .email("erik@thauvin.net")
+                                .url("https://erik.thauvin.net/")
                         )
-                        .license(
-                                new PublishLicense()
-                                        .name("The BSD 3-Clause License")
-                                        .url("https://opensource.org/licenses/BSD-3-Clause")
+                        .license(new PublishLicense()
+                                .name("The BSD 3-Clause License")
+                                .url("https://opensource.org/licenses/BSD-3-Clause")
                         )
-                        .scm(
-                                new PublishScm()
-                                        .connection("scm:git:" + url + ".git")
-                                        .developerConnection("scm:git:git@github.com:ethauvin/" + name.toLowerCase()
-                                                + ".git")
-                                        .url(url)
+                        .scm(new PublishScm()
+                                .connection("scm:git:" + url + ".git")
+                                .developerConnection("scm:git:git@github.com:ethauvin/" + name.toLowerCase() + ".git")
+                                .url(url)
                         )
                         .signKey(property("sign.key"))
                         .signPassphrase(property("sign.passphrase")));
@@ -121,7 +117,7 @@ public class SemverBuild extends Project {
     }
 
     @BuildCommand(summary = "Generates JaCoCo Reports")
-    public void jacoco() throws IOException {
+    public void jacoco() throws Exception {
         new JacocoReportOperation().fromProject(this).execute();
     }
 
@@ -142,30 +138,30 @@ public class SemverBuild extends Project {
     }
 
     @BuildCommand(summary = "Runs PMD analysis")
-    public void pmd() {
+    public void pmd() throws Exception {
         pmdOp.execute();
     }
 
     @BuildCommand(value = "pmd-cli", summary = "Runs PMD analysis (CLI)")
-    public void pmdCli() {
+    public void pmdCli() throws Exception {
         pmdOp.includeLineNumber(false).execute();
+    }
+
+    @BuildCommand(value = "pom-root", summary = "Generates the POM file in the root directory")
+    public void pomRoot() throws FileUtilsErrorException {
+        PomBuilder.generateInto(publishOperation().fromProject(this).info(), dependencies(),
+                new File(workDirectory, "pom.xml"));
     }
 
     @Override
     public void publish() throws Exception {
         super.publish();
-        rootPom();
+        pomRoot();
     }
 
     @Override
     public void publishLocal() throws Exception {
         super.publishLocal();
-        rootPom();
-    }
-
-    @BuildCommand(value = "pom-root", summary = "Generates the POM file in the root directory")
-    public void rootPom() throws FileUtilsErrorException {
-        PomBuilder.generateInto(publishOperation().info(), dependencies(),
-                Path.of(workDirectory.getPath(), "pom.xml").toFile());
+        pomRoot();
     }
 }

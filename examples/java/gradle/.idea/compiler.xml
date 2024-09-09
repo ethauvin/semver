@@ -6,8 +6,8 @@
         <outputRelativeToContentRoot value="true" />
         <option name="semver.project.dir" value="$PROJECT_DIR$" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/net/thauvin/erik/semver/1.2.2-SNAPSHOT/semver-1.2.2-SNAPSHOT.jar" />
-          <entry name="$MAVEN_REPOSITORY$/com/github/spullara/mustache/java/compiler/0.9.12/compiler-0.9.12.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.thauvin.erik/semver/1.2.2-SNAPSHOT/31d53f3e9fdd226343234d13a080d6fd12b58ae6/semver-1.2.2-SNAPSHOT.jar" />
+          <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.spullara.mustache.java/compiler/0.9.13/60666500a7dce7a5d3e17c09b46ea6f037192bd5/compiler-0.9.13.jar" />
         </processorPath>
         <module name="examples-java.main" />
       </profile>

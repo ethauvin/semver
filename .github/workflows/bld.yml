@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      COVERAGE_SDK: "17"
+      COVERAGE_JDK: "17"
 
     strategy:
       matrix:
@@ -25,28 +25,28 @@ jobs:
           distribution: "zulu"
           java-version: ${{ matrix.java-version }}
 
-      - name: Grant execute permission for bld
-        run: chmod +x bld
-
-      - name: Download the dependencies
+      - name: Download dependencies
         run: ./bld download
 
-      - name: Run tests with bld
-        run: ./bld compile jacoco
+      - name: Compile source
+        run: ./bld compile
+
+      - name: Run tests
+        run: ./bld jacoco
 
       - name: Remove pom.xml
-        if: success() && matrix.java-version == env.COVERAGE_SDK
+        if: success() && matrix.java-version == env.COVERAGE_JDK
         run: rm -rf pom.xml
 
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
-        if: success() && matrix.java-version == env.COVERAGE_SDK
+        if: success() && matrix.java-version == env.COVERAGE_JDK
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
-        if: success() && matrix.java-version == env.COVERAGE_SDK
+        if: success() && matrix.java-version == env.COVERAGE_JDK
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

@@ -4,9 +4,6 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.51.0'
 }
 
-// ./gradlew run
-// ./gradlew runExample
-
 defaultTasks 'run'
 
 final def semverProcessor = 'net.thauvin.erik:semver:1.2.2-SNAPSHOT'

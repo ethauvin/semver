@@ -6,16 +6,12 @@ import rife.bld.Project;
 import java.io.File;
 import java.util.List;
 
-import static rife.bld.dependencies.Repository.*;
-import static rife.bld.dependencies.Scope.compile;
+import static rife.bld.dependencies.Repository.MAVEN_CENTRAL;
+import static rife.bld.dependencies.Repository.MAVEN_LOCAL;
+import static rife.bld.dependencies.Scope.provided;
 
 /**
  * Example build.
- *
- * <ul style="list-style-type:none">
- *     <li>./bld run</li>
- *     <li>./bld runExample</li>
- * </ul>
  */
 public class ExampleBuild extends Project {
     public ExampleBuild() {
@@ -29,7 +25,7 @@ public class ExampleBuild extends Project {
 
         repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL);
 
-        scope(compile).include(dependency("net.thauvin.erik", "semver", version(1, 2, 2, "SNAPSHOT")));
+        scope(provided).include(dependency("net.thauvin.erik", "semver", version(1, 2, 2, "SNAPSHOT")));
     }
 
     public static void main(String[] args) {
@@ -50,7 +46,7 @@ public class ExampleBuild extends Project {
         super.compile();
     }
 
-    @BuildCommand(summary = "Run the example")
+    @BuildCommand(value = "run-example", summary = "Runs the example")
     public void runExample() throws Exception {
         runOperation().fromProject(this).mainClass("com.example.Example").execute();
     }

@@ -1,15 +1,9 @@
 plugins {
     id("application")
     id("com.github.ben-manes.versions") version "0.51.0"
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.0.20"
     kotlin("kapt") version "1.9.23"
 }
-
-// ./gradlew
-// ./gradlew run
-// ./gradlew runJava
-// ./gradlew runExample
-// ./gradlew runJavaExample
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
 
@@ -24,7 +18,7 @@ dependencies {
 
 kapt {
     arguments {
-        arg("semver.project.dir", projectDir)
+        arg("semver.project.dir", projectDir.absolutePath)
     }
 }
 

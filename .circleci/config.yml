@@ -1,40 +1,41 @@
-version: 2
-defaults: &defaults
-  working_directory: ~/repo
-  environment:
-    JVM_OPTS: -Xmx3200m
-    TERM: dumb
-    CI_NAME: "CircleCI"
+version: 2.1
 
-defaults_bld: &defaults_bld
-  steps:
-    - checkout
-    - run:
-        name: Download the dependencies
-        command: ./bld download
-    - run:
-        name: Run tests with bld
-        command: ./bld compile test
+commands:
+  build_and_test:
+    parameters:
+      reports-dir:
+        type: string
+        default: "build/reports/test_results"
+    steps:
+      - checkout
+      - run:
+          name: Download dependencies
+          command: ./bld download
+      - run:
+          name: Compile source
+          command: ./bld compile
+      - run:
+          name: Run tests
+          command: ./bld jacoco -reports-dir=<< parameters.reports-dir >>
+      - store_test_results:
+          path: << parameters.reports-dir >>
+      - store_artifacts:
+          path: build/reports/jacoco/test/html
 
 jobs:
-  bld_jdk21:
-    <<: *defaults
-
-    docker:
-      - image: cimg/openjdk:21.0
-
-    <<: *defaults_bld
-
   bld_jdk17:
-    <<: *defaults
-
     docker:
-      - image: cimg/openjdk:17.0
+      - image: cimg/openjdk:17
+    steps:
+      - build_and_test
 
-    <<: *defaults_bld
+  bld_jdk21:
+    docker:
+      - image: cimg/openjdk:21
+    steps:
+      - build_and_test
 
 workflows:
-  version: 2
   bld:
     jobs:
       - bld_jdk17
