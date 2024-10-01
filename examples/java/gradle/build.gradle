@@ -25,7 +25,7 @@ java {
 }
 
 application {
-    mainClassName = 'com.example.App'
+    mainClass = 'com.example.App'
 }
 
 tasks.withType(JavaCompile).configureEach {

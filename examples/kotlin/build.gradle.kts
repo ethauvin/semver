@@ -2,7 +2,7 @@ plugins {
     id("application")
     id("com.github.ben-manes.versions") version "0.51.0"
     kotlin("jvm") version "2.0.20"
-    kotlin("kapt") version "1.9.23"
+    kotlin("kapt") version "1.9.24"
 }
 
 defaultTasks(ApplicationPlugin.TASK_RUN_NAME)
