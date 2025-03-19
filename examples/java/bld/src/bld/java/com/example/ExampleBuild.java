@@ -2,6 +2,7 @@ package com.example;
 
 import rife.bld.BuildCommand;
 import rife.bld.Project;
+import rife.bld.operations.JavacOptions.Processing;
 
 import java.io.File;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ExampleBuild extends Project {
     public void compile() throws Exception {
         var generated = new File(buildDirectory(), "generated");
         var ignore = generated.mkdir();
-        compileOperation().compileOptions().addAll(List.of("-proc:full", "-s", generated.getAbsolutePath()));
+        compileOperation().compileOptions().process(Processing.FULL).sourceOutput(generated);
         super.compile();
     }
 
