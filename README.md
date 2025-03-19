@@ -18,20 +18,22 @@ This processor was inspired by Cédric Beust's [version-processor](https://githu
 
 ## Table of Contents
 
-- [Examples](#examples)
-- [Template](#template)
-  - [Default Template](#default-template)
-  - [Custom Template](#custom-template)
-- [Elements & Properties](#elements--properties)
-- [Maven](#maven)
-- [bld](#bld)
-- [Gradle](#gradle)
-  - [Class Generation](#class-generation)
-  - [Class & Source Generation](#class--source-generation)
-- [Kotlin](#kotlin)
-  - [Kotlin & Gradle](#kotlin--gradle)
-- [Auto-Increment](#auto-increment)
-- [Contributing](#contributing)
+- [Semantic Version Annotation Processor](#semantic-version-annotation-processor)
+  - [Table of Contents](#table-of-contents)
+  - [Examples](#examples)
+  - [Template](#template)
+    - [Default Template](#default-template)
+    - [Custom Template](#custom-template)
+  - [Elements \& Properties](#elements--properties)
+  - [Maven](#maven)
+  - [bld](#bld)
+  - [Gradle](#gradle)
+    - [Class Generation](#class-generation)
+    - [Class \& Source Generation](#class--source-generation)
+  - [Kotlin](#kotlin)
+    - [Kotlin \& Gradle](#kotlin--gradle)
+  - [Auto-Increment](#auto-increment)
+  - [Contributing](#contributing)
 
 ## Examples
 
@@ -201,10 +203,12 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 </dependency>
 ```
 
-Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/gradle/pom.xml) in the [examples/java/gradle](https://github.com/ethauvin/semver/tree/master/examples/java/gradle) directory for a sample:
-
+```console
 mvn verify
 ```
+
+Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/gradle/pom.xml) in the [examples/java/gradle](https://github.com/ethauvin/semver/tree/master/examples/java/gradle) directory for a sample:
+
 
 ## bld
 
