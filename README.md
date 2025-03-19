@@ -201,9 +201,8 @@ To install and run from [Maven](https://maven.apache.org/), configure an artifac
 </dependency>
 ```
 
-Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/pom.xml) in the [examples/java](https://github.com/ethauvin/semver/tree/master/examples/java) directory for a sample:
+Please look at [pom.xml](https://github.com/ethauvin/semver/blob/master/examples/java/gradle/pom.xml) in the [examples/java/gradle](https://github.com/ethauvin/semver/tree/master/examples/java/gradle) directory for a sample:
 
-```bash
 mvn verify
 ```
 
