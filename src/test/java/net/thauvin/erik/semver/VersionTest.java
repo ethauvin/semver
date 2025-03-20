@@ -41,7 +41,7 @@ import java.lang.annotation.Annotation;
  * @created 2019-04-02
  * @since 1.2.0
  */
-@SuppressWarnings({"ClassExplicitlyAnnotation", "SameReturnValue", "java:S2187", "PMD.TestClassWithoutTestCases"})
+@SuppressWarnings({"ClassExplicitlyAnnotation", "PMD.TestClassWithoutTestCases"})
 class VersionTest implements Version {
     String template = "myversion.mustache";
 
