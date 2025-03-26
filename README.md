@@ -8,7 +8,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/net.thauvin.erik/semver.svg)](https://central.sonatype.com/artifact/net.thauvin.erik/semver)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver)
-[![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/gradle.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/gradle.yml)
+[![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/bld.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/bld.yml)
 [![Build status](https://ci.appveyor.com/api/projects/status/nbv4mxd1gpxtx69o?svg=true)](https://ci.appveyor.com/project/ethauvin/semver)
 [![CircleCI](https://circleci.com/gh/ethauvin/semver/tree/master.svg?style=shield)](https://circleci.com/gh/ethauvin/semver/tree/master)
 
