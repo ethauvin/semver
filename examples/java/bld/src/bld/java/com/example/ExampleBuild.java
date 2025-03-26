@@ -23,7 +23,7 @@ public class ExampleBuild extends Project {
 
         testOperation().mainClass("com.example.ExampleTest");
 
-        repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL, SONATYPE_SNAPSHOTS);
+        repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL, SONATYPE_SNAPSHOTS_LEGACY);
 
         scope(provided).include(dependency("net.thauvin.erik", "semver", version(1, 2, 2, "SNAPSHOT")));
     }
