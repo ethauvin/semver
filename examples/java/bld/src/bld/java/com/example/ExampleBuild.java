@@ -7,8 +7,7 @@ import rife.bld.operations.JavacOptions.Processing;
 import java.io.File;
 import java.util.List;
 
-import static rife.bld.dependencies.Repository.MAVEN_CENTRAL;
-import static rife.bld.dependencies.Repository.MAVEN_LOCAL;
+import static rife.bld.dependencies.Repository.*;
 import static rife.bld.dependencies.Scope.provided;
 
 /**
