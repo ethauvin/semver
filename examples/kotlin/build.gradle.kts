@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("application")
     id("com.github.ben-manes.versions") version "0.51.0"
@@ -26,6 +28,12 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 application {
