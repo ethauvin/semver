@@ -1,5 +1,5 @@
 /*
- * ConstantsTest.java
+ * ConstantsTests.java
  *
  * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -32,7 +32,8 @@
 
 package net.thauvin.erik.semver;
 
-
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -42,32 +43,55 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The <code>ConstantsTest</code> class.
+ * The <code>ConstantsTests</code> class.
  *
  * @author <a href="https://erik.thauvin.net/" target="_blank">Erik C. Thauvin</a>
  * @created 2019-04-14
  * @since 1.0
  */
-class ConstantsTest {
+class ConstantsTests {
     @Test
-    void testDefaults() {
-        assertEquals(1, Constants.DEFAULT_MAJOR, "major");
-        assertEquals(0, Constants.DEFAULT_MINOR, "minor");
-        assertEquals(0, Constants.DEFAULT_PATCH, "patch");
-        assertEquals("-", Constants.DEFAULT_PRERELEASE_PREFIX, "preRelease");
-        assertEquals("+", Constants.DEFAULT_BUILDMETA_PREFIX, "buildMeta");
-        assertEquals(".", Constants.DEFAULT_SEPARATOR, "separator");
-    }
-
-    @Test
-    void testTemplates() {
+    @SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
+    void mustacheDefaultTemplates() {
         final List<String> templates = new ArrayList<>();
         templates.add(Constants.DEFAULT_JAVA_TEMPLATE);
         templates.add(Constants.DEFAULT_KOTLIN_TEMPLATE);
         templates.add(Constants.DEFAULT_TEMPLATE_NAME);
 
-        for (final var tp : templates) {
-            assertTrue(tp.endsWith(".mustache"), tp);
+        templates.forEach(tp -> assertTrue(tp.endsWith(".mustache"), tp));
+    }
+
+    @Nested
+    @DisplayName("Defaults Tests")
+    class DefaultTests {
+        @Test
+        void defaultBuildMeta() {
+            assertEquals("+", Constants.DEFAULT_BUILDMETA_PREFIX, "buildMeta");
+        }
+
+        @Test
+        void defaultMajor() {
+            assertEquals(1, Constants.DEFAULT_MAJOR, "major");
+        }
+
+        @Test
+        void defaultMinor() {
+            assertEquals(0, Constants.DEFAULT_MINOR, "minor");
+        }
+
+        @Test
+        void defaultPatch() {
+            assertEquals(0, Constants.DEFAULT_PATCH, "patch");
+        }
+
+        @Test
+        void defaultPreRelease() {
+            assertEquals("-", Constants.DEFAULT_PRERELEASE_PREFIX, "preRelease");
+        }
+
+        @Test
+        void defaultSeparator() {
+            assertEquals(".", Constants.DEFAULT_SEPARATOR, "separator");
         }
     }
 }

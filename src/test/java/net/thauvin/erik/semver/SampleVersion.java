@@ -1,5 +1,5 @@
 /*
- * VersionTest.java
+ * SampleVersion.java
  *
  * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
@@ -35,14 +35,14 @@ package net.thauvin.erik.semver;
 import java.lang.annotation.Annotation;
 
 /**
- * The <code>VersionTest</code> class.
+ * The <code>SampleVersion</code> class.
  *
  * @author <a href="https://erik.thauvin.net/" target="_blank">Erik C. Thauvin</a>
  * @created 2019-04-02
  * @since 1.2.0
  */
 @SuppressWarnings({"ClassExplicitlyAnnotation", "PMD.TestClassWithoutTestCases"})
-class VersionTest implements Version {
+class SampleVersion implements Version {
     String template = "myversion.mustache";
 
     @Override
