@@ -41,6 +41,8 @@ import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
@@ -49,6 +51,7 @@ import static rife.bld.dependencies.Scope.test;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
+    static final String TEST_RESULTS_DIR = "build/test-results/test/";
     final PmdOperation pmdOp = new PmdOperation()
             .fromProject(this)
             .failOnViolation(true)
@@ -118,7 +121,21 @@ public class SemverBuild extends Project {
 
     @BuildCommand(summary = "Generates JaCoCo Reports")
     public void jacoco() throws Exception {
-        new JacocoReportOperation().fromProject(this).execute();
+        var op = new JacocoReportOperation().fromProject(this);
+        op.testToolOptions("--reports-dir=" + TEST_RESULTS_DIR);
+
+        Exception ex = null;
+        try {
+            op.execute();
+        } catch (Exception e) {
+            ex = e;
+        }
+
+        renderWithXunitViewer();
+
+        if (ex != null) {
+            throw ex;
+        }
     }
 
     @BuildCommand(summary = "Build the docs with Pandoc")
@@ -151,6 +168,39 @@ public class SemverBuild extends Project {
     public void pomRoot() throws FileUtilsErrorException {
         PomBuilder.generateInto(publishOperation().fromProject(this).info(), dependencies(),
                 new File(workDirectory, "pom.xml"));
+    }
+
+    private void renderWithXunitViewer() throws Exception {
+        var xunitViewer = new File("/usr/bin/xunit-viewer");
+        if (xunitViewer.exists() && xunitViewer.canExecute()) {
+            var reportsDir = "build/reports/tests/test/";
+
+            Files.createDirectories(Path.of(reportsDir));
+
+            new ExecOperation()
+                    .fromProject(this)
+                    .command(xunitViewer.getPath(), "-r", TEST_RESULTS_DIR, "-o", reportsDir + "index.html")
+                    .execute();
+        }
+    }
+
+    @Override
+    public void test() throws Exception {
+        var op = testOperation().fromProject(this);
+        op.testToolOptions().reportsDir(new File(TEST_RESULTS_DIR));
+
+        Exception ex = null;
+        try {
+            op.execute();
+        } catch (Exception e) {
+            ex = e;
+        }
+
+        renderWithXunitViewer();
+
+        if (ex != null) {
+            throw ex;
+        }
     }
 
     @Override
