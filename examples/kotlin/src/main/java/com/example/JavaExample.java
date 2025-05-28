@@ -7,7 +7,7 @@ public final class JavaExample {
     /**
      * Command line interface.
      *
-     * @param args The command line parameters.
+     * @param args The command line parameters
      */
     public static void main(final String... args) {
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);

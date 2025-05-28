@@ -10,7 +10,7 @@ public final class App {
     /**
      * Command line interface.
      *
-     * @param args The command line parameters.
+     * @param args The command line parameters
      */
     public static void main(final String... args) {
         final var sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' HH:mm:ss z", Locale.US);

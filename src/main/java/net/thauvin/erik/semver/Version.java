@@ -51,168 +51,168 @@ public @interface Version {
     /**
      * Returns the build metadata version.
      *
-     * @return The build metadata version.
+     * @return The build metadata version
      */
     String buildMeta() default Constants.EMPTY;
 
     /**
      * Returns the build metadata key.
      *
-     * @return The build metadata key.
+     * @return The build metadata key
      */
     String buildMetaKey() default Constants.KEY_VERSION_BUILDMETA;
 
     /**
      * Returns the build metadata prefix.
      *
-     * @return The build metadata prefix.
+     * @return The build metadata prefix
      */
     String buildMetaPrefix() default Constants.DEFAULT_BUILDMETA_PREFIX;
 
     /**
      * Returns the build metadata prefix key.
      *
-     * @return The build metadata prefix key.
+     * @return The build metadata prefix key
      */
     String buildMetaPrefixKey() default Constants.KEY_VERSION_BUILDMETA_PREFIX;
 
     /**
      * Returns the class name.
      *
-     * @return The class name.
+     * @return The class name
      */
     String className() default Constants.DEFAULT_CLASS_NAME;
 
     /**
-     * Returns the keys prefix.
+     * Returns the prefix for all keys.
      *
-     * @return The keys prefix.
+     * @return The prefix
      */
     String keysPrefix() default Constants.DEFAULT_KEYS_PREFIX;
 
     /**
      * Returns the major version.
      *
-     * @return The major version.
+     * @return The major version
      */
     int major() default Constants.DEFAULT_MAJOR;
 
     /**
      * Returns the major key.
      *
-     * @return The major key.
+     * @return The major key
      */
     String majorKey() default Constants.KEY_VERSION_MAJOR;
 
     /**
      * Returns the minor version.
      *
-     * @return The build minor version.
+     * @return The build minor version
      */
     int minor() default Constants.DEFAULT_MINOR;
 
     /**
      * Returns the minor key.
      *
-     * @return The minor key.
+     * @return The minor key
      */
     String minorKey() default Constants.KEY_VERSION_MINOR;
 
     /**
      * Returns the package name.
      *
-     * @return The package name .
+     * @return The package name
      */
     String packageName() default Constants.EMPTY;
 
     /**
      * Returns the patch version.
      *
-     * @return The patch version.
+     * @return The patch version
      */
     int patch() default Constants.DEFAULT_PATCH;
 
     /**
      * Returns the patch key.
      *
-     * @return The patch key.
+     * @return The patch key
      */
     String patchKey() default Constants.KEY_VERSION_PATCH;
 
     /**
      * Returns the pre-release version.
      *
-     * @return The pre-release version.
+     * @return The pre-release version
      */
     String preRelease() default Constants.EMPTY;
 
     /**
      * Returns the pre-release key.
      *
-     * @return The pre-release key.
+     * @return The pre-release key
      */
     String preReleaseKey() default Constants.KEY_VERSION_PRERELEASE;
 
     /**
      * Returns the pre-release prefix.
      *
-     * @return The pre-release prefix.
+     * @return The pre-release prefix
      */
     String preReleasePrefix() default Constants.DEFAULT_PRERELEASE_PREFIX;
 
     /**
      * Returns the pre-release prefix key.
      *
-     * @return The pre-release prefix key.
+     * @return The pre-release prefix key
      */
     String preReleasePrefixKey() default Constants.KEY_VERSION_PRERELEASE_PREFIX;
 
     /**
      * Returns the project name.
      *
-     * @return The project name.
+     * @return The project name
      */
     String project() default Constants.EMPTY;
 
     /**
      * Returns the project key.
      *
-     * @return The project.
+     * @return The project
      */
     String projectKey() default Constants.KEY_VERSION_PROJECT;
 
     /**
      * Returns the properties file name.
      *
-     * @return The properties file name.
+     * @return The properties file name
      */
     String properties() default Constants.EMPTY;
 
     /**
      * Returns the version separator.
      *
-     * @return The separator.
+     * @return The separator
      */
     String separator() default Constants.DEFAULT_SEPARATOR;
 
     /**
      * Returns the version separator key.
      *
-     * @return The separator key.
+     * @return The separator key
      */
     String separatorKey() default Constants.KEY_VERSION_SEPARATOR;
 
     /**
      * Returns the template name.
      *
-     * @return The template.
+     * @return The template
      */
     String template() default Constants.DEFAULT_JAVA_TEMPLATE;
 
     /**
      * Returns the template type.
      *
-     * @return The type.
+     * @return The type
      */
     String type() default Constants.DEFAULT_JAVA_TYPE;
 }
