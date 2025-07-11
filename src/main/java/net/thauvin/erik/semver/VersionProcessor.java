@@ -58,7 +58,6 @@ import java.util.Set;
  * @created 2016-01-13
  * @since 1.0
  */
-@SuppressWarnings({"PMD.GuardLogStatement", "PMD.BeanMembersShouldSerialize"})
 @SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
     private Filer filer;
@@ -98,7 +97,6 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.ERROR, s);
     }
 
-    @SuppressWarnings("PMD.UnusedPrivateMethod")
     private void error(final String s, final Throwable t) {
         log(Diagnostic.Kind.ERROR, t != null ? t.toString() : s);
     }

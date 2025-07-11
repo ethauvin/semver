@@ -2,10 +2,10 @@
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 [![Java](https://img.shields.io/badge/java-17%2B-blue)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-[![bld](https://img.shields.io/badge/2.2.1-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
+[![bld](https://img.shields.io/badge/2.3.0-FA9052?label=bld&labelColor=2392FF)](https://rife2.com/bld)
 [![release](https://img.shields.io/github/release/ethauvin/semver.svg)](https://github.com/ethauvin/semver/releases/latest)
-[![Nexus Snapshot](https://img.shields.io/nexus/s/net.thauvin.erik/semver?label=snapshot&server=https%3A%2F%2Foss.sonatype.org%2F)](https://oss.sonatype.org/content/repositories/snapshots/net/thauvin/erik/semver/)
 [![Maven Central](https://img.shields.io/maven-central/v/net.thauvin.erik/semver.svg)](https://central.sonatype.com/artifact/net.thauvin.erik/semver)
+[![Maven metadata URL](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fnet%2Fthauvin%2Ferik%2Fsemver%2Fmaven-metadata.xml&label=snapshot)](https://github.com/ethauvin/semver/packages/2260869/versions)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ethauvin_semver&metric=alert_status)](https://sonarcloud.io/dashboard?id=ethauvin_semver)
 [![GitHub CI](https://github.com/ethauvin/semver/actions/workflows/bld.yml/badge.svg)](https://github.com/ethauvin/semver/actions/workflows/bld.yml)
@@ -218,6 +218,8 @@ To install and run from [bld](https://rife2.com/bld), just add the dependency to
 public class ExampleBuild extends Project {
     public ExampleBuild() {
         // ...
+        repositories = List.of(MAVEN_CENTRAL, CENTRAL_SNAPSHOTS);
+
         scope(compile)
             .include(dependency("net.thauvin.erik", "semver", version(1, 2, 1)));
     }
@@ -236,6 +238,10 @@ To install and run from [Gradle](https://gradle.org/), add the following to [bui
 
 ```gradle
 repositories {
+    maven {
+        name = 'Central Portal Snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
+    }
     mavenCentral()
 }
 
