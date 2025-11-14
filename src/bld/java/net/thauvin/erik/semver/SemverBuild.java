@@ -75,8 +75,8 @@ public class SemverBuild extends Project {
         scope(compile)
                 .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 14)));
         scope(test)
-                .include(dependency("org.junit.jupiter", "junit-jupiter", version(5, 13, 4)))
-                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(1, 13, 4)));
+                .include(dependency("org.junit.jupiter", "junit-jupiter", version(6, 0, 1)))
+                .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(6, 0, 1)));
 
 
         javadocOperation().javadocOptions()
