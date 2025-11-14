@@ -36,7 +36,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,7 +50,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 class VersionInfoTests {
-    final private VersionInfo versionInfo = new VersionInfo();
+    private final VersionInfo versionInfo = new VersionInfo();
 
     @Nested
     @DisplayName("Get Version Tests")
@@ -188,7 +188,8 @@ class VersionInfoTests {
     class SettersAndGettersTests {
         @Test
         void checkEpoch() {
-            assertTrue((versionInfo.getEpoch() - new Date().getTime()) < 1000, "buildDate - now < 1s");
+            assertTrue((versionInfo.getEpoch() - Instant.now().toEpochMilli()) < 1000,
+                    "buildDate - now < 1s");
         }
 
         @Test

@@ -35,6 +35,7 @@ package net.thauvin.erik.semver;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheNotFoundException;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
@@ -47,6 +48,7 @@ import javax.tools.FileObject;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
@@ -64,6 +66,65 @@ public class VersionProcessor extends AbstractProcessor {
 
     private Messager messager;
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        final Set<String> result = new HashSet<>();
+        result.add(Version.class.getCanonicalName());
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SourceVersion getSupportedSourceVersion() {
+        return SourceVersion.latestSupported();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
+    @Override
+    public synchronized void init(final ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        filer = processingEnv.getFiler();
+        messager = processingEnv.getMessager();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
+        final var isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
+        for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
+            final var version = element.getAnnotation(Version.class);
+            if (element.getKind() == ElementKind.CLASS) {
+                final var enclosingElement = element.getEnclosingElement();
+                if (enclosingElement.getKind() == ElementKind.PACKAGE) {
+                    final var packageElement = (PackageElement) enclosingElement;
+                    try {
+                        final var versionInfo = findValues(version);
+                        if (Constants.EMPTY.equals(version.packageName())) {
+                            versionInfo.setPackageName(packageElement.getQualifiedName().toString());
+                        }
+                        note("Found version: " + versionInfo.getVersion());
+                        final var template = getTemplate(isLocalTemplate, version);
+
+                        writeTemplate(version.type(), versionInfo, template);
+                    } catch (IOException | MustacheNotFoundException e) {
+                        error("An error occurred while running the annotation processor: " + e.getMessage(), e);
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     private static String getTemplate(final boolean isLocalTemplate, final Version version) {
         final String template;
         if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
@@ -80,12 +141,11 @@ public class VersionProcessor extends AbstractProcessor {
     private Mustache compileTemplate(final File dir, final String template) throws IOException {
         if (Constants.DEFAULT_JAVA_TEMPLATE.equals(template) || Constants.DEFAULT_KOTLIN_TEMPLATE.equals(template)) {
             try (var in = getClass().getResourceAsStream("/" + template)) {
-                if (in != null) {
-                    try (var reader = new BufferedReader(new InputStreamReader(in))) {
-                        return new DefaultMustacheFactory().compile(reader, template);
-                    }
-                } else {
+                if (in == null) {
                     throw new IOException("Resource not found: " + template);
+                }
+                try (var reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+                    return new DefaultMustacheFactory().compile(reader, template);
                 }
             }
         } else {
@@ -150,6 +210,7 @@ public class VersionProcessor extends AbstractProcessor {
         return versionInfo;
     }
 
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private File getLocalFile(final String fileName) {
         if (processingEnv != null) { // null when testing.
             final var prop = processingEnv.getOptions().get(Constants.SEMVER_PROJECT_DIR_ARG);
@@ -158,65 +219,6 @@ public class VersionProcessor extends AbstractProcessor {
             }
         }
         return new File(new File("").getAbsolutePath(), fileName);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Set<String> getSupportedAnnotationTypes() {
-        final Set<String> result = new HashSet<>();
-        result.add(Version.class.getCanonicalName());
-        return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SourceVersion getSupportedSourceVersion() {
-        return SourceVersion.latestSupported();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @SuppressWarnings("PMD.AvoidSynchronizedAtMethodLevel")
-    @Override
-    public synchronized void init(final ProcessingEnvironment processingEnv) {
-        super.init(processingEnv);
-        filer = processingEnv.getFiler();
-        messager = processingEnv.getMessager();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean process(final Set<? extends TypeElement> annotations, final RoundEnvironment roundEnv) {
-        final var isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
-        for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
-            final var version = element.getAnnotation(Version.class);
-            if (element.getKind() == ElementKind.CLASS) {
-                final var enclosingElement = element.getEnclosingElement();
-                if (enclosingElement.getKind() == ElementKind.PACKAGE) {
-                    final var packageElement = (PackageElement) enclosingElement;
-                    try {
-                        final var versionInfo = findValues(version);
-                        if (Constants.EMPTY.equals(version.packageName())) {
-                            versionInfo.setPackageName(packageElement.getQualifiedName().toString());
-                        }
-                        note("Found version: " + versionInfo.getVersion());
-                        final var template = getTemplate(isLocalTemplate, version);
-
-                        writeTemplate(version.type(), versionInfo, template);
-                    } catch (IOException | MustacheNotFoundException e) {
-                        error("An error occurred while running the annotation processor: " + e.getMessage(), e);
-                    }
-                }
-            }
-        }
-        return true;
     }
 
     private void log(final Diagnostic.Kind kind, final String s) {
@@ -243,6 +245,7 @@ public class VersionProcessor extends AbstractProcessor {
         log(Diagnostic.Kind.WARNING, s);
     }
 
+    @SuppressFBWarnings("PATH_TRAVERSAL_IN")
     private void writeTemplate(final String type, final VersionInfo versionInfo, final String template)
             throws IOException {
         final var dir = getLocalFile("");
@@ -261,15 +264,24 @@ public class VersionProcessor extends AbstractProcessor {
             if (kaptGenDir == null) {
                 throw new IOException("Could not find the target directory for generated Kotlin files.");
             }
-            final var ktFile = new File(kaptGenDir, fileName);
-            if (!ktFile.getParentFile().exists() && !ktFile.getParentFile().mkdirs()) {
-                note("Could not create target directory: " + ktFile.getParentFile().getAbsolutePath());
+            final var ktPath = Path.of(kaptGenDir).resolve(fileName);
+            final var parentDir = ktPath.getParent();
+            if (parentDir != null && Files.notExists(parentDir)) {
+                try {
+                    Files.createDirectories(parentDir);
+                } catch (IOException e) {
+                    note("Could not create target directory: " + parentDir.toAbsolutePath());
+                }
             }
-            try (var osw = new OutputStreamWriter(Files.newOutputStream(ktFile.toPath()),
+            try (var osw = new OutputStreamWriter(Files.newOutputStream(ktPath),
                     StandardCharsets.UTF_8)) {
                 mustache.execute(osw, versionInfo).flush();
             }
-            note("Generated source: " + fileName + " (" + ktFile.getParentFile().getAbsolutePath() + ')');
+            if (parentDir != null) {
+                note("Generated source: " + fileName + " (" + parentDir.toAbsolutePath() + ')');
+            } else {
+                note("Generated source: " + fileName);
+            }
         } else {
             final FileObject jfo = filer.createSourceFile(
                     versionInfo.getPackageName() + '.' + versionInfo.getClassName());

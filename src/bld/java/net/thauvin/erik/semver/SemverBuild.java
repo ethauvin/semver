@@ -34,10 +34,7 @@ package net.thauvin.erik.semver;
 
 import rife.bld.BuildCommand;
 import rife.bld.Project;
-import rife.bld.extension.ExecOperation;
-import rife.bld.extension.JUnitReporterOperation;
-import rife.bld.extension.JacocoReportOperation;
-import rife.bld.extension.PmdOperation;
+import rife.bld.extension.*;
 import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
@@ -45,8 +42,7 @@ import java.io.File;
 import java.util.List;
 
 import static rife.bld.dependencies.Repository.*;
-import static rife.bld.dependencies.Scope.compile;
-import static rife.bld.dependencies.Scope.test;
+import static rife.bld.dependencies.Scope.*;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
@@ -73,6 +69,9 @@ public class SemverBuild extends Project {
 
         scope(compile)
                 .include(dependency("com.github.spullara.mustache.java", "compiler", version(0, 9, 14)));
+        scope(provided)
+                .include(dependency("com.github.spotbugs", "spotbugs-annotations",
+                        version(4, 9, 8)));
         scope(test)
                 .include(dependency("org.junit.jupiter", "junit-jupiter", version(6, 0, 1)))
                 .include(dependency("org.junit.platform", "junit-platform-console-standalone", version(6, 0, 1)));
@@ -181,6 +180,14 @@ public class SemverBuild extends Project {
         new JUnitReporterOperation()
                 .fromProject(this)
                 .failOnSummary(true)
+                .execute();
+    }
+
+    @BuildCommand(summary = "Runs SpotBugs on this project")
+    public void spotbugs() throws Exception {
+        new SpotBugsOperation()
+                .fromProject(this)
+                .home("/opt/spotbugs")
                 .execute();
     }
 }

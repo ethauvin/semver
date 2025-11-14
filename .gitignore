@@ -5,6 +5,7 @@ lib/bld/**
 !lib/bld/bld-wrapper.properties
 !lib/bld/bld-wrapper.jar
 lib/compile/
+lib/provided/
 lib/runtime/
 lib/standalone/
 lib/test/

@@ -102,6 +102,15 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the build meta-data.
+     *
+     * @param buildMeta The new build meta-data
+     */
+    public void setBuildMeta(final String buildMeta) {
+        this.buildMeta = buildMeta;
+    }
+
+    /**
      * Returns the meta-data prefix.
      *
      * @return The meta-data prefix
@@ -111,12 +120,30 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the meta-data prefix.
+     *
+     * @param buildMetaPrefix The meta-data prefix
+     */
+    public void setBuildMetaPrefix(final String buildMetaPrefix) {
+        this.buildMetaPrefix = buildMetaPrefix;
+    }
+
+    /**
      * Returns the class name.
      *
      * @return The class name
      */
     public String getClassName() {
         return className;
+    }
+
+    /**
+     * Sets the class name.
+     *
+     * @param className The new class name
+     */
+    public void setClassName(final String className) {
+        this.className = className;
     }
 
     /**
@@ -138,12 +165,30 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the major version.
+     *
+     * @param major The new major version
+     */
+    public void setMajor(final int major) {
+        this.major = major;
+    }
+
+    /**
      * Returns the major version.
      *
      * @return The major version
      */
     public int getMinor() {
         return minor;
+    }
+
+    /**
+     * Sets the minor version.
+     *
+     * @param minor The new minor version
+     */
+    public void setMinor(final int minor) {
+        this.minor = minor;
     }
 
     /**
@@ -156,12 +201,30 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the package name.
+     *
+     * @param packageName The new package name
+     */
+    public void setPackageName(final String packageName) {
+        this.packageName = packageName;
+    }
+
+    /**
      * Returns the patch version.
      *
      * @return The patch version
      */
     public int getPatch() {
         return patch;
+    }
+
+    /**
+     * Sets the patch version.
+     *
+     * @param patch The new patch version
+     */
+    public void setPatch(final int patch) {
+        this.patch = patch;
     }
 
     /**
@@ -174,12 +237,30 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the pre-release version.
+     *
+     * @param preRelease The new pre-release version
+     */
+    public void setPreRelease(final String preRelease) {
+        this.preRelease = preRelease;
+    }
+
+    /**
      * Returns the pre-release prefix.
      *
      * @return The pre-release prefix
      */
     public String getPreReleasePrefix() {
         return preReleasePrefix;
+    }
+
+    /**
+     * Sets the pre-release prefix.
+     *
+     * @param preReleasePrefix The new pre-release prefix
+     */
+    public void setPreReleasePrefix(final String preReleasePrefix) {
+        this.preReleasePrefix = preReleasePrefix;
     }
 
     /**
@@ -192,21 +273,21 @@ public class VersionInfo {
     }
 
     /**
+     * Sets the project name.
+     *
+     * @param project The new project name
+     */
+    public void setProject(final String project) {
+        this.project = project;
+    }
+
+    /**
      * Sames as {@link #getVersion()}.
      *
      * @return The version string
      */
     public String getSemver() {
         return getVersion();
-    }
-
-    /**
-     * Returns the version separator.
-     *
-     * @return The version separator
-     */
-    public String getSeparator() {
-        return separator;
     }
 
     /**
@@ -240,93 +321,12 @@ public class VersionInfo {
     }
 
     /**
-     * Sets the build meta-data.
+     * Returns the version separator.
      *
-     * @param buildMeta The new build meta-data
+     * @return The version separator
      */
-    public void setBuildMeta(final String buildMeta) {
-        this.buildMeta = buildMeta;
-    }
-
-    /**
-     * Sets the meta-data prefix.
-     *
-     * @param buildMetaPrefix The meta-data prefix
-     */
-    public void setBuildMetaPrefix(final String buildMetaPrefix) {
-        this.buildMetaPrefix = buildMetaPrefix;
-    }
-
-    /**
-     * Sets the class name.
-     *
-     * @param className The new class name
-     */
-    public void setClassName(final String className) {
-        this.className = className;
-    }
-
-    /**
-     * Sets the major version.
-     *
-     * @param major The new major version
-     */
-    public void setMajor(final int major) {
-        this.major = major;
-    }
-
-    /**
-     * Sets the minor version.
-     *
-     * @param minor The new minor version
-     */
-    public void setMinor(final int minor) {
-        this.minor = minor;
-    }
-
-    /**
-     * Sets the package name.
-     *
-     * @param packageName The new package name
-     */
-    public void setPackageName(final String packageName) {
-        this.packageName = packageName;
-    }
-
-    /**
-     * Sets the patch version.
-     *
-     * @param patch The new patch version
-     */
-    public void setPatch(final int patch) {
-        this.patch = patch;
-    }
-
-    /**
-     * Sets the pre-release version.
-     *
-     * @param preRelease The new pre-release version
-     */
-    public void setPreRelease(final String preRelease) {
-        this.preRelease = preRelease;
-    }
-
-    /**
-     * Sets the pre-release prefix.
-     *
-     * @param preReleasePrefix The new pre-release prefix
-     */
-    public void setPreReleasePrefix(final String preReleasePrefix) {
-        this.preReleasePrefix = preReleasePrefix;
-    }
-
-    /**
-     * Sets the project name.
-     *
-     * @param project The new project name
-     */
-    public void setProject(final String project) {
-        this.project = project;
+    public String getSeparator() {
+        return separator;
     }
 
     /**

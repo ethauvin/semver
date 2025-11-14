@@ -55,30 +55,6 @@ class VersionProcessorTests {
     private final VersionProcessor processor = new VersionProcessor();
     private final SampleVersion version = new SampleVersion();
 
-    /**
-     * Compares two strings by removing all line separators and whitespace.
-     *
-     * @param text1 The first text to compare
-     * @param text2 The second text to compare
-     * @return true if the texts are equivalent when line separators are ignored, false otherwise
-     */
-    static boolean compareTextIgnoringLineSeparators(String text1, String text2) {
-        // Handle null cases
-        if (text1 == null && text2 == null) {
-            return true;
-        }
-        if (text1 == null || text2 == null) {
-            return false;
-        }
-
-        // Remove all line separators and whitespace
-        var cleanedText1 = text1.replaceAll("\\r?\\n|\\r|\\s", "");
-        var cleanedText2 = text2.replaceAll("\\r?\\n|\\r|\\s", "");
-
-        // Compare the cleaned strings
-        return cleanedText1.equals(cleanedText2);
-    }
-
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")
     @Test
     void compileTemplate()
@@ -128,6 +104,30 @@ class VersionProcessorTests {
                             version.buildMeta(), version.buildMetaPrefix(), version.separator(), version.className()),
                     writer.toString()));
         }
+    }
+
+    /**
+     * Compares two strings by removing all line separators and whitespace.
+     *
+     * @param text1 The first text to compare
+     * @param text2 The second text to compare
+     * @return true if the texts are equivalent when line separators are ignored, false otherwise
+     */
+    static boolean compareTextIgnoringLineSeparators(String text1, String text2) {
+        // Handle null cases
+        if (text1 == null && text2 == null) {
+            return true;
+        }
+        if (text1 == null || text2 == null) {
+            return false;
+        }
+
+        // Remove all line separators and whitespace
+        var cleanedText1 = text1.replaceAll("\\r?\\n|\\r|\\s", "");
+        var cleanedText2 = text2.replaceAll("\\r?\\n|\\r|\\s", "");
+
+        // Compare the cleaned strings
+        return cleanedText1.equals(cleanedText2);
     }
 
     @SuppressWarnings("PMD.AvoidAccessibilityAlteration")

@@ -35,9 +35,8 @@ package net.thauvin.erik.semver;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -50,15 +49,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @since 1.0
  */
 class ConstantsTests {
-    @Test
-    @SuppressWarnings("PMD.UnitTestShouldIncludeAssert")
-    void mustacheDefaultTemplates() {
-        final List<String> templates = new ArrayList<>();
-        templates.add(Constants.DEFAULT_JAVA_TEMPLATE);
-        templates.add(Constants.DEFAULT_KOTLIN_TEMPLATE);
-        templates.add(Constants.DEFAULT_TEMPLATE_NAME);
-
-        templates.forEach(tp -> assertTrue(tp.endsWith(".mustache"), tp));
+    @ParameterizedTest
+    @ValueSource(strings = {
+            Constants.DEFAULT_TEMPLATE_NAME,
+            Constants.DEFAULT_JAVA_TEMPLATE,
+            Constants.DEFAULT_KOTLIN_TEMPLATE})
+    void mustacheDefaultTemplates(String input) {
+        assertTrue(input.endsWith(".mustache"), input + " should end with .mustache");
     }
 
     @Nested
