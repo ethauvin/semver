@@ -66,6 +66,19 @@ public class VersionProcessor extends AbstractProcessor {
 
     private Messager messager;
 
+    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
+        final String template;
+        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
+            template = Constants.DEFAULT_TEMPLATE_NAME;
+        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
+                .equals(version.type())) {
+            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
+        } else {
+            template = version.template();
+        }
+        return template;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -103,7 +116,7 @@ public class VersionProcessor extends AbstractProcessor {
         final var isLocalTemplate = getLocalFile(Constants.DEFAULT_TEMPLATE_NAME).exists();
         for (final Element element : roundEnv.getElementsAnnotatedWith(Version.class)) {
             final var version = element.getAnnotation(Version.class);
-            if (element.getKind() == ElementKind.CLASS) {
+            if (version != null && element.getKind() == ElementKind.CLASS) {
                 final var enclosingElement = element.getEnclosingElement();
                 if (enclosingElement.getKind() == ElementKind.PACKAGE) {
                     final var packageElement = (PackageElement) enclosingElement;
@@ -123,19 +136,6 @@ public class VersionProcessor extends AbstractProcessor {
             }
         }
         return true;
-    }
-
-    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
-        final String template;
-        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
-            template = Constants.DEFAULT_TEMPLATE_NAME;
-        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
-                .equals(version.type())) {
-            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
-        } else {
-            template = version.template();
-        }
-        return template;
     }
 
     private Mustache compileTemplate(final File dir, final String template) throws IOException {
