@@ -1,7 +1,7 @@
 /*
  * SemverBuild.java
  *
- * Copyright (c) 2016-2024, Erik C. Thauvin (erik@thauvin.net)
+ * Copyright (c) 2016-2026, Erik C. Thauvin (erik@thauvin.net)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -113,6 +113,10 @@ public class SemverBuild extends Project {
                         .signPassphrase(property("sign.passphrase")));
     }
 
+    public static void main(String[] args) {
+        new SemverBuild().start(args);
+    }
+
     @Override
     public void test() throws Exception {
         var op = testOperation().fromProject(this);
@@ -136,10 +140,6 @@ public class SemverBuild extends Project {
     public void publishLocal() throws Exception {
         super.publishLocal();
         pomRoot();
-    }
-
-    public static void main(String[] args) {
-        new SemverBuild().start(args);
     }
 
     @BuildCommand(summary = "Generates JaCoCo Reports")
