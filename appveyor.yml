@@ -9,10 +9,11 @@ before_build:
   - set "PATH=C:\Program Files\Java\jdk17\bin;%PATH%"
 
 build_script:
-  - bld.bat download compile
+  - bld.bat download
+  - bld.bat compile
 
 test_script:
   - bld.bat test
 
-cache:
-  - C:\Users\appveyor\.m2
+on_failure:
+  - bld.bat reporter --all
