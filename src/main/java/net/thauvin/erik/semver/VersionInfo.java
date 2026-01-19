@@ -41,6 +41,7 @@ package net.thauvin.erik.semver;
  */
 @SuppressWarnings("PMD.DataClass")
 public class VersionInfo {
+
     private final long epoch = System.currentTimeMillis();
 
     private String buildMeta;
@@ -291,6 +292,24 @@ public class VersionInfo {
     }
 
     /**
+     * Returns the version separator.
+     *
+     * @return The version separator
+     */
+    public String getSeparator() {
+        return separator;
+    }
+
+    /**
+     * Sets the version separator.
+     *
+     * @param separator The new version separator
+     */
+    public void setSeparator(final String separator) {
+        this.separator = separator;
+    }
+
+    /**
      * Returns the full version string.
      *
      * <p>Formatted as:
@@ -318,23 +337,5 @@ public class VersionInfo {
                 + patch
                 + (!preRelease.isEmpty() ? preReleasePrefix + preRelease : "")
                 + (!buildMeta.isEmpty() ? buildMetaPrefix + buildMeta : "");
-    }
-
-    /**
-     * Returns the version separator.
-     *
-     * @return The version separator
-     */
-    public String getSeparator() {
-        return separator;
-    }
-
-    /**
-     * Sets the version separator.
-     *
-     * @param separator The new version separator
-     */
-    public void setSeparator(final String separator) {
-        this.separator = separator;
     }
 }

@@ -52,6 +52,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @since 1.2.0
  */
 class VersionProcessorTests {
+
     private final VersionProcessor processor = new VersionProcessor();
     private final SampleVersion version = new SampleVersion();
 

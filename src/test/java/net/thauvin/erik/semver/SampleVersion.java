@@ -43,6 +43,7 @@ import java.lang.annotation.Annotation;
  */
 @SuppressWarnings({"ClassExplicitlyAnnotation"})
 class SampleVersion implements Version {
+
     String template = "myversion.mustache";
 
     @Override

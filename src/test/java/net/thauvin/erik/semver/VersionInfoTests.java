@@ -50,12 +50,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 class VersionInfoTests {
+
     private final VersionInfo versionInfo = new VersionInfo();
 
     @Nested
     @DisplayName("Get Version Tests")
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
     class GetVersionTests {
+
         @Test
         void versionDefault() {
             assertEquals("1.0.0", versionInfo.getVersion(), "getVersion(1.0.0)");
@@ -186,6 +188,7 @@ class VersionInfoTests {
     @Nested
     @DisplayName("Setters and Getters Tests")
     class SettersAndGettersTests {
+
         @Test
         void checkEpoch() {
             assertTrue((versionInfo.getEpoch() - Instant.now().toEpochMilli()) < 1000,

@@ -41,6 +41,7 @@ package net.thauvin.erik.semver;
  */
 @SuppressWarnings("PMD.DataClass")
 public final class Constants {
+
     /**
      * The default metadata prefix.
      */

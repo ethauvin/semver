@@ -49,6 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @since 1.0
  */
 class ConstantsTests {
+
     @ParameterizedTest
     @ValueSource(strings = {
             Constants.DEFAULT_TEMPLATE_NAME,
@@ -61,6 +62,7 @@ class ConstantsTests {
     @Nested
     @DisplayName("Defaults Tests")
     class DefaultTests {
+
         @Test
         void defaultBuildMeta() {
             assertEquals("+", Constants.DEFAULT_BUILDMETA_PREFIX, "buildMeta");

@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class VersionTests {
+
     final Version version = new SampleVersion();
     final VersionInfo versionInfo = new VersionInfo(version);
 

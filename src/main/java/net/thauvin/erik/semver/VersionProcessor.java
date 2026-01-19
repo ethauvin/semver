@@ -62,22 +62,10 @@ import java.util.Set;
  */
 @SupportedOptions({Constants.KAPT_KOTLIN_GENERATED_OPTION_NAME, Constants.SEMVER_PROJECT_DIR_ARG})
 public class VersionProcessor extends AbstractProcessor {
+
     private Filer filer;
 
     private Messager messager;
-
-    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
-        final String template;
-        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
-            template = Constants.DEFAULT_TEMPLATE_NAME;
-        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
-                .equals(version.type())) {
-            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
-        } else {
-            template = version.template();
-        }
-        return template;
-    }
 
     /**
      * {@inheritDoc}
@@ -136,6 +124,19 @@ public class VersionProcessor extends AbstractProcessor {
             }
         }
         return true;
+    }
+
+    private static String getTemplate(final boolean isLocalTemplate, final Version version) {
+        final String template;
+        if (isLocalTemplate && Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template())) {
+            template = Constants.DEFAULT_TEMPLATE_NAME;
+        } else if (Constants.DEFAULT_JAVA_TEMPLATE.equals(version.template()) && Constants.KOTLIN_TYPE
+                .equals(version.type())) {
+            template = Constants.DEFAULT_KOTLIN_TEMPLATE;
+        } else {
+            template = version.template();
+        }
+        return template;
     }
 
     private Mustache compileTemplate(final File dir, final String template) throws IOException {
