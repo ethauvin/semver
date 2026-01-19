@@ -35,6 +35,7 @@ package net.thauvin.erik.semver;
 import rife.bld.BuildCommand;
 import rife.bld.Project;
 import rife.bld.extension.*;
+import rife.bld.extension.tools.IOUtils;
 import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
@@ -46,11 +47,12 @@ import static rife.bld.dependencies.Scope.*;
 import static rife.bld.operations.JavadocOptions.DocLinkOption.NO_MISSING;
 
 public class SemverBuild extends Project {
-    static final String TEST_RESULTS_DIR = "build/test-results/test/";
+
     final PmdOperation pmdOp = new PmdOperation()
             .fromProject(this)
             .failOnViolation(true)
             .ruleSets("config/pmd.xml");
+    final File testResultsDirectory = IOUtils.resolveFile(buildDirectory(), "test-results", "test");
 
     public SemverBuild() {
         pkg = "net.thauvin.erik";
@@ -113,14 +115,10 @@ public class SemverBuild extends Project {
                         .signPassphrase(property("sign.passphrase")));
     }
 
-    public static void main(String[] args) {
-        new SemverBuild().start(args);
-    }
-
     @Override
     public void test() throws Exception {
         var op = testOperation().fromProject(this);
-        op.testToolOptions().reportsDir(new File(TEST_RESULTS_DIR));
+        op.testToolOptions().reportsDir(testResultsDirectory);
         op.execute();
     }
 
@@ -130,22 +128,20 @@ public class SemverBuild extends Project {
         pomRoot();
     }
 
-    @BuildCommand(value = "pom-root", summary = "Generates the POM file in the root directory")
-    public void pomRoot() throws FileUtilsErrorException {
-        PomBuilder.generateInto(publishOperation().fromProject(this).info(), dependencies(),
-                new File("pom.xml"));
-    }
-
     @Override
     public void publishLocal() throws Exception {
         super.publishLocal();
         pomRoot();
     }
 
+    public static void main(String[] args) {
+        new SemverBuild().start(args);
+    }
+
     @BuildCommand(summary = "Generates JaCoCo Reports")
     public void jacoco() throws Exception {
         var op = new JacocoReportOperation().fromProject(this);
-        op.testToolOptions("--reports-dir=" + TEST_RESULTS_DIR);
+        op.testToolOptions("--reports-dir=" + testResultsDirectory.getAbsolutePath());
         op.execute();
     }
 
@@ -173,6 +169,12 @@ public class SemverBuild extends Project {
     @BuildCommand(value = "pmd-cli", summary = "Runs PMD analysis (CLI)")
     public void pmdCli() throws Exception {
         pmdOp.includeLineNumber(false).execute();
+    }
+
+    @BuildCommand(value = "pom-root", summary = "Generates the POM file in the root directory")
+    public void pomRoot() throws FileUtilsErrorException {
+        PomBuilder.generateInto(publishOperation().fromProject(this).info(), dependencies(),
+                new File("pom.xml"));
     }
 
     @BuildCommand(summary = "Runs the JUnit reporter")
