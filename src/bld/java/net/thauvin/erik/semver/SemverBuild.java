@@ -35,7 +35,7 @@ package net.thauvin.erik.semver;
 import rife.bld.BuildCommand;
 import rife.bld.Project;
 import rife.bld.extension.*;
-import rife.bld.extension.tools.IOUtils;
+import rife.bld.extension.tools.IOTools;
 import rife.bld.publish.*;
 import rife.tools.exceptions.FileUtilsErrorException;
 
@@ -52,7 +52,7 @@ public class SemverBuild extends Project {
             .fromProject(this)
             .failOnViolation(true)
             .ruleSets("config/pmd.xml");
-    final File testResultsDirectory = IOUtils.resolveFile(buildDirectory(), "test-results", "test");
+    final File testResultsDirectory = IOTools.resolveFile(buildDirectory(), "test-results", "test");
 
     public SemverBuild() {
         pkg = "net.thauvin.erik";
