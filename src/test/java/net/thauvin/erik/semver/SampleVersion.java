@@ -171,7 +171,7 @@ class SampleVersion implements Version {
         return "kt";
     }
 
-    public void setTemplate(final String template) {
+    void setTemplate(final String template) {
         this.template = template;
     }
 }

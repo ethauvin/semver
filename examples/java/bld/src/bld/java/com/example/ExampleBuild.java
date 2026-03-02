@@ -25,25 +25,21 @@ public class ExampleBuild extends Project {
 
         repositories = List.of(MAVEN_LOCAL, MAVEN_CENTRAL, CENTRAL_SNAPSHOTS);
 
-        scope(provided).include(dependency("net.thauvin.erik", "semver", version(1, 2, 2, "SNAPSHOT")));
+        scope(provided)
+                .include(dependency("net.thauvin.erik", "semver",
+                        version(1, 2, 2, "SNAPSHOT")));
+
+        // Saves generated source files in the build/generated directory.
+        //
+        // To incorporate the generated source code into the source tree, add this
+        // directory as an additional source location in your IDE.
+        var generated = new File(buildDirectory(), "generated");
+        var ignore = generated.mkdir();
+        compileOperation().compileOptions().process(Processing.FULL).sourceOutput(generated);
     }
 
     public static void main(String[] args) {
         new ExampleBuild().start(args);
-    }
-
-    /**
-     * Saves generated source files in the {@code build/generated} directory.
-     * <p>
-     * To incorporate the generated source code into the source tree, add this directory as an additional source
-     * location in your IDE.
-     */
-    @Override
-    public void compile() throws Exception {
-        var generated = new File(buildDirectory(), "generated");
-        var ignore = generated.mkdir();
-        compileOperation().compileOptions().process(Processing.FULL).sourceOutput(generated);
-        super.compile();
     }
 
     @BuildCommand(value = "run-example", summary = "Runs the example")

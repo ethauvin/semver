@@ -1,0 +1,4 @@
+<factorypath>
+    <factorypathentry kind="EXTJAR" id="/home/erik/.m2/repository/com/github/spullara/mustache/java/compiler/0.9.14/compiler-0.9.14.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="EXTJAR" id="/home/erik/.m2/repository/net/thauvin/erik/semver/1.2.2-SNAPSHOT/semver-1.2.2-SNAPSHOT.jar" enabled="true" runInBatchMode="false"/>
+</factorypath>
